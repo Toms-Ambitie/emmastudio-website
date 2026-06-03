@@ -2,9 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Emma Studio — AI-assistent voor horecaondernemers",
-  description:
-    "Emma is het complete AI-ecosysteem voor de horecaondernemer. 8 slimme modules die samen jouw bedrijf runnen. Jij doet je werk. Emma de rest.",
+  title: "Emma Studio — Binnenkort",
+  description: "Jij doet je werk. Emma de rest. Binnenkort beschikbaar op emmastudio.nl.",
   icons: {
     icon: [{ url: "/favicon.ico", sizes: "32x32" }],
   },
