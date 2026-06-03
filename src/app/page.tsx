@@ -4,7 +4,7 @@ const modules = [
     name: "EmmaBoekt",
     accent: "var(--m-boekt)",
     desc: "Boekhouden zonder boekhoudsoftware aan te raken. Facturen, bonnen en btw — Emma regelt het.",
-    price: "€49",
+    price: "€9",
     icon: (
       <svg viewBox="0 0 24 24">
         <rect x="3" y="4" width="18" height="18" rx="2" />
@@ -18,7 +18,7 @@ const modules = [
     name: "EmmaWaakt",
     accent: "var(--m-waakt)",
     desc: "Continu zicht op hoe je bedrijf ervoor staat. Afwijkingen gesignaleerd voordat ze problemen worden.",
-    price: "€29",
+    price: "€9",
     icon: (
       <svg viewBox="0 0 24 24">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
@@ -31,7 +31,7 @@ const modules = [
     name: "EmmaLoont",
     accent: "var(--m-loont)",
     desc: "Salaris, contracten en verlof zonder gedoe. Van urenregistratie tot loonstrook, geregeld.",
-    price: "€59",
+    price: "€19",
     icon: (
       <svg viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="9" />
@@ -45,7 +45,7 @@ const modules = [
     name: "EmmaVindt",
     accent: "var(--m-vindt)",
     desc: "Kandidaten en klanten ontdekken in je radius. Van vacature tot eerste werkdag, zonder zoekwerk.",
-    price: "€79",
+    price: "€9",
     icon: (
       <svg viewBox="0 0 24 24">
         <circle cx="11" cy="11" r="8" />
@@ -59,7 +59,7 @@ const modules = [
     name: "EmmaCoacht",
     accent: "var(--m-coacht)",
     desc: "Voortgang van je mensen op één plek. Inzicht in wie groeit, wie vastloopt en waar je kunt helpen.",
-    price: "€49",
+    price: "€9",
     icon: (
       <svg viewBox="0 0 24 24">
         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
@@ -74,7 +74,7 @@ const modules = [
     name: "EmmaZiet",
     accent: "var(--m-ziet)",
     desc: "Markt en concurrenten in beeld zonder zoekwerk. Slimme signalen die jij anders zou missen.",
-    price: "€39",
+    price: "€9",
     icon: (
       <svg viewBox="0 0 24 24">
         <path d="M18 20V10M12 20V4M6 20v-6" />
@@ -86,7 +86,7 @@ const modules = [
     name: "EmmaSchrijft",
     accent: "var(--m-schrijft)",
     desc: "Content schrijven en plannen met jouw stem. Van social post tot nieuwsbrief — altijd on-brand.",
-    price: "€49",
+    price: "€19",
     icon: (
       <svg viewBox="0 0 24 24">
         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
@@ -99,7 +99,7 @@ const modules = [
     name: "EmmaPromoot",
     accent: "var(--m-promoot)",
     desc: "Advertenties die echt iets opleveren. Emma optimaliseert je budget en rapporteert wat werkt.",
-    price: "€59",
+    price: "€19",
     icon: (
       <svg viewBox="0 0 24 24">
         <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
@@ -110,30 +110,33 @@ const modules = [
 
 const bundles = [
   {
-    sector: "Startpakket",
-    name: "Emma Start",
-    price: "€97",
-    save: "Bespaar 30%",
-    mods: ["Emma Boekt", "Emma Waakt", "Emma Ziet"],
-    cta: "Begin met Start",
-    featured: false,
-  },
-  {
-    sector: "Meest gekozen",
-    name: "Emma Groei",
-    price: "€179",
-    save: "Bespaar 40%",
-    mods: ["Emma Boekt", "Emma Waakt", "Emma Ziet", "Emma Schrijft", "Emma Promoot"],
-    cta: "Begin met Groei",
+    sector: "Kapsalons · beauty · nagels",
+    name: "Emma voor Salons",
+    price: "€59",
+    was: "€83",
+    save: "Bespaar 29%",
+    mods: ["EmmaBoekt", "EmmaWaakt", "EmmaLoont", "EmmaVindt", "EmmaCoacht", "EmmaZiet", "EmmaSchrijft"],
+    cta: "Begin met Salons",
     featured: true,
   },
   {
-    sector: "Volledig pakket",
-    name: "Emma Pro",
-    price: "€269",
-    save: "Bespaar 50%",
-    mods: ["Emma Boekt", "Emma Waakt", "Emma Loont", "Emma Vindt", "Emma Ziet", "Emma Schrijft", "Emma Promoot"],
-    cta: "Begin met Pro",
+    sector: "Tandartsen · fysio · paramedisch",
+    name: "Emma voor Zorg",
+    price: "€39",
+    was: "€55",
+    save: "Bespaar 29%",
+    mods: ["EmmaBoekt", "EmmaWaakt", "EmmaLoont", "EmmaVindt", "EmmaCoacht"],
+    cta: "Begin met Zorg",
+    featured: false,
+  },
+  {
+    sector: "ZZP'ers · alle branches",
+    name: "Emma voor ZZP'ers",
+    price: "€29",
+    was: "€46",
+    save: "Bespaar 37%",
+    mods: ["EmmaBoekt", "EmmaWaakt", "EmmaVindt", "EmmaSchrijft"],
+    cta: "Begin met ZZP'ers",
     featured: false,
   },
 ];
@@ -322,9 +325,9 @@ export default function Home() {
         <div className="container">
           <div className="section-head">
             <span className="eyebrow">Slimme combinaties</span>
-            <h2>Bundel en bespaar tot 50%</h2>
+            <h2>Bundel en bespaar tot 37%</h2>
             <p>
-              Combineer modules in een bundle en betaal flink minder dan bij losse afname. Of ga voor Emma Compleet en krijg alles voor één vaste prijs.
+              Emma heeft drie branche-pakketten die modules bundelen met korting. Geen jaar-commitment — maandelijks opzegbaar, 15% extra korting bij jaarbetaling.
             </p>
           </div>
           <div className="bundle-grid">
@@ -338,6 +341,7 @@ export default function Home() {
                     <span className="per">/maand</span>
                     <span className="save-tag">{b.save}</span>
                   </div>
+                  <div className="bundle-was">Losse modules: {b.was}/mnd</div>
                 </div>
                 <div className="bundle-mods">
                   <ul>
@@ -363,7 +367,7 @@ export default function Home() {
               <p>Het volledige ecosysteem. Elke module, volledig geïntegreerd, één maandelijks bedrag.</p>
             </div>
             <div className="compleet-price">
-              <span className="amt">€349</span>
+              <span className="amt">€69</span>
               <span className="per">/maand</span>
             </div>
             <a href="#demo" className="btn btn-cta">
@@ -401,7 +405,7 @@ export default function Home() {
                   "Alle updates en nieuwe functies inbegrepen",
                   "AVG-compliant en data altijd in Nederland",
                   "Geen lange contracten — maandelijks opzegbaar",
-                  "Gratis proefperiode van 30 dagen, geen creditcard nodig",
+                  "14 dagen gratis proberen, geen creditcard nodig",
                   "Integratie met je bestaande systemen",
                 ].map((p) => (
                   <li key={p}>
@@ -436,7 +440,7 @@ export default function Home() {
             <button type="submit">Demo aanvragen →</button>
           </form>
           <div className="cta-trust">
-            <span><span className="ck">✓</span>Gratis 30 dagen proberen</span>
+            <span><span className="ck">✓</span>14 dagen gratis proberen</span>
             <span><span className="ck">✓</span>Geen creditcard nodig</span>
             <span><span className="ck">✓</span>Binnen 24 uur live</span>
           </div>

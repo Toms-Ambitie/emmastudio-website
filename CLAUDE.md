@@ -173,16 +173,22 @@ Elke sessie: lees dit eerst. Wijk niet af zonder expliciete toestemming.
 
 Emma heeft 8 modules — elke module is een Nederlands werkwoord. CamelCase: `Emma + werkwoord`.
 
-| # | Module       | Accent    | Omschrijving (uit brandbook)                              |
-|---|--------------|-----------|-----------------------------------------------------------|
-| 1 | EmmaBoekt    | `#16B79C` | Boekhouden zonder boekhoudsoftware aan te raken           |
-| 2 | EmmaWaakt    | `#FFB23E` | Continu zicht op hoe je bedrijf ervoor staat              |
-| 3 | EmmaLoont    | `#4D6BF5` | Salaris, contracten en verlof zonder gedoe                |
-| 4 | EmmaVindt    | `#EB5C43` | Kandidaten en klanten ontdekken in je radius              |
-| 5 | EmmaCoacht   | `#FF7FA3` | Voortgang van je mensen op één plek                       |
-| 6 | EmmaZiet     | `#9B6BE0` | Markt en concurrenten in beeld zonder zoekwerk            |
-| 7 | EmmaSchrijft | `#1FA4E0` | Content schrijven en plannen met jouw stem                |
-| 8 | EmmaPromoot  | `#FF4D2E` | Advertenties die echt iets opleveren                      |
+| # | Module       | Accent    | Prijs  | Omschrijving (uit brandbook)                              |
+|---|--------------|-----------|--------|-----------------------------------------------------------|
+| 1 | EmmaBoekt    | `#16B79C` | €9/mnd | Boekhouden zonder boekhoudsoftware aan te raken           |
+| 2 | EmmaWaakt    | `#FFB23E` | €9/mnd | Continu zicht op hoe je bedrijf ervoor staat              |
+| 3 | EmmaLoont    | `#4D6BF5` | €19/mnd| Salaris, contracten en verlof zonder gedoe                |
+| 4 | EmmaVindt    | `#EB5C43` | €9/mnd | Kandidaten en klanten ontdekken in je radius              |
+| 5 | EmmaCoacht   | `#FF7FA3` | €9/mnd | Voortgang van je mensen op één plek                       |
+| 6 | EmmaZiet     | `#9B6BE0` | €9/mnd | Markt en concurrenten in beeld zonder zoekwerk            |
+| 7 | EmmaSchrijft | `#1FA4E0` | €19/mnd| Content schrijven en plannen met jouw stem                |
+| 8 | EmmaPromoot  | `#FF4D2E` | €19/mnd| Advertenties die echt iets opleveren                      |
+
+**Twee prijscategorieën:**
+- Standaard-modules à **€9/mnd** — functioneel werk dat Emma overneemt
+- Premium-modules à **€19/mnd** — werk dat anders door medewerker of bureau gedaan wordt
+- Som van alle 8 losse: €102/mnd
+- Prijzen exclusief BTW · 14 dagen gratis proefperiode · maandelijks opzegbaar · 15% korting bij jaarbetaling
 
 **Geen module:** AI-chat (platform-feature, altijd beschikbaar) · Medewerker-view (rol/view)
 
@@ -191,9 +197,15 @@ Emma heeft 8 modules — elke module is een Nederlands werkwoord. CamelCase: `Em
 ## 10. Pakketten (Niveau 3 naamgeving)
 
 Format: `Emma voor [branche]` — geen sub-merken, geen aparte logo's.
-- Emma voor Salons (7 modules)
-- Emma voor Zorg (5 modules)
-- Emma voor ZZP'ers (4 modules)
+
+| Pakket              | Modules                                              | À la carte | Pakketprijs | Korting |
+|---------------------|------------------------------------------------------|------------|-------------|---------|
+| Emma voor Salons    | 7 — alles behalve EmmaPromoot                        | €83/mnd    | €59/mnd     | 29%     |
+| Emma voor Zorg      | 5 — Boekt + Waakt + Loont + Vindt + Coacht           | €55/mnd    | €39/mnd     | 29%     |
+| Emma voor ZZP'ers   | 4 — Boekt + Waakt + Vindt + Schrijft                 | €46/mnd    | €29/mnd     | 37%     |
+| Emma Compleet       | Alle 8 modules                                       | €102/mnd   | €69/mnd     | 32%     |
+
+Pakketten zijn marketing-bundels, geen aparte producten. Zelfde software, andere module-configuratie.
 
 ---
 
