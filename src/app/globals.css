@@ -13,15 +13,15 @@
 
   --m-boekt:    #16B79C;
   --m-waakt:    #FFB23E;
-  --m-loont:    #4A7DC8;
-  --m-vindt:    #9B72CF;
-  --m-coacht:   #E8A058;
-  --m-ziet:     #C8932A;
-  --m-schrijft: #48A66A;
-  --m-promoot:  #D95C2E;
+  --m-loont:    #4D6BF5;
+  --m-vindt:    #EB5C43;
+  --m-coacht:   #FF7FA3;
+  --m-ziet:     #9B6BE0;
+  --m-schrijft: #1FA4E0;
+  --m-promoot:  #FF4D2E;
 
   --text:        #1C1715;
-  --text-muted:  #6B5F58;
+  --text-muted:  #7C736A;
   --border:      rgba(28,23,21,0.1);
   --border-soft: rgba(28,23,21,0.06);
 }

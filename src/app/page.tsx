@@ -1,9 +1,9 @@
 const modules = [
   {
     slug: "boekt",
-    name: "Emma Boekt",
+    name: "EmmaBoekt",
     accent: "var(--m-boekt)",
-    desc: "Reserveringen, afspraken en roosteringen volledig geautomatiseerd. Nooit meer dubbele boekingen of gemiste afspraken.",
+    desc: "Boekhouden zonder boekhoudsoftware aan te raken. Facturen, bonnen en btw — Emma regelt het.",
     price: "€49",
     icon: (
       <svg viewBox="0 0 24 24">
@@ -15,9 +15,9 @@ const modules = [
   },
   {
     slug: "waakt",
-    name: "Emma Waakt",
+    name: "EmmaWaakt",
     accent: "var(--m-waakt)",
-    desc: "24/7 monitoring van alle kritische bedrijfsprocessen. Jij slaapt, Emma houdt de wacht.",
+    desc: "Continu zicht op hoe je bedrijf ervoor staat. Afwijkingen gesignaleerd voordat ze problemen worden.",
     price: "€29",
     icon: (
       <svg viewBox="0 0 24 24">
@@ -28,9 +28,9 @@ const modules = [
   },
   {
     slug: "loont",
-    name: "Emma Loont",
+    name: "EmmaLoont",
     accent: "var(--m-loont)",
-    desc: "Slimme HR en salarisadministratie zonder gedoe. Van urenregistratie tot loonstrook.",
+    desc: "Salaris, contracten en verlof zonder gedoe. Van urenregistratie tot loonstrook, geregeld.",
     price: "€59",
     icon: (
       <svg viewBox="0 0 24 24">
@@ -42,9 +42,9 @@ const modules = [
   },
   {
     slug: "vindt",
-    name: "Emma Vindt",
+    name: "EmmaVindt",
     accent: "var(--m-vindt)",
-    desc: "Talentenwerving en selectie, van vacature tot aanstelling. De juiste mensen op de juiste plek.",
+    desc: "Kandidaten en klanten ontdekken in je radius. Van vacature tot eerste werkdag, zonder zoekwerk.",
     price: "€79",
     icon: (
       <svg viewBox="0 0 24 24">
@@ -56,9 +56,9 @@ const modules = [
   },
   {
     slug: "coacht",
-    name: "Emma Coacht",
+    name: "EmmaCoacht",
     accent: "var(--m-coacht)",
-    desc: "Persoonlijke begeleiding en training voor je team. Continu verbeteren zonder extra overhead.",
+    desc: "Voortgang van je mensen op één plek. Inzicht in wie groeit, wie vastloopt en waar je kunt helpen.",
     price: "€49",
     icon: (
       <svg viewBox="0 0 24 24">
@@ -71,9 +71,9 @@ const modules = [
   },
   {
     slug: "ziet",
-    name: "Emma Ziet",
+    name: "EmmaZiet",
     accent: "var(--m-ziet)",
-    desc: "Inzicht in alle data en prestaties van je bedrijf. Slimme rapportages die je zelf niet hoeft te maken.",
+    desc: "Markt en concurrenten in beeld zonder zoekwerk. Slimme signalen die jij anders zou missen.",
     price: "€39",
     icon: (
       <svg viewBox="0 0 24 24">
@@ -83,9 +83,9 @@ const modules = [
   },
   {
     slug: "schrijft",
-    name: "Emma Schrijft",
+    name: "EmmaSchrijft",
     accent: "var(--m-schrijft)",
-    desc: "Content creatie en copywriting op maat. Menu's, nieuwsbrieven, social posts — altijd in jouw stem.",
+    desc: "Content schrijven en plannen met jouw stem. Van social post tot nieuwsbrief — altijd on-brand.",
     price: "€49",
     icon: (
       <svg viewBox="0 0 24 24">
@@ -96,9 +96,9 @@ const modules = [
   },
   {
     slug: "promoot",
-    name: "Emma Promoot",
+    name: "EmmaPromoot",
     accent: "var(--m-promoot)",
-    desc: "Marketing automation en social media beheer. Meer gasten, minder tijd kwijt aan reclame.",
+    desc: "Advertenties die echt iets opleveren. Emma optimaliseert je budget en rapporteert wat werkt.",
     price: "€59",
     icon: (
       <svg viewBox="0 0 24 24">
