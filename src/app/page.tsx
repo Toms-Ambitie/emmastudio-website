@@ -141,115 +141,13 @@ const bundles = [
   },
 ];
 
+import HeroSection from '@/components/HeroSection';
+
 export default function Home() {
   return (
     <>
-      {/* NAV */}
-      <header className="nav-wrap">
-        <div className="container">
-          <nav className="nav">
-            <a href="/" className="nav-logo-group">
-              <img src="/beeldmerk.svg" alt="" className="nav-beeldmerk" width={28} height={28} />
-              <img src="/logo-dark.svg" alt="Emma Studio" className="nav-wordmark" width={80} height={17} />
-            </a>
-            <div className="nav-links">
-              <a href="#modules">Modules</a>
-              <a href="#bundles">Oplossingen</a>
-              <a href="#prijzen">Prijzen</a>
-              <a href="#case">Resultaten</a>
-            </div>
-            <div className="nav-right">
-              <a href="#demo" className="btn btn-ghost-dark">
-                Inloggen
-              </a>
-              <a href="#demo" className="btn btn-cta">
-                Plan demo
-              </a>
-            </div>
-          </nav>
-        </div>
-      </header>
-
-      {/* HERO */}
-      <section className="hero">
-        <div className="container">
-          <div className="hero-inner">
-            <div className="hero-content">
-              <span className="hero-eyebrow">AI-backoffice voor ondernemers</span>
-              <h1>
-                Jij doet je werk.
-                <br />
-                Emma de rest<span className="em">.</span>
-              </h1>
-              <p className="hero-sub">
-                Emma is een familie van 8 AI-modules die jouw administratie, planning, personeel en marketing voor je regelen — zodat jij je focust op je vak.
-              </p>
-              <div className="hero-actions">
-                <a href="#demo" className="btn btn-cta btn-lg">
-                  Plan een gratis demo
-                </a>
-                <a href="#modules" className="btn btn-ghost-dark btn-lg">
-                  Bekijk alle modules
-                </a>
-              </div>
-              <div className="hero-proof">
-                <span className="proof-dot" />
-                50+ ondernemers gingen je voor
-                <span className="proof-dot" />
-                Gemiddeld 18 uur bespaard per week
-                <span className="proof-dot" />
-                14 dagen gratis
-              </div>
-            </div>
-
-            {/* PRODUCT MOCKUP */}
-            <div className="hero-visual">
-              <div className="product-frame">
-                <div className="product-topbar">
-                  <span className="product-chrome-dot" />
-                  <span className="product-chrome-dot" />
-                  <span className="product-chrome-dot" />
-                  <span className="product-urlbar">emmastudio.nl/dashboard</span>
-                </div>
-                <div className="product-shell">
-                  <div className="product-nav">
-                    <div className="product-nav-logo" />
-                    {[1,2,3,4,5,6].map(i => (
-                      <div key={i} className={`product-nav-item${i === 1 ? " active" : ""}`} />
-                    ))}
-                  </div>
-                  <div className="product-main">
-                    <div className="product-greeting">Goedemorgen, Sandra ☀</div>
-                    <div className="product-kpis">
-                      {[
-                        { val: "€ 24.580", lbl: "Omzet deze maand" },
-                        { val: "€ 8.430",  lbl: "Cashflow" },
-                        { val: "€ 6.240",  lbl: "Openstaand" },
-                        { val: "12",        lbl: "Taken" },
-                      ].map(k => (
-                        <div key={k.lbl} className="product-kpi">
-                          <div className="product-kpi-val">{k.val}</div>
-                          <div className="product-kpi-lbl">{k.lbl}</div>
-                        </div>
-                      ))}
-                    </div>
-                    <div className="product-section-label">Jouw Emma OS</div>
-                    <div className="product-mods">
-                      {modules.map(m => (
-                        <div key={m.slug} className="product-mod">
-                          <div className="product-mod-icon" style={{ background: m.accent }} />
-                          <div className="product-mod-name">{m.name}</div>
-                          <div className="product-mod-desc">{m.desc.split('.')[0]}.</div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* NAV + CINEMATIC HERO */}
+      <HeroSection />
 
       {/* STATS */}
       <section className="stats" id="resultaten">
