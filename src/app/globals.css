@@ -9,138 +9,208 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; overflow: hidden; background: var(--inkt); }
+html, body { height: 100%; overflow: hidden; background: var(--petrol); }
 body { font-family: 'Hanken Grotesk', sans-serif; }
 
-/* COMING SOON */
-.cs-wrap {
-  position: fixed;
-  inset: 0;
-  background: #0c1e1b;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
+/* ─── VIDEO BACKGROUND ─────────────────────────────────────────────── */
 
-.cs-video {
+.vbg {
   position: absolute;
   inset: 0;
   z-index: 0;
+  background: var(--petrol); /* prevents black flash before video loads */
 }
-.cs-video video {
+.vbg video {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
+/* Petrol-heavy left (where text sits), warmer toward right */
 .cs-overlay {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: rgba(12, 30, 27, 0.52);
+  background: linear-gradient(
+    118deg,
+    rgba(14, 61, 55, 0.82) 0%,
+    rgba(14, 61, 55, 0.58) 55%,
+    rgba(28, 23, 21, 0.40) 100%
+  );
 }
 
-.cs-content {
+/* ─── PAGE SHELL ───────────────────────────────────────────────────── */
+
+.cs-wrap {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Left-aligned, content anchored to bottom with logo at top */
+.cs-layout {
   position: relative;
-  z-index: 2;
-  text-align: center;
-  padding: 0 24px;
+  z-index: 10;
+  width: 100%;
+  max-width: 1240px;
+  padding: 44px 64px 72px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
-.cs-logo {
-  height: 28px;
-  width: auto;
-  margin-bottom: 52px;
-  opacity: 0.9;
+/* ─── BEELDMERK ────────────────────────────────────────────────────── */
+
+.cs-beeldmerk {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  margin-bottom: auto; /* pushes everything below it to the bottom */
 }
+
+/* ─── PAYOFF ───────────────────────────────────────────────────────── */
 
 .cs-headline {
   font-family: 'Bricolage Grotesque', sans-serif;
-  font-size: clamp(64px, 12vw, 140px);
+  font-size: clamp(52px, 8.5vw, 108px);
   font-weight: 800;
-  color: var(--creme);
   line-height: 0.95;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.03em;
+  color: var(--creme);
+  max-width: 16ch;       /* keeps the two sentences on separate visual lines */
+  margin-bottom: 28px;
 }
-.cs-dot { color: var(--coral); }
+
+/* Words are visible by default — no-JS fallback */
+.payoff-words .word {
+  display: inline;
+  white-space: pre;      /* preserves space after each word */
+}
+.payoff-words .word::after { content: ' '; }
+
+/* JS has run → hide and animate word by word */
+.payoff-words[data-animate] .word {
+  display: inline-block;
+  white-space: normal;
+  margin-right: 0.22em;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: wordRise var(--word-duration, 0.65s) ease-out forwards;
+  animation-delay: var(--delay, 0s);
+}
+.payoff-words[data-animate] .word::after { content: none; }
+
+.coral { color: var(--coral); }
+
+@keyframes wordRise {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── TAGLINE ──────────────────────────────────────────────────────── */
 
 .cs-tagline {
-  font-size: clamp(14px, 1.6vw, 17px);
+  font-size: clamp(14px, 1.5vw, 17px);
   color: rgba(251, 244, 234, 0.55);
-  margin-top: 20px;
-  letter-spacing: 0.01em;
-  font-weight: 400;
+  max-width: 52ch;
+  line-height: 1.65;
+  margin-bottom: 36px;
 }
 
-.cs-form {
+/* ─── EMAIL FORM ───────────────────────────────────────────────────── */
+
+.cs-form-row {
   display: flex;
   gap: 8px;
-  margin-top: 44px;
   flex-wrap: wrap;
-  justify-content: center;
+  align-items: center;
 }
 
 .cs-input {
   background: rgba(251, 244, 234, 0.08);
-  border: 1px solid rgba(251, 244, 234, 0.18);
+  border: 1px solid rgba(251, 244, 234, 0.20);
   border-radius: 10px;
-  padding: 14px 20px;
+  padding: 13px 20px;
   color: var(--creme);
   font-family: 'Hanken Grotesk', sans-serif;
   font-size: 15px;
   outline: none;
-  min-width: 260px;
+  width: 280px;
   transition: border-color 0.15s;
 }
-.cs-input::placeholder { color: rgba(251, 244, 234, 0.3); }
-.cs-input:focus { border-color: rgba(251, 244, 234, 0.45); }
+.cs-input::placeholder { color: rgba(251, 244, 234, 0.30); }
+.cs-input:focus        { border-color: rgba(251, 244, 234, 0.50); }
+.cs-input--error       { border-color: rgba(235, 92, 67, 0.80); }
+.cs-input:disabled     { opacity: 0.55; cursor: not-allowed; }
 
 .cs-btn {
   background: var(--coral);
   color: white;
   border: none;
   border-radius: 10px;
-  padding: 14px 24px;
+  padding: 13px 22px;
   font-family: 'Hanken Grotesk', sans-serif;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.15s;
   white-space: nowrap;
+  transition: opacity 0.15s;
 }
-.cs-btn:hover { opacity: 0.85; }
+.cs-btn:hover:not(:disabled) { opacity: 0.85; }
+.cs-btn:disabled { opacity: 0.55; cursor: not-allowed; }
 
-.cs-thanks {
-  margin-top: 44px;
-  color: var(--teal);
+.cs-error {
+  width: 100%;
+  font-size: 13px;
+  color: rgba(235, 92, 67, 0.90);
+  margin-top: 4px;
+}
+
+.cs-success {
   font-size: 16px;
+  color: var(--teal);
   font-weight: 500;
 }
 
-.cs-url {
-  font-family: 'Spline Sans Mono', monospace;
-  font-size: 11px;
-  color: rgba(251, 244, 234, 0.2);
-  margin-top: 60px;
-  letter-spacing: 0.1em;
-  text-transform: lowercase;
-}
+/* ─── ENTRANCE ANIMATIONS ──────────────────────────────────────────── */
 
-/* Entrance animations */
 @keyframes fadeRise {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0);    }
 }
-.anim-fade-rise          { animation: fadeRise 0.9s ease-out forwards; }
-.anim-fade-rise-delay    { animation: fadeRise 0.9s ease-out 0.15s both; }
-.anim-fade-rise-delay-2  { animation: fadeRise 0.9s ease-out 0.3s both; }
+.anim-fade-rise          { animation: fadeRise 0.9s ease-out forwards;       opacity: 0; }
+.anim-fade-rise-delay    { animation: fadeRise 0.9s ease-out 0.25s both; }
+.anim-fade-rise-delay-2  { animation: fadeRise 0.9s ease-out 0.50s both; }
 
-@media (max-width: 520px) {
-  .cs-form { flex-direction: column; width: 100%; max-width: 340px; }
-  .cs-input { min-width: unset; width: 100%; }
-  .cs-btn { width: 100%; padding: 16px; }
+/* ─── REDUCED MOTION ───────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .payoff-words[data-animate] .word,
+  .anim-fade-rise,
+  .anim-fade-rise-delay,
+  .anim-fade-rise-delay-2 {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* ─── RESPONSIVE ───────────────────────────────────────────────────── */
+
+@media (max-width: 860px) {
+  .cs-layout { padding: 36px 40px 60px; }
+}
+
+@media (max-width: 640px) {
+  .cs-layout  { padding: 28px 24px 48px; }
+  .cs-form-row {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 360px;
+  }
+  .cs-input  { width: 100%; }
+  .cs-btn    { padding: 15px; text-align: center; }
 }

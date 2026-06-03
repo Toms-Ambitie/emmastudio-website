@@ -1,119 +1,115 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
+import VideoBackground from './VideoBackground';
+import PayoffWords, { type PayoffWord } from './PayoffWords';
+import { TIMING } from './timing';
 
 const VIDEO_URL =
   'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260510_060007_60275ce7-030c-4668-a160-8f364ec537d3.mp4';
 
-const FADE = 0.5;
+const PAYOFF: PayoffWord[] = [
+  { text: 'Jij' },
+  { text: 'doet' },
+  { text: 'je' },
+  { text: 'werk.' },
+  { text: 'Emma',  pauseBefore: TIMING.breathPause },
+  { text: 'de' },
+  { text: 'rest.', accentDot: true },
+];
+
+type Status = 'idle' | 'loading' | 'success' | 'error';
 
 export default function ComingSoon() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [email, setEmail] = useState('');
-  const [sent, setSent] = useState(false);
+  const [email,    setEmail]    = useState('');
+  const [status,   setStatus]   = useState<Status>('idle');
+  const [errorMsg, setErrorMsg] = useState('');
 
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    let rafId: number;
+  const handleSubmit = async () => {
+    if (status === 'loading') return;
+    setErrorMsg('');
 
-    const tick = () => {
-      const t = video.currentTime;
-      const dur = video.duration;
-      if (dur && !isNaN(dur)) {
-        if (t < FADE) {
-          video.style.opacity = String(t / FADE);
-        } else if (t > dur - FADE) {
-          video.style.opacity = String(Math.max(0, (dur - t) / FADE));
-        } else {
-          video.style.opacity = '1';
-        }
+    const trimmed = email.trim();
+    if (!trimmed || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed)) {
+      setErrorMsg('Vul een geldig e-mailadres in.');
+      return;
+    }
+
+    setStatus('loading');
+    try {
+      const res  = await fetch('/api/subscribe', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ email: trimmed }),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok) {
+        setStatus('success');
+      } else {
+        setErrorMsg(data.error ?? 'Er ging iets mis. Probeer het later nog eens.');
+        setStatus('error');
       }
-      rafId = requestAnimationFrame(tick);
-    };
-
-    const handleEnded = () => {
-      video.style.opacity = '0';
-      setTimeout(() => {
-        video.currentTime = 0;
-        video.play().catch(() => {});
-      }, 100);
-    };
-
-    video.play().catch(() => {});
-    rafId = requestAnimationFrame(tick);
-    video.addEventListener('ended', handleEnded);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      video.removeEventListener('ended', handleEnded);
-    };
-  }, []);
+    } catch {
+      setErrorMsg('Er ging iets mis. Controleer je verbinding.');
+      setStatus('error');
+    }
+  };
 
   return (
     <div className="cs-wrap">
-      {/* Video background */}
-      <div className="cs-video">
-        <video
-          ref={videoRef}
-          src={VIDEO_URL}
-          muted
-          playsInline
-          preload="auto"
-          style={{ opacity: 0 }}
-        />
-      </div>
+      <VideoBackground src={VIDEO_URL} overlayClassName="cs-overlay" />
 
-      {/* Dark overlay */}
-      <div className="cs-overlay" aria-hidden />
-
-      {/* Content */}
-      <main className="cs-content">
+      <div className="cs-layout">
+        {/* Beeldmerk top-left — from real logo files, never redrawn */}
         <img
-          src="/logo-light.svg"
+          src="/beeldmerk-coral.svg"
           alt="Emma Studio"
-          className="cs-logo anim-fade-rise"
-          width={120}
-          height={32}
+          className="cs-beeldmerk anim-fade-rise"
+          width={38}
+          height={38}
         />
 
-        <h1 className="cs-headline anim-fade-rise-delay">
-          Binnenkort<span className="cs-dot">.</span>
-        </h1>
+        {/* Payoff — word by word, breathing rhythm */}
+        <PayoffWords words={PAYOFF} className="cs-headline" />
 
+        {/* Tagline */}
         <p className="cs-tagline anim-fade-rise-delay">
-          Jij doet je werk. Emma de rest.
+          Binnenkort live. Emma neemt het saaie werk van ondernemen over — jij focust op je vak.
         </p>
 
-        <div className="anim-fade-rise-delay-2">
-          {!sent ? (
-            <form
-              className="cs-form"
-              onSubmit={(e) => {
-                e.preventDefault();
-                setSent(true);
-              }}
+        {/* Email signup — no <form> tag, handled via onClick */}
+        {status !== 'success' ? (
+          <div className="cs-form-row anim-fade-rise-delay-2">
+            <input
+              type="email"
+              className={`cs-input${errorMsg ? ' cs-input--error' : ''}`}
+              placeholder="jouw@emailadres.nl"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
+              disabled={status === 'loading'}
+              autoComplete="email"
+              aria-label="E-mailadres"
+            />
+            <button
+              className="cs-btn"
+              onClick={handleSubmit}
+              disabled={status === 'loading'}
+              aria-busy={status === 'loading'}
             >
-              <input
-                type="email"
-                className="cs-input"
-                placeholder="jouw@emailadres.nl"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                autoComplete="email"
-              />
-              <button type="submit" className="cs-btn">
-                Stuur me een seintje
-              </button>
-            </form>
-          ) : (
-            <p className="cs-thanks">Mooi, je hoort van ons.</p>
-          )}
-        </div>
-
-        <p className="cs-url anim-fade-rise-delay-2">emmastudio.nl</p>
-      </main>
+              {status === 'loading' ? 'Moment…' : 'Hou me op de hoogte'}
+            </button>
+            {errorMsg && (
+              <p className="cs-error" role="alert">{errorMsg}</p>
+            )}
+          </div>
+        ) : (
+          <p className="cs-success anim-fade-rise" role="status">
+            Goed. We laten het je weten als we live gaan.
+          </p>
+        )}
+      </div>
     </div>
   );
 }
