@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="foot__grid">
           <div className="foot__brand">
             <Image src="/logo-light.svg" alt="emma." width={88} height={26} />
-            <p>Het ecosysteem dat de saaie kant van ondernemen overneemt, zodat jij grip, gemak en snelheid houdt. Voor élke zelfstandige ondernemer in NL &amp; BE. In ontwikkeling bij Toms Ambitie.</p>
+            <p>Het ecosysteem dat de saaie kant van ondernemen overneemt, zodat jij grip, gemak en snelheid houdt. Voor élke zelfstandige ondernemer in NL &amp; BE. In ontwikkeling bij Toms Ambitie in Zwolle.</p>
           </div>
           <div className="foot__col">
             <h4>Modules</h4>
@@ -36,7 +36,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="foot__bot">
-          <span className="mono">WWW.EMMASTUDIO.NL · TOMS AMBITIE</span>
+          <span className="mono">WWW.EMMASTUDIO.NL · TOMS AMBITIE · ZWOLLE</span>
           <span className="mono">© 2026 · Jij doet je werk. Emma de rest.</span>
         </div>
       </div>

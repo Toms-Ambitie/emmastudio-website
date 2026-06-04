@@ -120,7 +120,7 @@ export default function Home() {
         <div className="proof__grid">
           <div className="proof__media">
             <Image src="/ilze.jpg" alt="Ilze Spannenberg, eigenaar Blondes Incognito" fill style={{ objectFit:'cover' }} />
-            <div className="ph" style={{ color: 'rgba(251,244,234,.7)' }}>Ilze Spannenberg · Blondes Incognito, Amsterdam</div>
+            <div className="ph" style={{ color: 'rgba(251,244,234,.7)' }}>Ilze Spannenberg · Blondes Incognito, Heeten</div>
           </div>
           <div className="proof__body">
             <div className="eyebrow proof__eyebrow"><span className="tick"></span> Bewijs uit de praktijk</div>
@@ -134,7 +134,7 @@ export default function Home() {
               </div>
               <div>
                 <b>Ilze Spannenberg</b>
-                <span>Eigenaar · Blondes Incognito, Amsterdam</span>
+                <span>Eigenaar · Blondes Incognito, Heeten</span>
               </div>
             </div>
             <div className="proof__stats">

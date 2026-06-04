@@ -27,7 +27,7 @@ export default function Over() {
             <div className="ostory__body reveal">
               <div className="eyebrow"><span className="tick"></span> Het begin</div>
               <h2>Begonnen in een salon.</h2>
-              <p>Emma begon niet als startup-idee op een whiteboard. Het begon bij salon Blondes Incognito in Almere, waar Ilze Vanaga haar salon runde met een wirwar aan losse tools, spreadsheets en notities.</p>
+              <p>Emma begon niet als startup-idee op een whiteboard. Het begon bij salon Blondes Incognito in Heeten, waar Ilze Vanaga haar salon runde met een wirwar aan losse tools, spreadsheets en notities.</p>
               <p>We bouwden een eerste versie voor haar, puur om het werk rustiger te maken. Dat draaide 18 maanden in de praktijk voordat we ook maar één euro aan Emma verdienden.</p>
               <p>Wat we leerden: ondernemers willen geen dashboard om in te verdwalen. Ze willen weten wat er vandaag toe doet, en de rest gewoon geregeld hebben.</p>
               <div className="ostory__stats">
@@ -50,7 +50,7 @@ export default function Over() {
                   <span style={{ width: '44px', height: '44px', borderRadius: '50%', background: 'var(--coral)', color: '#fff', display: 'grid', placeItems: 'center', fontFamily: 'var(--display)', fontWeight: 800, fontSize: '18px', flexShrink: 0 }}>I</span>
                   <div>
                     <strong style={{ display: 'block', fontSize: '15px' }}>Ilze Vanaga</strong>
-                    <span style={{ fontSize: '13px', color: 'var(--ink-soft)' }}>Eigenaar · Blondes Incognito, Almere</span>
+                    <span style={{ fontSize: '13px', color: 'var(--ink-soft)' }}>Eigenaar · Blondes Incognito, Heeten</span>
                   </div>
                 </footer>
               </blockquote>
