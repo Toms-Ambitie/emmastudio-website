@@ -1,27 +1,40 @@
-import type { Metadata, Viewport } from "next";
-import "./globals.css";
+import type { Metadata, Viewport } from 'next';
+import './globals.css';
+import Nav from '@/components/Nav';
+import Footer from '@/components/Footer';
+import CookieBanner from '@/components/CookieBanner';
 
 export const metadata: Metadata = {
-  title: "Emma Studio — Binnenkort",
-  description: "Jij doet je werk. Emma de rest. Binnenkort beschikbaar op emmastudio.nl.",
+  title: 'Emma — Jij doet je werk. Emma de rest.',
+  description: 'Het ecosysteem dat de saaie kant van ondernemen overneemt. Boekhouding, HR, content en meer, voor élke zelfstandige ondernemer in NL & BE.',
+  metadataBase: new URL('https://www.emmastudio.nl'),
+  openGraph: {
+    type: 'website',
+    images: [{ url: '/og-card.png', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/og-card.png'],
+  },
   icons: {
-    icon: [{ url: "/favicon.ico", sizes: "32x32" }],
+    icon: [{ url: '/beeldmerk-coral.svg', type: 'image/svg+xml' }],
   },
 };
 
 export const viewport: Viewport = {
-  width: "device-width",
+  width: 'device-width',
   initialScale: 1,
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="nl">
-      <body>{children}</body>
+      <body>
+        <Nav />
+        {children}
+        <Footer />
+        <CookieBanner />
+      </body>
     </html>
   );
 }
