@@ -6,6 +6,7 @@ export default function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [done, setDone] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -13,6 +14,7 @@ export default function ContactForm() {
     if (!form) return;
     const data = Object.fromEntries(new FormData(form));
     setLoading(true);
+    setError('');
     try {
       const res = await fetch('/api/contact', {
         method: 'POST',
@@ -20,7 +22,11 @@ export default function ContactForm() {
         body: JSON.stringify(data),
       });
       if (res.ok) { setDone(true); return; }
-    } catch {}
+      const body = await res.json().catch(() => ({}));
+      setError(body.error || 'Er ging iets mis. Probeer het later nog eens.');
+    } catch {
+      setError('Er ging iets mis. Controleer je verbinding en probeer opnieuw.');
+    }
     setLoading(false);
   };
 
@@ -42,6 +48,7 @@ export default function ContactForm() {
         <button className="btn btn-coral" type="submit" disabled={loading}>
           {loading ? 'Versturen…' : 'Verstuur bericht'} <span className="arr">→</span>
         </button>
+        {error && <p className="cform__err">{error}</p>}
         <div className="cform__note">We gebruiken je gegevens alleen om te reageren. Niets meer, niets minder.</div>
       </div>
       <div className="cform__ok">

@@ -82,7 +82,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
       <section className="does">
         <div className="wrap">
           <div className="does__head reveal">
-            <div className="eyebrow"><span className="tick"></span> {mod.does.title}</div>
+            <div className="eyebrow"><span className="tick"></span> Wat het doet</div>
             <h2>{mod.does.title}</h2>
             <p>{mod.does.sub}</p>
           </div>

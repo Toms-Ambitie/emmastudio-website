@@ -1,28 +1,29 @@
 'use client';
 
-import { useEffect, useRef, ReactNode } from 'react';
+import { useEffect } from 'react';
 
-export default function ScrollReveal({ children, delay }: { children: ReactNode; delay?: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-
+// Globale effect: observeert alle .reveal elementen op de pagina.
+// Gemount in layout.tsx zodat het op elke pagina werkt.
+export default function ScrollReveal() {
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+    const els = [...document.querySelectorAll<HTMLElement>('.reveal:not(.in)')];
+    if (!els.length) return;
 
-    const check = () => {
-      if (el.getBoundingClientRect().top < window.innerHeight * 0.88) {
-        el.classList.add('in');
-        window.removeEventListener('scroll', check);
-      }
-    };
-    check();
-    window.addEventListener('scroll', check, { passive: true });
-    return () => window.removeEventListener('scroll', check);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: '0px 0px -10% 0px' }
+    );
+
+    els.forEach(el => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
-  return (
-    <div className="reveal" data-d={delay} ref={ref}>
-      {children}
-    </div>
-  );
+  return null;
 }

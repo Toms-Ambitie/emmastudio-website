@@ -240,7 +240,7 @@ export default function Home() {
             <div className="eyebrow"><span className="tick"></span> Veiligheid &amp; privacy</div>
             <h2>Je gegevens zijn van jou.</h2>
             <p>Emma verwerkt gevoelige bedrijfsdata. Dat doen we met respect: opgeslagen in de EU, minimale rechten, transparante aanpak.</p>
-            <Link className="btn btn-creme" href="/over#security">Lees het beveiligingsdocument <span className="arr">→</span></Link>
+            <Link className="btn btn-creme" href="/contact">Stel een vraag <span className="arr">→</span></Link>
           </div>
           <div className="security__badges reveal" data-d="1">
             {[
