@@ -126,7 +126,7 @@ export default function Home() {
             <div className="eyebrow proof__eyebrow"><span className="tick"></span> Bewijs uit de praktijk</div>
             <blockquote className="proof__quote">
               &ldquo;Ik wil gewoon lekker kunnen knippen. Met Emma zie ik hoe het gaat met mijn salon en mijn team,
-              zonder elke avond in een <span className="hl">spreadsheet</span> te duiken.&rdquo;
+              zonder elke avond in een <span className="hl">spreadsheet</span>{' '}te duiken.&rdquo;
             </blockquote>
             <div className="proof__who">
               <div className="av">
@@ -190,7 +190,7 @@ export default function Home() {
             </tbody>
           </table>
         </div>
-        <div className="compare__foot wrap">* Prijzen zijn indicatief en gebaseerd op gangbare abonnementen en uurtarieven in 2025.</div>
+        <div className="compare__foot wrap">* Prijzen zijn indicatief en gebaseerd op gangbare abonnementen en uurtarieven.</div>
       </section>
 
       {/* ── QUIZ ── */}

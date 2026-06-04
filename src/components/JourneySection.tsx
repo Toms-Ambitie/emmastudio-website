@@ -67,7 +67,6 @@ const VIGNETTES: Record<string, string> = {
 
 function cap(s: string) { return s.charAt(0).toUpperCase() + s.slice(1); }
 const TK_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m20 6-11 11-5-5"/></svg>`;
-const N_TOTAL = SCENES.length + 1;
 
 export default function JourneySection() {
   const journeyRef = useRef<HTMLDivElement>(null);
@@ -177,7 +176,7 @@ export default function JourneySection() {
             <article className="scene" key={s.id} style={{ ['--sc' as string]: `var(--m-${s.id})` }}>
               <div className="scene__inner">
                 <div className="scene__text">
-                  <div className="scene__num"><span className="ln"></span>Module {s.n} / 0{N_TOTAL} · vanaf €{s.price}/mnd</div>
+                  <div className="scene__num"><span className="ln"></span>Emma{s.name} · vanaf €{s.price}/mnd</div>
                   <div className="scene__name"><span className="e">Emma</span>{s.name}</div>
                   <h3 className="scene__head">{s.head}</h3>
                   <p className="scene__desc">{s.desc}</p>
