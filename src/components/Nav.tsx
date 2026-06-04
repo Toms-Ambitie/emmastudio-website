@@ -19,6 +19,20 @@ export default function Nav({ dark = false, currentPage = '' }: { dark?: boolean
       const scrolled = window.scrollY > 24;
       nav.classList.toggle('scrolled', scrolled);
       topbar?.classList.toggle('hide', scrolled);
+
+      // Transparante nav over donkere sectie → crème logo tonen
+      if (scrolled) {
+        nav.classList.remove('on-dark');
+        return;
+      }
+      const navBottom = nav.getBoundingClientRect().bottom;
+      const darkSections = document.querySelectorAll('[data-nav-dark]');
+      let isDark = false;
+      darkSections.forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.top < navBottom && r.bottom > 0) isDark = true;
+      });
+      nav.classList.toggle('on-dark', isDark);
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });

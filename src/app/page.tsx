@@ -41,7 +41,7 @@ export default function Home() {
         <div className="wrap hero__inner">
           <div className="hero__text">
             <div className="hero__eyebrow eyebrow fade-soft" style={{ animationDelay: '.1s' }}>
-              <span className="tick"></span> Jij doet je werk. Emma de rest.
+              <span className="tick"></span> Al 18 maanden bewezen in de praktijk
             </div>
             <h1 className="payoff">
               <span className="ln l1">
@@ -116,7 +116,7 @@ export default function Home() {
       </section>
 
       {/* ── PROOF ── */}
-      <section className="proof" id="proof">
+      <section className="proof" id="proof" data-nav-dark>
         <div className="proof__grid">
           <div className="proof__media">
             <Image src="/ilze.jpg" alt="Ilze Spannenberg, eigenaar Blondes Incognito" fill style={{ objectFit:'cover' }} />
@@ -234,7 +234,7 @@ export default function Home() {
       </section>
 
       {/* ── SECURITY ── */}
-      <section className="security">
+      <section className="security" data-nav-dark>
         <div className="wrap security__grid">
           <div className="security__intro reveal">
             <div className="eyebrow"><span className="tick"></span> Veiligheid &amp; privacy</div>
