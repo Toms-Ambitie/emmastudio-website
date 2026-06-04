@@ -11,7 +11,7 @@ import HeroVideo from '@/components/HeroVideo';
 import { MODULE_ORDER } from '@/data/modules';
 
 export const metadata: Metadata = {
-  title: 'Emma — Jij doet je werk. Emma de rest.',
+  title: 'Emma · Jij doet je werk. Emma de rest.',
   alternates: { canonical: 'https://www.emmastudio.nl' },
 };
 
@@ -108,8 +108,8 @@ export default function Home() {
       <section className="bridge">
         <div className="wrap reveal">
           <p>
-            Alles wat je dagelijks kost—maar je<br />
-            <span className="big">niets oplevert</span>—doet Emma voortaan.
+            Alles wat je dagelijks kost, maar je<br />
+            <span className="big">niets oplevert</span>, doet Emma voortaan.
           </p>
           <p className="sub">Administratie, personeelsbeheer, content, marktonderzoek. Overgenomen, geautomatiseerd, of slim samengevat. Zodat jij je tijd stopt in het werk dat ertoe doet.</p>
         </div>
@@ -140,7 +140,7 @@ export default function Home() {
             <div className="proof__stats">
               <div className="proof__stat"><b>18 mnd</b><span>dagelijks in productie</span></div>
               <div className="proof__stat"><b>7 / 8</b><span>modules bewezen in de praktijk</span></div>
-              <div className="proof__stat"><b>1 salon</b><span>ons startpunt — nu breder</span></div>
+              <div className="proof__stat"><b>1 salon</b><span>ons startpunt, nu breder</span></div>
             </div>
           </div>
         </div>
@@ -228,7 +228,7 @@ export default function Home() {
             ))}
           </div>
           <div className="packs__foot">
-            <b>Los verkrijgbaar:</b> elke module ook individueel te activeren — <b>boekt, waakt, vindt, coacht, ziet</b> €9/mnd · <b>loont, schrijft, promoot</b> €19/mnd · exclusief btw · maandelijks opzegbaar
+            <b>Los verkrijgbaar:</b> elke module ook individueel te activeren. <b>boekt, waakt, vindt, coacht, ziet</b> €9/mnd · <b>loont, schrijft, promoot</b> €19/mnd · exclusief btw · maandelijks opzegbaar
           </div>
         </div>
       </section>

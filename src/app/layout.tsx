@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import CookieBanner from '@/components/CookieBanner';
 
 export const metadata: Metadata = {
-  title: 'Emma — Jij doet je werk. Emma de rest.',
+  title: 'Emma · Jij doet je werk. Emma de rest.',
   description: 'Het ecosysteem dat de saaie kant van ondernemen overneemt. Boekhouding, HR, content en meer, voor élke zelfstandige ondernemer in NL & BE.',
   metadataBase: new URL('https://www.emmastudio.nl'),
   openGraph: {
