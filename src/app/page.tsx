@@ -361,6 +361,53 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── VERGELIJK ── */}
+      <section className="compare" id="vergelijk">
+        <div className="wrap">
+          <div className="compare__head reveal">
+            <div className="eyebrow"><span className="tick"></span> Vergelijk</div>
+            <h2>Emma vs. losse tools vs. bureau</h2>
+            <p>Waarom één rustige werkplek voordeliger is dan een stapel losse abonnementen.</p>
+          </div>
+        </div>
+        <div className="compare__wrap" style={{ maxWidth: 'var(--maxw)', marginInline: 'auto' }}>
+          <table className="ctable">
+            <thead>
+              <tr>
+                <th>Wat je nodig hebt</th>
+                <th className="c-emma">Emma<small>alles in één</small></th>
+                <th>Losse tools</th>
+                <th>Bureau / boekhouder</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                ['Boekhouding & facturen', 'EmmaBoekt · €9/mnd', '€15–60/mnd', '€100–250/mnd'],
+                ['Financieel inzicht', 'EmmaWaakt · €9/mnd', '€30–80/mnd', 'In het uurtarief'],
+                ['Salarisadministratie', 'EmmaLoont · €19/mnd', '€25–80/mnd', '€100–300/mnd'],
+                ['Content & marketing', 'EmmaSchrijft · €19/mnd', '€15–40/mnd', '€500–2.000/mnd'],
+                ['Eén login', '✓', '✗ Vijf logins', '✗ Losse portalen'],
+                ['Alles werkt samen', '✓', '✗ Handmatig koppelen', '✗ Wachten op export'],
+              ].map(([label, emma, tools, bureau], i) => (
+                <tr key={i}>
+                  <th scope="row">{label}</th>
+                  <td className="c-emma">{emma.startsWith('✓') ? <span className="cyes"><svg viewBox="0 0 24 24"><path d="m20 6-11 11-5-5"/></svg>{emma.slice(1).trim()}</span> : emma}</td>
+                  <td className={tools.startsWith('✗') ? 'cno' : ''}>{tools}</td>
+                  <td className={bureau.startsWith('✗') ? 'cno' : ''}>{bureau}</td>
+                </tr>
+              ))}
+              <tr className="row-total">
+                <th scope="row">Alle acht modules</th>
+                <td className="c-emma">Emma Compleet · €69/mnd</td>
+                <td>€90–230/mnd</td>
+                <td>€350–950/mnd</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div className="compare__foot wrap">* Prijzen indicatief. De boekhoudmodule is er vanaf juli; de overige modules volgen maandelijks, zie de roadmap.</div>
+      </section>
+
       {/* ── PRIJS ── */}
       <section className="lprice" id="prijs">
         <div className="wrap lprice__grid">
@@ -402,6 +449,43 @@ export default function Home() {
               <Link className="btn btn-coral" href="/#closer">Houd me op de hoogte <span className="arr">→</span></Link>
             )}
             <div className="pcard__foot">Maandelijks opzegbaar · 15% korting bij jaarbetaling</div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── PAKKETTEN ── */}
+      <section className="packs" id="pakketten">
+        <div className="wrap">
+          <div className="packs__head reveal">
+            <div className="eyebrow"><span className="tick"></span> Pakketten · voorjaar 2027</div>
+            <h2>Straks kies je een pakket.</h2>
+            <p>Zodra alle modules live zijn, bundelen we ze per branche met flinke korting. Wie eerder instapt, houdt de instapprijs.</p>
+          </div>
+          <div className="packs__grid">
+            {[
+              { name: "ZZP'ers", badge: 'Solowerk', price: 29, sub: 'Boekhouding, inzicht, leads en content voor de eenpitter.', mods: ['boekt', 'waakt', 'vindt', 'schrijft'], feat: false },
+              { name: 'Salons', badge: 'Aanrader', price: 59, sub: 'Zeven modules voor het salon of de studio met een team.', mods: ['boekt', 'waakt', 'loont', 'vindt', 'coacht', 'ziet', 'schrijft'], feat: true },
+              { name: 'Zorg', badge: 'Compliance', price: 39, sub: 'Vijf modules voor de zorgpraktijk, CAO-engine ingebouwd.', mods: ['boekt', 'waakt', 'loont', 'vindt', 'coacht'], feat: false },
+              { name: 'Compleet', badge: 'Alles', price: 69, sub: 'Alle acht modules in één pakket, maximale korting.', mods: MODULE_ORDER, feat: false },
+            ].map(pack => (
+              <div key={pack.name} className={`pack${pack.feat ? ' feat' : ''}`}>
+                <div className="pack__top">
+                  <div className="pack__name">Emma voor {pack.name}</div>
+                  <div className="pack__badge">{pack.badge}</div>
+                </div>
+                <div className="pack__dots">
+                  {pack.mods.map(m => <i key={m} style={{ ['--d' as string]: `var(--m-${m})` }}></i>)}
+                </div>
+                <div className="pack__price"><b>€{pack.price}</b><span>/mnd</span></div>
+                <div className="pack__sub">{pack.sub}</div>
+                <Link className={`btn ${pack.feat ? 'btn-creme' : 'btn-coral'}`} href="/#closer">
+                  Hoor het als eerste <span className="arr">→</span>
+                </Link>
+              </div>
+            ))}
+          </div>
+          <div className="packs__foot">
+            Tot die tijd is elke module <b>los</b> te gebruiken: €9 of €19 per maand, excl. btw, maandelijks opzegbaar. De pakketprijzen zijn de beoogde lanceringsprijzen.
           </div>
         </div>
       </section>
@@ -449,17 +533,16 @@ export default function Home() {
             <p>Emma verwerkt gevoelige bedrijfsdata. Dat doen we met respect: opgeslagen in de EU, minimale rechten, transparante aanpak.</p>
             <Link className="btn btn-creme" href="/contact">Stel een vraag <span className="arr">→</span></Link>
           </div>
-          <div className="security__badges reveal" data-d="1">
+          <div className="seclist reveal" data-d="1">
             {[
-              { tag: 'Opslag', h: 'Data in de EU', t: 'Je gegevens verlaten nooit de Europese Unie. We werken met servers in Amsterdam en Frankfurt.' },
-              { tag: 'Toegang', h: 'Minimale rechten', t: 'Emma vraagt alleen de rechten die nodig zijn. Je sleutel voor e-Boekhouden.nl wordt versleuteld opgeslagen en nooit getoond.' },
-              { tag: 'Privacy', h: 'AVG-conform', t: 'Je gegevens worden alleen verwerkt om de modules te laten werken. Geen verkoop, geen tracking.' },
-              { tag: 'Transparantie', h: 'Open over hoe we bouwen', t: 'We communiceren eerlijk over wat er live is en wat nog in ontwikkeling is. Geen marketingbeloftes.' },
+              { i: 'shield', h: 'Jouw data, jouw eigendom', t: 'Je gegevens worden alleen verwerkt om de modules te laten werken. Geen verkoop, geen tracking, AVG-conform.' },
+              { i: 'link', h: 'Versleuteld gekoppeld', t: 'Je sleutel voor e-Boekhouden.nl wordt versleuteld opgeslagen en nooit getoond.' },
+              { i: 'check', h: 'Opgeslagen in de EU', t: 'Je gegevens verlaten nooit de Europese Unie. We werken met servers in Amsterdam en Frankfurt.' },
+              { i: 'chat', h: 'Open over hoe we bouwen', t: 'We zijn eerlijk over wat er live is en wat nog in ontwikkeling is. Geen marketingbeloftes.' },
             ].map(b => (
-              <div key={b.h} className="secbadge">
-                <div className="secbadge__tag">{b.tag}</div>
-                <b>{b.h}</b>
-                <span>{b.t}</span>
+              <div key={b.h} className="secrow">
+                <span className="secrow__i"><Ic d={b.i} /></span>
+                <div><b>{b.h}</b><span>{b.t}</span></div>
               </div>
             ))}
           </div>
@@ -496,7 +579,7 @@ export default function Home() {
       </section>
 
       {/* ── FAQ ── */}
-      <section className="faq" id="faq">
+      <section className="faq faq--wide" id="faq">
         <div className="wrap faq__grid">
           <div className="faq__head">
             <div className="eyebrow reveal"><span className="tick"></span> Veelgestelde vragen</div>
