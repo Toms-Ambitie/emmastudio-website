@@ -9,7 +9,7 @@ import { ICONS, MODULE_TAGS, MODULE_PRICE, MODULE_ORDER, MODULE_STATUS, APP_URL,
 
 export const metadata: Metadata = {
   title: 'Emma · Jij doet je werk. Emma de rest.',
-  description: 'EmmaBoekt is de vriendelijke schil om e-Boekhouden.nl. Bonnetjes inboeken, facturen maken en offertes sturen, zonder gedoe. Probeer 14 dagen gratis, daarna €9 per maand.',
+  description: 'Emma is het platform dat de dagelijkse taken van ondernemers makkelijker maakt: boekhouding, personeel, marketing en inzicht. We beginnen bij je boekhouding, bovenop e-Boekhouden.nl. Vanaf €9 per maand.',
   alternates: { canonical: 'https://www.emmastudio.nl' },
 };
 
@@ -56,7 +56,7 @@ export default function Home() {
       <header className="lph" id="hero">
         <div className="wrap lph__inner">
           <div className="lph__text">
-            <span className="lph__badge lph__fade"><span className="pulse"></span> {LAUNCHED ? 'EmmaBoekt is live · voor e-Boekhouden.nl' : 'De boekhoudmodule voor e-Boekhouden.nl · lanceert in juli'}</span>
+            <span className="lph__badge lph__fade"><span className="pulse"></span> {LAUNCHED ? 'Het platform voor ondernemers · de boekhoudmodule is live' : 'Het platform voor ondernemers · eerste module lanceert in juli'}</span>
             <h1>
               <span className="lw" style={{ animationDelay: '.15s' }}>Jij</span>{' '}
               <span className="lw" style={{ animationDelay: '.26s' }}>doet</span>{' '}
@@ -69,9 +69,9 @@ export default function Home() {
               <span className="lw accent" style={{ animationDelay: '1.14s' }}>.</span>
             </h1>
             <p className="lph__lead lph__fade" style={{ animationDelay: '.55s' }}>
-              Emma is de vriendelijke schil om <b>e-Boekhouden.nl</b>. Bonnetjes inboeken, facturen maken,
-              offertes sturen: Emma leest alles voor je in en zet het klaar, jij bevestigt.
-              Je boekhouding blijft precies waar die is.
+              Boekhouding, personeel, marketing: je doet het er allemaal bij, naast je echte werk.
+              Emma is het platform dat die taken makkelijker maakt, met inzicht en concreet advies erbij.
+              We beginnen bij je boekhouding, bovenop <b>e-Boekhouden.nl</b>. Daarna komt er elke maand meer.
             </p>
             <div className="lph__cta lph__fade" style={{ animationDelay: '.75s' }}>
               {LAUNCHED ? (
@@ -180,31 +180,25 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ── E-BOEKHOUDEN BAND ── */}
-      <section className="lpeb" id="eboekhouden">
-        <div className="wrap lpeb__grid">
-          <div className="lpeb__copy reveal">
-            <div className="eyebrow"><span className="tick"></span> Voor wie e-Boekhouden.nl gebruikt</div>
-            <h2>Boekhouden blijft.<br />Het gedoe niet.</h2>
-            <p className="lpeb__lead">
-              Je boekhouding staat prima in e-Boekhouden.nl. Maar bonnetjes overtypen, door schermen klikken
-              voor één factuur en zoeken naar wie nog moet betalen: dat kost je avonden.
-              <b> Emma zet er een schil omheen die dat werk overneemt.</b> De motor blijft, het gedoe verdwijnt.
-            </p>
+      {/* ── HET PROBLEEM ── */}
+      <section className="lpfeat lpfeat--prob" id="probleem">
+        <div className="wrap">
+          <div className="lpfeat__head reveal">
+            <div className="eyebrow"><span className="tick"></span> Het probleem</div>
+            <h2>Ondernemen is geweldig.<br />De administratie eromheen niet.</h2>
           </div>
-          <div className="lpeb__pts reveal" data-d="1">
-            <div className="lpebpt">
-              <span className="lpebpt__i"><Ic d="scan" /></span>
-              <div><b>Doorsturen in plaats van overtypen</b><span>Stuur een bon naar je inbox en Emma leest leverancier, bedrag en BTW er zelf uit.</span></div>
-            </div>
-            <div className="lpebpt">
-              <span className="lpebpt__i"><Ic d="file" /></span>
-              <div><b>Een factuur in een paar klikken</b><span>Emma onthoudt je klanten en tarieven. Factuur of offerte maken kost je een minuut.</span></div>
-            </div>
-            <div className="lpebpt">
-              <span className="lpebpt__i"><Ic d="wave" /></span>
-              <div><b>Overzicht in gewone taal</b><span>Omzet, cashflow en openstaande facturen in één blik. Geen grootboek-doolhof.</span></div>
-            </div>
+          <div className="lpfeat__grid lpfeat__grid--3">
+            {[
+              { n: '01', h: 'Boekhouding vreet tijd', p: 'Iedere avond cijfers invullen in plaats van bij je gezin zitten. Emma houdt het bij, bovenop e-Boekhouden.nl.' },
+              { n: '02', h: 'Loonadministratie is een ramp', p: 'Contracten, verlof, salaris. Eén fout en de Belastingdienst staat voor je deur. EmmaLoont regelt het straks.' },
+              { n: '03', h: 'Klanten vinden kost handen en voeten', p: 'Verspreid over zes losse tools, niemand die overzicht heeft. EmmaVindt en EmmaPromoot doen straks het werk.' },
+            ].map((c, i) => (
+              <div className="lpf reveal" data-d={String(i + 1)} key={c.n}>
+                <span className="lpf__num">{c.n}</span>
+                <h3>{c.h}</h3>
+                <p>{c.p}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -269,9 +263,9 @@ export default function Home() {
       <section className="lpfeat" id="functies">
         <div className="wrap">
           <div className="lpfeat__head reveal">
-            <div className="eyebrow"><span className="tick"></span> Wat EmmaBoekt doet</div>
-            <h2>Alles voor je dagelijkse boekhouding.</h2>
-            <p>Eén rustige werkplek voor het werk dat je nu in losse schermen doet.</p>
+            <div className="eyebrow"><span className="tick"></span> De eerste module · boekhouding</div>
+            <h2>We beginnen waar de pijn het grootst is.</h2>
+            <p>De boekhoudmodule is de eerste van acht. Eén rustige werkplek voor het werk dat je nu in losse schermen doet.</p>
           </div>
           <div className="lpfeat__grid">
             {[
@@ -362,50 +356,43 @@ export default function Home() {
       </section>
 
       {/* ── VERGELIJK ── */}
-      <section className="compare" id="vergelijk">
+      <section className="lpfeat" id="vergelijk" style={{ background: 'var(--creme-2)' }}>
         <div className="wrap">
-          <div className="compare__head reveal">
-            <div className="eyebrow"><span className="tick"></span> Vergelijk</div>
+          <div className="lpfeat__head reveal">
+            <div className="eyebrow"><span className="tick"></span> Vergelijking</div>
             <h2>Emma vs. losse tools vs. bureau</h2>
-            <p>Waarom één rustige werkplek voordeliger is dan een stapel losse abonnementen.</p>
           </div>
-        </div>
-        <div className="compare__wrap" style={{ maxWidth: 'var(--maxw)', marginInline: 'auto' }}>
-          <table className="ctable">
-            <thead>
-              <tr>
-                <th>Wat je nodig hebt</th>
-                <th className="c-emma">Emma<small>alles in één</small></th>
-                <th>Losse tools</th>
-                <th>Bureau / boekhouder</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                ['Boekhouding & facturen', 'EmmaBoekt · €9/mnd', '€15–60/mnd', '€100–250/mnd'],
-                ['Financieel inzicht', 'EmmaWaakt · €9/mnd', '€30–80/mnd', 'In het uurtarief'],
-                ['Salarisadministratie', 'EmmaLoont · €19/mnd', '€25–80/mnd', '€100–300/mnd'],
-                ['Content & marketing', 'EmmaSchrijft · €19/mnd', '€15–40/mnd', '€500–2.000/mnd'],
-                ['Eén login', '✓', '✗ Vijf logins', '✗ Losse portalen'],
-                ['Alles werkt samen', '✓', '✗ Handmatig koppelen', '✗ Wachten op export'],
-              ].map(([label, emma, tools, bureau], i) => (
-                <tr key={i}>
-                  <th scope="row">{label}</th>
-                  <td className="c-emma">{emma.startsWith('✓') ? <span className="cyes"><svg viewBox="0 0 24 24"><path d="m20 6-11 11-5-5"/></svg>{emma.slice(1).trim()}</span> : emma}</td>
-                  <td className={tools.startsWith('✗') ? 'cno' : ''}>{tools}</td>
-                  <td className={bureau.startsWith('✗') ? 'cno' : ''}>{bureau}</td>
+          <div className="cmp reveal" data-d="1">
+            <table>
+              <thead>
+                <tr>
+                  <th className="cmp__q">Wat heb je nodig?</th>
+                  <th className="cmp__emma"><b>Emma</b><span>vanaf €9/mnd</span></th>
+                  <th><b>Losse tools</b><span>€60–300+/mnd</span></th>
+                  <th><b>Bureau</b><span>€200–2.000+/mnd</span></th>
                 </tr>
-              ))}
-              <tr className="row-total">
-                <th scope="row">Alle acht modules</th>
-                <td className="c-emma">Emma Compleet · €69/mnd</td>
-                <td>€90–230/mnd</td>
-                <td>€350–950/mnd</td>
-              </tr>
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {[
+                  ['Boekhouding', 'Losse app €9–15/mnd', 'Inbegrepen, maar traag'],
+                  ['Loonadministratie', 'Loonbureau €100–300/mnd', 'Meerprijs'],
+                  ['Marketing & ads', 'Marketingbureau €500–2.000/mnd', 'Niet inbegrepen'],
+                  ['Klanten vinden', 'Extra tool nodig', 'Niet inbegrepen'],
+                  ['Slimme assistent', '–', '–'],
+                  ['Alles onder één dak', '–', '–'],
+                ].map(([label, tools, bureau]) => (
+                  <tr key={label}>
+                    <th scope="row">{label}</th>
+                    <td className="cmp__emma"><span className="cmp__ok"><Ic d="check" /></span></td>
+                    <td>{tools}</td>
+                    <td>{bureau}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="cmp__foot reveal">Gebaseerd op marktprijzen 2026. Emma Compleet (€69/mnd) bevat straks alles. De boekhoudmodule is er vanaf juli; de rest volgt maandelijks.</p>
         </div>
-        <div className="compare__foot wrap">* Prijzen indicatief. De boekhoudmodule is er vanaf juli; de overige modules volgen maandelijks, zie de roadmap.</div>
       </section>
 
       {/* ── PRIJS ── */}
@@ -454,39 +441,34 @@ export default function Home() {
       </section>
 
       {/* ── PAKKETTEN ── */}
-      <section className="packs" id="pakketten">
+      <section className="lpfeat" id="pakketten">
         <div className="wrap">
-          <div className="packs__head reveal">
+          <div className="lpfeat__head reveal">
             <div className="eyebrow"><span className="tick"></span> Pakketten · voorjaar 2027</div>
             <h2>Straks kies je een pakket.</h2>
             <p>Zodra alle modules live zijn, bundelen we ze per branche met flinke korting. Wie eerder instapt, houdt de instapprijs.</p>
           </div>
-          <div className="packs__grid">
+          <div className="pk__grid">
             {[
-              { name: "ZZP'ers", badge: 'Solowerk', price: 29, sub: 'Boekhouding, inzicht, leads en content voor de eenpitter.', mods: ['boekt', 'waakt', 'vindt', 'schrijft'], feat: false },
-              { name: 'Salons', badge: 'Aanrader', price: 59, sub: 'Zeven modules voor het salon of de studio met een team.', mods: ['boekt', 'waakt', 'loont', 'vindt', 'coacht', 'ziet', 'schrijft'], feat: true },
-              { name: 'Zorg', badge: 'Compliance', price: 39, sub: 'Vijf modules voor de zorgpraktijk, CAO-engine ingebouwd.', mods: ['boekt', 'waakt', 'loont', 'vindt', 'coacht'], feat: false },
-              { name: 'Compleet', badge: 'Alles', price: 69, sub: 'Alle acht modules in één pakket, maximale korting.', mods: MODULE_ORDER, feat: false },
-            ].map(pack => (
-              <div key={pack.name} className={`pack${pack.feat ? ' feat' : ''}`}>
-                <div className="pack__top">
-                  <div className="pack__name">Emma voor {pack.name}</div>
-                  <div className="pack__badge">{pack.badge}</div>
-                </div>
-                <div className="pack__dots">
-                  {pack.mods.map(m => <i key={m} style={{ ['--d' as string]: `var(--m-${m})` }}></i>)}
-                </div>
-                <div className="pack__price"><b>€{pack.price}</b><span>/mnd</span></div>
-                <div className="pack__sub">{pack.sub}</div>
-                <Link className={`btn ${pack.feat ? 'btn-creme' : 'btn-coral'}`} href="/#closer">
-                  Hoor het als eerste <span className="arr">→</span>
-                </Link>
+              { name: 'Emma voor ZZP', sub: 'Voor de zelfstandige zonder personeel.', price: 29, mods: ['EmmaBoekt', 'EmmaWaakt', 'EmmaVindt', 'EmmaSchrijft'], n: 4, feat: false },
+              { name: 'Emma voor Salons', sub: 'Voor kapsalons, schoonheidssalons en kappers.', price: 59, mods: ['Alles uit ZZP', 'EmmaLoont', 'EmmaCoacht', 'EmmaZiet'], n: 7, feat: true },
+              { name: 'Emma voor Zorg', sub: 'Voor zorgondernemers en praktijken.', price: 39, mods: ['EmmaBoekt', 'EmmaWaakt', 'EmmaLoont', 'EmmaVindt', 'EmmaCoacht'], n: 5, feat: false },
+              { name: 'Emma Compleet', sub: 'Alle acht modules. Het complete platform.', price: 69, mods: ['Alles uit Salons', 'EmmaPromoot'], n: 8, feat: false },
+            ].map(pk => (
+              <div key={pk.name} className={`pk${pk.feat ? ' pk--feat' : ''} reveal`}>
+                {pk.feat && <span className="pk__flag">Aanrader</span>}
+                <div className="pk__name">{pk.name}</div>
+                <div className="pk__sub">{pk.sub}</div>
+                <div className="pk__price"><b>€{pk.price}</b><span>/mnd</span></div>
+                <div className="pk__n">{pk.n} modules</div>
+                <ul className="pk__list">
+                  {pk.mods.map(m => <li key={m}><span className="pk__ok"><Ic d="check" /></span>{m}</li>)}
+                </ul>
+                <Link className={`btn ${pk.feat ? 'btn-coral' : 'btn-ghost'}`} href="/#closer">Hoor het als eerste</Link>
               </div>
             ))}
           </div>
-          <div className="packs__foot">
-            Tot die tijd is elke module <b>los</b> te gebruiken: €9 of €19 per maand, excl. btw, maandelijks opzegbaar. De pakketprijzen zijn de beoogde lanceringsprijzen.
-          </div>
+          <p className="cmp__foot reveal">Tot die tijd is elke module los te gebruiken: standaard €9/mnd, premium €19/mnd, excl. btw en maandelijks opzegbaar.</p>
         </div>
       </section>
 
