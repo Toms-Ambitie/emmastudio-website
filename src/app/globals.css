@@ -1496,3 +1496,12 @@ a.rm:hover{ transform:translateY(-2px); box-shadow:var(--sh-hover); }
 .secrow__i svg{ width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
 .secrow b{ display:block; font-size:15.5px; margin-bottom:3px; color:var(--creme); }
 .secrow span{ font-size:14px; line-height:1.6; color:color-mix(in oklab,var(--creme) 72%,transparent); }
+
+/* ── Laatste polish ── */
+/* geen dubbele rand tussen ticker en de band eronder */
+.lpmq + .lpeb{ border-top:0; }
+/* mobiel: CTA uit de pill-nav (staat in het menu), voorkomt regelbreuk */
+@media (max-width:600px){
+  .nav{ padding:8px 8px 8px 18px; }
+  .nav .btn{ display:none; }
+}
