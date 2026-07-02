@@ -33,6 +33,8 @@ export default function Footer() {
             <Link href="/contact">Contact</Link>
             <Link href="/#closer">Op de hoogte blijven</Link>
             <Link href="/over">Over Toms Ambitie</Link>
+            <Link href="/algemene-voorwaarden">Algemene voorwaarden</Link>
+            <Link href="/privacy">Privacyverklaring</Link>
           </div>
         </div>
         <div className="foot__bot">
