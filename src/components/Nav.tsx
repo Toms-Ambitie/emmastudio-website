@@ -69,9 +69,9 @@ export default function Nav({ dark = false, currentPage = '' }: { dark?: boolean
         </Link>
         <div className="nav__links">
           <Link href="/#hoe">Hoe het werkt</Link>
+          <Link href="/#modules">Modules</Link>
           <Link href="/#prijs">Prijs</Link>
           <Link href="/#roadmap">Roadmap</Link>
-          <Link href="/#proof">Het bewijs</Link>
           <Link href="/#faq">FAQ</Link>
         </div>
         <div className="nav__right">
@@ -91,6 +91,7 @@ export default function Nav({ dark = false, currentPage = '' }: { dark?: boolean
 
       <div className="mobile-menu" id="mobileMenu" ref={menuRef}>
         <Link href="/#hoe" onClick={closeMenu}>Hoe het werkt</Link>
+        <Link href="/#modules" onClick={closeMenu}>Modules</Link>
         <Link href="/#prijs" onClick={closeMenu}>Prijs</Link>
         <Link href="/#roadmap" onClick={closeMenu}>Roadmap</Link>
         <Link href="/kennisbank" onClick={closeMenu}>Kennisbank</Link>

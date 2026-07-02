@@ -3,6 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import FaqAccordion from '@/components/FaqAccordion';
 import WaitlistForm from '@/components/WaitlistForm';
+import JourneySection from '@/components/JourneySection';
+import CountUp from '@/components/CountUp';
 import { ICONS, MODULE_TAGS, MODULE_PRICE, MODULE_ORDER, MODULE_STATUS, APP_URL, LAUNCHED } from '@/data/modules';
 
 export const metadata: Metadata = {
@@ -32,6 +34,8 @@ const I: Record<string, string> = {
   arrowfile: '<path d="M6.5 3h7.2L18.5 7.8V21h-12Z"/><path d="M13.5 3v5h5"/><path d="M9.5 14.5h5M12.5 12l2.5 2.5-2.5 2.5"/>',
 };
 
+function cap(t: string) { return t.charAt(0).toUpperCase() + t.slice(1); }
+
 function Ic({ d, className }: { d: string; className?: string }) {
   return <svg viewBox="0 0 24 24" className={className} aria-hidden="true" dangerouslySetInnerHTML={{ __html: I[d] || d }} />;
 }
@@ -52,14 +56,24 @@ export default function Home() {
       <header className="lph" id="hero">
         <div className="wrap lph__inner">
           <div className="lph__text">
-            <span className="lph__badge"><span className="pulse"></span> {LAUNCHED ? 'EmmaBoekt is live · voor e-Boekhouden.nl' : 'De boekhoudmodule voor e-Boekhouden.nl · lanceert in juli'}</span>
-            <h1>Jij doet je werk.<br />Emma de rest<span className="accent">.</span></h1>
-            <p className="lph__lead">
+            <span className="lph__badge lph__fade"><span className="pulse"></span> {LAUNCHED ? 'EmmaBoekt is live · voor e-Boekhouden.nl' : 'De boekhoudmodule voor e-Boekhouden.nl · lanceert in juli'}</span>
+            <h1>
+              <span className="lw" style={{ animationDelay: '.15s' }}>Jij</span>{' '}
+              <span className="lw" style={{ animationDelay: '.26s' }}>doet</span>{' '}
+              <span className="lw" style={{ animationDelay: '.37s' }}>je</span>{' '}
+              <span className="lw" style={{ animationDelay: '.48s' }}>werk.</span>
+              <br />
+              <span className="lw" style={{ animationDelay: '.72s' }}>Emma</span>{' '}
+              <span className="lw" style={{ animationDelay: '.84s' }}>de</span>{' '}
+              <span className="lw" style={{ animationDelay: '.96s' }}>rest</span>
+              <span className="lw accent" style={{ animationDelay: '1.14s' }}>.</span>
+            </h1>
+            <p className="lph__lead lph__fade" style={{ animationDelay: '.55s' }}>
               Emma is de vriendelijke schil om <b>e-Boekhouden.nl</b>. Bonnetjes inboeken, facturen maken,
               offertes sturen: Emma leest alles voor je in en zet het klaar, jij bevestigt.
               Je boekhouding blijft precies waar die is.
             </p>
-            <div className="lph__cta">
+            <div className="lph__cta lph__fade" style={{ animationDelay: '.75s' }}>
               {LAUNCHED ? (
                 <a className="btn btn-coral btn-lg" href={APP_URL}>Start 14 dagen gratis <span className="arr">→</span></a>
               ) : (
@@ -67,7 +81,7 @@ export default function Home() {
               )}
               <Link className="btn btn-ghost btn-lg" href="/#inboeken">Bekijk hoe het werkt</Link>
             </div>
-            <div className="lph__assure">
+            <div className="lph__assure lph__fade" style={{ animationDelay: '.95s' }}>
               <span><span className="d"></span>{LAUNCHED ? 'Daarna €9 per maand' : '14 dagen gratis proberen, daarna €9 per maand'}</span>
               <span><span className="d"></span>Maandelijks opzegbaar</span>
               <span><span className="d"></span>Je accountant houdt toegang</span>
@@ -100,22 +114,22 @@ export default function Home() {
                   <div className="mock__kpis">
                     <div className="kpi">
                       <span className="kpi__l"><i style={{ background: 'var(--teal-soft)', color: 'var(--success)' }}><Ic d="euro" /></i> Omzet</span>
-                      <div className="kpi__v">€ 24.680</div>
+                      <div className="kpi__v"><CountUp to={24680} prefix="€ " /></div>
                       <div className="kpi__n up">+12% t.o.v. vorige maand</div>
                     </div>
                     <div className="kpi">
                       <span className="kpi__l"><i style={{ background: 'var(--teal-soft)', color: 'var(--success)' }}><Ic d="wave" /></i> Cashflow</span>
-                      <div className="kpi__v">€ 8.430</div>
+                      <div className="kpi__v"><CountUp to={8430} prefix="€ " /></div>
                       <div className="kpi__n up">Positief</div>
                     </div>
                     <div className="kpi">
                       <span className="kpi__l"><i style={{ background: 'var(--warning-soft)', color: 'var(--warning)' }}><Ic d="file" /></i> Openstaand</span>
-                      <div className="kpi__v">€ 6.240</div>
+                      <div className="kpi__v"><CountUp to={6240} prefix="€ " /></div>
                       <div className="kpi__n warn">3 facturen · 1 te laat</div>
                     </div>
                     <div className="kpi">
                       <span className="kpi__l"><i style={{ background: 'var(--coral-soft)', color: 'var(--coral-deep)' }}><Ic d="task" /></i> Taken</span>
-                      <div className="kpi__v">12</div>
+                      <div className="kpi__v"><CountUp to={12} /></div>
                       <div className="kpi__n">6 openstaand vandaag</div>
                     </div>
                   </div>
@@ -149,6 +163,22 @@ export default function Home() {
           </figure>
         </div>
       </header>
+
+      {/* ── MODULE-TICKER ── */}
+      <div className="lpmq" aria-hidden="true">
+        <div className="lpmq__track">
+          {[0, 1].map(i => (
+            <div className="lpmq__seq" key={i}>
+              {MODULE_ORDER.map(id => (
+                <span key={id}>
+                  <i className="dot" style={{ background: `var(--m-${id})` }}></i>
+                  <b>Emma{cap(id)}</b> {MODULE_TAGS[id]}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* ── E-BOEKHOUDEN BAND ── */}
       <section className="lpeb" id="eboekhouden">
@@ -296,6 +326,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── MODULES-SLIDER ── */}
+      <JourneySection />
 
       {/* ── PROOF ── */}
       <section className="proof" id="proof" data-nav-dark>

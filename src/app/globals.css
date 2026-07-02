@@ -214,8 +214,8 @@ h1,h2,h3{ font-family:var(--display); font-weight:800; line-height:1.0; letter-s
 .journey__track{ display:flex; height:100%; will-change:transform; }
 .scene{ width:100vw; height:100%; flex:0 0 100vw; position:relative; overflow:hidden;
   background:
-    radial-gradient(120% 90% at 78% 18%, color-mix(in srgb,var(--sc) 78%,#fff 0%) 0%, transparent 55%),
-    linear-gradient(150deg, color-mix(in srgb,var(--sc) 90%,#1C1715) 0%, color-mix(in srgb,var(--sc) 70%,#1C1715) 100%);
+    radial-gradient(120% 90% at 78% 18%, color-mix(in oklab,var(--sc) 52%,var(--ink)) 0%, transparent 55%),
+    linear-gradient(150deg, color-mix(in oklab,var(--sc) 42%,var(--ink)) 0%, color-mix(in oklab,var(--sc) 24%,var(--ink)) 100%);
   color:var(--creme); display:flex; align-items:center; }
 .scene__inner{ width:100%; max-width:var(--maxw); margin-inline:auto; padding:0 var(--gut);
   display:grid; grid-template-columns:1.04fr .96fr; align-items:center; gap:clamp(28px,5vw,80px); }
@@ -1381,4 +1381,99 @@ a.rm:hover{ transform:translateY(-2px); box-shadow:var(--sh-hover); }
 @media (max-width:560px){
   .mock__search{ max-width:none; }
   .mock__top .mock__bell{ display:none; }
+}
+
+/* ============================================================
+   MOTION-LAAG — entrance-animaties, ticker, micro-interacties
+   ============================================================ */
+
+/* ── Hero: woord-voor-woord entree ── */
+.lph h1 .lw{ display:inline-block; opacity:0; transform:translateY(22px); filter:blur(7px);
+  animation:lpword .75s var(--ease-out) forwards; }
+@keyframes lpword{ to{ opacity:1; transform:none; filter:none; } }
+.lph__fade{ opacity:0; animation:lpfade .8s var(--ease-out) forwards; }
+@keyframes lpfade{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
+
+/* subtiel technisch grid in de hero-achtergrond */
+.lph::before{ content:""; position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(ellipse 90% 60% at 78% 8%, color-mix(in oklab,var(--teal) 7%,transparent), transparent 60%),
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:auto, 56px 56px, 56px 56px;
+  opacity:.35;
+  -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,.9), transparent 82%);
+  mask-image:linear-gradient(to bottom, rgba(0,0,0,.9), transparent 82%); }
+.lph .wrap{ position:relative; }
+
+/* ── Hero-mockup: entree + zweven + gestaffelde inhoud ── */
+.lph__visual .mock{ opacity:0;
+  animation:mockin .95s var(--ease-out) .5s forwards, mockfloat 8s ease-in-out 3s infinite; }
+@keyframes mockin{ from{ opacity:0; transform:translateY(28px) scale(.965); }
+  to{ opacity:1; transform:none; } }
+@keyframes mockfloat{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-7px); } }
+.mock .kpi, .mock .sig, .mock .ask__chip, .mock .mock__card-h, .mock .ask__h, .mock .ask__p{
+  opacity:0; animation:lpfade .6s var(--ease-out) forwards; }
+.mock .kpi:nth-child(1){ animation-delay:.95s; } .mock .kpi:nth-child(2){ animation-delay:1.05s; }
+.mock .kpi:nth-child(3){ animation-delay:1.15s; } .mock .kpi:nth-child(4){ animation-delay:1.25s; }
+.mock .mock__card-h{ animation-delay:1.35s; }
+.mock .sig:nth-of-type(1){ animation-delay:1.45s; } .mock .sig:nth-of-type(2){ animation-delay:1.6s; }
+.mock .sig:nth-of-type(3){ animation-delay:1.75s; }
+.mock .ask__h{ animation-delay:1.5s; } .mock .ask__p{ animation-delay:1.6s; }
+.mock .ask__chip:nth-of-type(1){ animation-delay:1.7s; } .mock .ask__chip:nth-of-type(2){ animation-delay:1.82s; }
+.mock .ask__chip:nth-of-type(3){ animation-delay:1.94s; }
+.mock__navi.on::before{ animation:navpulse 3.2s var(--ease) 2.4s infinite; }
+@keyframes navpulse{ 0%,100%{ opacity:1; } 50%{ opacity:.45; } }
+
+/* ── Module-ticker ── */
+.lpmq{ background:var(--paper); border-block:1px solid var(--line); overflow:hidden; padding-block:14px;
+  position:relative; }
+.lpmq::before,.lpmq::after{ content:""; position:absolute; top:0; bottom:0; width:80px; z-index:1; pointer-events:none; }
+.lpmq::before{ left:0; background:linear-gradient(90deg,var(--paper),transparent); }
+.lpmq::after{ right:0; background:linear-gradient(-90deg,var(--paper),transparent); }
+.lpmq__track{ display:flex; width:max-content; animation:lpmq 46s linear infinite; }
+.lpmq:hover .lpmq__track{ animation-play-state:paused; }
+@keyframes lpmq{ to{ transform:translateX(-50%); } }
+.lpmq__seq{ display:flex; align-items:center; gap:44px; padding-right:44px; }
+.lpmq__seq span{ display:inline-flex; align-items:center; gap:10px; font-family:var(--mono); font-size:12px;
+  letter-spacing:.05em; color:var(--subtext); white-space:nowrap; }
+.lpmq__seq b{ font-weight:600; color:var(--ink); }
+.lpmq__seq .dot{ width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+
+/* ── Slim-inboeken showcase: gestaffelde binnenkomst bij scroll ── */
+.lpshow__stage .mockdoc.reveal, .lpshow__stage .mockprop.reveal{ transition-duration:.8s; }
+.mockprop .mockprop__field, .mockprop .mockprop__gl, .mockprop .mockprop__why,
+.mockprop .mockprop__warn, .mockprop .mockprop__foot{
+  opacity:0; transform:translateY(10px);
+  transition:opacity .55s var(--ease-out), transform .55s var(--ease-out); }
+.mockprop.in .mockprop__field:nth-of-type(1){ transition-delay:.25s; }
+.mockprop.in .mockprop__field:nth-of-type(2){ transition-delay:.4s; }
+.mockprop.in .mockprop__field:nth-of-type(3){ transition-delay:.55s; }
+.mockprop.in .mockprop__gl{ transition-delay:.75s; }
+.mockprop.in .mockprop__why{ transition-delay:.9s; }
+.mockprop.in .mockprop__warn{ transition-delay:1.05s; }
+.mockprop.in .mockprop__foot{ transition-delay:1.25s; }
+.mockprop.in .mockprop__field, .mockprop.in .mockprop__gl, .mockprop.in .mockprop__why,
+.mockprop.in .mockprop__warn, .mockprop.in .mockprop__foot{ opacity:1; transform:none; }
+.mockdoc__lines i{ position:relative; overflow:hidden; }
+.mockdoc.in .mockdoc__lines i::after{ content:""; position:absolute; inset:0;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent);
+  transform:translateX(-100%); animation:docscan 2.2s var(--ease) .3s 2; }
+@keyframes docscan{ to{ transform:translateX(100%); } }
+
+/* ── Journey: statuschip per module ── */
+.scene__status{ margin-left:10px; font-family:var(--mono); font-size:10px; letter-spacing:.07em;
+  text-transform:uppercase; padding:4px 10px; border-radius:var(--r-pill);
+  background:color-mix(in oklab,var(--sc) 12%,var(--creme)); color:color-mix(in oklab,var(--sc) 52%,var(--ink)); }
+.scene__status.is-live{ background:var(--teal-soft); color:var(--success); }
+
+/* ── Reduced motion: alles rustig aan ── */
+@media (prefers-reduced-motion: reduce){
+  .lph h1 .lw, .lph__fade, .lph__visual .mock,
+  .mock .kpi, .mock .sig, .mock .ask__chip, .mock .mock__card-h, .mock .ask__h, .mock .ask__p{
+    animation:none; opacity:1; transform:none; filter:none; }
+  .lpmq__track{ animation:none; }
+  .mockprop .mockprop__field, .mockprop .mockprop__gl, .mockprop .mockprop__why,
+  .mockprop .mockprop__warn, .mockprop .mockprop__foot{ opacity:1; transform:none; transition:none; }
+  .mockdoc.in .mockdoc__lines i::after{ animation:none; }
 }
