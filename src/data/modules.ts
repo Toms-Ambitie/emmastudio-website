@@ -67,12 +67,17 @@ export const MODULE_PRICE: Record<string, number> = {
 
 export const MODULE_ORDER = ['boekt','waakt','loont','vindt','coacht','ziet','schrijft','promoot'];
 
+/** DE LANCEERSCHAKELAAR. Zet op true zodra de boekhoudmodule live is op
+ *  app.emmastudio.nl. Alle teksten en CTA's op de site schakelen dan mee
+ *  van "lanceert in juli" naar "nu live" met directe aanmeldknoppen. */
+export const LAUNCHED = false;
+
 /** Lanceerstatus per module. `live: true` = te gebruiken via app.emmastudio.nl;
  *  anders toont de site "komt in {when}". Eén bron van waarheid voor homepage,
  *  modulepagina's en footer. */
 export type ModuleStatus = { live: boolean; when: string };
 export const MODULE_STATUS: Record<string, ModuleStatus> = {
-  boekt:    { live: true,  when: 'nu live' },
+  boekt:    { live: LAUNCHED, when: 'juli 2026' },
   waakt:    { live: false, when: 'augustus 2026' },
   loont:    { live: false, when: 'september 2026' },
   vindt:    { live: false, when: 'oktober 2026' },
@@ -125,7 +130,9 @@ export const MODULES: Record<string, ModuleData> = {
       { q:'Werkt het samen met mijn accountant?', a:'Ja. Je accountant houdt gewoon toegang tot e-Boekhouden.nl en blijft eindverantwoordelijk. Emma neemt het voorbereidende werk over, zodat er minder uren overblijven om te factureren.' },
       { q:'Ik gebruik SnelStart. Kan ik ook meedoen?', a:'Bijna. EmmaBoekt start met e-Boekhouden.nl; de koppeling met SnelStart volgt binnenkort. Laat je e-mail achter en je hoort het zodra die klaar is.' },
       { q:'Wat kost EmmaBoekt?', a:'€9 per maand, exclusief btw. Je probeert Emma eerst 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 15% korting.' },
-      { q:'Kan ik EmmaBoekt nu al gebruiken?', a:'Ja. EmmaBoekt is de eerste module van Emma en is nu te gebruiken. Maak een account aan op app.emmastudio.nl en je bent binnen een paar minuten gekoppeld.' },
+      { q:'Kan ik de boekhoudmodule nu al gebruiken?', a: LAUNCHED
+          ? 'Ja. De boekhoudmodule is de eerste module van Emma en is nu te gebruiken. Maak een account aan op app.emmastudio.nl en je bent binnen een paar minuten gekoppeld.'
+          : 'Bijna. De boekhoudmodule lanceert in juli 2026. Laat je e-mail achter en je hoort het op de dag dat je kunt starten.' },
     ],
   },
   waakt:{

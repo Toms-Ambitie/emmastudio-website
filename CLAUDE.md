@@ -196,7 +196,9 @@ Emma heeft 8 modules — elke module is een Nederlands werkwoord. CamelCase: `Em
 
 ## 9b. Lanceerstatus (juli 2026) — leidend voor alle site-teksten
 
-**EmmaBoekt is live** en is voorlopig de enige te gebruiken module. De app draait op **app.emmastudio.nl**; de primaire CTA op de site is "Start 14 dagen gratis" en linkt daarheen.
+**De boekhoudmodule lanceert in juli 2026** (volgende stap: livegang). De site heeft een **lanceerschakelaar**: `LAUNCHED` in `src/data/modules.ts`. Staat die op `false`, dan toont de site "lanceert in juli" met e-mailcapture; op `true` schakelen alle CTA's naar "Start 14 dagen gratis" richting **app.emmastudio.nl**. Bij livegang is de flip dus één regel.
+
+**Naamgeving:** EmmaBoekt is een communicatietitel, geen productnaam. Het product is EmmaStudio met een boekhoudmodule. Defensieve domeinen zoals emmaboekt.nl verwijzen naar taakgerichte URL's (emmastudio.nl/boekhouding, redirect in next.config.ts).
 
 **Positionering EmmaBoekt:** de vriendelijke schil om **e-Boekhouden.nl**. e-Boekhouden.nl blijft de motor van de boekhouding; Emma maakt het dagelijkse werk makkelijker, sneller en leuker (bonnen slim inboeken, facturen en offertes maken, openstaande posten, Vraag Emma). SnelStart-koppeling volgt later. Kernbelofte: **Emma stelt voor, jij bevestigt — niets wordt automatisch geboekt.**
 

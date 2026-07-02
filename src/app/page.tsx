@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import FaqAccordion from '@/components/FaqAccordion';
-import { ICONS, MODULE_TAGS, MODULE_PRICE, MODULE_ORDER, MODULE_STATUS, APP_URL } from '@/data/modules';
+import WaitlistForm from '@/components/WaitlistForm';
+import { ICONS, MODULE_TAGS, MODULE_PRICE, MODULE_ORDER, MODULE_STATUS, APP_URL, LAUNCHED } from '@/data/modules';
 
 export const metadata: Metadata = {
   title: 'Emma · Jij doet je werk. Emma de rest.',
@@ -51,7 +52,7 @@ export default function Home() {
       <header className="lph" id="hero">
         <div className="wrap lph__inner">
           <div className="lph__text">
-            <span className="lph__badge"><span className="pulse"></span> EmmaBoekt is live · voor e-Boekhouden.nl</span>
+            <span className="lph__badge"><span className="pulse"></span> {LAUNCHED ? 'EmmaBoekt is live · voor e-Boekhouden.nl' : 'De boekhoudmodule voor e-Boekhouden.nl · lanceert in juli'}</span>
             <h1>Jij doet je werk.<br />Emma de rest<span className="accent">.</span></h1>
             <p className="lph__lead">
               Emma is de vriendelijke schil om <b>e-Boekhouden.nl</b>. Bonnetjes inboeken, facturen maken,
@@ -59,11 +60,15 @@ export default function Home() {
               Je boekhouding blijft precies waar die is.
             </p>
             <div className="lph__cta">
-              <a className="btn btn-coral btn-lg" href={APP_URL}>Start 14 dagen gratis <span className="arr">→</span></a>
+              {LAUNCHED ? (
+                <a className="btn btn-coral btn-lg" href={APP_URL}>Start 14 dagen gratis <span className="arr">→</span></a>
+              ) : (
+                <Link className="btn btn-coral btn-lg" href="/#closer">Houd me op de hoogte <span className="arr">→</span></Link>
+              )}
               <Link className="btn btn-ghost btn-lg" href="/#inboeken">Bekijk hoe het werkt</Link>
             </div>
             <div className="lph__assure">
-              <span><span className="d"></span>Daarna €9 per maand</span>
+              <span><span className="d"></span>{LAUNCHED ? 'Daarna €9 per maand' : '14 dagen gratis proberen, daarna €9 per maand'}</span>
               <span><span className="d"></span>Maandelijks opzegbaar</span>
               <span><span className="d"></span>Je accountant houdt toegang</span>
             </div>
@@ -282,8 +287,12 @@ export default function Home() {
             </div>
           </div>
           <div className="lpsteps__cta reveal">
-            <a className="btn btn-creme btn-lg" href={APP_URL}>Start 14 dagen gratis <span className="arr">→</span></a>
-            <span className="note">Klaar in een paar minuten. Maandelijks opzegbaar.</span>
+            {LAUNCHED ? (
+              <a className="btn btn-creme btn-lg" href={APP_URL}>Start 14 dagen gratis <span className="arr">→</span></a>
+            ) : (
+              <Link className="btn btn-creme btn-lg" href="/#closer">Houd me op de hoogte <span className="arr">→</span></Link>
+            )}
+            <span className="note">{LAUNCHED ? 'Klaar in een paar minuten. Maandelijks opzegbaar.' : 'Lancering in juli. Je hoort het als eerste.'}</span>
           </div>
         </div>
       </section>
@@ -337,7 +346,7 @@ export default function Home() {
             </div>
           </div>
           <div className="pcard reveal" data-d="1">
-            <span className="pcard__flag">Eerste module · nu live</span>
+            <span className="pcard__flag">{LAUNCHED ? 'Eerste module · nu live' : 'Eerste module · lanceert in juli'}</span>
             <div className="pcard__mod">
               <span className="pcard__ico"><svg viewBox="0 0 24 24" style={{ fill: 'none', stroke: 'currentColor', strokeWidth: 1.7, strokeLinecap: 'round', strokeLinejoin: 'round' }} dangerouslySetInnerHTML={{ __html: ICONS.boekt }} /></span>
               <div>
@@ -354,7 +363,11 @@ export default function Home() {
               <li><span className="ok"><Ic d="check" /></span>Vraag Emma: antwoorden uit je eigen cijfers</li>
               <li><span className="ok"><Ic d="check" /></span>Koppeling met e-Boekhouden.nl inbegrepen</li>
             </ul>
-            <a className="btn btn-coral" href={APP_URL}>Start 14 dagen gratis <span className="arr">→</span></a>
+            {LAUNCHED ? (
+              <a className="btn btn-coral" href={APP_URL}>Start 14 dagen gratis <span className="arr">→</span></a>
+            ) : (
+              <Link className="btn btn-coral" href="/#closer">Houd me op de hoogte <span className="arr">→</span></Link>
+            )}
             <div className="pcard__foot">Maandelijks opzegbaar · 15% korting bij jaarbetaling</div>
           </div>
         </div>
@@ -423,13 +436,24 @@ export default function Home() {
       {/* ── CLOSER ── */}
       <section className="closer" id="closer">
         <div className="closer__in">
-          <div className="eyebrow" style={{ justifyContent: 'center' }}><span className="tick"></span> Klaar om te beginnen</div>
+          <div className="eyebrow" style={{ justifyContent: 'center' }}><span className="tick"></span> {LAUNCHED ? 'Klaar om te beginnen' : 'Lancering in juli'}</div>
           <h2 className="reveal">Vanavond geen boekhouding<span className="dot">.</span></h2>
-          <p className="reveal" data-d="1">Koppel e-Boekhouden.nl, stuur je eerste bon door en merk het verschil. De eerste 14 dagen zijn gratis.</p>
-          <div className="reveal" data-d="2" style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}>
-            <a className="btn btn-coral btn-lg" href={APP_URL}>Start 14 dagen gratis <span className="arr">→</span></a>
-            <Link className="btn btn-ghost btn-lg" href="/#prijs">Bekijk de prijs</Link>
-          </div>
+          {LAUNCHED ? (
+            <>
+              <p className="reveal" data-d="1">Koppel e-Boekhouden.nl, stuur je eerste bon door en merk het verschil. De eerste 14 dagen zijn gratis.</p>
+              <div className="reveal" data-d="2" style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}>
+                <a className="btn btn-coral btn-lg" href={APP_URL}>Start 14 dagen gratis <span className="arr">→</span></a>
+                <Link className="btn btn-ghost btn-lg" href="/#prijs">Bekijk de prijs</Link>
+              </div>
+            </>
+          ) : (
+            <>
+              <p className="reveal" data-d="1">De boekhoudmodule lanceert in juli. Laat je e-mail achter en je hoort het op de dag dat je kunt starten, met 14 dagen gratis proberen.</p>
+              <div className="reveal" data-d="2" style={{ display: 'flex', justifyContent: 'center' }}>
+                <WaitlistForm note="Geen spam. Alleen het lanceerbericht." noteLabel="Jij doet je werk. Emma de rest." />
+              </div>
+            </>
+          )}
           <div className="closer__assure reveal" data-d="3">
             <span><span className="d"></span>Maandelijks opzegbaar</span>
             <span><span className="d"></span>€9 per maand na je proefperiode</span>

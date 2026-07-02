@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { MODULES, ICONS, MODULE_TAGS, MODULE_PRICE, MODULE_ORDER, MODULE_STATUS, APP_URL, VIGNETTES } from '@/data/modules';
+import { MODULES, ICONS, MODULE_TAGS, MODULE_PRICE, MODULE_ORDER, MODULE_STATUS, APP_URL, LAUNCHED, VIGNETTES } from '@/data/modules';
 import WaitlistForm from '@/components/WaitlistForm';
 import FaqAccordion from '@/components/FaqAccordion';
 
@@ -54,7 +54,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
                 ) : (
                   <>
                     <Link href="#melden" className="btn btn-mod">Houd me op de hoogte <span className="arr">→</span></Link>
-                    <Link href="/modules/boekt" className="btn btn-ghost">Start alvast met EmmaBoekt</Link>
+                    <Link href="/modules/boekt" className="btn btn-ghost">{LAUNCHED ? 'Start alvast met EmmaBoekt' : 'Bekijk de boekhoudmodule'}</Link>
                   </>
                 )}
               </div>

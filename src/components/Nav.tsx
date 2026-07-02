@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { APP_URL, LAUNCHED } from '@/data/modules';
 
 export default function Nav({ dark = false, currentPage = '' }: { dark?: boolean; currentPage?: string }) {
   const navRef = useRef<HTMLElement>(null);
@@ -74,8 +75,12 @@ export default function Nav({ dark = false, currentPage = '' }: { dark?: boolean
           <Link href="/#faq">FAQ</Link>
         </div>
         <div className="nav__right">
-          <a className="nav__login" href="https://app.emmastudio.nl">Inloggen</a>
-          <a className="btn btn-coral" href="https://app.emmastudio.nl">Start gratis</a>
+          <a className="nav__login" href={APP_URL}>Inloggen</a>
+          {LAUNCHED ? (
+            <a className="btn btn-coral" href={APP_URL}>Start gratis</a>
+          ) : (
+            <Link className="btn btn-coral" href="/#closer">Houd me op de hoogte</Link>
+          )}
           <button className="nav__burger" id="burger" ref={burgerRef} aria-label="Menu" onClick={toggleMenu}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
               <path d="M3 6h18M3 12h18M3 18h18"/>
@@ -90,8 +95,12 @@ export default function Nav({ dark = false, currentPage = '' }: { dark?: boolean
         <Link href="/#roadmap" onClick={closeMenu}>Roadmap</Link>
         <Link href="/kennisbank" onClick={closeMenu}>Kennisbank</Link>
         <Link href="/contact" onClick={closeMenu}>Contact</Link>
-        <a href="https://app.emmastudio.nl" onClick={closeMenu}>Inloggen</a>
-        <a className="btn btn-coral btn-lg" href="https://app.emmastudio.nl" onClick={closeMenu}>Start 14 dagen gratis</a>
+        <a href={APP_URL} onClick={closeMenu}>Inloggen</a>
+        {LAUNCHED ? (
+          <a className="btn btn-coral btn-lg" href={APP_URL} onClick={closeMenu}>Start 14 dagen gratis</a>
+        ) : (
+          <Link className="btn btn-coral btn-lg" href="/#closer" onClick={closeMenu}>Houd me op de hoogte</Link>
+        )}
       </div>
     </>
   );

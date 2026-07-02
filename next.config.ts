@@ -16,6 +16,8 @@ const nextConfig: NextConfig = {
         destination: `/modules/${id}`,
         permanent: false,
       })),
+      // Taakgerichte URL: doel van de emmaboekt.nl-domeinredirect
+      { source: '/boekhouding', destination: '/modules/boekt', permanent: false },
     ];
   },
 };

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { MODULE_ORDER, MODULE_STATUS } from '@/data/modules';
+import { MODULE_ORDER, MODULE_STATUS, APP_URL, LAUNCHED } from '@/data/modules';
 
 function cap(s: string) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
@@ -31,8 +31,8 @@ export default function Footer() {
           </div>
           <div className="foot__col">
             <h4>Emma</h4>
-            <a href="https://app.emmastudio.nl">Inloggen</a>
-            <a href="https://app.emmastudio.nl">Start 14 dagen gratis</a>
+            <a href={APP_URL}>Inloggen</a>
+            {LAUNCHED ? <a href={APP_URL}>Start 14 dagen gratis</a> : <Link href="/#closer">Houd me op de hoogte</Link>}
             <Link href="/contact">Contact</Link>
             <Link href="/over">Over Toms Ambitie</Link>
             <Link href="/algemene-voorwaarden">Algemene voorwaarden</Link>

@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
+import { APP_URL, LAUNCHED } from '@/data/modules';
 
 export const metadata: Metadata = {
   title: 'Over Toms Ambitie · Emma',
@@ -96,9 +98,15 @@ export default function Over() {
         <div className="closer__in">
           <div className="eyebrow" style={{ justifyContent: 'center', display: 'flex', marginBottom: '24px' }}><span className="tick"></span> Meedoen</div>
           <h2 className="reveal">Doe je mee<span className="dot">?</span></h2>
-          <p className="reveal">EmmaBoekt, de eerste module, is live. Koppel e-Boekhouden.nl en probeer het 14 dagen gratis.</p>
+          <p className="reveal">{LAUNCHED
+            ? 'De boekhoudmodule, de eerste module van Emma, is live. Koppel e-Boekhouden.nl en probeer het 14 dagen gratis.'
+            : 'De boekhoudmodule, de eerste module van Emma, lanceert in juli. Laat je e-mail achter op de homepage en je hoort het als eerste.'}</p>
           <div className="reveal" style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}>
-            <a className="btn btn-coral btn-lg" href="https://app.emmastudio.nl">Start 14 dagen gratis <span className="arr">→</span></a>
+            {LAUNCHED ? (
+              <a className="btn btn-coral btn-lg" href={APP_URL}>Start 14 dagen gratis <span className="arr">→</span></a>
+            ) : (
+              <Link className="btn btn-coral btn-lg" href="/#closer">Houd me op de hoogte <span className="arr">→</span></Link>
+            )}
           </div>
           <div className="closer__assure">
             <span><span className="d"></span>Daarna €9 per maand</span>
