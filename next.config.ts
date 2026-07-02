@@ -10,6 +10,12 @@ const nextConfig: NextConfig = {
         destination: 'https://www.emmastudio.nl/:path*',
         permanent: true,
       },
+      // Korte module-URL's uit de businesscase → modulepagina's
+      ...['boekt', 'waakt', 'loont', 'vindt', 'coacht', 'ziet', 'schrijft', 'promoot'].map(id => ({
+        source: `/${id}`,
+        destination: `/modules/${id}`,
+        permanent: false,
+      })),
     ];
   },
 };

@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import WaitlistForm from '@/components/WaitlistForm';
 
 export const metadata: Metadata = {
   title: 'Over Toms Ambitie · Emma',
@@ -27,7 +26,7 @@ export default function Over() {
             <div className="ostory__body reveal">
               <div className="eyebrow"><span className="tick"></span> Het begin</div>
               <h2>Begonnen in een salon.</h2>
-              <p>Emma begon niet als startup-idee op een whiteboard. Het begon bij salon Blondes Incognito in Heeten, waar Ilze Vanaga haar salon runde met een wirwar aan losse tools, spreadsheets en notities.</p>
+              <p>Emma begon niet als startup-idee op een whiteboard. Het begon bij salon Blondes Incognito in Heeten, waar Ilze Spannenberg haar salon runde met een wirwar aan losse tools, spreadsheets en notities.</p>
               <p>We bouwden een eerste versie voor haar, puur om het werk rustiger te maken. Dat draaide 18 maanden in de praktijk voordat we ook maar één euro aan Emma verdienden.</p>
               <p>Wat we leerden: ondernemers willen geen dashboard om in te verdwalen. Ze willen weten wat er vandaag toe doet, en de rest gewoon geregeld hebben.</p>
               <div className="ostory__stats">
@@ -49,7 +48,7 @@ export default function Over() {
                 <footer style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                   <span style={{ width: '44px', height: '44px', borderRadius: '50%', background: 'var(--coral)', color: '#fff', display: 'grid', placeItems: 'center', fontFamily: 'var(--display)', fontWeight: 800, fontSize: '18px', flexShrink: 0 }}>I</span>
                   <div>
-                    <strong style={{ display: 'block', fontSize: '15px' }}>Ilze Vanaga</strong>
+                    <strong style={{ display: 'block', fontSize: '15px' }}>Ilze Spannenberg</strong>
                     <span style={{ fontSize: '13px', color: 'var(--ink-soft)' }}>Eigenaar · Blondes Incognito, Heeten</span>
                   </div>
                 </footer>
@@ -96,15 +95,15 @@ export default function Over() {
       <section className="closer" id="closer-over">
         <div className="closer__in">
           <div className="eyebrow" style={{ justifyContent: 'center', display: 'flex', marginBottom: '24px' }}><span className="tick"></span> Meedoen</div>
-          <h2 className="reveal">Wil je erbij zijn<span className="dot">.</span></h2>
-          <p className="reveal">We lanceren binnenkort. Laat je e-mail achter en wij laten je als eerste weten wanneer je kunt beginnen.</p>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <WaitlistForm note="Je hoort het als eerste" />
+          <h2 className="reveal">Doe je mee<span className="dot">?</span></h2>
+          <p className="reveal">EmmaBoekt, de eerste module, is live. Koppel e-Boekhouden.nl en probeer het 14 dagen gratis.</p>
+          <div className="reveal" style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}>
+            <a className="btn btn-coral btn-lg" href="https://app.emmastudio.nl">Start 14 dagen gratis <span className="arr">→</span></a>
           </div>
           <div className="closer__assure">
-            <span><span className="d"></span>Gratis beginnen</span>
-            <span><span className="d"></span>Geen spam</span>
+            <span><span className="d"></span>Daarna €9 per maand</span>
             <span><span className="d"></span>Maandelijks opzegbaar</span>
+            <span><span className="d"></span>Je accountant houdt toegang</span>
           </div>
         </div>
       </section>

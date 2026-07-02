@@ -1,5 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { MODULE_ORDER, MODULE_STATUS } from '@/data/modules';
+
+function cap(s: string) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
 export default function Footer() {
   return (
@@ -8,30 +11,29 @@ export default function Footer() {
         <div className="foot__grid">
           <div className="foot__brand">
             <Image src="/logo-light.svg" alt="emma." width={88} height={26} />
-            <p>Het ecosysteem dat de saaie kant van ondernemen overneemt, zodat jij grip, gemak en snelheid houdt. Voor élke zelfstandige ondernemer in NL &amp; BE. In ontwikkeling bij Toms Ambitie in Zwolle.</p>
+            <p>De vriendelijke schil om je boekhouding, en straks om de rest van je onderneming. Voor élke zelfstandige ondernemer in NL &amp; BE. In ontwikkeling bij Toms Ambitie in Zwolle.</p>
           </div>
           <div className="foot__col">
             <h4>Modules</h4>
-            <Link href="/modules/boekt">EmmaBoekt</Link>
-            <Link href="/modules/waakt">EmmaWaakt</Link>
-            <Link href="/modules/loont">EmmaLoont</Link>
-            <Link href="/modules/vindt">EmmaVindt</Link>
-            <Link href="/modules/coacht">EmmaCoacht</Link>
-            <Link href="/modules/ziet">EmmaZiet</Link>
-            <Link href="/modules/schrijft">EmmaSchrijft</Link>
-            <Link href="/modules/promoot">EmmaPromoot</Link>
+            {MODULE_ORDER.map(id => (
+              <Link key={id} href={`/modules/${id}`}>
+                Emma{cap(id)}{MODULE_STATUS[id].live ? '' : ` · ${MODULE_STATUS[id].when}`}
+              </Link>
+            ))}
           </div>
           <div className="foot__col">
             <h4>Op de site</h4>
+            <Link href="/#hoe">Hoe het werkt</Link>
+            <Link href="/#prijs">Prijs</Link>
+            <Link href="/#roadmap">Roadmap</Link>
             <Link href="/#proof">Het bewijs</Link>
-            <Link href="/#compare">Vergelijk</Link>
-            <Link href="/#packs">Prijzen</Link>
             <Link href="/kennisbank">Kennisbank</Link>
           </div>
           <div className="foot__col">
             <h4>Emma</h4>
+            <a href="https://app.emmastudio.nl">Inloggen</a>
+            <a href="https://app.emmastudio.nl">Start 14 dagen gratis</a>
             <Link href="/contact">Contact</Link>
-            <Link href="/#closer">Op de hoogte blijven</Link>
             <Link href="/over">Over Toms Ambitie</Link>
             <Link href="/algemene-voorwaarden">Algemene voorwaarden</Link>
             <Link href="/privacy">Privacyverklaring</Link>

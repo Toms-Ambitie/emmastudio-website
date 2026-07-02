@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { MODULES, ICONS, MODULE_TAGS, MODULE_PRICE, MODULE_ORDER, VIGNETTES } from '@/data/modules';
+import { MODULES, ICONS, MODULE_TAGS, MODULE_PRICE, MODULE_ORDER, MODULE_STATUS, APP_URL, VIGNETTES } from '@/data/modules';
 import WaitlistForm from '@/components/WaitlistForm';
 import FaqAccordion from '@/components/FaqAccordion';
 
@@ -26,6 +26,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
 
   const others = MODULE_ORDER.filter(k => k !== id);
   const mcStyle = { ['--mc' as string]: `var(--m-${id})` };
+  const status = MODULE_STATUS[id];
 
   return (
     <main className="mpage lightpage" style={mcStyle}>
@@ -40,20 +41,29 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
                 <span className="mhero__icon">
                   <svg viewBox="0 0 24 24" dangerouslySetInnerHTML={{ __html: ICONS[id] || '' }}></svg>
                 </span>
-                <span className="mhero__modname">Emma{mod.name} · {mod.num}</span>
+                <span className="mhero__modname">Emma{mod.name} · {status.live ? 'nu live' : `komt in ${status.when}`}</span>
               </div>
               <h1>{mod.head.replace(/\.$/, '')}<span className="dot">.</span></h1>
               <p className="mhero__lead">{mod.intro}</p>
               <div className="mhero__cta">
-                <Link href="/#closer" className="btn btn-mod">Op de wachtlijst <span className="arr">→</span></Link>
-                <Link href="/#packages" className="btn btn-ghost">Bekijk pakketten</Link>
+                {status.live ? (
+                  <>
+                    <a href={APP_URL} className="btn btn-mod">Start 14 dagen gratis <span className="arr">→</span></a>
+                    <Link href="/#hoe" className="btn btn-ghost">Bekijk hoe het werkt</Link>
+                  </>
+                ) : (
+                  <>
+                    <Link href="#melden" className="btn btn-mod">Houd me op de hoogte <span className="arr">→</span></Link>
+                    <Link href="/modules/boekt" className="btn btn-ghost">Start alvast met EmmaBoekt</Link>
+                  </>
+                )}
               </div>
               <div className="mhero__price">
                 <b>€{mod.price}/mnd</b>
                 <span>excl. btw · maandelijks opzegbaar</span>
               </div>
               <div className="mhero__assure">
-                <span><span className="d"></span>14 dagen gratis</span>
+                <span><span className="d"></span>{status.live ? '14 dagen gratis proberen' : `beschikbaar vanaf ${status.when}`}</span>
                 <span><span className="d"></span>{mod.chip}</span>
               </div>
             </div>
@@ -66,7 +76,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
                     <svg viewBox="0 0 24 24" dangerouslySetInnerHTML={{ __html: ICONS[id] || '' }}></svg>
                   </span>
                   <span className="mhero__card-title">Emma{mod.name}</span>
-                  <span className="mhero__card-live">live</span>
+                  <span className="mhero__card-live">impressie</span>
                 </div>
                 <div
                   className="vig__body"
@@ -152,19 +162,31 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
       </section>
 
       {/* CTA */}
-      <section className="mcta">
+      <section className="mcta" id="melden">
         <div className="mcta__in">
           <div className="mcta__badge reveal">
             <span className="mcta__icon">
               <svg viewBox="0 0 24 24" dangerouslySetInnerHTML={{ __html: ICONS[id] || '' }}></svg>
             </span>
-            <span style={{ fontFamily: 'var(--mono)', fontSize: '13px', letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--mc)' }}>
+            <span style={{ fontFamily: 'var(--mono)', fontSize: '13px', letterSpacing: '.1em', textTransform: 'uppercase', color: 'color-mix(in oklab, var(--mc) 55%, var(--ink))' }}>
               Emma{mod.name}
             </span>
           </div>
-          <h2 className="reveal">Begin zonder gedoe<span className="dot">.</span></h2>
-          <p className="reveal">Zet je op de wachtlijst en hoor als eerste wanneer Emma klaar is voor jou.</p>
-          <WaitlistForm dark={false} note={`Emma${mod.name} · €${mod.price}/mnd`} className="mcta__form" />
+          {status.live ? (
+            <>
+              <h2 className="reveal">Begin zonder gedoe<span className="dot">.</span></h2>
+              <p className="reveal">Maak een account, koppel e-Boekhouden.nl en stuur je eerste bon door. De eerste 14 dagen zijn gratis.</p>
+              <div className="reveal" style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}>
+                <a className="btn btn-coral btn-lg" href={APP_URL}>Start 14 dagen gratis <span className="arr">→</span></a>
+              </div>
+            </>
+          ) : (
+            <>
+              <h2 className="reveal">Komt in {status.when}<span className="dot">.</span></h2>
+              <p className="reveal">Laat je e-mail achter en je hoort het als eerste zodra Emma{mod.name} live gaat. Tot die tijd kun je alvast starten met EmmaBoekt.</p>
+              <WaitlistForm dark={false} note={`Emma${mod.name} · €${mod.price}/mnd · vanaf ${status.when}`} className="mcta__form" />
+            </>
+          )}
           <div className="mcta__assure">
             <span><span className="d"></span>14 dagen gratis proberen</span>
             <span><span className="d"></span>Maandelijks opzegbaar</span>
@@ -194,7 +216,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
                 </span>
                 <span className="xmod__name">Emma{MODULES[k].name}</span>
                 <span className="xmod__desc">{MODULE_TAGS[k]}</span>
-                <span className="xmod__price">Vanaf <b>€{MODULE_PRICE[k]}/mnd</b></span>
+                <span className="xmod__price">{MODULE_STATUS[k].live ? 'Nu live · ' : `${MODULE_STATUS[k].when} · `}<b>€{MODULE_PRICE[k]}/mnd</b></span>
                 <span className="xmod__link">Bekijk module <span className="arr">→</span></span>
               </Link>
             ))}

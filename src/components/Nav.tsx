@@ -67,14 +67,15 @@ export default function Nav({ dark = false, currentPage = '' }: { dark?: boolean
           <Image className="light" src="/logo-light.svg" alt="emma." width={90} height={23} priority />
         </Link>
         <div className="nav__links">
-          <Link href="/#journey">Modules</Link>
+          <Link href="/#hoe">Hoe het werkt</Link>
+          <Link href="/#prijs">Prijs</Link>
+          <Link href="/#roadmap">Roadmap</Link>
           <Link href="/#proof">Het bewijs</Link>
-          <Link href="/#compare">Vergelijk</Link>
-          <Link href="/#packs">Prijzen</Link>
           <Link href="/#faq">FAQ</Link>
         </div>
         <div className="nav__right">
-          <Link className="btn btn-coral" href="/#closer">Blijf op de hoogte</Link>
+          <a className="nav__login" href="https://app.emmastudio.nl">Inloggen</a>
+          <a className="btn btn-coral" href="https://app.emmastudio.nl">Start gratis</a>
           <button className="nav__burger" id="burger" ref={burgerRef} aria-label="Menu" onClick={toggleMenu}>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round">
               <path d="M3 6h18M3 12h18M3 18h18"/>
@@ -84,12 +85,13 @@ export default function Nav({ dark = false, currentPage = '' }: { dark?: boolean
       </nav>
 
       <div className="mobile-menu" id="mobileMenu" ref={menuRef}>
-        <Link href="/#journey" onClick={closeMenu}>Modules</Link>
-        <Link href="/#proof" onClick={closeMenu}>Het bewijs</Link>
-        <Link href="/#packs" onClick={closeMenu}>Prijzen</Link>
+        <Link href="/#hoe" onClick={closeMenu}>Hoe het werkt</Link>
+        <Link href="/#prijs" onClick={closeMenu}>Prijs</Link>
+        <Link href="/#roadmap" onClick={closeMenu}>Roadmap</Link>
         <Link href="/kennisbank" onClick={closeMenu}>Kennisbank</Link>
         <Link href="/contact" onClick={closeMenu}>Contact</Link>
-        <Link className="btn btn-coral btn-lg" href="/#closer" onClick={closeMenu}>Blijf op de hoogte</Link>
+        <a href="https://app.emmastudio.nl" onClick={closeMenu}>Inloggen</a>
+        <a className="btn btn-coral btn-lg" href="https://app.emmastudio.nl" onClick={closeMenu}>Start 14 dagen gratis</a>
       </div>
     </>
   );

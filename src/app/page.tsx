@@ -1,117 +1,290 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import HeroOrbit from '@/components/HeroOrbit';
-import WaitlistForm from '@/components/WaitlistForm';
-import JourneySection from '@/components/JourneySection';
 import FaqAccordion from '@/components/FaqAccordion';
-import Quiz from '@/components/Quiz';
-import HeroAnimTrigger from '@/components/HeroAnimTrigger';
-import HeroVideo from '@/components/HeroVideo';
-import { MODULE_ORDER } from '@/data/modules';
+import { ICONS, MODULE_TAGS, MODULE_PRICE, MODULE_ORDER, MODULE_STATUS, APP_URL } from '@/data/modules';
 
 export const metadata: Metadata = {
   title: 'Emma · Jij doet je werk. Emma de rest.',
+  description: 'EmmaBoekt is de vriendelijke schil om e-Boekhouden.nl. Bonnetjes inboeken, facturen maken en offertes sturen, zonder gedoe. Probeer 14 dagen gratis, daarna €9 per maand.',
   alternates: { canonical: 'https://www.emmastudio.nl' },
 };
 
-const FAQ = [
-  { q:'Kan ik Emma nu al gebruiken?', a:'Nog niet. We bouwen Emma op dit moment als platform. De functies zijn 18 maanden bewezen in de praktijk bij salon Blondes Incognito. Laat je e-mail achter op de wachtlijst en je bent als eerste aan de beurt.' },
-  { q:'Wat is het verschil tussen de modules?', a:'Elke module pakt één taak over: EmmaBoekt de boekhouding, EmmaWaakt de financiële sturing, EmmaLoont de salarisadministratie, enzovoort. Je start met wat je nu nodig hebt en zet de rest aan wanneer het past.' },
-  { q:'Vervangt Emma mijn accountant?', a:'Nee. Emma neemt het voorbereidende werk over zodat je minder accountantsuren nodig hebt. Je accountant blijft eindverantwoordelijk en houdt gewoon toegang tot je cijfers.' },
-  { q:'Hoe zit het met privacy en beveiliging?', a:'Emma verwerkt je gegevens alleen om de modules te laten werken. We verkopen niets aan derden, bewaren gegevens in de EU en voldoen aan de AVG. De volledige aanpak staat beschreven in het beveiligingsdocument.' },
-  { q:'Wat kost Emma?', a:'Modules zijn los verkrijgbaar vanaf €9/mnd. De branchepakketten geven een korting van 29–37% ten opzichte van losse aanschaf. De prijzen op de site zijn de beoogde lanceringsprijzen, exclusief btw.' },
-  { q:'Wanneer is Emma beschikbaar?', a:'We communiceren de lanceringsdatum via de wachtlijst. Schrijf je in en je hoort het als eerste, plus af en toe een eerlijk bericht over hoe het bouwen vordert.' },
-];
-
-const MODULE_DOTS: Record<string, string> = {
-  boekt:'--m-boekt', waakt:'--m-waakt', loont:'--m-loont', vindt:'--m-vindt',
-  coacht:'--m-coacht', ziet:'--m-ziet', schrijft:'--m-schrijft', promoot:'--m-promoot',
+/* Kleine lijniconen voor mockups en features (1.7px, rounded) */
+const I: Record<string, string> = {
+  home:  '<path d="M4 11l8-7 8 7v8.4a1.6 1.6 0 0 1-1.6 1.6H14v-6h-4v6H5.6A1.6 1.6 0 0 1 4 19.4Z"/>',
+  inbox: '<path d="M22 13h-5.5l-2 3h-5l-2-3H2"/><path d="M5.2 5h13.6L22 13v5.4a1.6 1.6 0 0 1-1.6 1.6H3.6A1.6 1.6 0 0 1 2 18.4V13Z"/>',
+  task:  '<rect x="4" y="4" width="16" height="16" rx="3.2"/><path d="m8.6 12.2 2.4 2.4 4.8-4.8"/>',
+  file:  '<path d="M6.5 3h7.2L18.5 7.8V21h-12Z"/><path d="M13.5 3v5h5"/>',
+  clock: '<circle cx="12" cy="12" r="8.6"/><path d="M12 7.4V12l3.1 2"/>',
+  users: '<circle cx="9.2" cy="8.4" r="3.3"/><path d="M3.4 19.4a5.8 5.8 0 0 1 11.6 0"/><path d="M16 5.5a3.3 3.3 0 0 1 0 5.9M20.6 19.4a5.8 5.8 0 0 0-3.7-5.2"/>',
+  euro:  '<path d="M17.2 5.6a7.4 7.4 0 1 0 0 12.8"/><path d="M4.8 10.4h8M4.8 13.6h8"/>',
+  wave:  '<path d="M3 12.5h3.4l2.3-5.6 3.8 10.2 2.3-5.6H21"/>',
+  chat:  '<path d="M21 11.6a8.2 8.2 0 0 1-11.9 7.3L3.6 20.4l1.5-5.3A8.2 8.2 0 1 1 21 11.6Z"/>',
+  alert: '<circle cx="12" cy="12" r="8.6"/><path d="M12 7.8v5M12 16.1v.2"/>',
+  trenddown: '<path d="M3 7.5l5.8 5.8 3.8-3.8L20 16.9"/><path d="M14.6 17h6v-6"/>',
+  shield:'<path d="M12 3l7 2.8v5.2c0 4.4-3 7.5-7 8.8-4-1.3-7-4.4-7-8.8V5.8Z"/>',
+  scan:  '<path d="M4 8.2V5.6A1.6 1.6 0 0 1 5.6 4h2.6M15.8 4h2.6A1.6 1.6 0 0 1 20 5.6v2.6M20 15.8v2.6a1.6 1.6 0 0 1-1.6 1.6h-2.6M8.2 20H5.6A1.6 1.6 0 0 1 4 18.4v-2.6"/><path d="M7.2 12h9.6"/>',
+  send:  '<path d="M21 3.5 10.4 14.1"/><path d="M21 3.5 14.2 21l-3.8-6.9L3.5 10.3Z"/>',
+  link:  '<path d="M10 14.2a4.2 4.2 0 0 0 6.2.4l2.8-2.8a4.2 4.2 0 0 0-5.9-5.9l-1.3 1.3"/><path d="M14 9.8a4.2 4.2 0 0 0-6.2-.4L5 12.2a4.2 4.2 0 0 0 5.9 5.9l1.3-1.3"/>',
+  check: '<path d="m5 12.5 4.5 4.5L19 7.5"/>',
+  arrowfile: '<path d="M6.5 3h7.2L18.5 7.8V21h-12Z"/><path d="M13.5 3v5h5"/><path d="M9.5 14.5h5M12.5 12l2.5 2.5-2.5 2.5"/>',
 };
 
-function cap(s: string) { return s.charAt(0).toUpperCase() + s.slice(1); }
+function Ic({ d, className }: { d: string; className?: string }) {
+  return <svg viewBox="0 0 24 24" className={className} aria-hidden="true" dangerouslySetInnerHTML={{ __html: I[d] || d }} />;
+}
+
+const FAQ = [
+  { q: 'Wat heb ik nodig om te starten?', a: 'Een account bij e-Boekhouden.nl en een account bij Emma. De koppeling maak je in een paar minuten; je sleutel wordt versleuteld opgeslagen en nooit getoond. Daarna werk je gewoon in Emma en staat alles netjes in je boekhouding.' },
+  { q: 'Boekt Emma dingen automatisch in?', a: 'Nee. Emma leest je bonnen en facturen, herkent leverancier, bedrag en BTW en stelt de juiste grootboekrekening voor, met de reden erbij. Jij controleert en bevestigt. Niets verdwijnt vanzelf in je administratie.' },
+  { q: 'Vervangt Emma e-Boekhouden.nl of mijn accountant?', a: 'Geen van beide. e-Boekhouden.nl blijft de motor van je boekhouding en je accountant houdt gewoon toegang. Emma is de schil eromheen die het dagelijkse werk sneller en prettiger maakt.' },
+  { q: 'Wat kost Emma?', a: 'EmmaBoekt kost €9 per maand, exclusief btw. Je start met 14 dagen gratis en kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 15% korting. Modules die later komen zet je los aan voor €9 of €19 per maand.' },
+  { q: 'Wanneer komen de andere modules?', a: 'Er komt elke maand een module bij, van EmmaWaakt tot EmmaPromoot. De volledige planning staat in de roadmap op deze pagina. Je betaalt alleen voor wat je aanzet, dus je abonnement groeit pas als jij dat wilt.' },
+  { q: 'Hoe zit het met privacy en beveiliging?', a: 'Je gegevens staan in de Europese Unie en worden alleen verwerkt om Emma te laten werken. Geen verkoop aan derden, geen tracking. De koppeling met je boekhouding is versleuteld en voldoet aan de AVG.' },
+];
 
 export default function Home() {
   return (
     <>
       {/* ── HERO ── */}
-      <header className="hero" id="hero">
-        <HeroVideo />
-        <div className="hero__scrim"></div>
-        <div className="wrap hero__inner">
-          <div className="hero__text">
-            <div className="hero__eyebrow eyebrow fade-soft" style={{ animationDelay: '.1s' }}>
-              <span className="tick"></span> Al 18 maanden bewezen in de praktijk
+      <header className="lph" id="hero">
+        <div className="wrap lph__inner">
+          <div className="lph__text">
+            <span className="lph__badge"><span className="pulse"></span> EmmaBoekt is live · voor e-Boekhouden.nl</span>
+            <h1>Jij doet je werk.<br />Emma de rest<span className="accent">.</span></h1>
+            <p className="lph__lead">
+              Emma is de vriendelijke schil om <b>e-Boekhouden.nl</b>. Bonnetjes inboeken, facturen maken,
+              offertes sturen: Emma leest alles voor je in en zet het klaar, jij bevestigt.
+              Je boekhouding blijft precies waar die is.
+            </p>
+            <div className="lph__cta">
+              <a className="btn btn-coral btn-lg" href={APP_URL}>Start 14 dagen gratis <span className="arr">→</span></a>
+              <Link className="btn btn-ghost btn-lg" href="/#inboeken">Bekijk hoe het werkt</Link>
             </div>
-            <h1 className="payoff">
-              <span className="ln l1">
-                <span className="w" style={{ animationDelay: '.30s' }}>Jij</span>{' '}
-                <span className="w" style={{ animationDelay: '.48s' }}>doet</span>{' '}
-                <span className="w" style={{ animationDelay: '.64s' }}>je</span>{' '}
-                <span className="w" style={{ animationDelay: '.80s' }}>werk.</span>
-              </span>
-              <span className="ln l2">
-                <span className="w" style={{ animationDelay: '1.25s' }}>Emma</span>{' '}
-                <span className="w" style={{ animationDelay: '1.45s' }}>de</span>{' '}
-                <span className="w" style={{ animationDelay: '1.63s' }}>rest</span>
-                <span className="dot" style={{ animationDelay: '1.92s' }}>.</span>
-              </span>
-            </h1>
-            <WaitlistForm
-              note="Geen verplichtingen. Geen creditcard."
-              noteLabel="Emma komt eraan."
-            />
-            <div className="hero__assure fade-soft" style={{ animationDelay: '2.6s' }}>
-              <span><span className="d"></span>Al 18 maanden bewezen in de praktijk</span>
-              <span><span className="d"></span>Geen losse software</span>
+            <div className="lph__assure">
+              <span><span className="d"></span>Daarna €9 per maand</span>
               <span><span className="d"></span>Maandelijks opzegbaar</span>
+              <span><span className="d"></span>Je accountant houdt toegang</span>
             </div>
           </div>
-          <div className="hero__visual">
-            <HeroOrbit />
-          </div>
+
+          {/* App-mockup: het Overzicht-scherm van de Emma-app */}
+          <figure className="lph__visual" aria-label="Impressie van de Emma-app: het overzichtsscherm">
+            <div className="mock" aria-hidden="true">
+              <div className="mock__top">
+                <span className="mock__search"><span>Vraag Emma of zoek iets…</span><span className="k">⌘K</span></span>
+                <span className="mock__ava">SC</span>
+              </div>
+              <div className="mock__body">
+                <div className="mock__side">
+                  <div className="mock__logo"><Image src="/logo-light.svg" alt="" width={62} height={16} /></div>
+                  <span className="mock__navi on"><Ic d="home" /> Overzicht</span>
+                  <span className="mock__navi"><Ic d="inbox" /> Inbox <span className="b">2</span></span>
+                  <span className="mock__navi"><Ic d="task" /> Taken</span>
+                  <div className="mock__group">Financiën</div>
+                  <span className="mock__navi"><Ic d="file" /> Facturen</span>
+                  <span className="mock__navi"><Ic d="send" /> Offertes</span>
+                  <span className="mock__navi"><Ic d="clock" /> Openstaand</span>
+                  <div className="mock__group">Relaties</div>
+                  <span className="mock__navi"><Ic d="users" /> Klanten</span>
+                </div>
+                <div className="mock__main">
+                  <div className="mock__hello">Goedemiddag, Sandra</div>
+                  <div className="mock__sub">Dit is je overzicht van vandaag.</div>
+                  <div className="mock__kpis">
+                    <div className="kpi">
+                      <span className="kpi__l"><i style={{ background: 'var(--teal-soft)', color: 'var(--success)' }}><Ic d="euro" /></i> Omzet</span>
+                      <div className="kpi__v">€ 24.680</div>
+                      <div className="kpi__n up">+12% t.o.v. vorige maand</div>
+                    </div>
+                    <div className="kpi">
+                      <span className="kpi__l"><i style={{ background: 'var(--teal-soft)', color: 'var(--success)' }}><Ic d="wave" /></i> Cashflow</span>
+                      <div className="kpi__v">€ 8.430</div>
+                      <div className="kpi__n up">Positief</div>
+                    </div>
+                    <div className="kpi">
+                      <span className="kpi__l"><i style={{ background: 'var(--warning-soft)', color: 'var(--warning)' }}><Ic d="file" /></i> Openstaand</span>
+                      <div className="kpi__v">€ 6.240</div>
+                      <div className="kpi__n warn">3 facturen · 1 te laat</div>
+                    </div>
+                    <div className="kpi">
+                      <span className="kpi__l"><i style={{ background: 'var(--coral-soft)', color: 'var(--coral-deep)' }}><Ic d="task" /></i> Taken</span>
+                      <div className="kpi__v">12</div>
+                      <div className="kpi__n">6 openstaand vandaag</div>
+                    </div>
+                  </div>
+                  <div className="mock__cols">
+                    <div className="mock__card">
+                      <div className="mock__card-h"><i><Ic d="chat" /></i> Wat Emma ziet</div>
+                      <div className="sig">
+                        <span className="sig__i err"><Ic d="alert" /></span>
+                        <span className="sig__t"><span className="sev err">Let op</span><b>Eén factuur staat 43 dagen open.</b> Studio Vorm · € 3.450. Deze klant betaalde de vorige twee facturen ook te laat.</span>
+                      </div>
+                      <div className="sig">
+                        <span className="sig__i warn"><Ic d="trenddown" /></span>
+                        <span className="sig__t"><span className="sev warn">Aandacht</span><b>Je omzet loopt 8% achter op je maanddoel.</b> Nog 9 dagen te gaan deze maand.</span>
+                      </div>
+                      <div className="sig">
+                        <span className="sig__i ok"><Ic d="check" /></span>
+                        <span className="sig__t"><span className="sev ok">Klaar</span><b>Je BTW-overzicht is voorbereid.</b> Alles staat klaar om te controleren.</span>
+                      </div>
+                    </div>
+                    <div className="ask">
+                      <div className="ask__h"><i><Ic d="chat" /></i> Vraag Emma</div>
+                      <div className="ask__p">Stel een vraag over je cijfers, klanten of facturen. Emma antwoordt met je eigen data.</div>
+                      <span className="ask__chip">Wie heeft nog niet betaald? <span className="arr">→</span></span>
+                      <span className="ask__chip">Hoe staat mijn cashflow ervoor? <span className="arr">→</span></span>
+                      <span className="ask__chip">Maak een factuur voor De Creatieven <span className="arr">→</span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </figure>
         </div>
-        <div className="scrollcue">
-          Ontdek Emma<div className="bar"></div>
-        </div>
-        <HeroAnimTrigger />
       </header>
 
-      {/* ── STATEMENT ── */}
-      <section className="statement">
-        <div className="wrap statement__grid reveal">
-          <p className="lead">
-            Ondernemen is <span className="em">geweldig</span>.<br />
-            De administratie eromheen niet.
-          </p>
-          <div className="statement__side">
-            <div className="statement__pt">
-              <b>Eén rustig ecosysteem</b>
-              <span>Emma bundelt boekhouding, HR, content en marktinzicht in één overzicht. Geen losse tools meer.</span>
+      {/* ── E-BOEKHOUDEN BAND ── */}
+      <section className="lpeb" id="eboekhouden">
+        <div className="wrap lpeb__grid">
+          <div className="lpeb__copy reveal">
+            <div className="eyebrow"><span className="tick"></span> Voor wie e-Boekhouden.nl gebruikt</div>
+            <h2>Boekhouden blijft.<br />Het gedoe niet.</h2>
+            <p className="lpeb__lead">
+              Je boekhouding staat prima in e-Boekhouden.nl. Maar bonnetjes overtypen, door schermen klikken
+              voor één factuur en zoeken naar wie nog moet betalen: dat kost je avonden.
+              <b> Emma zet er een schil omheen die dat werk overneemt.</b> De motor blijft, het gedoe verdwijnt.
+            </p>
+          </div>
+          <div className="lpeb__pts reveal" data-d="1">
+            <div className="lpebpt">
+              <span className="lpebpt__i"><Ic d="scan" /></span>
+              <div><b>Doorsturen in plaats van overtypen</b><span>Stuur een bon naar je inbox en Emma leest leverancier, bedrag en BTW er zelf uit.</span></div>
             </div>
-            <div className="statement__pt">
-              <b>Bewezen in de praktijk</b>
-              <span>Achttien maanden dagelijks gebruikt bij salon Blondes Incognito. Nu beschikbaar voor iedereen.</span>
+            <div className="lpebpt">
+              <span className="lpebpt__i"><Ic d="file" /></span>
+              <div><b>Een factuur in een paar klikken</b><span>Emma onthoudt je klanten en tarieven. Factuur of offerte maken kost je een minuut.</span></div>
             </div>
-            <div className="statement__pt">
-              <b>Jij blijft aan het roer</b>
-              <span>Emma neemt het routinewerk over. Jij houdt overzicht en beslist zelf wat je ermee doet.</span>
+            <div className="lpebpt">
+              <span className="lpebpt__i"><Ic d="wave" /></span>
+              <div><b>Overzicht in gewone taal</b><span>Omzet, cashflow en openstaande facturen in één blik. Geen grootboek-doolhof.</span></div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── JOURNEY ── */}
-      <JourneySection />
+      {/* ── SLIM INBOEKEN SHOWCASE ── */}
+      <section className="lpshow" id="inboeken">
+        <div className="wrap">
+          <div className="lpshow__head reveal">
+            <div className="eyebrow"><span className="tick"></span> Slim inboeken</div>
+            <h2>Emma stelt voor. Jij bevestigt.</h2>
+            <p>
+              Stuur een bon of inkomende factuur naar Emma. Ze herkent de leverancier, het bedrag en de BTW,
+              kiest de grootboekrekening en vertelt je waarom. Twijfelt ze, dan zegt ze dat eerlijk.
+            </p>
+          </div>
+          <div className="lpshow__stage">
+            <div className="mockdoc reveal" aria-hidden="true">
+              <div className="mockdoc__tag"><span>gamma-bon-3041.jpg</span><span>Foto</span></div>
+              <div className="mockdoc__row">
+                <div className="mockdoc__name">Gamma</div>
+                <div className="mockdoc__meta">FACTUUR<br />INK-3041<br />30-04-2026</div>
+              </div>
+              <div className="mockdoc__lines">
+                <i style={{ width: '82%' }}></i><i style={{ width: '64%' }}></i><i style={{ width: '74%' }}></i><i style={{ width: '52%' }}></i>
+              </div>
+              <div className="mockdoc__sum">
+                <span className="t"><span>Subtotaal</span><span>€ 71,24</span></span>
+                <span className="t"><span>BTW 21%</span><span>€ 14,96</span></span>
+                <span className="t tot"><span>Totaal</span><span>€ 86,20</span></span>
+              </div>
+            </div>
+            <div className="mockprop reveal" data-d="1" aria-hidden="true">
+              <div className="mockprop__head">
+                <span className="mockprop__mark">e</span>
+                <span className="mockprop__title">Emma&rsquo;s voorstel</span>
+                <span className="mockprop__chip">Controleer even</span>
+              </div>
+              <div className="mockprop__field"><span className="l">Leverancier</span><span className="v">Gamma</span></div>
+              <div className="mockprop__field"><span className="l">Factuurdatum</span><span className="v">30-04-2026</span></div>
+              <div className="mockprop__field"><span className="l">Bedrag</span><span className="v">€ 86,20<small>€ 71,24 excl. · € 14,96 BTW (21%)</small></span></div>
+              <div className="mockprop__gl"><span className="code">4210</span> Kantoorinrichting</div>
+              <div className="mockprop__why">Je boekte deze leverancier eerder op deze rekening. Emma onthoudt je keuzes.</div>
+              <div className="mockprop__warn">
+                <span aria-hidden="true">◆</span>
+                <span><b>Emma ziet een mogelijke afwijking.</b> Je vorige twee bonnen van Gamma staan op &lsquo;Onkosten algemeen&rsquo;. <u>Houd &lsquo;Onkosten algemeen&rsquo; aan</u></span>
+              </div>
+              <div className="mockprop__foot">
+                <span className="mockprop__note">Niets wordt automatisch geboekt. Jij bevestigt.</span>
+                <span className="mockprop__book">✓ Boeken</span>
+                <span className="mockprop__later">Later</span>
+              </div>
+            </div>
+          </div>
+          <div className="lpshow__claim reveal">
+            <span className="ok"><Ic d="check" /></span>
+            Elke boeking staat direct goed in e-Boekhouden.nl. Zonder overtypen.
+          </div>
+        </div>
+      </section>
 
-      {/* ── BRIDGE ── */}
-      <section className="bridge">
-        <div className="wrap reveal">
-          <p>
-            Alles wat je dagelijks kost, maar je<br />
-            <span className="big">niets oplevert</span>, doet Emma voortaan.
-          </p>
-          <p className="sub">Administratie, personeelsbeheer, content, marktonderzoek. Overgenomen, geautomatiseerd, of slim samengevat. Zodat jij je tijd stopt in het werk dat ertoe doet.</p>
+      {/* ── FEATURES ── */}
+      <section className="lpfeat" id="functies">
+        <div className="wrap">
+          <div className="lpfeat__head reveal">
+            <div className="eyebrow"><span className="tick"></span> Wat EmmaBoekt doet</div>
+            <h2>Alles voor je dagelijkse boekhouding.</h2>
+            <p>Eén rustige werkplek voor het werk dat je nu in losse schermen doet.</p>
+          </div>
+          <div className="lpfeat__grid">
+            {[
+              { i: 'scan', h: 'Slim inboeken', p: 'Bonnen en inkomende facturen leest Emma zelf. Leverancier, bedrag, BTW en grootboekrekening staan klaar; jij bevestigt.' },
+              { i: 'file', h: 'Facturen in jouw stijl', p: 'Maak en verstuur facturen vanuit één scherm. Emma onthoudt je klanten, je tarieven en je opmaak.' },
+              { i: 'arrowfile', h: 'Offertes die factuur worden', p: 'Verstuur offertes en zet een geaccepteerde offerte met één klik om naar een factuur.' },
+              { i: 'clock', h: 'Openstaand in beeld', p: 'Zie wie nog moet betalen en verstuur een herinnering. Emma weet welke klant vaker te laat is.' },
+              { i: 'chat', h: 'Vraag Emma', p: 'Stel een vraag over je cijfers en krijg antwoord uit je eigen boekhouding. Altijd bereikbaar met ⌘K.' },
+              { i: 'shield', h: 'Veilig gekoppeld', p: 'Je sleutel wordt versleuteld opgeslagen en nooit getoond. Je data staat in de EU, AVG-conform.' },
+            ].map((f, n) => (
+              <div className="lpf reveal" data-d={String((n % 3) + 1)} key={f.h}>
+                <span className="lpf__i"><Ic d={f.i} /></span>
+                <h3>{f.h}</h3>
+                <p>{f.p}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── STAPPEN ── */}
+      <section className="lpsteps" id="hoe" data-nav-dark>
+        <div className="wrap">
+          <div className="reveal">
+            <div className="eyebrow"><span className="tick"></span> Hoe het werkt</div>
+            <h2>Vanavond al minder boekhouden.</h2>
+          </div>
+          <div className="lpsteps__grid">
+            <div className="lpstep reveal" data-d="1">
+              <div className="lpstep__n">STAP 01</div>
+              <h3>Koppel e-Boekhouden.nl</h3>
+              <p>Maak een account en verbind je boekhouding in een paar minuten. Je sleutel wordt versleuteld opgeslagen en nooit getoond.</p>
+            </div>
+            <div className="lpstep reveal" data-d="2">
+              <div className="lpstep__n">STAP 02</div>
+              <h3>Stuur je bonnen door</h3>
+              <p>Mail of sleep bonnetjes en facturen naar je inbox. Emma leest ze en zet per stuk een voorstel klaar.</p>
+            </div>
+            <div className="lpstep reveal" data-d="3">
+              <div className="lpstep__n">STAP 03</div>
+              <h3>Bevestig en klaar</h3>
+              <p>Controleer het voorstel en klik op Boeken. Alles staat direct goed in je boekhouding, BTW voorbereid.</p>
+            </div>
+          </div>
+          <div className="lpsteps__cta reveal">
+            <a className="btn btn-creme btn-lg" href={APP_URL}>Start 14 dagen gratis <span className="arr">→</span></a>
+            <span className="note">Klaar in een paar minuten. Maandelijks opzegbaar.</span>
+          </div>
         </div>
       </section>
 
@@ -119,7 +292,7 @@ export default function Home() {
       <section className="proof" id="proof" data-nav-dark>
         <div className="proof__grid">
           <div className="proof__media">
-            <Image src="/ilze.jpg" alt="Ilze Spannenberg, eigenaar Blondes Incognito" fill style={{ objectFit:'cover' }} />
+            <Image src="/ilze.jpg" alt="Ilze Spannenberg, eigenaar Blondes Incognito" fill style={{ objectFit: 'cover' }} />
             <div className="ph" style={{ color: 'rgba(251,244,234,.7)' }}>Ilze Spannenberg · Blondes Incognito, Heeten</div>
           </div>
           <div className="proof__body">
@@ -140,96 +313,84 @@ export default function Home() {
             <div className="proof__stats">
               <div className="proof__stat"><b>18 mnd</b><span>dagelijks in productie</span></div>
               <div className="proof__stat"><b>7 / 8</b><span>modules bewezen in de praktijk</span></div>
-              <div className="proof__stat"><b>1 salon</b><span>ons startpunt, nu breder</span></div>
+              <div className="proof__stat"><b>1 salon</b><span>ons startpunt, nu voor iedereen</span></div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── COMPARE ── */}
-      <section className="compare" id="compare">
-        <div className="wrap">
-          <div className="compare__head reveal">
-            <div className="eyebrow"><span className="tick"></span> Vergelijk</div>
-            <h2>Emma vs. losse tools vs. bureau</h2>
-            <p>Waarom één ecosysteem rustiger en goedkoper is dan een stapel losse abonnementen.</p>
+      {/* ── PRIJS ── */}
+      <section className="lprice" id="prijs">
+        <div className="wrap lprice__grid">
+          <div className="lprice__copy reveal">
+            <div className="eyebrow"><span className="tick"></span> Prijs</div>
+            <h2>Eén module, één eerlijke prijs.</h2>
+            <p>
+              Je start met EmmaBoekt en betaalt alleen daarvoor. Komt er een module bij die je wilt gebruiken,
+              dan zet je die los aan. Geen pakket verplicht, geen verrassingen achteraf.
+            </p>
+            <div className="lprice__facts">
+              <span><span className="ok"><Ic d="check" /></span>Nieuwe modules zet je los aan: €9 of €19 per maand</span>
+              <span><span className="ok"><Ic d="check" /></span>De instapprijs is de prijs. Geen verhogingen achteraf</span>
+              <span><span className="ok"><Ic d="check" /></span>15% korting als je per jaar betaalt</span>
+              <span><span className="ok"><Ic d="check" /></span>Zodra alle acht modules live zijn: Emma Compleet voor €69 per maand</span>
+            </div>
+          </div>
+          <div className="pcard reveal" data-d="1">
+            <span className="pcard__flag">Eerste module · nu live</span>
+            <div className="pcard__mod">
+              <span className="pcard__ico"><svg viewBox="0 0 24 24" style={{ fill: 'none', stroke: 'currentColor', strokeWidth: 1.7, strokeLinecap: 'round', strokeLinejoin: 'round' }} dangerouslySetInnerHTML={{ __html: ICONS.boekt }} /></span>
+              <div>
+                <div className="pcard__name"><span className="e">Emma</span>Boekt</div>
+                <div className="pcard__tag">Voor e-Boekhouden.nl</div>
+              </div>
+            </div>
+            <div className="pcard__price"><b>€9</b><span>per maand · excl. btw</span></div>
+            <div className="pcard__trial">Eerst 14 dagen gratis proberen</div>
+            <ul className="pcard__list">
+              <li><span className="ok"><Ic d="check" /></span>Slim inboeken van bonnen en facturen</li>
+              <li><span className="ok"><Ic d="check" /></span>Facturen en offertes maken en versturen</li>
+              <li><span className="ok"><Ic d="check" /></span>Openstaande posten en herinneringen</li>
+              <li><span className="ok"><Ic d="check" /></span>Vraag Emma: antwoorden uit je eigen cijfers</li>
+              <li><span className="ok"><Ic d="check" /></span>Koppeling met e-Boekhouden.nl inbegrepen</li>
+            </ul>
+            <a className="btn btn-coral" href={APP_URL}>Start 14 dagen gratis <span className="arr">→</span></a>
+            <div className="pcard__foot">Maandelijks opzegbaar · 15% korting bij jaarbetaling</div>
           </div>
         </div>
-        <div className="compare__wrap" style={{ maxWidth: 'var(--maxw)', marginInline: 'auto' }}>
-          <table className="ctable">
-            <thead>
-              <tr>
-                <th>Wat je nodig hebt</th>
-                <th className="c-emma">Emma<small>alles in één</small></th>
-                <th>Losse tools</th>
-                <th>Bureau / boekhouder</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                ['Boekhouding & BTW', 'EmmaBoekt · €9/mnd', '€25–60/mnd', '€100–250/mnd'],
-                ['Financieel inzicht', 'EmmaWaakt · €9/mnd', '€30–80/mnd', 'Meegenomen in uurtarief'],
-                ['Salarisadministratie', 'EmmaLoont · €19/mnd', '€20–50/mnd', '€50–100/mnd'],
-                ['Content plannen', 'EmmaSchrijft · €19/mnd', '€15–40/mnd', '€200–600/mnd'],
-                ['Één login', '✓', '✗ Vijf logins', '✗ Losse portalen'],
-                ['Alles samenwerkt', '✓', '✗ Handmatig koppelen', '✗ Wachten op export'],
-              ].map(([label, emma, tools, bureau], i) => (
-                <tr key={i}>
-                  <th scope="row">{label}</th>
-                  <td className="c-emma">{emma.startsWith('✓') ? <span className="cyes"><svg viewBox="0 0 24 24"><path d="m20 6-11 11-5-5"/></svg>{emma.slice(1).trim()}</span> : emma}</td>
-                  <td className={tools.startsWith('✗') ? 'cno' : ''}>{tools}</td>
-                  <td className={bureau.startsWith('✗') ? 'cno' : ''}>{bureau}</td>
-                </tr>
-              ))}
-              <tr className="row-total">
-                <th scope="row">Totaal per maand</th>
-                <td className="c-emma">vanaf €29/mnd</td>
-                <td>€90–230/mnd</td>
-                <td>€350–950/mnd</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div className="compare__foot wrap">* Prijzen zijn indicatief en gebaseerd op gangbare abonnementen en uurtarieven.</div>
       </section>
 
-      {/* ── QUIZ ── */}
-      <Quiz />
-
-      {/* ── PACKAGES ── */}
-      <section className="packs" id="packs">
+      {/* ── ROADMAP ── */}
+      <section className="lproad" id="roadmap">
         <div className="wrap">
-          <div className="packs__head reveal">
-            <div className="eyebrow"><span className="tick"></span> Prijzen</div>
-            <h2>Kies het pakket dat past.</h2>
-            <p>Begin met wat je nu nodig hebt. Zet modules bij wanneer je eraan toe bent. Geen lock-in.</p>
+          <div className="lproad__head reveal">
+            <div className="eyebrow"><span className="tick"></span> Roadmap</div>
+            <h2>Elke maand wordt Emma groter.</h2>
+            <p>
+              EmmaBoekt is de eerste van acht modules. De rest volgt maand na maand, en jij bepaalt zelf
+              wat je aanzet. Start je nu, dan groeit Emma vanzelf met je mee.
+            </p>
           </div>
-          <div className="packs__grid">
-            {[
-              { name:"ZZP'ers", badge:'Solowerk', price:29, sub:'Boekhouding, inzicht, leads en content voor de eenpitter.', mods:['boekt','waakt','vindt','schrijft'], feat:false },
-              { name:'Salons', badge:'Aanrader', price:59, sub:'Zeven modules voor het salon of de studio met een team.', mods:['boekt','waakt','loont','vindt','coacht','ziet','schrijft'], feat:true },
-              { name:'Zorg', badge:'Compliance', price:39, sub:'Vijf modules voor de zorgpraktijk, CAO-engine ingebouwd.', mods:['boekt','waakt','loont','vindt','coacht'], feat:false },
-              { name:'Compleet', badge:'Alles', price:69, sub:'Alle acht modules in één pakket, maximale korting.', mods:MODULE_ORDER, feat:false },
-            ].map(pack => (
-              <div key={pack.name} className={`pack${pack.feat ? ' feat' : ''}`}>
-                <div className="pack__top">
-                  <div className="pack__name">Emma voor {pack.name}</div>
-                  <div className="pack__badge">{pack.badge}</div>
-                </div>
-                <div className="pack__dots">
-                  {pack.mods.map(m => <i key={m} style={{ ['--d' as string]: `var(${MODULE_DOTS[m]})` }}></i>)}
-                </div>
-                <div className="pack__price"><b>€{pack.price}</b><span>/mnd</span></div>
-                <div className="pack__sub">{pack.sub}</div>
-                <Link className={`btn ${pack.feat ? 'btn-creme' : 'btn-coral'}`} href="/#closer">
-                  Zet me op de wachtlijst <span className="arr">→</span>
+          <div className="lproad__list">
+            {MODULE_ORDER.map((id, n) => {
+              const st = MODULE_STATUS[id];
+              const name = id.charAt(0).toUpperCase() + id.slice(1);
+              return (
+                <Link href={`/modules/${id}`} className={`rm reveal${st.live ? ' rm--live' : ''}`} data-d={String((n % 2) + 1)} key={id} style={{ ['--rc' as string]: `var(--m-${id})` }}>
+                  <span className="rm__ico"><svg viewBox="0 0 24 24" style={{ fill: 'none', stroke: 'currentColor', strokeWidth: 1.7, strokeLinecap: 'round', strokeLinejoin: 'round' }} dangerouslySetInnerHTML={{ __html: ICONS[id] }} /></span>
+                  <span>
+                    <span className="rm__name"><span className="e">Emma</span>{name}</span>
+                    <span className="rm__desc" style={{ display: 'block' }}>{MODULE_TAGS[id]} · €{MODULE_PRICE[id]}/mnd</span>
+                  </span>
+                  <span className="rm__when">{st.live ? 'Nu live' : st.when}</span>
                 </Link>
-              </div>
-            ))}
+              );
+            })}
           </div>
-          <div className="packs__foot">
-            <b>Los verkrijgbaar:</b> elke module ook individueel te activeren. <b>boekt, waakt, vindt, coacht, ziet</b> €9/mnd · <b>loont, schrijft, promoot</b> €19/mnd · exclusief btw · maandelijks opzegbaar
-          </div>
+          <p className="lproad__foot reveal">
+            <b>Daarna volgen de pakketten</b>, zoals Emma voor Salons en Emma voor ZZP&rsquo;ers: meerdere modules
+            in één bundel met korting, vanaf voorjaar 2027. Wie eerder instapt, houdt de instapprijs.
+          </p>
         </div>
       </section>
 
@@ -244,10 +405,10 @@ export default function Home() {
           </div>
           <div className="security__badges reveal" data-d="1">
             {[
-              { tag:'Opslag', h:'Data in de EU', t:'Je gegevens verlaten nooit de Europese Unie. We werken met servers in Amsterdam en Frankfurt.' },
-              { tag:'Toegang', h:'Minimale rechten', t:'Emma vraagt alleen de rechten die nodig zijn. Geen toegang tot wat we niet gebruiken.' },
-              { tag:'Privacy', h:'AVG-conform', t:'Je gegevens worden alleen verwerkt om de modules te laten werken. Geen verkoop, geen tracking.' },
-              { tag:'Transparantie', h:'Open over hoe we bouwen', t:'We communiceren eerlijk over wat er in productie is en wat nog in ontwikkeling. Geen marketingbeloftes.' },
+              { tag: 'Opslag', h: 'Data in de EU', t: 'Je gegevens verlaten nooit de Europese Unie. We werken met servers in Amsterdam en Frankfurt.' },
+              { tag: 'Toegang', h: 'Minimale rechten', t: 'Emma vraagt alleen de rechten die nodig zijn. Je sleutel voor e-Boekhouden.nl wordt versleuteld opgeslagen en nooit getoond.' },
+              { tag: 'Privacy', h: 'AVG-conform', t: 'Je gegevens worden alleen verwerkt om de modules te laten werken. Geen verkoop, geen tracking.' },
+              { tag: 'Transparantie', h: 'Open over hoe we bouwen', t: 'We communiceren eerlijk over wat er live is en wat nog in ontwikkeling is. Geen marketingbeloftes.' },
             ].map(b => (
               <div key={b.h} className="secbadge">
                 <div className="secbadge__tag">{b.tag}</div>
@@ -259,18 +420,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── CLOSER / WAITLIST ── */}
+      {/* ── CLOSER ── */}
       <section className="closer" id="closer">
         <div className="closer__in">
-          <div className="eyebrow" style={{ justifyContent:'center' }}><span className="tick"></span> Wachtlijst</div>
-          <h2 className="reveal">Wees erbij als Emma live gaat<span className="dot">.</span></h2>
-          <p className="reveal" data-d="1">We bouwen nu het platform. Laat je e-mail achter en je bent als eerste aan de beurt. Geen verplichtingen, geen creditcard.</p>
-          <div className="reveal" data-d="2" style={{ display:'flex', justifyContent:'center' }}>
-            <WaitlistForm note="Geen verplichtingen. Geen creditcard." noteLabel="Jij doet je werk. Emma de rest." />
+          <div className="eyebrow" style={{ justifyContent: 'center' }}><span className="tick"></span> Klaar om te beginnen</div>
+          <h2 className="reveal">Vanavond geen boekhouding<span className="dot">.</span></h2>
+          <p className="reveal" data-d="1">Koppel e-Boekhouden.nl, stuur je eerste bon door en merk het verschil. De eerste 14 dagen zijn gratis.</p>
+          <div className="reveal" data-d="2" style={{ display: 'flex', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}>
+            <a className="btn btn-coral btn-lg" href={APP_URL}>Start 14 dagen gratis <span className="arr">→</span></a>
+            <Link className="btn btn-ghost btn-lg" href="/#prijs">Bekijk de prijs</Link>
           </div>
           <div className="closer__assure reveal" data-d="3">
             <span><span className="d"></span>Maandelijks opzegbaar</span>
-            <span><span className="d"></span>14 dagen gratis proberen</span>
+            <span><span className="d"></span>€9 per maand na je proefperiode</span>
             <span><span className="d"></span>Eerlijk over wat er is en wat nog komt</span>
           </div>
         </div>

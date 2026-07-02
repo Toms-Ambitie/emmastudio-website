@@ -194,6 +194,22 @@ Emma heeft 8 modules — elke module is een Nederlands werkwoord. CamelCase: `Em
 
 ---
 
+## 9b. Lanceerstatus (juli 2026) — leidend voor alle site-teksten
+
+**EmmaBoekt is live** en is voorlopig de enige te gebruiken module. De app draait op **app.emmastudio.nl**; de primaire CTA op de site is "Start 14 dagen gratis" en linkt daarheen.
+
+**Positionering EmmaBoekt:** de vriendelijke schil om **e-Boekhouden.nl**. e-Boekhouden.nl blijft de motor van de boekhouding; Emma maakt het dagelijkse werk makkelijker, sneller en leuker (bonnen slim inboeken, facturen en offertes maken, openstaande posten, Vraag Emma). SnelStart-koppeling volgt later. Kernbelofte: **Emma stelt voor, jij bevestigt — niets wordt automatisch geboekt.**
+
+**Roadmap overige modules** (bron van waarheid: `MODULE_STATUS` in `src/data/modules.ts`):
+Waakt aug 2026 · Loont sep 2026 · Vindt okt 2026 · Coacht nov 2026 · Ziet dec 2026 · Schrijft jan 2027 · Promoot feb 2027 · pakketten voorjaar 2027.
+Je betaalt per module; niet-live modules tonen "komt in [maand]" + wachtlijstformulier.
+
+**Eigenaar Blondes Incognito (testimonial): Ilze Spannenberg, Heeten.**
+
+**Design-referentie app:** de Claude Design-handoff (Emma-app) is leidend voor mockups en tokens: CTA-vulling `#C23A1E` (coral-strong, AA), subtekst `#6E655C`, zachte tinten (teal-soft `#DBF3EE` etc.), radii 16/11/999, subtiele schaduwen, `tabular-nums` voor bedragen.
+
+---
+
 ## 10. Pakketten (Niveau 3 naamgeving)
 
 Format: `Emma voor [branche]` — geen sub-merken, geen aparte logo's.

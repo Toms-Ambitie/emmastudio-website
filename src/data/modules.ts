@@ -51,7 +51,7 @@ export const ICONS: Record<string, string> = {
 };
 
 export const MODULE_TAGS: Record<string, string> = {
-  boekt:    'Boekhouding en BTW, automatisch geregeld.',
+  boekt:    'Boekhouden zonder je boekhoudsoftware aan te raken.',
   waakt:    'Het financiële brein van je zaak.',
   loont:    'Loon en contracten, zonder gedoe.',
   vindt:    'Vind klanten en kandidaten die passen.',
@@ -67,47 +67,65 @@ export const MODULE_PRICE: Record<string, number> = {
 
 export const MODULE_ORDER = ['boekt','waakt','loont','vindt','coacht','ziet','schrijft','promoot'];
 
+/** Lanceerstatus per module. `live: true` = te gebruiken via app.emmastudio.nl;
+ *  anders toont de site "komt in {when}". Eén bron van waarheid voor homepage,
+ *  modulepagina's en footer. */
+export type ModuleStatus = { live: boolean; when: string };
+export const MODULE_STATUS: Record<string, ModuleStatus> = {
+  boekt:    { live: true,  when: 'nu live' },
+  waakt:    { live: false, when: 'augustus 2026' },
+  loont:    { live: false, when: 'september 2026' },
+  vindt:    { live: false, when: 'oktober 2026' },
+  coacht:   { live: false, when: 'november 2026' },
+  ziet:     { live: false, when: 'december 2026' },
+  schrijft: { live: false, when: 'januari 2027' },
+  promoot:  { live: false, when: 'februari 2027' },
+};
+
+export const APP_URL = 'https://app.emmastudio.nl';
+
 export const MODULES: Record<string, ModuleData> = {
   boekt:{
     id:'boekt', name:'Boekt', num:'01', price:9, accentVar:'--m-boekt',
-    chip:'al 18 maanden bewezen in de praktijk',
-    head:'Boekhouding die zichzelf bijhoudt.',
-    intro:'Een rustige schil rond je boekhouding. Emma leest binnenkomende facturen vanzelf in en houdt je administratie bij, zodat jij niet meer in losse systemen hoeft te werken.',
+    chip:'werkt bovenop e-Boekhouden.nl',
+    head:'Boekhouden zonder je boekhoudsoftware aan te raken.',
+    intro:'EmmaBoekt is de vriendelijke schil om e-Boekhouden.nl. Je boekhouding blijft gewoon daar staan, maar het werk doe je voortaan in Emma: bonnetjes doorsturen, facturen maken, offertes versturen. Sneller, overzichtelijker en een stuk leuker.',
     heroVig:'boekt_inlezen',
     does:{
       title:'Wat EmmaBoekt voor je doet.',
-      sub:'De dagelijkse boekhouding, teruggebracht tot een paar rustige handelingen. Jij houdt het overzicht, Emma doet het typewerk.',
+      sub:'De dagelijkse boekhouding, teruggebracht tot een paar rustige handelingen. Jij bevestigt, Emma doet het typewerk.',
       feats:[
-        { tag:'Facturen & offertes', h:'Factureren in een paar klikken.',
-          p:'Maak en verstuur facturen en offertes vanuit één rustig scherm. Emma onthoudt je klanten, je diensten en je huisstijl.',
-          list:['Professionele facturen en offertes','Automatische nummering en herinneringen','Klaar voor je klant, in jouw stijl'],
-          vig:'boekt_factuur' },
-        { tag:'Automatisch inlezen', h:'Bonnetjes en facturen leest Emma zelf.',
-          p:'Stuur een inkomende factuur door en Emma herkent het bedrag, de BTW en de juiste grootboekrekening. Jij hoeft alleen nog te controleren.',
-          list:['Bedrag en BTW automatisch herkend','Direct op de juiste rekening geboekt','Geen overtypen, geen schoenendoos'],
+        { tag:'Slim inboeken', h:'Bonnetjes en facturen leest Emma zelf.',
+          p:'Stuur een bon of inkomende factuur naar je inbox. Emma herkent de leverancier, het bedrag en de BTW, stelt de juiste grootboekrekening voor en legt uit waarom. Jij controleert en klikt op Boeken. Niets wordt automatisch geboekt.',
+          list:['Leverancier, bedrag en BTW automatisch herkend','Grootboekrekening voorgesteld, met de reden erbij','Jij bevestigt elke boeking zelf'],
           vig:'boekt_inlezen' },
-        { tag:'BTW voorbereid', h:'Je BTW-aangifte staat klaar.',
-          p:'Emma houdt je BTW het hele kwartaal bij en zet de aangifte voor je klaar. Jij controleert en verstuurt, je accountant kijkt mee.',
-          list:['Altijd actueel BTW-overzicht','Aangifte voorbereid per kwartaal','Klaar om te controleren en in te dienen'],
+        { tag:'Facturen & offertes', h:'Factureren in een paar klikken.',
+          p:'Maak en verstuur facturen en offertes vanuit één rustig scherm. Emma onthoudt je klanten en je tarieven, en een geaccepteerde offerte zet je met één klik om naar een factuur.',
+          list:['Facturen en offertes in je eigen stijl','Offerte geaccepteerd? Eén klik naar factuur','Openstaande posten en herinneringen in beeld'],
+          vig:'boekt_factuur' },
+        { tag:'Overzicht & BTW', h:'Je cijfers in gewone taal.',
+          p:'Omzet, cashflow en openstaande facturen in één oogopslag, met de BTW het hele kwartaal bijgehouden. Vraag Emma iets over je cijfers en je krijgt antwoord op basis van je eigen boekhouding.',
+          list:['Dagelijks overzicht van omzet en openstaand','BTW voorbereid voor de aangifte','Vraag Emma: antwoorden uit je eigen cijfers'],
           vig:'boekt_btw' },
-        { tag:'Rust rond je software', h:'Een schil rond wat je al gebruikt.',
-          p:'EmmaBoekt werkt bovenop je bestaande boekhoudpakket, zoals eBoekhouden.nl of SnelStart. Je cijfers blijven waar ze horen; jij werkt voortaan in de rust van Emma.',
-          list:['Sluit aan op eBoekhouden.nl en SnelStart','Geen migratie, geen dubbel werk','Je accountant houdt toegang'],
+        { tag:'e-Boekhouden.nl blijft', h:'De motor blijft waar hij is.',
+          p:'EmmaBoekt werkt bovenop e-Boekhouden.nl. Alles wat je in Emma doet, staat gewoon in je boekhouding. Geen migratie, geen dubbel werk, en je accountant houdt toegang zoals altijd. SnelStart volgt binnenkort.',
+          list:['Koppeling in een paar minuten, sleutel versleuteld','Geen migratie, geen dubbel werk','Je accountant houdt gewoon toegang'],
           vig:'boekt_schil' },
       ],
     },
     steps:{ title:'Zo rustig werkt het.', items:[
-      { n:'01 · KOPPEL', h:'Verbind je boekhouding', p:'Koppel je bestaande pakket. Emma haalt je klanten en instellingen op, je hoeft niets opnieuw in te richten.' },
-      { n:'02 · INLEZEN', h:'Emma leest je post in', p:'Inkomende facturen en bonnetjes worden automatisch herkend en geboekt op de juiste rekening.' },
-      { n:'03 · CONTROLE', h:'Jij houdt de regie', p:'In één overzicht controleer en verstuur je facturen. Niets gebeurt zonder dat jij het ziet.' },
-      { n:'04 · KLAAR', h:'Je BTW staat klaar', p:'Aan het eind van het kwartaal is je aangifte voorbereid. Controleren, indienen, klaar.' },
+      { n:'01 · KOPPEL', h:'Verbind e-Boekhouden.nl', p:'Koppel je boekhouding in een paar minuten. Je sleutel wordt versleuteld opgeslagen en nooit getoond.' },
+      { n:'02 · STUUR DOOR', h:'Bonnen naar je inbox', p:'Stuur bonnetjes en inkomende facturen door of sleep ze in je inbox. Emma leest ze en zet een voorstel klaar.' },
+      { n:'03 · BEVESTIG', h:'Jij houdt de regie', p:'Controleer het voorstel van Emma, pas aan waar nodig en klik op Boeken. Niets gebeurt zonder jou.' },
+      { n:'04 · KLAAR', h:'Alles staat in je boekhouding', p:'Elke boeking en factuur staat direct goed in e-Boekhouden.nl. Je BTW-overzicht is voorbereid voor de aangifte.' },
     ] },
     faq:[
-      { q:'Vervangt EmmaBoekt mijn boekhoudsoftware?', a:'Nee. EmmaBoekt is een rustige schil rond je bestaande pakket, zoals eBoekhouden.nl of SnelStart. Je cijfers blijven daar staan; jij werkt voortaan in het overzicht van Emma in plaats van in die losse systemen.' },
-      { q:'Werkt het samen met mijn accountant?', a:'Ja. Je accountant houdt gewoon toegang tot je boekhouding en blijft eindverantwoordelijk. Emma neemt het voorbereidende werk over, zodat er minder uren overblijven om te factureren.' },
-      { q:'Hoe leest Emma mijn facturen in?', a:'Je stuurt een inkomende factuur door of uploadt hem. Emma herkent het bedrag, de BTW en de leverancier en boekt het op de juiste grootboekrekening. Jij controleert het resultaat voordat het definitief is.' },
-      { q:'Wat kost EmmaBoekt?', a:'EmmaBoekt is bij de lancering los te gebruiken vanaf €9 per maand, exclusief btw. Het zit ook in elk branche-pakket, van ZZP tot Compleet. Maandelijks opzegbaar.' },
-      { q:'Kan ik EmmaBoekt nu al gebruiken?', a:'Nog niet. We bouwen Emma op dit moment als platform. De boekhoud-functies zijn 18 maanden bewezen in de praktijk bij salon Blondes Incognito. Laat je e-mail achter en je hoort het als eerste zodra je kunt starten.' },
+      { q:'Vervangt EmmaBoekt e-Boekhouden.nl?', a:'Nee, juist niet. e-Boekhouden.nl blijft de motor van je boekhouding en alles blijft daar netjes staan. Emma is de schil eromheen die het dagelijkse werk makkelijker, sneller en leuker maakt. Je logt alleen bijna nooit meer rechtstreeks in.' },
+      { q:'Boekt Emma dingen automatisch?', a:'Nee. Emma leest je bonnen en facturen, herkent de bedragen en stelt de juiste boeking voor, met de reden erbij. Jij controleert en bevestigt. Niets verdwijnt vanzelf in je administratie.' },
+      { q:'Werkt het samen met mijn accountant?', a:'Ja. Je accountant houdt gewoon toegang tot e-Boekhouden.nl en blijft eindverantwoordelijk. Emma neemt het voorbereidende werk over, zodat er minder uren overblijven om te factureren.' },
+      { q:'Ik gebruik SnelStart. Kan ik ook meedoen?', a:'Bijna. EmmaBoekt start met e-Boekhouden.nl; de koppeling met SnelStart volgt binnenkort. Laat je e-mail achter en je hoort het zodra die klaar is.' },
+      { q:'Wat kost EmmaBoekt?', a:'€9 per maand, exclusief btw. Je probeert Emma eerst 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 15% korting.' },
+      { q:'Kan ik EmmaBoekt nu al gebruiken?', a:'Ja. EmmaBoekt is de eerste module van Emma en is nu te gebruiken. Maak een account aan op app.emmastudio.nl en je bent binnen een paar minuten gekoppeld.' },
     ],
   },
   waakt:{
