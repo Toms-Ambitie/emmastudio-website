@@ -9,7 +9,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: BASE,                   priority: 1.0, changeFrequency: 'weekly'  },
     { url: `${BASE}/kennisbank`,   priority: 0.8, changeFrequency: 'weekly'  },
     { url: `${BASE}/over`,         priority: 0.6, changeFrequency: 'monthly' },
-    { url: `${BASE}/contact`,      priority: 0.5, changeFrequency: 'yearly'  },
+    { url: `${BASE}/contact`,                    priority: 0.5, changeFrequency: 'yearly'  },
+    { url: `${BASE}/algemene-voorwaarden`,       priority: 0.2, changeFrequency: 'yearly'  },
+    { url: `${BASE}/privacy`,                    priority: 0.2, changeFrequency: 'yearly'  },
     ...MODULE_ORDER.map(id => ({
       url: `${BASE}/modules/${id}`,
       priority: 0.85,
