@@ -74,7 +74,7 @@ export default function Privacy() {
               <li><b>Resend:</b> voor het verzenden van e-mail (wachtlijst-bevestigingen en berichten via het contactformulier). Resend is gevestigd in de Verenigde Staten; de doorgifte vindt plaats op basis van Standard Contractual Clauses.</li>
               <li><b>Vercel:</b> voor de hosting van de website. Vercel is gevestigd in de Verenigde Staten; de doorgifte vindt plaats op basis van Standard Contractual Clauses.</li>
             </ul>
-            <p>Persoonsgegevens die je invoert <em>in</em> het Emma-platform worden opgeslagen op servers binnen de Europese Unie (Amsterdam en Frankfurt). Wij verkopen jouw gegevens nooit aan derden.</p>
+            <p>Persoonsgegevens die je invoert <em>in</em> het Emma-platform worden opgeslagen op servers binnen de Europese Unie (Frankfurt). Wij verkopen jouw gegevens nooit aan derden.</p>
 
             <h2>6. Beveiliging</h2>
             <p>Toms Ambitie treft passende technische en organisatorische maatregelen om persoonsgegevens te beschermen tegen verlies, ongeautoriseerde toegang of openbaarmaking. Dit omvat onder meer versleutelde verbindingen (TLS/HTTPS), strikte toegangscontrole en regelmatige beveiligingscontroles.</p>

@@ -519,7 +519,7 @@ export default function Home() {
             {[
               { i: 'shield', h: 'Jouw data, jouw eigendom', t: 'Je gegevens worden alleen verwerkt om de modules te laten werken. Geen verkoop, geen tracking, AVG-conform.' },
               { i: 'link', h: 'Versleuteld gekoppeld', t: 'Je sleutel voor e-Boekhouden.nl wordt versleuteld opgeslagen en nooit getoond.' },
-              { i: 'check', h: 'Opgeslagen in de EU', t: 'Je gegevens verlaten nooit de Europese Unie. We werken met servers in Amsterdam en Frankfurt.' },
+              { i: 'check', h: 'Opgeslagen in de EU', t: 'Je bedrijfsdata staat binnen de Europese Unie, op servers in Frankfurt. Onze website en e-mailverzending lopen via Amerikaanse dienstverleners onder Europese standaardcontractbepalingen. Meer daarover lees je in ons privacybeleid.' },
               { i: 'chat', h: 'Open over hoe we bouwen', t: 'We zijn eerlijk over wat er live is en wat nog in ontwikkeling is. Geen marketingbeloftes.' },
             ].map(b => (
               <div key={b.h} className="secrow">
