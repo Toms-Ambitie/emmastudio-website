@@ -1560,3 +1560,104 @@ a.rm:hover{ transform:translateY(-2px); box-shadow:var(--sh-hover); }
 .pk--feat .pk__ok{ background:var(--coral-soft); color:var(--coral-strong); }
 .pk__ok svg{ width:10px; height:10px; fill:none; stroke:currentColor; stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round; }
 .pk .btn{ justify-content:center; }
+
+/* ============================================================
+   HIGGSFIELD-PORT — merk-tokens uit export styles.css
+   Bron: emmastudio-website-export.zip, src/styles.css, @theme-blok.
+   Geverifieerd tegen huisstijlhandboek v1.1 — waarden ONGEWIJZIGD
+   overgenomen, op de toegestane correctie na (briefing v2 §3.3):
+   --color-emma-waaks → --color-emma-waakt.
+   Tailwind's `@theme` at-rule bestaat niet in dit (niet-Tailwind)
+   project; de tokens zijn daarom als platte :root custom properties
+   overgezet zodat ze daadwerkelijk bruikbaar zijn. Toegevoegd NAAST
+   de bestaande tokens hierboven (--coral, --m-boekt, etc.) — die
+   blijven ongewijzigd, vervanging is stap 3 (componenten porten).
+   ============================================================ */
+:root{
+  /* Kernkleuren */
+  --color-emma-coral: #EB5C43;
+  --color-emma-coral-deep: #E8462B;
+  --color-emma-coral-strong: #C23A1E;
+  --color-emma-petrol: #0E3D37;
+  --color-emma-petrol-light: #15514A;
+  --color-emma-ink: #1C1715;
+  --color-emma-ink-2: #4A423B;
+  --color-emma-creme: #FBF4EA;
+  --color-emma-paper: #FFFFFF;
+  --color-emma-line: #ECE2D6;
+  --color-emma-subtext: #6E655C;
+
+  /* Semantisch */
+  --color-emma-success: #1F6E47;
+  --color-emma-warning: #9A6512;
+  --color-emma-error: #A83C26;
+  --color-emma-info: #1F5E91;
+
+  /* Module accenten */
+  --color-emma-boekt: #16B79C;
+  --color-emma-waakt: #FFB23E;
+  --color-emma-loont: #4D6BF5;
+  --color-emma-vindt: #EB5C43;
+  --color-emma-coacht: #FF7FA3;
+  --color-emma-ziet: #9B6BE0;
+  --color-emma-schrijft: #1FA4E0;
+  --color-emma-promoot: #FF4D2E;
+
+  /* Soft tints */
+  --color-emma-coral-soft: #FBE3DD;
+  --color-emma-teal-soft: #DBF3EE;
+  --color-emma-warning-soft: #F8E9CF;
+  --color-emma-error-soft: #F6DDD5;
+  --color-emma-success-soft: #DBEEE3;
+
+  /* Typography */
+  --font-emma-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-emma-body: 'Hanken Grotesk', system-ui, sans-serif;
+  --font-emma-mono: 'Spline Sans Mono', ui-monospace, monospace;
+
+  /* Radius */
+  --radius-emma-card: 16px;
+  --radius-emma-btn: 11px;
+  --radius-emma-pill: 999px;
+  --radius-emma-squircle: 14px;
+
+  /* Elevation */
+  --shadow-emma-card: 0 1px 2px rgba(28,23,21,.04), 0 1px 1px rgba(28,23,21,.03);
+  --shadow-emma-pop: 0 12px 32px rgba(28,23,21,.12), 0 2px 8px rgba(28,23,21,.06);
+  --shadow-emma-hover: 0 6px 20px rgba(28,23,21,.08);
+}
+
+/* em-* utilities, verbatim uit export */
+.em-num { font-variant-numeric: tabular-nums; }
+
+.em-label {
+  font-family: var(--font-emma-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+@keyframes em-shimmer { 0% { background-position: -360px 0; } 100% { background-position: 360px 0; } }
+.em-skel {
+  background: linear-gradient(90deg, #EFE6D8 0%, #F6EFE3 50%, #EFE6D8 100%);
+  background-size: 720px 100%;
+  border-radius: 8px;
+  animation: em-shimmer 1.3s linear infinite;
+}
+
+.em-scroll::-webkit-scrollbar { width: 10px; height: 10px; }
+.em-scroll::-webkit-scrollbar-thumb { background: rgba(28,23,21,.14); border-radius: 99px; border: 3px solid transparent; background-clip: content-box; }
+.em-scroll::-webkit-scrollbar-thumb:hover { background: rgba(28,23,21,.24); background-clip: content-box; }
+.em-scroll::-webkit-scrollbar-track { background: transparent; }
+
+/* prefers-reduced-motion, verbatim uit export (universele regel,
+   aanvullend op de bestaande scoped regels elders in dit bestand) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
