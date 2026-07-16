@@ -4,11 +4,12 @@ import { useRef, useState } from 'react';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-export default function WaitlistForm({ dark = false, note = '', noteLabel = '', className = '' }: {
+export default function WaitlistForm({ dark = false, note = '', noteLabel = '', className = '', submitLabel = 'Zet me op de wachtlijst' }: {
   dark?: boolean;
   note?: string;
   noteLabel?: string;
   className?: string;
+  submitLabel?: string;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const rowRef = useRef<HTMLDivElement>(null);
@@ -40,7 +41,7 @@ export default function WaitlistForm({ dark = false, note = '', noteLabel = '', 
       <div className="wait__row" ref={rowRef}>
         <input ref={inputRef} type="email" inputMode="email" placeholder="Je e-mailadres" aria-label="E-mailadres" required disabled={loading} />
         <button className="btn btn-coral" type="submit" disabled={loading}>
-          {loading ? 'Even wachten…' : 'Zet me op de wachtlijst'} <span className="arr">→</span>
+          {loading ? 'Even wachten…' : submitLabel} <span className="arr">→</span>
         </button>
       </div>
       <div className="wait__note">

@@ -1686,6 +1686,12 @@ a.rm:hover{ transform:translateY(-2px); box-shadow:var(--sh-hover); }
 .em-scroll::-webkit-scrollbar-thumb:hover { background: rgba(28,23,21,.24); background-clip: content-box; }
 .em-scroll::-webkit-scrollbar-track { background: transparent; }
 
+/* em-fade: in de Higgsfield-export gerefereerd (ProductShowcase, bij het
+   wisselen van screenshot) maar nooit gedefinieerd — een stille bug in de
+   export. Hier alsnog toegevoegd zodat de bedoelde fade werkt. Reduced-
+   motion neutraliseert 'm via de universele regel hieronder. */
+@keyframes em-fade { from { opacity: 0; } to { opacity: 1; } }
+
 /* prefers-reduced-motion, verbatim uit export (universele regel,
    aanvullend op de bestaande scoped regels elders in dit bestand) */
 @media (prefers-reduced-motion: reduce) {
