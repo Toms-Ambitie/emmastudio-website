@@ -518,9 +518,8 @@ export default function Home() {
           <div className="seclist reveal" data-d="1">
             {[
               { i: 'shield', h: 'Jouw data, jouw eigendom', t: 'Je gegevens worden alleen verwerkt om de modules te laten werken. Geen verkoop, geen tracking, AVG-conform.' },
-              { i: 'link', h: 'Versleuteld gekoppeld', t: 'Je sleutel voor e-Boekhouden.nl wordt versleuteld opgeslagen en nooit getoond.' },
+              { i: 'link', h: 'Versleuteld gekoppeld', t: 'Koppel je Emma aan een externe dienst, dan wordt je sleutel versleuteld opgeslagen en nooit getoond.' },
               { i: 'check', h: 'Opgeslagen in de EU', t: 'Je bedrijfsdata staat binnen de Europese Unie, op servers in Frankfurt. Onze website en e-mailverzending lopen via Amerikaanse dienstverleners onder Europese standaardcontractbepalingen. Meer daarover lees je in ons privacybeleid.' },
-              { i: 'chat', h: 'Open over hoe we bouwen', t: 'We zijn eerlijk over wat er live is en wat nog in ontwikkeling is. Geen marketingbeloftes.' },
             ].map(b => (
               <div key={b.h} className="secrow">
                 <span className="secrow__i"><Ic d={b.i} /></span>
