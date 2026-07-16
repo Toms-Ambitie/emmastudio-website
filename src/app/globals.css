@@ -1661,3 +1661,77 @@ a.rm:hover{ transform:translateY(-2px); box-shadow:var(--sh-hover); }
     scroll-behavior: auto !important;
   }
 }
+
+/* ============================================================
+   HIGGSFIELD-PORT — utilities + fundament-stijlen uit export
+   Bron: emmastudio-website-export.zip, src/styles.css, regels 104-163.
+   Vervolg op het HIGGSFIELD-PORT tokenblok hierboven. Waarden
+   ongewijzigd overgenomen. Twee syntax-aanpassingen, zelfde principe
+   als bij het @theme-blok:
+   1. Tailwind's @layer utilities bestaat niet zonder Tailwind-pipeline
+      → platte utility-classes.
+   2. @layer base is native CSS (Cascade Layers), maar dit bestand
+      gebruikt nergens @layer. Een los, ongeregistreerd @layer base
+      zou zwakker zijn dan ALLE bestaande niet-gelaagde CSS hieronder
+      (gelaagde declaraties verliezen altijd van niet-gelaagde,
+      ongeacht specificiteit) — dat ondermijnt precies het doel
+      (een fundament dat werkt). Daarom platte regels, aan het eind
+      toegevoegd: voor html/body/::selection overschrijven ze alleen
+      de overlappende eigenschappen van de bestaande regels verderop
+      in dit bestand (zelfde kleurwaarden, dus geen zichtbaar verschil
+      voor background/color/font-family), niet-overlappende
+      eigenschappen (scroll-behavior, font-size, line-height,
+      overflow-x) blijven van de bestaande regels staan.
+   AFWIJKING VAN DE EXPORT, MET AKKOORD VAN TOM: de export gebruikt voor
+   ::selection color:#fff (puur wit). #fff staat niet in het huisstijl-
+   handboek — het palet kent Paper (#FFFFFF) als achtergrondkleur en
+   Crème (#FBF4EA) als merkkleur; op petrol is puur wit harder dan crème.
+   De bestaande site gebruikt al crème en is daarmee merkconform. Hier
+   bewust NIET de exportwaarde overgenomen: color:var(--creme) blijft.
+   ============================================================ */
+:root {
+  --radius: 0.625rem;
+}
+
+.font-display { font-family: var(--font-emma-display); }
+.font-body { font-family: var(--font-emma-body); }
+.font-mono { font-family: var(--font-emma-mono); }
+
+.rounded-emma-card { border-radius: var(--radius-emma-card); }
+.rounded-emma-btn { border-radius: var(--radius-emma-btn); }
+.rounded-emma-pill { border-radius: var(--radius-emma-pill); }
+.rounded-emma-squircle { border-radius: var(--radius-emma-squircle); }
+
+.shadow-emma-card { box-shadow: var(--shadow-emma-card); }
+.shadow-emma-pop { box-shadow: var(--shadow-emma-pop); }
+.shadow-emma-hover { box-shadow: var(--shadow-emma-hover); }
+
+html {
+  background-color: var(--color-emma-creme);
+  color: var(--color-emma-ink);
+  color-scheme: light;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--color-emma-creme);
+  color: var(--color-emma-ink);
+  font-family: var(--font-emma-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-emma-coral);
+  color: var(--creme);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-emma-boekt);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+  outline: none;
+}
