@@ -17,6 +17,11 @@ export type Article = {
   read: string;
   author: string;
   featured?: boolean;
+  /** Briefing v2 §5.3: voorbereiding op de latere blog/kennisbank-splitsing.
+   *  Nu nog geen filter actief — /kennisbank toont alle artikelen ongeacht
+   *  deze waarde. 'kennisbank' = handleiding/uitleg/hulp, tijdloos.
+   *  'blog' = nieuws over Emma zelf (productstatus, bouwvoortgang). */
+  section: 'blog' | 'kennisbank';
   body: ArticleBlock[];
 };
 
@@ -26,6 +31,7 @@ export const ARTICLES: Article[] = [
     cat: 'Grip op cijfers',
     accent: '#44857C',
     glyph: 'waakt',
+    section: 'kennisbank',
     title: 'Waarom grip op je cijfers begint met rust',
     dek: 'De meeste ondernemers weten pas hoe het écht gaat als de cijfers van de accountant binnen zijn. Dat kan anders, en rustiger.',
     date: '28 mei 2026',
@@ -55,6 +61,7 @@ export const ARTICLES: Article[] = [
     cat: 'Praktijk',
     accent: '#AE8232',
     glyph: 'vindt',
+    section: 'kennisbank',
     title: 'Eén ding dat elke salon, praktijk en ZZP\'er morgen anders kan doen',
     dek: 'Drie korte, praktische gewoontes die je vandaag al kunt oppakken, ongeacht je branche.',
     date: '21 mei 2026',
@@ -78,6 +85,7 @@ export const ARTICLES: Article[] = [
     cat: 'Achter de schermen',
     accent: '#9C4456',
     glyph: 'schrijft',
+    section: 'blog',
     title: 'Achter de schermen: hoe we Emma opnieuw opbouwen',
     dek: 'Emma is niet op een whiteboard bedacht. Ze is ontstaan in een echte salon. Dit is hoe we van die ervaring een platform maken.',
     date: '14 mei 2026',

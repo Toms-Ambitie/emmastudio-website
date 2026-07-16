@@ -35,6 +35,11 @@ export type ModuleData = {
   intro: string;
   heroVig: string;
   does: { title: string; sub: string; feats: ModuleFeat[] };
+  /** Optioneel: functies die nog niet bestaan maar wel op de roadmap staan,
+   *  apart van `does.feats` (dat alleen aantoonbare, live functies bevat).
+   *  Briefing v2 §4.1: voor EmmaZiet moeten prijsvergelijking, reviews-
+   *  analyse en sentiment-over-tijd hier staan, niet bij `does.feats`. */
+  roadmap?: { title: string; items: string[] };
   steps: { title: string; items: ModuleStep[] };
   faq: ModuleFaq[];
 };
@@ -56,7 +61,7 @@ export const MODULE_TAGS: Record<string, string> = {
   loont:    'Loon en contracten, zonder gedoe.',
   vindt:    'Vind klanten en kandidaten die passen.',
   coacht:   'Coaching en voortgang voor jou en je team.',
-  ziet:     'Zie waar je staat in de markt.',
+  ziet:     'Zie wie er om je heen zit.',
   schrijft: 'Teksten die klinken als jij.',
   promoot:  'Zie welke euro écht omzet oplevert.',
 };
@@ -72,19 +77,40 @@ export const MODULE_ORDER = ['boekt','waakt','loont','vindt','coacht','ziet','sc
  *  van "lanceert in juli" naar "nu live" met directe aanmeldknoppen. */
 export const LAUNCHED = false;
 
-/** Lanceerstatus per module. `live: true` = te gebruiken via app.emmastudio.nl;
- *  anders toont de site "komt in {when}". Eén bron van waarheid voor homepage,
- *  modulepagina's en footer. */
+/** Lanceerstatus per module. `live: true` = de software draait (bevestigd
+ *  in Supabase-prod); `when` is de roadmap-aanduiding voor wat nog niet
+ *  draait. Eén bron van waarheid voor homepage, modulepagina's en footer.
+ *
+ *  Briefing v2 §4.1 (bevestigd via Supabase-tabellen in stap 0): Boekt,
+ *  Waakt en Ziet zijn de drie "Live"-modules — Ziet gedeeltelijk (zie
+ *  ziet.roadmap voor wat nog ontbreekt). De overige vijf zijn "Binnenkort",
+ *  zonder datum (briefing: "Geen datums. [...] Een gemiste datum doet meer
+ *  schade dan geen datum.").
+ *
+ *  `live` staat hier bewust LOS van `LAUNCHED`. `live` beschrijft of de
+ *  software draait (een technisch feit — Supabase toont actieve tabellen
+ *  en een draaiende tenant voor boekt/waakt/ziet). `LAUNCHED` beschrijft
+ *  of de publieke signup open staat (een marketingbeslissing). Dat zijn
+ *  onafhankelijke assen; ze aan elkaar knopen zou betekenen dat het
+ *  omzetten van de signup-knop ook de modulestatus verandert, of andersom.
+ *  `when` optioneel maken (`when?: string`) breekt de typecheck van
+ *  `JourneySection.tsx` (regel 74, `return st.when;` met retourtype
+ *  `string`) — een component, dus dit rondje niet aan te passen. Daarom
+ *  blijft `when: string` verplicht en wordt het een lege string voor
+ *  boekt/waakt/ziet: een module die draait heeft geen "komt in ...", en
+ *  elke huidige plek die `.when` gebruikt doet dat al alleen wanneer
+ *  `!live` (geverifieerd), dus deze lege string wordt nergens zichtbaar
+ *  geïnterpoleerd. */
 export type ModuleStatus = { live: boolean; when: string };
 export const MODULE_STATUS: Record<string, ModuleStatus> = {
-  boekt:    { live: LAUNCHED, when: 'juli 2026' },
-  waakt:    { live: false, when: 'augustus 2026' },
-  loont:    { live: false, when: 'september 2026' },
-  vindt:    { live: false, when: 'oktober 2026' },
-  coacht:   { live: false, when: 'november 2026' },
-  ziet:     { live: false, when: 'december 2026' },
-  schrijft: { live: false, when: 'januari 2027' },
-  promoot:  { live: false, when: 'februari 2027' },
+  boekt:    { live: true, when: '' },
+  waakt:    { live: true, when: '' },
+  loont:    { live: false, when: 'Binnenkort' },
+  vindt:    { live: false, when: 'Binnenkort' },
+  coacht:   { live: false, when: 'Binnenkort' },
+  ziet:     { live: true, when: '' },
+  schrijft: { live: false, when: 'Binnenkort' },
+  promoot:  { live: false, when: 'Binnenkort' },
 };
 
 export const APP_URL = 'https://app.emmastudio.nl';
@@ -162,8 +188,10 @@ export const MODULES: Record<string, ModuleData> = {
     faq:[
       { q:'Heb ik verstand van cijfers nodig?', a:'Nee. EmmaWaakt is juist bedoeld voor ondernemers die geen analist willen worden. Je krijgt de paar inzichten die ertoe doen in gewone taal, met een concrete suggestie erbij.' },
       { q:'Werkt EmmaWaakt samen met EmmaBoekt?', a:'Ja. EmmaWaakt gebruikt je boekhoudcijfers uit EmmaBoekt als basis. Samen vormen ze het financiële hart van je onderneming, maar je kunt ook starten met alleen Waakt.' },
-      { q:'Wat kost EmmaWaakt?', a:'EmmaWaakt is bij de lancering los te gebruiken vanaf €9 per maand, exclusief btw. Het zit ook in elk branche-pakket. Maandelijks opzegbaar.' },
-      { q:'Kan ik het nu al gebruiken?', a:'Nog niet. We bouwen Emma op dit moment als platform; de aanpak is 18 maanden bewezen bij salon Blondes Incognito. Laat je e-mail achter en je hoort het als eerste.' },
+      { q:'Wat kost EmmaWaakt?', a:'€9 per maand, exclusief btw. Je probeert Emma eerst 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 15% korting.' },
+      { q:'Kan ik het nu al gebruiken?', a: LAUNCHED
+          ? 'Ja. EmmaWaakt is nu te gebruiken. Maak een account aan op app.emmastudio.nl.'
+          : 'Bijna. EmmaWaakt lanceert samen met de boekhoudmodule. Laat je e-mail achter en je hoort het op de dag dat je kunt starten.' },
     ],
   },
   loont:{
@@ -261,33 +289,46 @@ export const MODULES: Record<string, ModuleData> = {
   },
   ziet:{
     id:'ziet', name:'Ziet', num:'06', price:9, accentVar:'--m-ziet',
-    chip:'lokale markt in beeld',
-    head:'Zie waar je staat in de markt.',
-    intro:'Markt-intelligentie die meedenkt. Hoe verhouden je prijzen zich tot de buurt, wie zijn je concurrenten, en wat zeggen je reviews? Eén keer per maand rustig samengevat.',
-    heroVig:'ziet_prijs',
+    chip:'concurrenten automatisch in beeld',
+    head:'Zie wie er om je heen zit.',
+    intro:'Emma houdt de concurrentie in jouw buurt in de gaten. Automatische detectie via KvK en SBI-codes, een kaart waarop je in één oogopslag ziet wie er in jouw straal zit, en een wekelijks signaal zodra er een nieuwe concurrent bijkomt.',
+    heroVig:'ziet_concurrent',
     does:{
       title:'Wat EmmaZiet voor je doet.',
-      sub:'Je hoeft niet zelf de buurt af te speuren. Emma houdt de markt in de gaten en vat samen wat ertoe doet.',
+      sub:'Drie dingen, niet meer: wie er in jouw buurt zit, waar precies, en of er iets verandert.',
       feats:[
-        { tag:'Prijsvergelijking', h:'Weet of je goed zit.', p:'Vergelijk je prijzen per dienst met vergelijkbare bedrijven in de buurt, zodat je bewust kunt kiezen.',
-          list:['Prijsvergelijking per dienst','Binnen jouw straal','Bewust kiezen, niet gokken'], vig:'ziet_prijs' },
-        { tag:'Concurrenten', h:'Weet wie er om je heen zit.', p:'Automatische detectie van concurrenten in de buurt, met een rustige maandelijkse update.',
-          list:['Concurrenten automatisch in kaart','Op basis van locatie en branche','Maandelijkse positie-update'], vig:'ziet_concurrent' },
-        { tag:'Reviews', h:'Hoor wat klanten zeggen.', p:'Je reviews verzameld en samengevat tot thema\'s, zodat je ziet waar je sterk in bent en wat beter kan.',
-          list:['Reviews op één plek','Samengevat tot thema\'s','Zie je sterke punten en kansen'], vig:'ziet_review' },
+        { tag:'Concurrent-detectie', h:'Concurrent-detectie automatisch.',
+          p:'Via KvK en SBI-codes binnen een instelbare radius. Geen handmatig zoeken meer.',
+          list:['Automatisch via KvK en SBI-codes','Radius zelf in te stellen'],
+          vig:'ziet_concurrent' },
+        { tag:'Kaartvisualisatie', h:'Kaartvisualisatie.',
+          p:'Zie in één oogopslag wie er in jouw straal zit en waar.',
+          list:['Alle concurrenten in de buurt op de kaart'],
+          vig:'ziet_concurrent' },
+        { tag:'Wekelijkse monitoring', h:'Wekelijkse monitoring.',
+          p:'Emma signaleert het als er een nieuwe concurrent bijkomt.',
+          list:['Wekelijkse controle op nieuwe concurrenten','Signaal zodra er iets verandert'],
+          vig:'ziet_concurrent' },
       ],
     },
-    steps:{ title:'Zo zie je de markt.', items:[
-      { n:'01 · STEL IN', h:'Geef je werkgebied', p:'Bepaal je locatie en diensten. Emma weet waar en wat ze moet vergelijken.' },
-      { n:'02 · VERZAMEL', h:'Emma kijkt rond', p:'Prijzen, concurrenten en reviews in de buurt worden automatisch verzameld.' },
-      { n:'03 · SAMENVATTING', h:'Krijg het overzicht', p:'Eén keer per maand een rustige samenvatting van waar je staat.' },
-      { n:'04 · BESLIS', h:'Doe er iets mee', p:'Pas je prijzen aan, speel in op een kans, of laat het juist zoals het is.' },
+    roadmap:{
+      title:'Op de roadmap',
+      items:['Prijsvergelijking per dienst','Reviews-analyse','Sentiment-over-tijd'],
+    },
+    steps:{ title:'Zo houd je zicht op de buurt.', items:[
+      { n:'01 · STEL IN', h:'Geef je werkgebied', p:'Bepaal je locatie en de radius waarbinnen Emma moet zoeken.' },
+      { n:'02 · DETECTEER', h:'Emma zoekt automatisch', p:'Concurrenten in de buurt worden via KvK en SBI-codes automatisch gevonden.' },
+      { n:'03 · BEKIJK DE KAART', h:'Zie het in één oogopslag', p:'Alle concurrenten binnen jouw straal in beeld op de kaart.' },
+      { n:'04 · BLIJF OP DE HOOGTE', h:'Wekelijkse controle', p:'Komt er een nieuwe concurrent bij, dan signaleert Emma dat.' },
     ] },
     faq:[
-      { q:'Hoe komt Emma aan deze gegevens?', a:'Uit openbare bronnen, zoals bedrijfsregisters en openbare reviews in jouw omgeving. EmmaZiet vat dat samen tot een rustig overzicht.' },
-      { q:'Voor wie is het vooral nuttig?', a:'Voor lokale dienstverleners zoals salons en zorgpraktijken, die willen weten hoe ze zich verhouden tot de buurt zonder er zelf onderzoek naar te doen.' },
-      { q:'Word ik er niet onrustig van?', a:'Daar is het juist niet voor. EmmaZiet stuurt geen alarmen, maar één rustige update per maand met wat er echt toe doet.' },
-      { q:'Wat kost het en kan ik het nu gebruiken?', a:'EmmaZiet is bij de lancering los te gebruiken vanaf €9 per maand, exclusief btw. We bouwen het platform nu; laat je e-mail achter voor de start.' },
+      { q:'Hoe komt Emma aan deze gegevens?', a:'Via KvK en SBI-codes, binnen een instelbare radius die jij zelf bepaalt.' },
+      { q:'Voor wie is het vooral nuttig?', a:'Voor lokale dienstverleners zoals salons en zorgpraktijken, die willen weten wie er in hun buurt actief is zonder daar zelf naar te hoeven zoeken.' },
+      { q:'Word ik er niet onrustig van?', a:'Nee. EmmaZiet stuurt geen doorlopende alarmen, alleen een signaal als er daadwerkelijk een nieuwe concurrent bijkomt.' },
+      { q:'Komt er nog meer bij?', a:'Ja. Prijsvergelijking per dienst, reviews-analyse en sentiment-over-tijd staan op de roadmap. Nu draait EmmaZiet op concurrent-detectie, kaartvisualisatie en wekelijkse monitoring.' },
+      { q:'Wat kost het en kan ik het nu gebruiken?', a: LAUNCHED
+          ? 'EmmaZiet is los te gebruiken vanaf €9 per maand, exclusief btw, en is nu live.'
+          : 'EmmaZiet is los te gebruiken vanaf €9 per maand, exclusief btw. De boekhoudmodule lanceert als eerste; EmmaZiet volgt op hetzelfde platform.' },
     ],
   },
   schrijft:{
@@ -433,18 +474,10 @@ export const VIGNETTES: Record<string, string> = {
     <div class="vig__row vig__row--head"><span class="vig__dot"></span> Voorbereiding</div>
     <div class="vig__insight"><span class="vig__spark">◆</span> Suggestie: <b>vraag naar productverkoop</b>, die liep terug</div>
     <div class="vig__li" style="margin-top:8px"><span class="vig__tick">✓</span><span>Op basis van je eigen cijfers</span></div>`,
-  ziet_prijs:`
-    <div class="vig__row vig__row--head"><span class="vig__dot"></span> Jouw prijs vs. de markt</div>
-    <div class="vig__scale"><span class="vig__band"></span><span class="vig__me" style="left:58%">jij</span><span class="vig__avg" style="left:50%"></span></div>
-    <div class="vig__legend"><span><i class="vig__lg vig__lg--me"></i> jouw tarief</span><span><i class="vig__lg"></i> gemiddelde in de buurt</span></div>`,
-  ziet_review:`
-    <div class="vig__row vig__row--head"><span class="vig__dot"></span> Reviews</div>
-    <div class="vig__li"><span class="vig__tick">✓</span><span>Jouw reviewscore</span><b class="vig__pill">sterk</b></div>
-    <div class="vig__insight"><span class="vig__spark">◆</span> Veel genoemd: <b>vriendelijkheid</b> en <b>resultaat</b></div>`,
   ziet_concurrent:`
     <div class="vig__row vig__row--head"><span class="vig__dot"></span> In de buurt</div>
     <div class="vig__li"><span class="vig__tick">✓</span><span>Concurrenten in kaart</span><b class="vig__pill">2 km</b></div>
-    <div class="vig__li"><span class="vig__tick">✓</span><span>Maandelijkse update</span><b class="vig__pill">rustig</b></div>`,
+    <div class="vig__li"><span class="vig__tick">✓</span><span>Wekelijkse update</span><b class="vig__pill">rustig</b></div>`,
   schrijft_kanban:`
     <div class="vig__row vig__row--head"><span class="vig__dot"></span> Contentplanner</div>
     <div class="vig__kan">
