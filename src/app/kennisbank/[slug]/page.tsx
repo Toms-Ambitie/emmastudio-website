@@ -74,6 +74,18 @@ function Check({ color }: { color: string }) {
   );
 }
 
+/** Gelaagde radials + groot subtiel glyph-watermerk — geeft de gekleurde
+ *  header een bewuste uitstraling i.p.v. een vlak placeholder-vlak. */
+function CoverDecor({ glyph, size = 150 }: { glyph: string; size?: number }) {
+  return (
+    <>
+      <div className="absolute inset-0 opacity-25" style={{ background: 'radial-gradient(circle at 22% 18%, #fff 0%, transparent 55%)' }} aria-hidden="true" />
+      <div className="absolute inset-0 opacity-40" style={{ background: 'radial-gradient(120% 120% at 100% 105%, rgba(0,0,0,.30) 0%, transparent 55%)' }} aria-hidden="true" />
+      <div className="absolute -bottom-6 -right-5 rotate-[8deg] text-white/[0.14]" aria-hidden="true"><Glyph id={glyph} size={size} /></div>
+    </>
+  );
+}
+
 function renderBlock(block: ArticleBlock, accent: string, i: number) {
   switch (block.t) {
     case 'p':
@@ -165,8 +177,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <section className="px-5 pt-10 md:px-8 lg:px-10">
         <div className="mx-auto max-w-4xl">
           <div className="relative flex h-56 items-center justify-center overflow-hidden rounded-emma-card md:h-72" style={{ backgroundColor: accent }}>
-            <div className="absolute inset-0 opacity-20" style={{ background: 'radial-gradient(circle at 30% 30%, #fff 0%, transparent 60%)' }} aria-hidden="true" />
-            <div className="flex h-16 w-16 items-center justify-center rounded-emma-squircle bg-white/15 text-white" aria-hidden="true">
+            <CoverDecor glyph={article.glyph} size={240} />
+            <div className="relative flex h-16 w-16 items-center justify-center rounded-emma-squircle bg-white/15 text-white" aria-hidden="true">
               <Glyph id={article.glyph} size={34} />
             </div>
           </div>
@@ -200,7 +212,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                   className="group flex flex-col overflow-hidden rounded-emma-card border border-emma-line bg-emma-paper transition-all hover:shadow-emma-hover hover:-translate-y-1"
                 >
                   <div className="relative aspect-[16/10] overflow-hidden" style={{ backgroundColor: other.accent }}>
-                    <div className="absolute inset-0 opacity-20" style={{ background: 'radial-gradient(circle at 30% 30%, #fff 0%, transparent 60%)' }} aria-hidden="true" />
+                    <CoverDecor glyph={other.glyph} size={128} />
                     <div className="absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-emma-squircle bg-white/15 text-white" aria-hidden="true">
                       <Glyph id={other.glyph} size={22} />
                     </div>
