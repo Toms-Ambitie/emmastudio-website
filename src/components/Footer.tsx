@@ -25,14 +25,15 @@ export default function Footer() {
             <h4>Op de site</h4>
             <Link href="/#hoe">Hoe het werkt</Link>
             <Link href="/#prijs">Prijs</Link>
-            <Link href="/#roadmap">Roadmap</Link>
-            <Link href="/#proof">Het bewijs</Link>
+            <Link href="/pakketten">Pakketten</Link>
+            <Link href="/vergelijk">Vergelijk</Link>
+            <Link href="/veiligheid">Veiligheid</Link>
             <Link href="/kennisbank">Kennisbank</Link>
           </div>
           <div className="foot__col">
             <h4>Emma</h4>
             <a href={APP_URL}>Inloggen</a>
-            {LAUNCHED ? <a href={APP_URL}>Start 14 dagen gratis</a> : <Link href="/#closer">Houd me op de hoogte</Link>}
+            {LAUNCHED ? <a href={APP_URL}>Start 14 dagen gratis</a> : <Link href="/#wachtlijst">Houd me op de hoogte</Link>}
             <Link href="/contact">Contact</Link>
             <Link href="/over">Over Toms Ambitie</Link>
             <Link href="/algemene-voorwaarden">Algemene voorwaarden</Link>

@@ -114,9 +114,9 @@ function Hero() {
                   <IconArrow size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
                 </a>
               )}
-              <a href="#product" className="group inline-flex items-center gap-1.5 text-base font-semibold text-white transition-colors hover:text-emma-coral focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emma-boekt">
-                Bekijk Emma
-                <span className="block h-px w-0 bg-emma-coral transition-all duration-300 group-hover:w-full" aria-hidden="true" />
+              <a href="#product" className="group inline-flex w-fit items-center gap-2 whitespace-nowrap text-base font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emma-boekt">
+                <span className="border-b-2 border-white/30 pb-0.5 transition-colors group-hover:border-emma-coral">Bekijk Emma</span>
+                <IconArrow size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
               </a>
             </div>
             <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2">
