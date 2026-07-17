@@ -4,6 +4,7 @@ import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
 import CookieBanner from '@/components/CookieBanner';
 import ScrollReveal from '@/components/ScrollReveal';
+import ScrollReset from '@/components/ScrollReset';
 
 export const metadata: Metadata = {
   title: 'Emma · Jij doet je werk. Emma de rest.',
@@ -31,6 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="nl">
       <body>
+        <ScrollReset />
         <Nav />
         {children}
         <Footer />

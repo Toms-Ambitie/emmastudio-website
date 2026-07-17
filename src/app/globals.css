@@ -1743,6 +1743,9 @@ html {
   background-color: var(--color-emma-creme);
   color: var(--color-emma-ink);
   color-scheme: light;
+  /* Ankers (bijv. /#prijs vanaf een andere pagina) niet onder de vaste
+     nav (64px) laten landen. */
+  scroll-padding-top: 5rem;
 }
 
 body {

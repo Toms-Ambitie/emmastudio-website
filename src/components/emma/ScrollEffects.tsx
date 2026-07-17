@@ -63,8 +63,14 @@ export function ScrollEffects() {
           return;
         }
         if (url.origin !== window.location.origin) return;
-        // Different route → let Next handle it (instant scroll to top).
-        if (url.pathname !== window.location.pathname || url.search !== window.location.search) return;
+        // Different route → Lenis wijkt. Stop de raf-loop meteen, anders blijft
+        // Lenis tijdens de client-transitie (homepage nog gemount) de oude
+        // scrollpositie terugzetten en verschijnt de nieuwe pagina kort op die
+        // diepte (§7.5, bug 2). Next scrollt daarna naar top; ScrollReset borgt.
+        if (url.pathname !== window.location.pathname || url.search !== window.location.search) {
+          lenis.stop();
+          return;
+        }
         // Same page, no hash → return to the top through Lenis.
         if (!url.hash || url.hash === "#") {
           e.preventDefault();
@@ -75,7 +81,9 @@ export function ScrollEffects() {
         const el = document.getElementById(decodeURIComponent(url.hash.slice(1)));
         if (el) {
           e.preventDefault();
-          lenis.scrollTo(el);
+          // Offset voor de vaste nav (64px) zodat de sectiekop niet onder de
+          // nav verdwijnt.
+          lenis.scrollTo(el, { offset: -80 });
         }
       };
       document.addEventListener("click", onLinkClick, { capture: true });
