@@ -385,7 +385,7 @@ function IlzeQuote() {
               </div>
             </footer>
           </blockquote>
-          <div className="mt-10 grid grid-cols-3 gap-4">
+          <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-4">
             {ILZE_QUOTE.stats.map((stat, i) => (
               <div key={i} className="border-l-2 border-emma-creme/20 pl-4">
                 <div className="font-display text-2xl font-bold text-emma-creme">{stat.value}</div>

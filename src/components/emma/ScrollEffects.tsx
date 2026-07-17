@@ -13,12 +13,21 @@ export function ScrollEffects() {
     if (prefersReduced) return;
 
     let lenis: any = null;
+    // References captured for a complete teardown. The old cleanup only called
+    // lenis.destroy(), leaving the gsap.ticker callback firing on a dead Lenis,
+    // lagSmoothing disabled and every ScrollTrigger alive across navigations.
+    let gsapRef: any = null;
+    let ScrollTriggerRef: any = null;
+    let tickerCb: ((time: number) => void) | null = null;
+    let onLinkClick: ((e: MouseEvent) => void) | null = null;
 
     async function setup() {
       const Lenis = (await import("lenis")).default;
       const { gsap } = await import("gsap");
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
 
+      gsapRef = gsap;
+      ScrollTriggerRef = ScrollTrigger;
       gsap.registerPlugin(ScrollTrigger);
 
       // Lenis smooth scroll
@@ -30,8 +39,46 @@ export function ScrollEffects() {
       });
 
       lenis.on("scroll", ScrollTrigger.update);
-      gsap.ticker.add((time: number) => lenis.raf(time * 1000));
+      tickerCb = (time: number) => lenis.raf(time * 1000);
+      gsap.ticker.add(tickerCb);
       gsap.ticker.lagSmoothing(0);
+
+      // Scroll ownership: Next owns navigation scroll (route changes scroll
+      // instantly to the top — see globals.css, no smooth-scroll), Lenis owns
+      // wheel/touch. But a click on a link to the *current* page (the logo →
+      // "/") is not a route change, so Next's scrollTo(0,0) gets overwritten by
+      // Lenis on the next frame. Route those same-page clicks through Lenis so
+      // the logo actually returns to the top, and keep in-page anchor links
+      // (the nav's /#hoe, /#modules, …) smooth now that CSS smooth-scroll is
+      // gone.
+      onLinkClick = (e: MouseEvent) => {
+        if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        const target = e.target as HTMLElement | null;
+        const a = target?.closest?.("a[href]") as HTMLAnchorElement | null;
+        if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
+        let url: URL;
+        try {
+          url = new URL(a.href, window.location.href);
+        } catch {
+          return;
+        }
+        if (url.origin !== window.location.origin) return;
+        // Different route → let Next handle it (instant scroll to top).
+        if (url.pathname !== window.location.pathname || url.search !== window.location.search) return;
+        // Same page, no hash → return to the top through Lenis.
+        if (!url.hash || url.hash === "#") {
+          e.preventDefault();
+          lenis.scrollTo(0);
+          return;
+        }
+        // Same page with a hash → smooth-scroll to the target if it exists.
+        const el = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+        if (el) {
+          e.preventDefault();
+          lenis.scrollTo(el);
+        }
+      };
+      document.addEventListener("click", onLinkClick, { capture: true });
 
       // Parallax on images with data-parallax attribute
       const parallaxEls = document.querySelectorAll("[data-parallax]");
@@ -136,6 +183,10 @@ export function ScrollEffects() {
     setup();
 
     return () => {
+      if (onLinkClick) document.removeEventListener("click", onLinkClick, { capture: true });
+      if (tickerCb && gsapRef) gsapRef.ticker.remove(tickerCb);
+      if (gsapRef) gsapRef.ticker.lagSmoothing(500, 33); // restore GSAP's default
+      if (ScrollTriggerRef) ScrollTriggerRef.getAll().forEach((t: any) => t.kill());
       if (lenis) lenis.destroy();
     };
   }, []);
