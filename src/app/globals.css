@@ -11,13 +11,28 @@
    is Tailwind's globale reset op html/body/headings/buttons/etc., en
    die zou de bestaande, niet-Tailwind pagina's platslaan. Dit project
    heeft al een eigen reset verderop in dit bestand.
-   Cascade: Tailwind-utilities staan in @layer utilities; alle
-   bestaande CSS hieronder is ONgelaagd en wint dus altijd — daardoor
-   veranderen de bestaande pagina's niet.
+
+   UTILITIES ONGELAAGD (ronde 2, na de layout-bug). Ronde 1 zette de
+   utilities in @layer utilities, met de aanname "gelaagd verliest van
+   ongelaagd, dus de bestaande pagina's blijven heilig". Dat brak de
+   homepage: die BESTAAT uit utilities, en de ongelaagde reset
+   (`*{margin:0;padding:0}`) sloeg elke `mx-auto`/`px-*`/`p-*` plat.
+   De voor de hand liggende reparatie — reset naar @layer base — bleek
+   NIET te werken in deze build: Next/LightningCSS strippen het
+   `@layer …;`-volgordestatement, waarna de effectieve laagvolgorde uit
+   eerste-voorkomen volgt en @layer base juist BOVEN @layer utilities
+   eindigt (bewezen met CSS.getMatchedStylesForNode: `[base] *` wint van
+   `[utilities] .px-5`). Layer-volgorde is hier dus onbetrouwbaar.
+   Daarom nu op SPECIFICITEIT i.p.v. lagen: utilities ONgelaagd. Dan
+   wint `.px-5` (0,1,0) van de reset `*{…}` (0,0,0) en van de element-
+   regels (`a`,`button`,`h1-3` = 0,0,1..3) — deterministisch, buiten
+   LightningCSS' laag-afhandeling om. De bestaande pagina's gebruiken
+   GEEN Tailwind-classnamen (geverifieerd: geen botsende selectors), dus
+   de ongelaagde utilities raken niets daar — pixel-geverifieerd.
    ============================================================ */
-@layer theme, base, components, utilities;
+@layer theme;
 @import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/utilities.css" layer(utilities);
+@import "tailwindcss/utilities.css";
 
 /* ============================================================
    DESIGN TOKENS
