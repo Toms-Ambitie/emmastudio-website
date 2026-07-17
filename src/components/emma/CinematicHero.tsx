@@ -1,39 +1,61 @@
 'use client';
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const FRAME_COUNT = 101;
+const TOTAL_FRAMES = 101;
 const FRAME_PATH = "/frames/hero/frame_";
+const STATIC_SRC = "/assets/hero-cinematic.jpg";
+const MOBILE_BREAKPOINT = 768;
+const CONCURRENCY = 6;
+
+/** Sample ~51 frames uit de 101 (elke 2e, plus altijd de laatste). Halveert
+ *  de payload; over één viewport-hoogte scrub blijft dat vloeiend. */
+function buildFrameList(): number[] {
+  const list: number[] = [];
+  for (let i = 1; i <= TOTAL_FRAMES; i += 2) list.push(i);
+  if (list[list.length - 1] !== TOTAL_FRAMES) list.push(TOTAL_FRAMES);
+  return list;
+}
 
 /**
- * CinematicHero — full-bleed scroll-scrub video header.
- * Draws a canvas image-sequence bound to scroll progress.
- * Frame 1 renders immediately (screenshot-safe).
- * Reduced-motion: static final frame, no scrub.
+ * CinematicHero — full-bleed scroll-scrub image-sequence header.
+ *
+ * Performance (briefing §7.2):
+ * - Mobiel (<768px) of prefers-reduced-motion → géén frame-sequence:
+ *   één statisch beeld, nul frame-requests. De 4 MB aan frames laadt daar
+ *   dus nooit.
+ * - Desktop → frame 1 direct (screenshot-safe), de rest progressief in
+ *   batches van CONCURRENCY i.p.v. 100 gelijktijdige requests.
+ * - 101 → ~51 frames gesampeld.
  */
 export function CinematicHero() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imagesRef = useRef<HTMLImageElement[]>([]);
   const currentFrameRef = useRef(0);
-  const loadedCountRef = useRef(0);
-  const scrollProgressRef = useRef(0);
   const rafRef = useRef<number | null>(null);
 
+  // Beslis client-side (ClientOnly mount al gegarandeerd): statisch of canvas.
+  const [isStatic] = useState<boolean>(() => {
+    if (typeof window === "undefined") return true;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const mobile = window.innerWidth < MOBILE_BREAKPOINT;
+    return reduced || mobile;
+  });
+
   useEffect(() => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isStatic) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    // Preload all frames
-    const images: HTMLImageElement[] = [];
-    imagesRef.current = images;
+    const frames = buildFrameList();
+    const images: (HTMLImageElement | undefined)[] = new Array(frames.length);
+    let disposed = false;
 
     function drawFrame(idx: number) {
       if (!canvas || !ctx) return;
       const img = images[idx];
-      if (!img || !img.complete) return;
+      if (!img || !img.complete || img.naturalWidth === 0) return;
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const w = window.innerWidth;
       const h = window.innerHeight;
@@ -42,107 +64,91 @@ export function CinematicHero() {
       canvas.style.width = w + "px";
       canvas.style.height = h + "px";
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      // Cover fit
       const imgAspect = img.width / img.height;
       const canvasAspect = w / h;
       let dw = w, dh = h, dx = 0, dy = 0;
       if (imgAspect > canvasAspect) {
-        dh = h;
-        dw = h * imgAspect;
-        dx = (w - dw) / 2;
+        dh = h; dw = h * imgAspect; dx = (w - dw) / 2;
       } else {
-        dw = w;
-        dh = w / imgAspect;
-        dy = (h - dh) / 2;
+        dw = w; dh = w / imgAspect; dy = (h - dh) / 2;
       }
       ctx.clearRect(0, 0, w, h);
       ctx.drawImage(img, dx, dy, dw, dh);
     }
 
-    // Load frame 1 first for instant first paint
-    const img1 = new Image();
-    img1.onload = () => {
-      drawFrame(0);
-      currentFrameRef.current = 0;
-    };
-    img1.src = `${FRAME_PATH}001.jpg`;
-    images.push(img1);
-
-    // Load remaining frames
-    for (let i = 2; i <= FRAME_COUNT; i++) {
-      const img = new Image();
-      const idx = i - 1;
-      img.onload = () => {
-        loadedCountRef.current++;
-        // Draw frame 1 immediately when first load completes
-        if (loadedCountRef.current === 1) {
-          drawFrame(0);
-        }
-      };
-      img.src = `${FRAME_PATH}${String(i).padStart(3, "0")}.jpg`;
-      images.push(img);
+    function drawNearest(targetIdx: number) {
+      let nearest = targetIdx;
+      while (nearest > 0 && (!images[nearest] || !images[nearest]!.complete)) nearest--;
+      if (images[nearest] && images[nearest]!.complete) drawFrame(nearest);
     }
 
-    if (prefersReduced) {
-      // Static: just show last frame
-      const lastImg = new Image();
-      lastImg.onload = () => drawFrame(FRAME_COUNT - 1);
-      lastImg.src = `${FRAME_PATH}${String(FRAME_COUNT).padStart(3, "0")}.jpg`;
-      return;
+    // Progressieve batch-loader: frame 0 eerst (direct tekenen), rest in
+    // batches van CONCURRENCY.
+    let nextToLoad = 1;
+    let active = 0;
+    function pump() {
+      while (!disposed && active < CONCURRENCY && nextToLoad < frames.length) {
+        const idx = nextToLoad++;
+        active++;
+        const img = new Image();
+        images[idx] = img;
+        const done = () => { active--; if (!disposed) pump(); };
+        img.onload = done;
+        img.onerror = done;
+        img.src = `${FRAME_PATH}${String(frames[idx]).padStart(3, "0")}.jpg`;
+      }
     }
 
-    // Scroll-scrub: map scroll position to frame index
+    const first = new Image();
+    images[0] = first;
+    first.onload = () => { if (!disposed) { drawFrame(0); currentFrameRef.current = 0; pump(); } };
+    first.onerror = () => { if (!disposed) pump(); };
+    first.src = `${FRAME_PATH}001.jpg`;
+
     function onScroll() {
-      const scrollY = window.scrollY;
-      const maxScroll = window.innerHeight;
-      const progress = Math.min(Math.max(scrollY / maxScroll, 0), 1);
-      scrollProgressRef.current = progress;
-
-      const targetFrame = Math.min(
-        Math.floor(progress * (FRAME_COUNT - 1)),
-        FRAME_COUNT - 1
-      );
-
-      if (targetFrame !== currentFrameRef.current) {
-        currentFrameRef.current = targetFrame;
+      const progress = Math.min(Math.max(window.scrollY / window.innerHeight, 0), 1);
+      const targetIdx = Math.min(Math.round(progress * (frames.length - 1)), frames.length - 1);
+      if (targetIdx !== currentFrameRef.current) {
+        currentFrameRef.current = targetIdx;
         if (rafRef.current) cancelAnimationFrame(rafRef.current);
         rafRef.current = requestAnimationFrame(() => {
-          const img = images[targetFrame];
-          if (img && img.complete) {
-            drawFrame(targetFrame);
-          } else {
-            // Find nearest loaded frame
-            let nearest = targetFrame;
-            while (nearest > 0 && (!images[nearest] || !images[nearest].complete)) {
-              nearest--;
-            }
-            if (images[nearest] && images[nearest].complete) {
-              drawFrame(nearest);
-            }
-          }
+          const img = images[targetIdx];
+          if (img && img.complete && img.naturalWidth > 0) drawFrame(targetIdx);
+          else drawNearest(targetIdx);
         });
       }
     }
 
-    // Also support GSAP-driven scroll (Lenis updates window.scrollY)
-    let scrollTickScheduled = false;
+    let tick = false;
     function onScrollTick() {
-      if (scrollTickScheduled) return;
-      scrollTickScheduled = true;
-      requestAnimationFrame(() => {
-        scrollTickScheduled = false;
-        onScroll();
-      });
+      if (tick) return;
+      tick = true;
+      requestAnimationFrame(() => { tick = false; onScroll(); });
     }
+    const onResize = () => drawFrame(currentFrameRef.current);
 
     window.addEventListener("scroll", onScrollTick, { passive: true });
-    window.addEventListener("resize", () => drawFrame(currentFrameRef.current));
+    window.addEventListener("resize", onResize);
 
     return () => {
+      disposed = true;
       window.removeEventListener("scroll", onScrollTick);
+      window.removeEventListener("resize", onResize);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, []);
+  }, [isStatic]);
+
+  if (isStatic) {
+    // eslint-disable-next-line @next/next/no-img-element
+    return (
+      <img
+        src={STATIC_SRC}
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover"
+        aria-hidden="true"
+      />
+    );
+  }
 
   return (
     <canvas
