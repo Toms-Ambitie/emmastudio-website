@@ -77,8 +77,8 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
     <main id="main-content" style={{ ['--mc' as string]: mc }}>
       {/* Hero */}
       <section className="px-5 pt-28 md:px-8 md:pt-36 lg:px-10">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 md:grid-cols-2 lg:gap-16">
-          <div>
+        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 md:grid-cols-2 lg:gap-16">
+          <div className="min-w-0">
             <div className="inline-flex items-center gap-2 rounded-emma-pill border border-emma-line bg-emma-paper px-3 py-1.5">
               <span className="flex h-6 w-6 items-center justify-center rounded-md" style={{ backgroundColor: tint(10), color: mc }}>
                 <Glyph id={id} size={15} />
@@ -94,7 +94,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
               )}
             </div>
 
-            <h1 className="mt-5 font-display text-4xl font-bold leading-[1.05] tracking-tight text-emma-ink md:text-5xl lg:text-6xl">
+            <h1 className="mt-5 break-words font-display text-[2rem] font-bold leading-[1.08] tracking-tight text-emma-ink sm:text-4xl md:text-5xl lg:text-6xl">
               {mod.head.replace(/\.$/, '')}<span style={{ color: mc }}>.</span>
             </h1>
             <p className="mt-5 max-w-lg text-lg leading-relaxed text-emma-ink-2">{mod.intro}</p>
@@ -136,9 +136,9 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
           </div>
 
           {/* Impressie-kaart (vignette) */}
-          <div className="relative">
-            <div className="pointer-events-none absolute -inset-6 -z-10 rounded-[32px] opacity-40 blur-2xl" style={{ background: `radial-gradient(circle at 60% 40%, ${tint(45)} 0%, transparent 70%)` }} aria-hidden="true" />
-            <div className="rounded-emma-card border border-emma-line bg-emma-paper p-5 shadow-emma-pop" style={{ ['--mc' as string]: mc }}>
+          <div className="relative min-w-0">
+            <div className="pointer-events-none absolute -inset-4 -z-10 rounded-[32px] opacity-40 blur-2xl" style={{ background: `radial-gradient(circle at 60% 40%, ${tint(45)} 0%, transparent 70%)` }} aria-hidden="true" />
+            <div className="overflow-hidden rounded-emma-card border border-emma-line bg-emma-paper p-5 shadow-emma-pop" style={{ ['--mc' as string]: mc }}>
               <div className="mb-4 flex items-center gap-2.5">
                 <span className="flex h-8 w-8 items-center justify-center rounded-emma-squircle" style={{ backgroundColor: tint(12), color: mc }}>
                   <Glyph id={id} size={18} />
@@ -242,7 +242,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
 
       {/* FAQ */}
       <section className="px-5 py-20 md:px-8 md:py-28 lg:px-10">
-        <div className="mx-auto grid max-w-6xl gap-10 md:grid-cols-[1fr_1.6fr] md:gap-16">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 md:grid-cols-[1fr_1.6fr] md:gap-16">
           <div>
             <div className="flex items-center gap-2">
               <span className="h-2 w-2 rounded-full" style={{ backgroundColor: mc }} aria-hidden="true" />
