@@ -103,7 +103,7 @@ export const ARTICLES: Article[] = [
       { t: 'h2', v: 'Wat dat voor jou betekent' },
       { t: 'ul', v: [
         'Je kunt Emma nog niet kopen. We bouwen eerst het fundament goed.',
-        'De prijzen die je op de site ziet, zijn de beoogde lanceringsprijzen.',
+        'De prijzen die je ziet, zijn de prijzen waarvoor je straks instapt.',
         'De productbeelden zijn impressies, geen schermen uit een live app.',
       ] },
       { t: 'p', v: 'We vertellen dit liever te open dan te mooi. Een wachtlijst die groeit omdat mensen geloven in waar we naartoe werken, is voor ons waardevoller dan een belofte die we nog niet kunnen waarmaken.' },
