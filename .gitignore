@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# lokale dev/build-artifacts (niet committen)
+.devserver.mjs
+build.log
+devserver.log

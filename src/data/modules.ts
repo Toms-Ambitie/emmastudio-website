@@ -118,13 +118,13 @@ export const APP_URL = 'https://app.emmastudio.nl';
 export const MODULES: Record<string, ModuleData> = {
   boekt:{
     id:'boekt', name:'Boekt', num:'01', price:9, accentVar:'--m-boekt',
-    chip:'werkt bovenop e-Boekhouden.nl',
+    chip:'Werkt bovenop e-Boekhouden.nl',
     head:'Boekhouden zonder je boekhoudsoftware aan te raken.',
-    intro:'EmmaBoekt is de vriendelijke schil om e-Boekhouden.nl. Je boekhouding blijft gewoon daar staan, maar het werk doe je voortaan in Emma: bonnetjes doorsturen, facturen maken, offertes versturen. Sneller, overzichtelijker en een stuk leuker.',
+    intro:'EmmaBoekt is de schil om e-Boekhouden.nl. Je boekhouding blijft daar staan, maar het werk doe je in Emma: bonnetjes doorsturen, facturen maken, offertes versturen. Je logt bijna nooit meer rechtstreeks in.',
     heroVig:'boekt_inlezen',
     does:{
       title:'Wat EmmaBoekt voor je doet.',
-      sub:'De dagelijkse boekhouding, teruggebracht tot een paar rustige handelingen. Jij bevestigt, Emma doet het typewerk.',
+      sub:'De dagelijkse boekhouding, teruggebracht tot een paar handelingen. Emma doet het typewerk, jij bevestigt.',
       feats:[
         { tag:'Slim inboeken', h:'Bonnetjes en facturen leest Emma zelf.',
           p:'Stuur een bon of inkomende factuur naar je inbox. Emma herkent de leverancier, het bedrag en de BTW, stelt de juiste grootboekrekening voor en legt uit waarom. Jij controleert en klikt op Boeken. Niets wordt automatisch geboekt.',
@@ -139,12 +139,12 @@ export const MODULES: Record<string, ModuleData> = {
           list:['Dagelijks overzicht van omzet en openstaand','BTW voorbereid voor de aangifte','Vraag Emma: antwoorden uit je eigen cijfers'],
           vig:'boekt_btw' },
         { tag:'e-Boekhouden.nl blijft', h:'De motor blijft waar hij is.',
-          p:'EmmaBoekt werkt bovenop e-Boekhouden.nl. Alles wat je in Emma doet, staat gewoon in je boekhouding. Geen migratie, geen dubbel werk, en je accountant houdt toegang zoals altijd. SnelStart volgt binnenkort.',
+          p:'EmmaBoekt werkt bovenop e-Boekhouden.nl. Alles wat je in Emma doet, staat gewoon in je boekhouding. Geen migratie, geen dubbel werk, en je accountant houdt toegang zoals altijd. SnelStart en Moneybird staan op de planning.',
           list:['Koppeling in een paar minuten, sleutel versleuteld','Geen migratie, geen dubbel werk','Je accountant houdt gewoon toegang'],
           vig:'boekt_schil' },
       ],
     },
-    steps:{ title:'Zo rustig werkt het.', items:[
+    steps:{ title:'Zo werkt het.', items:[
       { n:'01 · KOPPEL', h:'Verbind e-Boekhouden.nl', p:'Koppel je boekhouding in een paar minuten. Je sleutel wordt versleuteld opgeslagen en nooit getoond.' },
       { n:'02 · STUUR DOOR', h:'Bonnen naar je inbox', p:'Stuur bonnetjes en inkomende facturen door of sleep ze in je inbox. Emma leest ze en zet een voorstel klaar.' },
       { n:'03 · BEVESTIG', h:'Jij houdt de regie', p:'Controleer het voorstel van Emma, pas aan waar nodig en klik op Boeken. Niets gebeurt zonder jou.' },
@@ -154,22 +154,22 @@ export const MODULES: Record<string, ModuleData> = {
       { q:'Vervangt EmmaBoekt e-Boekhouden.nl?', a:'Nee, juist niet. e-Boekhouden.nl blijft de motor van je boekhouding en alles blijft daar netjes staan. Emma is de schil eromheen die het dagelijkse werk makkelijker, sneller en leuker maakt. Je logt alleen bijna nooit meer rechtstreeks in.' },
       { q:'Boekt Emma dingen automatisch?', a:'Nee. Emma leest je bonnen en facturen, herkent de bedragen en stelt de juiste boeking voor, met de reden erbij. Jij controleert en bevestigt. Niets verdwijnt vanzelf in je administratie.' },
       { q:'Werkt het samen met mijn accountant?', a:'Ja. Je accountant houdt gewoon toegang tot e-Boekhouden.nl en blijft eindverantwoordelijk. Emma neemt het voorbereidende werk over, zodat er minder uren overblijven om te factureren.' },
-      { q:'Ik gebruik SnelStart. Kan ik ook meedoen?', a:'Bijna. EmmaBoekt start met e-Boekhouden.nl; de koppeling met SnelStart volgt binnenkort. Laat je e-mail achter en je hoort het zodra die klaar is.' },
-      { q:'Wat kost EmmaBoekt?', a:'€9 per maand, exclusief btw. Je probeert Emma eerst 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 15% korting.' },
+      { q:'Ik gebruik SnelStart. Kan ik ook meedoen?', a:'Nog niet. EmmaBoekt werkt met e-Boekhouden.nl. De koppelingen met SnelStart en Moneybird staan op de planning, maar hebben nog geen datum. Laat je e-mail achter, dan hoor je het als ze er zijn.' },
+      { q:'Wat kost EmmaBoekt?', a:'€9 per maand, exclusief btw. Je probeert Emma eerst 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 10% korting.' },
       { q:'Kan ik de boekhoudmodule nu al gebruiken?', a: LAUNCHED
           ? 'Ja. De boekhoudmodule is de eerste module van Emma en is nu te gebruiken. Maak een account aan op app.emmastudio.nl en je bent binnen een paar minuten gekoppeld.'
-          : 'Bijna. De boekhoudmodule lanceert in juli 2026. Laat je e-mail achter en je hoort het op de dag dat je kunt starten.' },
+          : 'EmmaBoekt draait al, maar de aanmelding staat nog niet open. Laat je e-mail achter, dan hoor je het op de dag dat je kunt starten.' },
     ],
   },
   waakt:{
     id:'waakt', name:'Waakt', num:'02', price:9, accentVar:'--m-waakt',
-    chip:'al bewezen in de praktijk',
+    chip:'Werkt op je eigen cijfers',
     head:'Het financiële brein van je zaak.',
-    intro:'Doelen, prognoses en een wekelijks advies op je échte cijfers. Emma kijkt mee en zegt het op tijd als iets afwijkt, zodat je kunt sturen in plaats van het achteraf te ontdekken.',
+    intro:'Doelen, prognoses en een wekelijks advies op je eigen cijfers. Emma kijkt mee en zegt het op tijd als iets afwijkt, zodat je stuurt in plaats van het achteraf te ontdekken bij de boekhouder.',
     heroVig:'waakt_doel',
     does:{
       title:'Wat EmmaWaakt voor je doet.',
-      sub:'Je cijfers, vertaald naar rust en richting. Geen dashboard om in te verdwalen, maar de paar dingen die er deze week toe doen.',
+      sub:'Je cijfers, vertaald naar richting. Geen dashboard om in te verdwalen, maar de dingen die er deze week toe doen, met advies erbij.',
       feats:[
         { tag:'Doelen', h:'Stel doelen, op elk niveau.', p:'Bepaal doelen voor je bedrijf en per medewerker. Emma houdt de voortgang bij en laat rustig zien waar je staat.',
           list:['Doelen op bedrijfs- en teamniveau','Voortgang automatisch bijgehouden','Altijd actueel, zonder bijwerken'], vig:'waakt_signaal' },
@@ -187,11 +187,12 @@ export const MODULES: Record<string, ModuleData> = {
     ] },
     faq:[
       { q:'Heb ik verstand van cijfers nodig?', a:'Nee. EmmaWaakt is juist bedoeld voor ondernemers die geen analist willen worden. Je krijgt de paar inzichten die ertoe doen in gewone taal, met een concrete suggestie erbij.' },
-      { q:'Werkt EmmaWaakt samen met EmmaBoekt?', a:'Ja. EmmaWaakt gebruikt je boekhoudcijfers uit EmmaBoekt als basis. Samen vormen ze het financiële hart van je onderneming, maar je kunt ook starten met alleen Waakt.' },
-      { q:'Wat kost EmmaWaakt?', a:'€9 per maand, exclusief btw. Je probeert Emma eerst 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 15% korting.' },
+      { q:'Werkt EmmaWaakt samen met EmmaBoekt?', a:'Ja. Heb je EmmaBoekt, dan leest Waakt die cijfers direct mee. Heb je Boekt niet, dan upload je je omzet en kosten zelf. Waakt werkt allebei de manieren.' },
+      { q:'Wat kost EmmaWaakt?', a:'€9 per maand, exclusief btw. Je probeert Emma eerst 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 10% korting.' },
       { q:'Kan ik het nu al gebruiken?', a: LAUNCHED
           ? 'Ja. EmmaWaakt is nu te gebruiken. Maak een account aan op app.emmastudio.nl.'
-          : 'Bijna. EmmaWaakt lanceert samen met de boekhoudmodule. Laat je e-mail achter en je hoort het op de dag dat je kunt starten.' },
+          : 'EmmaWaakt draait al, maar de aanmelding staat nog niet open. Laat je e-mail achter, dan hoor je het op de dag dat je kunt starten.' },
+      { q:'Verzint Emma cijfers als er geen data is?', a:'Nee. Als er geen gegevens zijn, zie je dat. Geen nul waar niets staat, geen schatting die eruitziet als een meting. Emma rekent niet zelf: de database rekent, Emma vertelt wat eruit komt.' },
     ],
   },
   loont:{
@@ -289,46 +290,47 @@ export const MODULES: Record<string, ModuleData> = {
   },
   ziet:{
     id:'ziet', name:'Ziet', num:'06', price:9, accentVar:'--m-ziet',
-    chip:'concurrenten automatisch in beeld',
-    head:'Zie wie er om je heen zit.',
-    intro:'Emma houdt de concurrentie in jouw buurt in de gaten. Automatische detectie via KvK en SBI-codes, een kaart waarop je in één oogopslag ziet wie er in jouw straal zit, en een wekelijks signaal zodra er een nieuwe concurrent bijkomt.',
+    chip:'Op basis van het KvK-register',
+    head:'Weet wat je concurrenten in de buurt doen.',
+    intro:'Emma zoekt in het KvK-register wie er in jouw vak binnen een straal om je heen zit, zet ze op de kaart, en zegt het als er iemand bijkomt. Jij bepaalt wie er op je lijst staat.',
     heroVig:'ziet_concurrent',
     does:{
       title:'Wat EmmaZiet voor je doet.',
-      sub:'Drie dingen, niet meer: wie er in jouw buurt zit, waar precies, en of er iets verandert.',
+      sub:'Emma zoekt, jij kiest. De lijst is een voorstel, geen oordeel.',
       feats:[
-        { tag:'Concurrent-detectie', h:'Concurrent-detectie automatisch.',
-          p:'Via KvK en SBI-codes binnen een instelbare radius. Geen handmatig zoeken meer.',
-          list:['Automatisch via KvK en SBI-codes','Radius zelf in te stellen'],
+        { tag:'Concurrent-detectie', h:'Emma zoekt, jij kiest.',
+          p:'Op basis van je SBI-code en een straal die je zelf instelt, zoekt Emma in het KvK-register wie er in jouw vak zit. Je krijgt een lijst en bepaalt zelf wie erop blijft staan.',
+          list:['Zoekt op SBI-code binnen jouw straal','Straal zelf instelbaar, per kilometer','Jij bepaalt wie op je lijst staat'],
           vig:'ziet_concurrent' },
-        { tag:'Kaartvisualisatie', h:'Kaartvisualisatie.',
-          p:'Zie in één oogopslag wie er in jouw straal zit en waar.',
-          list:['Alle concurrenten in de buurt op de kaart'],
+        { tag:'Kaartvisualisatie', h:'Zie in één blik waar ze zitten.',
+          p:'Elke concurrent die je selecteert, staat op de kaart. Je ziet in één oogopslag wie er dichtbij zit en wie aan de rand van je gebied.',
+          list:['Alle geselecteerde concurrenten op één kaart','Je eigen adres uitgesloten','Klik door naar wat Emma van ze weet'],
           vig:'ziet_concurrent' },
-        { tag:'Wekelijkse monitoring', h:'Wekelijkse monitoring.',
-          p:'Emma signaleert het als er een nieuwe concurrent bijkomt.',
-          list:['Wekelijkse controle op nieuwe concurrenten','Signaal zodra er iets verandert'],
+        { tag:'Wekelijkse monitoring', h:'Emma let op, ook als jij dat niet doet.',
+          p:'Elke week kijkt Emma of er iemand nieuw is in jouw gebied. Zo ja, dan hoor je het. Niet elke week een mail, alleen als er echt iets verandert.',
+          list:['Wekelijkse controle op nieuwe inschrijvingen','Melding alleen als er iets verandert','Komt binnen bij je andere signalen'],
           vig:'ziet_concurrent' },
       ],
     },
     roadmap:{
       title:'Op de roadmap',
-      items:['Prijsvergelijking per dienst','Reviews-analyse','Sentiment-over-tijd'],
+      items:['Prijsvergelijking per dienst','Reviews-analyse per thema','Sentiment-over-tijd','Maandelijkse positie-update'],
     },
-    steps:{ title:'Zo houd je zicht op de buurt.', items:[
+    steps:{ title:'Zo werkt het.', items:[
       { n:'01 · STEL IN', h:'Geef je werkgebied', p:'Bepaal je locatie en de radius waarbinnen Emma moet zoeken.' },
       { n:'02 · DETECTEER', h:'Emma zoekt automatisch', p:'Concurrenten in de buurt worden via KvK en SBI-codes automatisch gevonden.' },
-      { n:'03 · BEKIJK DE KAART', h:'Zie het in één oogopslag', p:'Alle concurrenten binnen jouw straal in beeld op de kaart.' },
-      { n:'04 · BLIJF OP DE HOOGTE', h:'Wekelijkse controle', p:'Komt er een nieuwe concurrent bij, dan signaleert Emma dat.' },
+      { n:'03 · KIES', h:'Jij kiest', p:'Wie hoort erbij, wie niet. Emma doet een voorstel op basis van het register, jij weet wie je echte concurrent is.' },
+      { n:'04 · MONITORT', h:'Emma houdt bij', p:'Elke week een controle. Komt er iemand bij, dan hoor je het. En op de kaart zie je meteen waar.' },
     ] },
     faq:[
-      { q:'Hoe komt Emma aan deze gegevens?', a:'Via KvK en SBI-codes, binnen een instelbare radius die jij zelf bepaalt.' },
+      { q:'Hoe komt Emma aan deze gegevens?', a:'De concurrenten komen uit het openbare KvK-register, op basis van je SBI-code en een straal die je zelf instelt. Reviews komen van Google. Geen social media, geen LinkedIn. Alleen openbare bronnen.' },
       { q:'Voor wie is het vooral nuttig?', a:'Voor lokale dienstverleners zoals salons en zorgpraktijken, die willen weten wie er in hun buurt actief is zonder daar zelf naar te hoeven zoeken.' },
       { q:'Word ik er niet onrustig van?', a:'Nee. EmmaZiet stuurt geen doorlopende alarmen, alleen een signaal als er daadwerkelijk een nieuwe concurrent bijkomt.' },
-      { q:'Komt er nog meer bij?', a:'Ja. Prijsvergelijking per dienst, reviews-analyse en sentiment-over-tijd staan op de roadmap. Nu draait EmmaZiet op concurrent-detectie, kaartvisualisatie en wekelijkse monitoring.' },
-      { q:'Wat kost het en kan ik het nu gebruiken?', a: LAUNCHED
-          ? 'EmmaZiet is los te gebruiken vanaf €9 per maand, exclusief btw, en is nu live.'
-          : 'EmmaZiet is los te gebruiken vanaf €9 per maand, exclusief btw. De boekhoudmodule lanceert als eerste; EmmaZiet volgt op hetzelfde platform.' },
+      { q:'Komt er nog meer bij?', a:'Ja. Prijsvergelijking per dienst, reviews-analyse per thema, sentiment over tijd en een maandelijkse positie-update staan op de roadmap. Nu draait EmmaZiet op concurrent-detectie, de kaart en wekelijkse monitoring.' },
+      { q:'Wat kost EmmaZiet?', a:'€9 per maand, exclusief btw. Je probeert het eerst 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 10% korting.' },
+      { q:'Kan ik EmmaZiet nu al gebruiken?', a: LAUNCHED
+          ? 'Ja. EmmaZiet is nu te gebruiken. Maak een account aan op app.emmastudio.nl.'
+          : 'EmmaZiet draait al, maar de aanmelding staat nog niet open. Laat je e-mail achter, dan hoor je het op de dag dat je kunt starten.' },
     ],
   },
   schrijft:{

@@ -121,7 +121,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
 
             <div className="mt-7 flex flex-wrap items-baseline gap-x-3 gap-y-1">
               <span className="font-display text-2xl font-bold text-emma-ink" style={{ fontVariantNumeric: 'tabular-nums' }}>€{mod.price}/mnd</span>
-              <span className="text-sm text-emma-subtext">excl. btw{canSignup ? ' · maandelijks opzegbaar' : ' · prijs bij lancering'}</span>
+              <span className="text-sm text-emma-subtext">excl. btw · maandelijks opzegbaar</span>
             </div>
             <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
               <span className="flex items-center gap-2 text-sm text-emma-subtext">
@@ -200,7 +200,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
               </div>
               <h2 className="mt-3 font-display text-2xl font-bold tracking-tight text-emma-ink md:text-3xl">Dit komt er nog aan.</h2>
               <p className="mt-3 max-w-2xl text-base leading-relaxed text-emma-ink-2">
-                Nog niet beschikbaar — we noemen bewust geen datum. Deze functies staan op de roadmap, gescheiden van wat Emma{mod.name} vandaag al doet.
+                Deze functies zijn in ontwikkeling. Ze zitten er nog niet in.
               </p>
               <ul className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {mod.roadmap.items.map((item, i) => (
@@ -280,7 +280,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
           ) : (
             <>
               <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-emma-ink md:text-4xl">
-                {status.live ? <>Draait al — aanmelding opent binnenkort<span style={{ color: mc }}>.</span></> : <>Binnenkort beschikbaar<span style={{ color: mc }}>.</span></>}
+                {status.live ? <>Draait al. De aanmelding volgt<span style={{ color: mc }}>.</span></> : <>Binnenkort beschikbaar<span style={{ color: mc }}>.</span></>}
               </h2>
               <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-emma-ink-2">
                 {status.live
@@ -292,11 +292,13 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
               </div>
             </>
           )}
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-emma-subtext">
-            <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: mc }} aria-hidden="true" />14 dagen gratis proberen</span>
-            <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: mc }} aria-hidden="true" />Maandelijks opzegbaar</span>
-            <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: mc }} aria-hidden="true" />Excl. btw</span>
-          </div>
+          {canSignup && (
+            <div className="mt-7 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-emma-subtext">
+              <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: mc }} aria-hidden="true" />14 dagen gratis proberen</span>
+              <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: mc }} aria-hidden="true" />Maandelijks opzegbaar</span>
+              <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: mc }} aria-hidden="true" />Excl. btw</span>
+            </div>
+          )}
         </div>
       </section>
 
