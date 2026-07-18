@@ -53,7 +53,7 @@ export default function Contact() {
                 </PointIcon>
                 <div className="text-sm">
                   <b className="block font-semibold text-emma-ink">E-mail</b>
-                  <a href="mailto:hallo@emmastudio.nl" className="text-emma-coral hover:underline">hallo@emmastudio.nl</a>
+                  <a href="mailto:info@emmastudio.nl" className="text-emma-coral hover:underline">info@emmastudio.nl</a>
                 </div>
               </div>
               <div className="flex items-center gap-3.5">

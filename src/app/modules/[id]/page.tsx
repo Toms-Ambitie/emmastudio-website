@@ -250,9 +250,9 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
             </div>
             <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-emma-ink md:text-4xl">Veelgestelde vragen</h2>
             <p className="mt-4 text-base leading-relaxed text-emma-ink-2">Staat je vraag er niet bij? Stuur ons een bericht.</p>
-            <a className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-emma-coral hover:underline" href="mailto:hallo@emmastudio.nl">
+            <a className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-emma-coral hover:underline" href="mailto:info@emmastudio.nl">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 6h16v12H4z" /><path d="m4 7 8 6 8-6" /></svg>
-              hallo@emmastudio.nl
+              info@emmastudio.nl
             </a>
           </div>
           <ModuleFaq items={mod.faq.map(f => ({ q: f.q, a: f.a }))} />
