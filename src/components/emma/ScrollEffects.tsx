@@ -81,9 +81,11 @@ export function ScrollEffects() {
         const el = document.getElementById(decodeURIComponent(url.hash.slice(1)));
         if (el) {
           e.preventDefault();
-          // Offset voor de vaste nav (64px) zodat de sectiekop niet onder de
-          // nav verdwijnt.
-          lenis.scrollTo(el, { offset: -80 });
+          // Numeriek doel uit de LIVE positie (getBoundingClientRect +
+          // scrollY): dat verrekent de GSAP-pin-inflatie die lenis.scrollTo(el)
+          // via offsetTop mist. Offset -80 voor de vaste nav (64px).
+          const target = el.getBoundingClientRect().top + window.scrollY - 80;
+          lenis.scrollTo(target, { duration: 1, force: true });
         }
       };
       document.addEventListener("click", onLinkClick, { capture: true });

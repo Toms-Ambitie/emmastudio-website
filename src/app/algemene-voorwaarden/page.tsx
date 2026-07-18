@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function AlgemeneVoorwaarden() {
   return (
-    <main className="lightpage" data-page="legal">
+    <main id="main-content" className="lightpage" data-page="legal">
       <div className="wrap">
         <div className="legal">
           <div className="legal__content">
