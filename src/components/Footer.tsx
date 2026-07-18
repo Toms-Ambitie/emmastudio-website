@@ -14,7 +14,7 @@ export default function Footer() {
             <p>De vriendelijke schil om je boekhouding, en straks om de rest van je onderneming. Voor zelfstandige ondernemers en kleine bedrijven in Nederland. Gebouwd door Toms Ambitie in Zwolle.</p>
           </div>
           <div className="foot__col">
-            <h4>Modules</h4>
+            <h2>Modules</h2>
             {MODULE_ORDER.map(id => (
               <Link key={id} href={`/modules/${id}`}>
                 Emma{cap(id)}{MODULE_STATUS[id].live ? '' : ` · ${MODULE_STATUS[id].when}`}
@@ -22,7 +22,7 @@ export default function Footer() {
             ))}
           </div>
           <div className="foot__col">
-            <h4>Op de site</h4>
+            <h2>Op de site</h2>
             <Link href="/#hoe">Hoe het werkt</Link>
             <Link href="/#prijs">Prijs</Link>
             <Link href="/pakketten">Pakketten</Link>
@@ -31,7 +31,7 @@ export default function Footer() {
             <Link href="/kennisbank">Kennisbank</Link>
           </div>
           <div className="foot__col">
-            <h4>Emma</h4>
+            <h2>Emma</h2>
             <a href={APP_URL}>Inloggen</a>
             {LAUNCHED ? <a href={APP_URL}>Start 14 dagen gratis</a> : <Link href="/#wachtlijst">Houd me op de hoogte</Link>}
             <Link href="/contact">Contact</Link>
