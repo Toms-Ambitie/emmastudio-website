@@ -74,8 +74,48 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
      Zodra Tom LAUNCHED aanzet, schakelen live-modules mee zonder herbouw. */
   const canSignup = status.live && LAUNCHED;
 
+  /* JSON-LD (doc 08 / SEO-plan): SoftwareApplication met een eerlijke offer +
+     FAQPage. Eerlijkheidsregel machineleesbaar: availability is alleen InStock
+     als de module écht koopbaar is (draait ÉN signup open = canSignup). Zolang
+     de aanmelding dicht is, is het PreOrder — nooit InStock voor iets dat je
+     niet kunt kopen. Schakelt vanzelf mee zodra Tom LAUNCHED aanzet. */
+  const seo = MODULE_SEO[id] ?? { title: `Emma${mod.name}`, desc: mod.intro };
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'SoftwareApplication',
+        '@id': `${SITE}/modules/${id}#software`,
+        name: `Emma${mod.name}`,
+        applicationCategory: 'BusinessApplication',
+        operatingSystem: 'Web',
+        inLanguage: 'nl-NL',
+        description: seo.desc,
+        url: `${SITE}/modules/${id}`,
+        offers: {
+          '@type': 'Offer',
+          price: mod.price,
+          priceCurrency: 'EUR',
+          availability: canSignup ? 'https://schema.org/InStock' : 'https://schema.org/PreOrder',
+          url: canSignup ? APP_URL : `${SITE}/modules/${id}`,
+        },
+        publisher: { '@type': 'Organization', name: 'Emma', legalName: 'Toms Ambitie', url: SITE },
+      },
+      {
+        '@type': 'FAQPage',
+        '@id': `${SITE}/modules/${id}#faq`,
+        mainEntity: mod.faq.map((f) => ({
+          '@type': 'Question',
+          name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      },
+    ],
+  };
+
   return (
     <main id="main-content" style={{ ['--mc' as string]: mc }}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       {/* Hero */}
       <section className="px-5 pt-28 md:px-8 md:pt-36 lg:px-10">
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 md:grid-cols-2 lg:gap-16">
