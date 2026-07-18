@@ -83,7 +83,7 @@ export default function Modules() {
             })}
           </div>
           <p className="mt-8 text-sm text-emma-subtext">
-            Elke module is los te gebruiken. Pakketten volgen zodra alle acht live zijn — <Link href="/pakketten" className="font-semibold text-emma-coral hover:underline">bekijk de pakketten</Link>.
+            Elke module is los te gebruiken. Pakketten volgen zodra alle acht er zijn. <Link href="/pakketten" className="font-semibold text-emma-coral hover:underline">Bekijk de pakketten</Link>.
           </p>
         </div>
       </section>
