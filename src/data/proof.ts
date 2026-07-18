@@ -48,4 +48,4 @@ export const HERO_BADGE = 'Gebouwd op 18 maanden praktijk';
  *  vóór "als platform voor elke ondernemer" is vervangen door een komma,
  *  conform de projectregel "geen em-dashes als leesteken". De woorden zijn
  *  ongewijzigd. */
-export const PROOF_INTRO = 'De bedrijfslogica achter Emma draait sinds eind 2024 dagelijks bij Blondes Incognito, een kapsalon in Heeten. Op dat fundament is EmmaStudio gebouwd, als platform voor elke ondernemer.';
+export const PROOF_INTRO = 'De bedrijfslogica achter Emma draait sinds eind 2024 dagelijks bij Blondes Incognito, een kapsalon in Heeten. Op dat fundament is emma gebouwd, als platform voor elke ondernemer.';

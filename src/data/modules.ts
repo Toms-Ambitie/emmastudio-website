@@ -61,7 +61,7 @@ export const MODULE_TAGS: Record<string, string> = {
   loont:    'Loon en contracten, zonder gedoe.',
   vindt:    'Vind klanten en kandidaten die passen.',
   coacht:   'Coaching en voortgang voor jou en je team.',
-  ziet:     'Zie wie er om je heen zit.',
+  ziet:     'Weet wat je concurrenten in de buurt doen.',
   schrijft: 'Teksten die klinken als jij.',
   promoot:  'Zie welke euro écht omzet oplevert.',
 };

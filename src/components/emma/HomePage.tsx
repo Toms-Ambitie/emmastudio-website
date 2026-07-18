@@ -79,7 +79,7 @@ function Section({ id, children, className = '' }: { id?: string; children: Reac
 function Hero() {
   const assurances = [HERO_BADGE, ...HERO.assurances];
   return (
-    <section className="relative h-dvh w-full overflow-hidden bg-emma-petrol" aria-label="EmmaStudio introductie">
+    <section className="relative h-dvh w-full overflow-hidden bg-emma-petrol" aria-label="emma introductie">
       <ClientOnly
         fallback={<img src="/assets/hero-cinematic.jpg" alt="Warm en kalm werkblad met zacht gouden licht" className="absolute inset-0 h-full w-full object-cover" aria-hidden="true" />}
       >

@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="foot__grid">
           <div className="foot__brand">
             <Image src="/logo-light.svg" alt="emma." width={88} height={26} />
-            <p>De vriendelijke schil om je boekhouding, en straks om de rest van je onderneming. Voor élke zelfstandige ondernemer in NL &amp; BE. In ontwikkeling bij Toms Ambitie in Zwolle.</p>
+            <p>De vriendelijke schil om je boekhouding, en straks om de rest van je onderneming. Voor zelfstandige ondernemers en kleine bedrijven in Nederland. Gebouwd door Toms Ambitie in Zwolle.</p>
           </div>
           <div className="foot__col">
             <h4>Modules</h4>

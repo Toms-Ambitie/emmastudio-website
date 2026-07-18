@@ -24,12 +24,12 @@
    - De CTA ging naar {APP_URL}/register (dode funnel, signup dicht). In de
      component schakelt de CTA met LAUNCHED: nu wachtlijst, straks signup. */
 export const HERO = {
-  eyebrow: 'Compleet softwareplatform',
+  eyebrow: 'Software voor ondernemers',
   titleLine1: 'Jij doet je werk.',
   titleLine2: 'Emma de rest.',
-  intro: 'Acht modules die het saaie werk van ondernemen overnemen. Boekhouden, monitoring, personeel, marketing. Voor elke zelfstandige ondernemer in Nederland.',
+  intro: 'Acht modules die het saaie werk overnemen. Boekhouden, cijfers, personeel, marketing. Voor zelfstandige ondernemers en kleine bedrijven in Nederland.',
   // assurances: eerste komt uit HERO_BADGE (proof.ts), rest verbatim
-  assurances: ['Vanaf EUR 9/mnd', 'Geen lock-in'],
+  assurances: ['Vanaf EUR 9 per maand', 'Je data blijft van jou'],
 };
 
 /* ── HET PROBLEEM ──
@@ -37,12 +37,12 @@ export const HERO = {
    claim die correctie behoeft. In stap 2 niet aangeraakt omdat er niets
    te corrigeren viel; met akkoord van Tom (ronde 2) hier meegenomen. */
 export const THREE_PROBLEMS = [
-  { num: '01', title: 'Boekhouding vreet tijd', desc: 'Iedere avond cijfers invullen in plaats van bij je gezin zitten. Zes tabbladen open, geen idee van je marge. Emma houdt het bij.', solution: 'EmmaBoekt + EmmaWaakt' },
-  { num: '02', title: 'Loonadministratie is een ramp', desc: 'Contracten, verlof, salaris. Een fout en de Belastingdienst staat voor je deur. Een loonbureau kost EUR 100 tot 300 per maand.', solution: 'EmmaLoont' },
-  { num: '03', title: 'Klanten vinden kost handen en voeten', desc: 'Verspreid over zes losse tools, niemand die overzicht heeft. Marketing gebeurt niet of slecht. Leads komen niet binnen.', solution: 'EmmaVindt + EmmaPromoot + EmmaSchrijft' },
+  { num: '01', title: 'Boekhouding vreet je avonden op', desc: 'Bonnetjes overtypen als de zaak dicht is. Zes tabbladen open en nog steeds geen idee wat je marge is. Het werk is niet moeilijk, het is alleen nooit klaar.', solution: 'EmmaBoekt + EmmaWaakt' },
+  { num: '02', title: 'Loonadministratie is een ramp', desc: 'Contracten, verlof, salaris, en één fout is er één te veel. Een loonbureau lost het op voor honderd tot driehonderd euro per maand, ook in de maanden dat er niets verandert.', solution: 'EmmaLoont' },
+  { num: '03', title: 'Klanten vinden kost handen en voeten', desc: 'Zes losse tools die niet met elkaar praten. Marketing die erbij inschiet omdat er geen tijd is. En als er een lead binnenkomt, weet je niet waar hij vandaan kwam.', solution: 'EmmaVindt + EmmaPromoot + EmmaSchrijft' },
 ];
 export const PROBLEM_PULL = {
-  stat: '8 tot 12 uur per week aan administratieve handelingen die voor 70% geautomatiseerd kunnen worden.',
+  stat: '8 tot 12 uur per week aan werk dat je niet gekozen hebt toen je voor jezelf begon.',
   sub: 'De grootste klacht van ondernemers: geen rust.',
 };
 
@@ -55,7 +55,7 @@ export const SHOWCASE = {
   eyebrow: 'Het product',
   title1: 'Software zo slim,',
   title2: 'dat het simpel voelt.',
-  intro: 'Eén overzicht plus acht modules. Elke module doet een specifiek stuk van je bedrijf. Klik door en zie wat er in EmmaStudio zit.',
+  intro: 'Eén overzicht plus acht modules. Elke module doet een specifiek stuk van je bedrijf. Klik door en kijk rond.',
   overzicht: { src: '/assets/app/overzicht.jpg', label: 'Overzicht', desc: 'De dag in een blik. Signalen die Emma ziet, geprioriteerd op urgentie.' },
 };
 
@@ -66,9 +66,9 @@ export const SOLUTION = {
   title2: 'alles samenkomt.',
   intro: 'Emma is een rustige copiloot. Geen vervanger voor je vak, maar een schil eromheen die het saaie werk overneemt. Kies wat je nodig hebt.',
   points: [
-    { icon: 'shield', title: 'Geen lock-in', text: 'Je data blijft van jou. Geen kooi. Stop wanneer je wilt, je administratie staat gewoon in je eigen pakket.' },
-    { icon: 'link', title: 'Echt verbonden', text: 'Modules praten live met elkaar. Een waarheid per gegeven. Geen dubbele cijfers die uit elkaar lopen.' },
-    { icon: 'chat', title: 'Rustig slim', text: 'Slimme functies overal ingebed. Geen AI-product, wel slim. Emma doet het zware werk, jij bevestigt.' },
+    { icon: 'shield', title: 'Je data blijft van jou', text: 'Stop je met Emma, dan staat je administratie gewoon in je eigen pakket. Emma is een schil, geen kooi.' },
+    { icon: 'link', title: 'Echt verbonden', text: 'Modules lezen elkaars gegevens live. Eén waarheid per cijfer, dus geen twee versies van je omzet die uit elkaar lopen.' },
+    { icon: 'chat', title: 'Rustig slim', text: 'Emma leest, rekent en stelt voor. Jij bevestigt. Niets gebeurt zonder jou.' },
   ],
 };
 
@@ -76,8 +76,8 @@ export const SOLUTION = {
 export const MODULES_SECTION = {
   eyebrow: 'Acht modules',
   title1: 'Acht modules.',
-  title2: 'Een platform.',
-  intro: 'Elke module is zelfstandig levensvatbaar. Koppel er een, koppel er acht. Los verkrijgbaar vanaf EUR 9 per maand.',
+  title2: 'Eén platform.',
+  intro: 'Elke module werkt op zichzelf. Neem er één, neem er acht. Vanaf EUR 9 per maand, per module.',
 };
 
 /* ── HOE HET WERKT ── inline copy, verbatim. */
@@ -85,9 +85,9 @@ export const HOW_IT_WORKS = {
   title: 'Hoe Emma werkt',
   steps: [
     { num: '01', title: 'Kies je modules', desc: 'Elke module staat zelfstandig. Begin met een, voeg er later meer toe.' },
-    { num: '02', title: 'Koppel je data', desc: 'Emma leest live uit je boekhouding, je kassa, je reviews. Een waarheid per gegeven.' },
-    { num: '03', title: 'Emma doet het werk', desc: 'Facturen, loonstroken, content, concurrent-analyse. Jij bevestigt, Emma regelt.' },
-    { num: '04', title: 'Vraag Emma', desc: 'De copiloot kent je cijfers. Een antwoord, geen zoektocht door zes systemen.' },
+    { num: '02', title: 'Koppel je data', desc: 'Emma leest live uit je boekhouding. Eén waarheid per cijfer, geen overtypen.' },
+    { num: '03', title: 'Emma doet het werk', desc: 'Bonnen inlezen, facturen maken, signalen opmerken. Emma stelt voor, jij bevestigt.' },
+    { num: '04', title: 'Vraag Emma', desc: 'Een vraag over je cijfers, een antwoord uit je eigen boekhouding. Geen zoektocht door zes systemen.' },
   ],
 };
 
@@ -96,7 +96,7 @@ export const HOW_IT_WORKS = {
 export const PRICE_COMPARISON = {
   eyebrow: 'Vergelijking',
   title: 'Emma vs. losse tools vs. bureau',
-  intro: 'Zes tot acht losse systemen, of een bureau dat niet alles dekt. Emma brengt het samen, voor een fractie van de prijs.',
+  intro: 'Zes losse abonnementen of een bureau dat niet alles doet. Emma brengt het samen, voor een stuk minder.',
   rows: [
     { need: 'Boekhouding', loose: 'Losse app EUR 9-15/mnd', bureau: 'Inbegrepen, maar traag' },
     { need: 'Loonadministratie', loose: 'Loonbureau EUR 100-300/mnd', bureau: 'Meerprijs' },
@@ -111,13 +111,13 @@ export const PRICE_COMPARISON = {
 /* ── MODULE-PRIJZEN ── benefits verbatim uit de export. */
 export const MODULE_PRICES = {
   eyebrow: 'Prijs',
-  title: 'Een module, een eerlijke prijs.',
-  intro: 'Je start met een module en betaalt alleen daarvoor. Komt er een module bij die je wilt gebruiken, dan zet je die los aan. Geen pakket verplicht, geen verrassingen achteraf.',
+  title: 'Eén module, één eerlijke prijs.',
+  intro: 'Je begint met één module en betaalt alleen daarvoor. Wil je er later een bij, dan zet je die los aan. Geen pakket verplicht.',
   benefits: [
-    'Nieuwe modules zet je los aan: EUR 9 of EUR 19 per maand',
-    'De instapprijs is de prijs. Geen verhogingen achteraf',
+    'Elke module kost EUR 9 of EUR 19 per maand',
+    'De prijs waarvoor je instapt, blijft je prijs',
     '10% korting als je per jaar betaalt',
-    'Zodra alle acht modules live zijn: Emma Compleet voor EUR 77 per maand',
+    'Zodra alle acht modules er zijn: Emma Compleet voor EUR 77 per maand',
   ],
 };
 
@@ -126,11 +126,11 @@ export const MODULE_PRICES = {
    wachtlijstformulier onder de kaarten. */
 export const PACKAGES_SECTION = {
   title: 'Straks kies je een pakket.',
-  intro: 'Zodra alle modules live zijn, bundelen we ze per branche met flinke korting. Wie eerder instapt, houdt de instapprijs.',
+  intro: 'Zodra alle acht modules er zijn, bundelen we ze per branche met 20 tot 25% korting. Wie nu instapt, houdt zijn prijs.',
   foot: 'Tot die tijd is elke module los te gebruiken: standaard EUR 9/mnd, premium EUR 19/mnd, excl. BTW en maandelijks opzegbaar.',
   waitlist: {
     heading: 'Wil je weten wanneer de pakketten er zijn?',
-    sub: 'Laat je e-mailadres achter. Je hoort het als eerste, en je krijgt de instapprijs.',
+    sub: 'Laat je e-mailadres achter. Je hoort het als eerste, en je houdt de prijs waarvoor je instapt.',
     button: 'Houd me op de hoogte',
   },
 };
@@ -138,8 +138,8 @@ export const PACKAGES_SECTION = {
 /* ── HET BEWIJS ── kop; stats + intro uit proof.ts (STATS, PROOF_INTRO).
    "Niet uit een pitch deck" (eerlijkheid-USP) verwijderd, §4.3. */
 export const PROOF_SECTION = {
-  eyebrow: 'Het bewijs',
-  title: 'Bewezen in productie.',
+  eyebrow: 'Waar Emma vandaan komt',
+  title: 'Emma begon in een kapsalon.',
 };
 
 /* ── VEILIGHEID ── de DRIE live kaarten uit briefing §3.5, verbatim. De
@@ -148,7 +148,7 @@ export const PROOF_SECTION = {
 export const SECURITY = {
   eyebrow: 'Veiligheid & privacy',
   title: 'Je gegevens zijn van jou.',
-  intro: 'Emma verwerkt gevoelige bedrijfsdata. Dat doen we met respect: opgeslagen in de EU, minimale rechten, transparante aanpak.',
+  intro: 'Emma verwerkt je bedrijfsdata. Dat doen we met zo min mogelijk rechten en zo min mogelijk kopieën.',
   cards: [
     { title: 'Jouw data, jouw eigendom', desc: 'Je gegevens worden alleen verwerkt om de modules te laten werken. Geen verkoop, geen tracking, AVG-conform.' },
     { title: 'Versleuteld gekoppeld', desc: 'Koppel je Emma aan een externe dienst, dan wordt je sleutel versleuteld opgeslagen en nooit getoond.' },
@@ -168,8 +168,8 @@ export const FAQ = {
     { q: 'Moet ik mijn boekhoudsoftware vervangen?', a: 'Nee. EmmaBoekt is een schil rond je bestaande pakket (e-Boekhouden, SnelStart, Moneybird). Het onderliggende pakket blijft de bron van waarheid. Stop je met Emma? Dan staat je volledige administratie gewoon in je eigen pakket.' },
     { q: 'Kan ik met een module beginnen en later uitbreiden?', a: 'Ja. Elke module is zelfstandig levensvatbaar. Begin met EmmaBoekt voor EUR 9 per maand. Voeg er later andere modules aan toe. Een module aanzetten is een rij toevoegen, geen code schrijven.' },
     { q: 'Wat als ik stop met Emma?', a: 'Je verliest geen data. Alles wat je via Emma doet, landt ook in je onderliggende pakket. Emma is een schil, geen kooi. Je data blijft van jou.' },
-    { q: 'Wat kost Emma?', a: 'Standaard-modules kosten EUR 9 per maand, premium-modules EUR 19 per maand. Excl. BTW. Je start met 14 dagen gratis en kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 10% korting.' },
-    { q: 'Doet Emma ook de loonaangifte bij de Belastingdienst?', a: 'EmmaLoont rekent, maakt loonstroken en boekt de loonjournaalpost. De loonaangifte zelf doe je via Mijn Belastingdienst Zakelijk (toegestaan bij 10 of minder werknemers) of via je administratiekantoor.' },
+    { q: 'Wat kost Emma?', a: 'Standaard-modules kosten EUR 9 per maand, premium-modules EUR 19 per maand, exclusief btw. Je begint met 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 10% korting.' },
+    { q: 'Welke modules kan ik nu gebruiken?', a: 'Drie: EmmaBoekt voor je boekhouding, EmmaWaakt voor je cijfers en EmmaZiet voor je concurrenten. De andere vijf zijn in ontwikkeling. Op elke modulepagina zie je waar hij staat.' },
     { q: 'Hoe zit het met privacy en beveiliging?', a: 'Je bedrijfsdata staat binnen de Europese Unie, op servers in Frankfurt. Onze website en e-mailverzending lopen via Amerikaanse dienstverleners onder Europese standaardcontractbepalingen. Je gegevens worden alleen verwerkt om Emma te laten werken: geen verkoop aan derden, geen tracking. De koppeling met je boekhouding is versleuteld en voldoet aan de AVG.' },
   ],
 };

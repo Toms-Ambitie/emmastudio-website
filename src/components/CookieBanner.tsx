@@ -34,7 +34,7 @@ export default function CookieBanner() {
       <div className="cookie__row">
         <button className="btn btn-coral" data-cookie="all">Oké, prima</button>
         <button className="btn cookie__ghost" data-cookie="min">Alleen noodzakelijk</button>
-        <a className="cookie__more" href="/#faq">Meer info</a>
+        <a className="cookie__more" href="/privacy">Meer info</a>
       </div>
     </div>
   );
