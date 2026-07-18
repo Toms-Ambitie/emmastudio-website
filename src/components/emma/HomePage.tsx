@@ -590,15 +590,19 @@ function ModulePrices() {
                   <button
                     key={modId}
                     onClick={() => setActiveModule(i)}
-                    className="h-2 rounded-full transition-all"
-                    style={{
-                      width: activeModule === i ? '24px' : '8px',
-                      backgroundColor: activeModule === i ? hex : 'var(--color-emma-line)',
-                    }}
+                    className="flex h-9 items-center rounded-full px-1 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emma-boekt"
                     aria-label={`Ga naar ${emmaName(modId)}`}
                     aria-selected={activeModule === i}
                     role="tab"
-                  />
+                  >
+                    <span
+                      className="block h-2 rounded-full transition-all"
+                      style={{
+                        width: activeModule === i ? '24px' : '8px',
+                        backgroundColor: activeModule === i ? hex : 'var(--color-emma-line)',
+                      }}
+                    />
+                  </button>
                 ))}
               </div>
 

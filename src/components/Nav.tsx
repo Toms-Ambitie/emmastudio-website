@@ -65,7 +65,7 @@ export default function Nav() {
         {/* Logo — SVG-vector, geen eigen scroll (Lenis doet dat) */}
         <Link
           href="/"
-          className="flex items-center rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emma-boekt"
+          className="-my-2 flex items-center rounded py-2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emma-boekt"
           aria-label="emma. home"
           onClick={() => setOpenMenu(null)}
         >
@@ -184,14 +184,14 @@ export default function Nav() {
         <div className="flex items-center gap-3">
           <a
             href={APP_URL}
-            className="hidden text-sm font-medium text-emma-ink-2 transition-colors hover:text-emma-ink sm:inline"
+            className="hidden rounded text-sm font-medium text-emma-ink-2 transition-colors hover:text-emma-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emma-boekt sm:inline"
           >
             Inloggen
           </a>
           {LAUNCHED ? (
             <a
               href={`${APP_URL}/register`}
-              className="group hidden items-center gap-1.5 rounded-emma-pill bg-emma-coral-strong px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-emma-coral-deep active:scale-[0.98] sm:inline-flex"
+              className="group hidden items-center gap-1.5 rounded-emma-pill bg-emma-coral-strong px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-emma-coral-deep active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emma-ink sm:inline-flex"
             >
               Aan de slag
               <IconArrow size={15} className="transition-transform group-hover:translate-x-0.5" />
@@ -199,7 +199,7 @@ export default function Nav() {
           ) : (
             <Link
               href={WAITLIST_ANCHOR}
-              className="group hidden items-center gap-1.5 rounded-emma-pill bg-emma-coral-strong px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-emma-coral-deep active:scale-[0.98] sm:inline-flex"
+              className="group hidden items-center gap-1.5 rounded-emma-pill bg-emma-coral-strong px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-emma-coral-deep active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emma-ink sm:inline-flex"
             >
               Houd me op de hoogte
               <IconArrow size={15} className="transition-transform group-hover:translate-x-0.5" />
@@ -208,7 +208,7 @@ export default function Nav() {
 
           {/* Mobile menu button */}
           <button
-            className="flex h-10 w-10 items-center justify-center rounded-lg text-emma-ink lg:hidden"
+            className="flex h-10 w-10 items-center justify-center rounded-lg text-emma-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emma-boekt lg:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Menu"
             aria-expanded={mobileOpen}
