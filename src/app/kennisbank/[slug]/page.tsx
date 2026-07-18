@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ICONS } from '@/data/modules';
-import { ARTICLES, ARTICLE_SEO_TITLE } from '@/data/articles';
+import { ARTICLES, ARTICLE_SEO_TITLE, ARTICLE_RELATED } from '@/data/articles';
 import type { Article, ArticleBlock } from '@/data/articles';
 
 const SITE = 'https://www.emmastudio.nl';
@@ -189,6 +189,17 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <article className="px-5 pt-10 md:px-8 lg:px-10">
         <div className="mx-auto max-w-2xl">
           {article.body.map((block, i) => renderBlock(block, accent, i))}
+          {ARTICLE_RELATED[article.slug] && (
+            <p className="mt-8 border-t border-emma-line pt-6 text-base leading-relaxed text-emma-ink-2">
+              {ARTICLE_RELATED[article.slug].lead}{' '}
+              {ARTICLE_RELATED[article.slug].links.map((l, i, arr) => (
+                <span key={l.href}>
+                  <Link href={l.href} className="font-medium text-emma-coral hover:underline">{l.anchor}</Link>
+                  {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' en ' : '.'}
+                </span>
+              ))}
+            </p>
+          )}
         </div>
       </article>
 

@@ -110,6 +110,53 @@ export const MODULE_SEO: Record<string, { title: string; desc: string }> = {
   },
 };
 
+/** Contextuele interne links per modulepagina (doc 08 / SEO-plan, Deel 3 punt 4
+ *  en briefing punt 5: minimaal 3 beschrijvende links per pagina). Elke anchor
+ *  is een beschrijvende zin, geen "lees meer". Gerenderd als prose-alinea in de
+ *  body van modules/[id]/page.tsx, los van het "Meer van Emma"-kaartenraster. */
+export const MODULE_RELATED: Record<string, { lead: string; links: { href: string; anchor: string }[] }> = {
+  boekt: { lead: 'EmmaBoekt werkt goed samen met', links: [
+    { href: '/modules/waakt', anchor: 'EmmaWaakt om je cijfers in de gaten te houden' },
+    { href: '/modules/loont', anchor: 'EmmaLoont voor je loonadministratie' },
+    { href: '/vergelijk', anchor: 'de vergelijking met losse boekhoudtools' },
+  ] },
+  waakt: { lead: 'EmmaWaakt werkt goed samen met', links: [
+    { href: '/modules/boekt', anchor: 'EmmaBoekt als bron voor je cijfers' },
+    { href: '/modules/coacht', anchor: 'EmmaCoacht om je team te begeleiden' },
+    { href: '/modules/promoot', anchor: 'EmmaPromoot om je advertenties op omzet te meten' },
+  ] },
+  loont: { lead: 'EmmaLoont werkt goed samen met', links: [
+    { href: '/modules/boekt', anchor: 'EmmaBoekt zodat de loonkosten in je boekhouding landen' },
+    { href: '/modules/coacht', anchor: 'EmmaCoacht om je mensen te begeleiden' },
+    { href: '/modules/vindt', anchor: 'EmmaVindt om nieuw personeel te vinden' },
+  ] },
+  vindt: { lead: 'EmmaVindt werkt goed samen met', links: [
+    { href: '/modules/schrijft', anchor: 'EmmaSchrijft om je aanbod te schrijven' },
+    { href: '/modules/coacht', anchor: 'EmmaCoacht om nieuwe mensen in te werken' },
+    { href: '/modules/ziet', anchor: 'EmmaZiet om je marktgebied te kennen' },
+  ] },
+  coacht: { lead: 'EmmaCoacht werkt goed samen met', links: [
+    { href: '/modules/waakt', anchor: 'EmmaWaakt voor de cijfers onder je gesprekken' },
+    { href: '/modules/loont', anchor: 'EmmaLoont voor je personeelsadministratie' },
+    { href: '/modules/vindt', anchor: 'EmmaVindt om nieuwe mensen te vinden' },
+  ] },
+  ziet: { lead: 'EmmaZiet werkt goed samen met', links: [
+    { href: '/modules/vindt', anchor: 'EmmaVindt om nieuwe klanten te vinden' },
+    { href: '/modules/schrijft', anchor: 'EmmaSchrijft om je content te plannen' },
+    { href: '/pakketten', anchor: 'een branchepakket waarin EmmaZiet zit' },
+  ] },
+  schrijft: { lead: 'EmmaSchrijft werkt goed samen met', links: [
+    { href: '/modules/promoot', anchor: 'EmmaPromoot voor je betaalde advertenties' },
+    { href: '/modules/vindt', anchor: 'EmmaVindt om klanten te vinden' },
+    { href: '/modules/ziet', anchor: 'EmmaZiet om te weten wat de buurt doet' },
+  ] },
+  promoot: { lead: 'EmmaPromoot werkt goed samen met', links: [
+    { href: '/modules/schrijft', anchor: 'EmmaSchrijft voor je organische content' },
+    { href: '/modules/waakt', anchor: 'EmmaWaakt om op je echte omzet te meten' },
+    { href: '/modules/vindt', anchor: 'EmmaVindt om nieuwe klanten te vinden' },
+  ] },
+};
+
 export const MODULE_ORDER = ['boekt','waakt','loont','vindt','coacht','ziet','schrijft','promoot'];
 
 /** DE LANCEERSCHAKELAAR. Zet op true zodra de boekhoudmodule live is op

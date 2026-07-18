@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
   MODULES, ICONS, MODULE_TAGS, MODULE_PRICE, MODULE_ORDER, MODULE_STATUS,
-  MODULE_SEO, APP_URL, LAUNCHED, VIGNETTES,
+  MODULE_SEO, MODULE_RELATED, APP_URL, LAUNCHED, VIGNETTES,
 } from '@/data/modules';
 import WaitlistForm from '@/components/WaitlistForm';
 import ModuleFaq from '@/components/ModuleFaq';
@@ -227,6 +227,18 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
               </div>
             ))}
           </div>
+
+          {MODULE_RELATED[id] && (
+            <p className="mt-8 max-w-3xl text-base leading-relaxed text-emma-ink-2">
+              {MODULE_RELATED[id].lead}{' '}
+              {MODULE_RELATED[id].links.map((l, i, arr) => (
+                <span key={l.href}>
+                  <Link href={l.href} className="font-medium text-emma-coral hover:underline">{l.anchor}</Link>
+                  {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' en ' : '.'}
+                </span>
+              ))}
+            </p>
+          )}
         </div>
       </section>
 

@@ -34,6 +34,26 @@ export const ARTICLE_SEO_TITLE: Record<string, string> = {
   'hoe-we-emma-bouwen': 'Hoe we Emma opnieuw opbouwen, uit een echte salon · Emma',
 };
 
+/** Contextuele interne links van artikel naar modulepagina's (doc 08 / SEO-plan:
+ *  "stuurt autoriteit naar de transactionele pagina's"). Beschrijvende anchors,
+ *  gerenderd als prose-alinea onder de artikeltekst. */
+export const ARTICLE_RELATED: Record<string, { lead: string; links: { href: string; anchor: string }[] }> = {
+  'grip-op-je-cijfers': { lead: 'Meer weten? Bekijk', links: [
+    { href: '/modules/waakt', anchor: 'EmmaWaakt om je cijfers wekelijks te volgen' },
+    { href: '/modules/boekt', anchor: 'EmmaBoekt voor je boekhouding' },
+  ] },
+  'tips-per-branche': { lead: 'Zo pakt Emma dit aan met', links: [
+    { href: '/modules/boekt', anchor: 'EmmaBoekt voor je dagelijkse boekhouding' },
+    { href: '/modules/waakt', anchor: 'EmmaWaakt voor grip op je cijfers' },
+    { href: '/pakketten', anchor: 'een pakket voor jouw branche' },
+  ] },
+  'hoe-we-emma-bouwen': { lead: 'Verder lezen:', links: [
+    { href: '/modules', anchor: 'de acht modules van Emma' },
+    { href: '/modules/boekt', anchor: 'EmmaBoekt, de eerste live module' },
+    { href: '/over', anchor: 'waarom we Emma bouwen' },
+  ] },
+};
+
 export const ARTICLES: Article[] = [
   {
     slug: 'grip-op-je-cijfers',
