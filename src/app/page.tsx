@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import HomePage from '@/components/emma/HomePage';
 
 export const metadata: Metadata = {
-  title: 'Emma · Jij doet je werk. Emma de rest.',
-  description: 'Emma is het platform dat de dagelijkse taken van ondernemers makkelijker maakt: boekhouding, personeel, marketing en inzicht. We beginnen bij je boekhouding, bovenop e-Boekhouden.nl. Vanaf €9 per maand.',
+  title: 'Emma · Software voor ondernemers, van boekhouden tot marketing',
+  description: 'Emma neemt het saaie werk van ondernemen over: boekhouden, cijfers, personeel en marketing in één platform. Vanaf €9 per maand. Bekijk de modules.',
   alternates: { canonical: 'https://www.emmastudio.nl' },
 };
 

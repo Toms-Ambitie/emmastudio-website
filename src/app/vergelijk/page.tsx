@@ -6,15 +6,18 @@ import { IconCheck, IconArrow } from '@/components/emma/icons';
 const SITE = 'https://www.emmastudio.nl';
 const { rows, foot } = PRICE_COMPARISON;
 
+const META_TITLE = 'Emma vergelijken · Eén platform vs losse tools en bureaus';
+const META_DESC = 'Zes losse abonnementen of een bureau? Zie hoe emma je boekhouding, cijfers, personeel en marketing samenbrengt, voor een stuk minder. Vergelijk zelf.';
+
 export const metadata: Metadata = {
-  title: 'Vergelijk · Emma',
-  description: PRICE_COMPARISON.intro,
+  title: META_TITLE,
+  description: META_DESC,
   alternates: { canonical: `${SITE}/vergelijk` },
   openGraph: {
     type: 'website',
     url: `${SITE}/vergelijk`,
-    title: 'Vergelijk · Emma',
-    description: PRICE_COMPARISON.intro,
+    title: META_TITLE,
+    description: META_DESC,
     images: [{ url: '/og-card.png', width: 1200, height: 630 }],
   },
 };

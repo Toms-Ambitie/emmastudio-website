@@ -5,15 +5,18 @@ import { ILZE_QUOTE } from '@/data/proof';
 
 const SITE = 'https://www.emmastudio.nl';
 
+const META_TITLE = 'Over Emma · Ontstaan in een kapsalon, gebouwd voor ondernemers';
+const META_DESC = 'Emma begon als werkend systeem in een echte kapsalon, niet op een whiteboard. Gebouwd door Toms Ambitie uit Zwolle, module voor module. Lees het verhaal.';
+
 export const metadata: Metadata = {
-  title: 'Over Toms Ambitie · Emma',
-  description: 'Wij bouwen Emma vanuit één overtuiging: ondernemers verdienen software die voor hen werkt, niet andersom.',
+  title: META_TITLE,
+  description: META_DESC,
   alternates: { canonical: `${SITE}/over` },
   openGraph: {
     type: 'website',
     url: `${SITE}/over`,
-    title: 'Over Toms Ambitie · Emma',
-    description: 'Wij bouwen Emma vanuit één overtuiging: ondernemers verdienen software die voor hen werkt, niet andersom.',
+    title: META_TITLE,
+    description: META_DESC,
     images: [{ url: '/og-card.png', width: 1200, height: 630 }],
   },
 };

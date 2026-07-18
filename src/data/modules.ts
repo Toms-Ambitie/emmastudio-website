@@ -70,6 +70,46 @@ export const MODULE_PRICE: Record<string, number> = {
   boekt:9, waakt:9, loont:19, vindt:9, coacht:9, ziet:9, schrijft:19, promoot:19,
 };
 
+/** SEO-metadata per modulepagina (doc 08 / SEO-plan). Los van `head`/`intro`
+ *  zodat de <title> en meta-description zoekwoorden dragen zonder de merk-H1
+ *  of de hero-tekst te veranderen. `title` mikt kort (<60 tekens) met het
+ *  zoekwoord vooraan; `desc` ~150-160 tekens. Gebruikt in generateMetadata
+ *  van modules/[id]/page.tsx. */
+export const MODULE_SEO: Record<string, { title: string; desc: string }> = {
+  boekt: {
+    title: 'EmmaBoekt · e-Boekhouden makkelijker, facturen in een klik',
+    desc: 'EmmaBoekt legt een rustige schil over e-Boekhouden.nl. Facturen maken, bonnetjes scannen, offertes versturen. Sneller werken, je boekhouding blijft waar hij is.',
+  },
+  waakt: {
+    title: 'EmmaWaakt · Financieel dashboard en advies op je cijfers',
+    desc: 'EmmaWaakt is je financiële dashboard: doelen, prognoses en wekelijks advies op je eigen cijfers. Zie hoe je bedrijf ervoor staat, zonder Excel. Vanaf €9.',
+  },
+  loont: {
+    title: 'EmmaLoont · Loonadministratie zonder loonbureau, vanaf €19',
+    desc: 'EmmaLoont doet je loonadministratie: loon berekenen conform cao, loonstroken, contracten en verlof. De loonkosten belanden direct in je boekhouding.',
+  },
+  vindt: {
+    title: 'EmmaVindt · Personeel en klanten vinden in je eigen regio',
+    desc: 'EmmaVindt zoekt personeel of klanten in je regio via het openbare KvK-register, met een fit-score per match. Lokaal, licht, zonder dure recruitmenttool.',
+  },
+  coacht: {
+    title: 'EmmaCoacht · Medewerkers coachen met structuur en cijfers',
+    desc: 'EmmaCoacht maakt coaching consistent: scorecards per medewerker, gesprekken vastgelegd en een aanzet op echte cijfers. Jij voert het gesprek, Emma denkt mee.',
+  },
+  ziet: {
+    title: 'EmmaZiet · Concurrenten in de buurt in beeld, automatisch',
+    desc: 'EmmaZiet vindt je concurrenten in de buurt via het KvK-register, zet ze op de kaart en meldt het als er een bijkomt. Weet wat er om je heen gebeurt. Vanaf €9.',
+  },
+  schrijft: {
+    title: 'EmmaSchrijft · Content en blogs schrijven in je eigen stem',
+    desc: 'EmmaSchrijft schrijft je blogs, e-mails en posts in je eigen stem, SEO-geoptimaliseerd. Van idee tot gepubliceerd, met een planner. Content die eindelijk gebeurt.',
+  },
+  promoot: {
+    title: 'EmmaPromoot · Zelf adverteren op Google en Meta, op omzet',
+    desc: 'EmmaPromoot maakt je advertenties compleet: beeld, tekst, campagne en meting op je echte omzet. Adverteren op Google en Meta zonder marketingbureau.',
+  },
+};
+
 export const MODULE_ORDER = ['boekt','waakt','loont','vindt','coacht','ziet','schrijft','promoot'];
 
 /** DE LANCEERSCHAKELAAR. Zet op true zodra de boekhoudmodule live is op

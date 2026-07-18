@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
   MODULES, ICONS, MODULE_TAGS, MODULE_PRICE, MODULE_ORDER, MODULE_STATUS,
-  APP_URL, LAUNCHED, VIGNETTES,
+  MODULE_SEO, APP_URL, LAUNCHED, VIGNETTES,
 } from '@/data/modules';
 import WaitlistForm from '@/components/WaitlistForm';
 import ModuleFaq from '@/components/ModuleFaq';
@@ -19,15 +19,16 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const mod = MODULES[id];
   if (!mod) return {};
   const url = `${SITE}/modules/${id}`;
+  const seo = MODULE_SEO[id] ?? { title: `Emma${mod.name} · ${mod.head}`, desc: mod.intro };
   return {
-    title: `Emma${mod.name} · ${mod.head}`,
-    description: mod.intro,
+    title: seo.title,
+    description: seo.desc,
     alternates: { canonical: url },
     openGraph: {
       type: 'website',
       url,
-      title: `Emma${mod.name} · ${mod.head}`,
-      description: mod.intro,
+      title: seo.title,
+      description: seo.desc,
       images: [{ url: '/og-card.png', width: 1200, height: 630 }],
     },
   };

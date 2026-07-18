@@ -25,6 +25,15 @@ export type Article = {
   body: ArticleBlock[];
 };
 
+/** SEO-<title> per artikel (doc 08 / SEO-plan). Mikt op één long-tail vraag
+ *  per artikel; los van de zichtbare H1. Gebruikt in generateMetadata van
+ *  kennisbank/[slug]/page.tsx, met de bestaande titel als fallback. */
+export const ARTICLE_SEO_TITLE: Record<string, string> = {
+  'grip-op-je-cijfers': 'Grip op je cijfers als ondernemer begint met rust · Emma',
+  'tips-per-branche': "3 administratietips voor elke zzp'er en salon · Emma",
+  'hoe-we-emma-bouwen': 'Hoe we Emma opnieuw opbouwen, uit een echte salon · Emma',
+};
+
 export const ARTICLES: Article[] = [
   {
     slug: 'grip-op-je-cijfers',

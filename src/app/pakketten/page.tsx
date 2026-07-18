@@ -8,15 +8,18 @@ import WaitlistForm from '@/components/WaitlistForm';
 const SITE = 'https://www.emmastudio.nl';
 const emmaName = (id: string) => `Emma${MODULES[id]?.name ?? id.charAt(0).toUpperCase() + id.slice(1)}`;
 
+const META_TITLE = 'Emma-pakketten · Software per branche voor zzp, zorg en salons';
+const META_DESC = "Emma bundelt modules per branche: voor zzp'ers, zorg, salons of compleet. Straks met 20 tot 25% korting. Stap nu los in en houd je prijs. Vanaf €37.";
+
 export const metadata: Metadata = {
-  title: 'Pakketten · Emma',
-  description: PACKAGES_SECTION.intro,
+  title: META_TITLE,
+  description: META_DESC,
   alternates: { canonical: `${SITE}/pakketten` },
   openGraph: {
     type: 'website',
     url: `${SITE}/pakketten`,
-    title: 'Pakketten · Emma',
-    description: PACKAGES_SECTION.intro,
+    title: META_TITLE,
+    description: META_DESC,
     images: [{ url: '/og-card.png', width: 1200, height: 630 }],
   },
 };

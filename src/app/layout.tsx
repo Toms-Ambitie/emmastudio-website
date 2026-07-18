@@ -8,7 +8,7 @@ import ScrollReset from '@/components/ScrollReset';
 
 export const metadata: Metadata = {
   title: 'Emma · Jij doet je werk. Emma de rest.',
-  description: 'Het ecosysteem dat de saaie kant van ondernemen overneemt. Boekhouding, HR, content en meer, voor élke zelfstandige ondernemer in NL & BE.',
+  description: 'Emma neemt het saaie werk van ondernemen over: boekhouden, cijfers, personeel en marketing in één platform. Voor zelfstandige ondernemers en kleine bedrijven in Nederland.',
   metadataBase: new URL('https://www.emmastudio.nl'),
   openGraph: {
     type: 'website',

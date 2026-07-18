@@ -5,15 +5,18 @@ import { IconShield, IconArrow } from '@/components/emma/icons';
 
 const SITE = 'https://www.emmastudio.nl';
 
+const META_TITLE = 'Veiligheid · Je data in de EU, AVG-conform, van jou';
+const META_DESC = 'Emma verwerkt je bedrijfsdata met zo min mogelijk rechten, opgeslagen in de EU en AVG-conform. Je data blijft van jou. Lees hoe we ermee omgaan.';
+
 export const metadata: Metadata = {
-  title: 'Veiligheid & privacy · Emma',
-  description: SECURITY.intro,
+  title: META_TITLE,
+  description: META_DESC,
   alternates: { canonical: `${SITE}/veiligheid` },
   openGraph: {
     type: 'website',
     url: `${SITE}/veiligheid`,
-    title: 'Veiligheid & privacy · Emma',
-    description: SECURITY.intro,
+    title: META_TITLE,
+    description: META_DESC,
     images: [{ url: '/og-card.png', width: 1200, height: 630 }],
   },
 };

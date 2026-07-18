@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ICONS } from '@/data/modules';
-import { ARTICLES } from '@/data/articles';
+import { ARTICLES, ARTICLE_SEO_TITLE } from '@/data/articles';
 import type { Article, ArticleBlock } from '@/data/articles';
 
 const SITE = 'https://www.emmastudio.nl';
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!article) return {};
   const url = `${SITE}/kennisbank/${article.slug}`;
   return {
-    title: `${article.title} · Emma Kennisbank`,
+    title: ARTICLE_SEO_TITLE[article.slug] ?? `${article.title} · Emma Kennisbank`,
     description: article.dek,
     alternates: { canonical: url },
     openGraph: {
