@@ -17,7 +17,41 @@ export type Article = {
   read: string;
   author: string;
   featured?: boolean;
+  /** Briefing v2 §5.3: voorbereiding op de latere blog/kennisbank-splitsing.
+   *  Nu nog geen filter actief — /kennisbank toont alle artikelen ongeacht
+   *  deze waarde. 'kennisbank' = handleiding/uitleg/hulp, tijdloos.
+   *  'blog' = nieuws over Emma zelf (productstatus, bouwvoortgang). */
+  section: 'blog' | 'kennisbank';
   body: ArticleBlock[];
+};
+
+/** SEO-<title> per artikel (doc 08 / SEO-plan). Mikt op één long-tail vraag
+ *  per artikel; los van de zichtbare H1. Gebruikt in generateMetadata van
+ *  kennisbank/[slug]/page.tsx, met de bestaande titel als fallback. */
+export const ARTICLE_SEO_TITLE: Record<string, string> = {
+  'grip-op-je-cijfers': 'Grip op je cijfers als ondernemer begint met rust · Emma',
+  'tips-per-branche': "3 administratietips voor elke zzp'er en salon · Emma",
+  'hoe-we-emma-bouwen': 'Hoe we Emma opnieuw opbouwen, uit een echte salon · Emma',
+};
+
+/** Contextuele interne links van artikel naar modulepagina's (doc 08 / SEO-plan:
+ *  "stuurt autoriteit naar de transactionele pagina's"). Beschrijvende anchors,
+ *  gerenderd als prose-alinea onder de artikeltekst. */
+export const ARTICLE_RELATED: Record<string, { lead: string; links: { href: string; anchor: string }[] }> = {
+  'grip-op-je-cijfers': { lead: 'Meer weten? Bekijk', links: [
+    { href: '/modules/waakt', anchor: 'EmmaWaakt om je cijfers wekelijks te volgen' },
+    { href: '/modules/boekt', anchor: 'EmmaBoekt voor je boekhouding' },
+  ] },
+  'tips-per-branche': { lead: 'Zo pakt Emma dit aan met', links: [
+    { href: '/modules/boekt', anchor: 'EmmaBoekt voor je dagelijkse boekhouding' },
+    { href: '/modules/waakt', anchor: 'EmmaWaakt voor grip op je cijfers' },
+    { href: '/pakketten', anchor: 'een pakket voor jouw branche' },
+  ] },
+  'hoe-we-emma-bouwen': { lead: 'Verder lezen:', links: [
+    { href: '/modules', anchor: 'de acht modules van Emma' },
+    { href: '/modules/boekt', anchor: 'EmmaBoekt, de eerste live module' },
+    { href: '/over', anchor: 'waarom we Emma bouwen' },
+  ] },
 };
 
 export const ARTICLES: Article[] = [
@@ -26,6 +60,7 @@ export const ARTICLES: Article[] = [
     cat: 'Grip op cijfers',
     accent: '#44857C',
     glyph: 'waakt',
+    section: 'kennisbank',
     title: 'Waarom grip op je cijfers begint met rust',
     dek: 'De meeste ondernemers weten pas hoe het écht gaat als de cijfers van de accountant binnen zijn. Dat kan anders, en rustiger.',
     date: '28 mei 2026',
@@ -55,6 +90,7 @@ export const ARTICLES: Article[] = [
     cat: 'Praktijk',
     accent: '#AE8232',
     glyph: 'vindt',
+    section: 'kennisbank',
     title: 'Eén ding dat elke salon, praktijk en ZZP\'er morgen anders kan doen',
     dek: 'Drie korte, praktische gewoontes die je vandaag al kunt oppakken, ongeacht je branche.',
     date: '21 mei 2026',
@@ -78,6 +114,7 @@ export const ARTICLES: Article[] = [
     cat: 'Achter de schermen',
     accent: '#9C4456',
     glyph: 'schrijft',
+    section: 'blog',
     title: 'Achter de schermen: hoe we Emma opnieuw opbouwen',
     dek: 'Emma is niet op een whiteboard bedacht. Ze is ontstaan in een echte salon. Dit is hoe we van die ervaring een platform maken.',
     date: '14 mei 2026',
@@ -95,7 +132,7 @@ export const ARTICLES: Article[] = [
       { t: 'h2', v: 'Wat dat voor jou betekent' },
       { t: 'ul', v: [
         'Je kunt Emma nog niet kopen. We bouwen eerst het fundament goed.',
-        'De prijzen die je op de site ziet, zijn de beoogde lanceringsprijzen.',
+        'De prijzen die je ziet, zijn de prijzen waarvoor je straks instapt.',
         'De productbeelden zijn impressies, geen schermen uit een live app.',
       ] },
       { t: 'p', v: 'We vertellen dit liever te open dan te mooi. Een wachtlijst die groeit omdat mensen geloven in waar we naartoe werken, is voor ons waardevoller dan een belofte die we nog niet kunnen waarmaken.' },

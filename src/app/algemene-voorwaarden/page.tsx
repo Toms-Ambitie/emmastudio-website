@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function AlgemeneVoorwaarden() {
   return (
-    <main className="lightpage" data-page="legal">
+    <main id="main-content" className="lightpage" data-page="legal">
       <div className="wrap">
         <div className="legal">
           <div className="legal__content">
@@ -46,7 +46,7 @@ export default function AlgemeneVoorwaarden() {
             <h2>Artikel 4 — Abonnement en betaling</h2>
             <p>4.1 Het abonnement bestaat uit de door de Klant geselecteerde modules. De actuele prijzen per module staan vermeld op emmastudio.nl/modules.</p>
             <p>4.2 Betaling vindt maandelijks of jaarlijks vooruit plaats, afhankelijk van de door de Klant gekozen betalingstermijn.</p>
-            <p>4.3 Bij jaarlijkse betaling ontvangt de Klant een korting van 15% ten opzichte van de maandelijkse prijs.</p>
+            <p>4.3 Bij jaarlijkse betaling ontvangt de Klant een korting van 10% ten opzichte van de maandelijkse prijs.</p>
             <p>4.4 Alle prijzen zijn exclusief omzetbelasting (btw).</p>
             <p>4.5 Betaling geschiedt via de door Toms Ambitie aangeboden betaalmethoden. Bij niet-tijdige betaling is de Klant van rechtswege in verzuim en is Toms Ambitie gerechtigd de toegang tot Emma op te schorten totdat de volledige betaling is ontvangen.</p>
             <p>4.6 Toms Ambitie behoudt zich het recht voor de prijzen aan te passen. Prijswijzigingen worden minimaal 30 dagen van tevoren per e-mail aan de Klant medegedeeld.</p>

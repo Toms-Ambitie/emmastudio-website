@@ -1,6 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap');
 
 /* ============================================================
+   TAILWIND v4 — utilities-only, GEEN preflight
+   ------------------------------------------------------------
+   Toegevoegd in stap 3a (ronde 1) van de herbouw. De Higgsfield-
+   homepage is opgebouwd uit honderden Tailwind-utility-classes;
+   handmatig omzetten zou het ontwerp onvermijdelijk laten afwijken.
+   Daarom Tailwind v4 als build-stap (via postcss.config.mjs).
+   BEWUST alleen de theme- en utilities-laag, NIET preflight: preflight
+   is Tailwind's globale reset op html/body/headings/buttons/etc., en
+   die zou de bestaande, niet-Tailwind pagina's platslaan. Dit project
+   heeft al een eigen reset verderop in dit bestand.
+
+   UTILITIES ONGELAAGD (ronde 2, na de layout-bug). Ronde 1 zette de
+   utilities in @layer utilities, met de aanname "gelaagd verliest van
+   ongelaagd, dus de bestaande pagina's blijven heilig". Dat brak de
+   homepage: die BESTAAT uit utilities, en de ongelaagde reset
+   (`*{margin:0;padding:0}`) sloeg elke `mx-auto`/`px-*`/`p-*` plat.
+   De voor de hand liggende reparatie — reset naar @layer base — bleek
+   NIET te werken in deze build: Next/LightningCSS strippen het
+   `@layer …;`-volgordestatement, waarna de effectieve laagvolgorde uit
+   eerste-voorkomen volgt en @layer base juist BOVEN @layer utilities
+   eindigt (bewezen met CSS.getMatchedStylesForNode: `[base] *` wint van
+   `[utilities] .px-5`). Layer-volgorde is hier dus onbetrouwbaar.
+   Daarom nu op SPECIFICITEIT i.p.v. lagen: utilities ONgelaagd. Dan
+   wint `.px-5` (0,1,0) van de reset `*{…}` (0,0,0) en van de element-
+   regels (`a`,`button`,`h1-3` = 0,0,1..3) — deterministisch, buiten
+   LightningCSS' laag-afhandeling om. De bestaande pagina's gebruiken
+   GEEN Tailwind-classnamen (geverifieerd: geen botsende selectors), dus
+   de ongelaagde utilities raken niets daar — pixel-geverifieerd.
+   ============================================================ */
+@layer theme;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css";
+
+/* ============================================================
    DESIGN TOKENS
    ============================================================ */
 
@@ -38,7 +72,7 @@
    ============================================================ */
 
 *{ margin:0; padding:0; box-sizing:border-box; }
-html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; background:var(--creme); }
+html{ -webkit-text-size-adjust:100%; background:var(--creme); }
 body{ font-family:var(--body); background:var(--creme); color:var(--ink); font-size:17px;
   line-height:1.6; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; overflow-x:hidden; }
 img{ max-width:100%; display:block; }
@@ -513,25 +547,6 @@ h1,h2,h3{ font-family:var(--display); font-weight:800; line-height:1.0; letter-s
 .faq__a p{ padding:0 4px 24px; color:var(--ink-soft); font-size:16px; line-height:1.6; max-width:60ch; }
 
 /* ============================================================
-   COOKIE BANNER
-   ============================================================ */
-
-.cookie{ position:fixed; left:clamp(16px,3vw,32px); bottom:clamp(16px,3vw,32px); z-index:70;
-  width:min(440px, calc(100vw - 32px)); background:var(--ink); color:var(--creme);
-  border-radius:24px; padding:26px 28px 24px; box-shadow:0 30px 70px -24px rgba(10,12,10,.7);
-  transform:translateY(calc(100% + 40px)); opacity:0; transition:transform .6s var(--ease), opacity .5s; }
-.cookie.show{ transform:translateY(0); opacity:1; }
-.cookie__eyebrow{ font-family:var(--mono); font-size:12.5px; letter-spacing:.18em; text-transform:uppercase;
-  color:rgba(251,244,234,.78); font-weight:500; display:inline-flex; align-items:center; gap:.7em; margin-bottom:16px; }
-.cookie__eyebrow .tick{ width:7px; height:7px; border-radius:50%; background:var(--coral); }
-.cookie__txt{ font-size:16px; line-height:1.5; color:rgba(251,244,234,.86); margin-bottom:22px; }
-.cookie__row{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
-.cookie__ghost{ background:transparent; color:var(--creme); box-shadow:inset 0 0 0 1.5px rgba(251,244,234,.3); }
-.cookie__ghost:hover{ box-shadow:inset 0 0 0 1.5px var(--creme); transform:translateY(-2px); }
-.cookie__more{ margin-left:auto; font-size:15px; color:rgba(251,244,234,.6); text-decoration:underline; text-underline-offset:3px; transition:color .2s; }
-.cookie__more:hover{ color:var(--creme); }
-
-/* ============================================================
    SECURITY
    ============================================================ */
 
@@ -558,7 +573,7 @@ h1,h2,h3{ font-family:var(--display); font-weight:800; line-height:1.0; letter-s
 .foot__grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; }
 .foot__brand img{ height:26px; width:auto; margin-bottom:20px; }
 .foot__brand p{ font-size:15px; max-width:30ch; line-height:1.55; }
-.foot__col h4{ font-family:var(--mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:rgba(251,244,234,.45); margin-bottom:16px; font-weight:500; }
+.foot__col h2{ font-family:var(--mono); font-size:11.5px; line-height:1.2; letter-spacing:.1em; text-transform:uppercase; color:rgba(251,244,234,.45); margin-bottom:16px; font-weight:500; }
 .foot__col a{ display:block; font-size:15px; padding:5px 0; color:rgba(251,244,234,.78); transition:color .2s; }
 .foot__col a:hover{ color:var(--creme); }
 .foot__bot{ display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap;
@@ -627,8 +642,6 @@ h1,h2,h3{ font-family:var(--display); font-weight:800; line-height:1.0; letter-s
   .scene__cta{ width:100%; justify-content:center; }
   .hero__cta .btn, .closer .btn, .cta .btn{ width:100%; justify-content:center; }
   .security__badges{ grid-template-columns:1fr; }
-  .cookie__row .btn{ flex:1; justify-content:center; }
-  .cookie__more{ margin-left:0; width:100%; text-align:center; margin-top:4px; }
 }
 @media (max-width:860px){
   .journey.vertical .scene__inner{ grid-template-columns:1fr; gap:36px; }
@@ -1560,3 +1573,180 @@ a.rm:hover{ transform:translateY(-2px); box-shadow:var(--sh-hover); }
 .pk--feat .pk__ok{ background:var(--coral-soft); color:var(--coral-strong); }
 .pk__ok svg{ width:10px; height:10px; fill:none; stroke:currentColor; stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round; }
 .pk .btn{ justify-content:center; }
+
+/* ============================================================
+   HIGGSFIELD-PORT — merk-tokens uit export styles.css (@theme)
+   Bron: emmastudio-website-export.zip, src/styles.css, @theme-blok.
+   Geverifieerd tegen huisstijlhandboek v1.1 — waarden ONGEWIJZIGD,
+   op de toegestane correctie na (briefing v3 §3.3): waaks → waakt.
+
+   Stap 1 zette dit tijdelijk in een plat :root{}-blok omdat er nog
+   geen Tailwind was. Nu Tailwind (utilities-only) er is, staat het
+   weer in @theme — de vorm die de export bedoelde. @theme is de
+   ENKELE bron: het emit deze variabelen naar :root (zodat hand-
+   geschreven CSS var(--color-emma-*) blijft werken) ÉN genereert de
+   bijbehorende utilities (bg-emma-coral, text-emma-petrol,
+   rounded-emma-card, shadow-emma-card, font-display, ...). Het
+   stap-1 :root-duplicaat is daarom verwijderd, evenals de hand-
+   geschreven font-, rounded-emma- en shadow-emma-klassen (die
+   genereert @theme nu identiek — anders dubbele bron van waarheid).
+
+   Font-tokens dragen bewust GEEN emma-prefix (--font-display, niet
+   --font-emma-display): de export-markup en de Wordmark-component
+   gebruiken de klasse `font-display`, die Tailwind alleen uit een
+   token `--font-*` genereert. Stap 1's emma-prefix op de fonts is
+   hier gecorrigeerd naar de export-naam, anders krijgt de geporte
+   homepage geen lettertype.
+
+   De OUDE tokens (--coral, --m-boekt, ...) hierboven blijven
+   ongemoeid; de bestaande pagina's draaien daarop.
+   ============================================================ */
+@theme {
+  /* Kernkleuren */
+  --color-emma-coral: #EB5C43;
+  --color-emma-coral-deep: #E8462B;
+  --color-emma-coral-strong: #C23A1E;
+  --color-emma-petrol: #0E3D37;
+  --color-emma-petrol-light: #15514A;
+  --color-emma-ink: #1C1715;
+  --color-emma-ink-2: #4A423B;
+  --color-emma-creme: #FBF4EA;
+  --color-emma-paper: #FFFFFF;
+  --color-emma-line: #ECE2D6;
+  --color-emma-subtext: #6E655C;
+
+  /* Semantisch */
+  --color-emma-success: #1F6E47;
+  --color-emma-warning: #9A6512;
+  --color-emma-error: #A83C26;
+  --color-emma-info: #1F5E91;
+
+  /* Module accenten */
+  --color-emma-boekt: #16B79C;
+  --color-emma-waakt: #FFB23E;
+  --color-emma-loont: #4D6BF5;
+  --color-emma-vindt: #EB5C43;
+  --color-emma-coacht: #FF7FA3;
+  --color-emma-ziet: #9B6BE0;
+  --color-emma-schrijft: #1FA4E0;
+  --color-emma-promoot: #FF4D2E;
+
+  /* Soft tints */
+  --color-emma-coral-soft: #FBE3DD;
+  --color-emma-teal-soft: #DBF3EE;
+  --color-emma-warning-soft: #F8E9CF;
+  --color-emma-error-soft: #F6DDD5;
+  --color-emma-success-soft: #DBEEE3;
+
+  /* Typography — export-namen, genereren font-display/body/mono */
+  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: 'Hanken Grotesk', system-ui, sans-serif;
+  --font-mono: 'Spline Sans Mono', ui-monospace, monospace;
+
+  /* Radius */
+  --radius-emma-card: 16px;
+  --radius-emma-btn: 11px;
+  --radius-emma-pill: 999px;
+  --radius-emma-squircle: 14px;
+
+  /* Elevation */
+  --shadow-emma-card: 0 1px 2px rgba(28,23,21,.04), 0 1px 1px rgba(28,23,21,.03);
+  --shadow-emma-pop: 0 12px 32px rgba(28,23,21,.12), 0 2px 8px rgba(28,23,21,.06);
+  --shadow-emma-hover: 0 6px 20px rgba(28,23,21,.08);
+}
+
+/* em-* utilities die Tailwind niet kan genereren (multi-property).
+   Blijven hand-geschreven. */
+.em-num { font-variant-numeric: tabular-nums; }
+
+.em-label {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+@keyframes em-shimmer { 0% { background-position: -360px 0; } 100% { background-position: 360px 0; } }
+.em-skel {
+  background: linear-gradient(90deg, #EFE6D8 0%, #F6EFE3 50%, #EFE6D8 100%);
+  background-size: 720px 100%;
+  border-radius: 8px;
+  animation: em-shimmer 1.3s linear infinite;
+}
+
+.em-scroll::-webkit-scrollbar { width: 10px; height: 10px; }
+.em-scroll::-webkit-scrollbar-thumb { background: rgba(28,23,21,.14); border-radius: 99px; border: 3px solid transparent; background-clip: content-box; }
+.em-scroll::-webkit-scrollbar-thumb:hover { background: rgba(28,23,21,.24); background-clip: content-box; }
+.em-scroll::-webkit-scrollbar-track { background: transparent; }
+
+/* em-fade: in de Higgsfield-export gerefereerd (ProductShowcase, bij het
+   wisselen van screenshot) maar nooit gedefinieerd — een stille bug in de
+   export. Hier alsnog toegevoegd zodat de bedoelde fade werkt. Reduced-
+   motion neutraliseert 'm via de universele regel hieronder. */
+@keyframes em-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* prefers-reduced-motion, verbatim uit export (universele regel,
+   aanvullend op de bestaande scoped regels elders in dit bestand) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   HIGGSFIELD-PORT — fundament-stijlen uit export
+   Bron: emmastudio-website-export.zip, src/styles.css, regels 104-163.
+   De hand-geschreven font-, rounded-emma- en shadow-emma-utilities
+   die hier in stap 1 stonden, zijn verwijderd: @theme genereert ze nu
+   identiek, twee definities zou dubbele bron van waarheid zijn.
+   Wat blijft zijn de fundament-regels (html/body/::selection/
+   :focus-visible) als platte top-level regels — GEEN @layer base:
+   gelaagde CSS verliest altijd van niet-gelaagde, dus een los
+   @layer base zou :focus-visible juist verzwakken.
+   AFWIJKING VAN DE EXPORT, MET AKKOORD VAN TOM: de export gebruikt voor
+   ::selection color:#fff (puur wit). #fff staat niet in het huisstijl-
+   handboek — het palet kent Paper (#FFFFFF) als achtergrondkleur en
+   Crème (#FBF4EA) als merkkleur; op petrol is puur wit harder dan crème.
+   De bestaande site gebruikt al crème en is daarmee merkconform. Hier
+   bewust NIET de exportwaarde overgenomen: color:var(--creme) blijft.
+   ============================================================ */
+:root {
+  --radius: 0.625rem;
+}
+
+html {
+  background-color: var(--color-emma-creme);
+  color: var(--color-emma-ink);
+  color-scheme: light;
+  /* Ankers (bijv. /#prijs vanaf een andere pagina) niet onder de vaste
+     nav (64px) laten landen. */
+  scroll-padding-top: 5rem;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--color-emma-creme);
+  color: var(--color-emma-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-emma-coral);
+  color: var(--creme);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-emma-boekt);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+  outline: none;
+}

@@ -22,8 +22,8 @@ export async function POST(req: NextRequest) {
     method: 'POST',
     headers: { Authorization: `Bearer ${API_KEY}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      from: 'Emma Contact <hallo@emmastudio.nl>',
-      to: ['hallo@emmastudio.nl'],
+      from: 'Emma Contact <info@emmastudio.nl>',
+      to: ['info@emmastudio.nl'],
       reply_to: email,
       subject: `Contactformulier: ${name}`,
       text: `Van: ${name} <${email}>\n\n${message}`,

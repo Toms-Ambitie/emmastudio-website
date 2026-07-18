@@ -1,0 +1,51 @@
+<!doctype html><html lang="nl"><head><meta charset="utf-8">
+<link rel="stylesheet" href="shell.css"><style>
+.mapwrap{position:relative;height:300px;background:linear-gradient(135deg,#EAF1EC,#F1E8DC);overflow:hidden}
+.mapwrap .street{position:absolute;background:#fff;opacity:.7}
+.dotc{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:3px}
+.dotc .m{width:22px;height:22px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 2px 5px rgba(0,0,0,.2)}
+.dotc.me .m{background:#EB5C43} .dotc .m{background:#9B6BE0}
+.dotc .lbl{font-size:11px;font-weight:600;background:#fff;border:1px solid var(--line);border-radius:6px;padding:1px 6px;white-space:nowrap}
+</style></head><body><aside class="side"><div class="brand">emma<b>.</b></div><nav class="nav">
+      <a class=""><svg class="ico" viewBox="0 0 24 24" ><path d="M4 11l8-7 8 7v8.4a1.6 1.6 0 0 1-1.6 1.6H14v-6h-4v6H5.6A1.6 1.6 0 0 1 4 19.4Z"/></svg> Overzicht</a>
+      <a><svg class="ico" viewBox="0 0 24 24" ><path d="M22 13h-5.5l-2 3h-5l-2-3H2"/><path d="M5.2 5h13.6L22 13v5.4a1.6 1.6 0 0 1-1.6 1.6H3.6A1.6 1.6 0 0 1 2 18.4V13Z"/></svg> Inbox <span class="b">2</span></a>
+      <a><svg class="ico" viewBox="0 0 24 24" ><rect x="4" y="4" width="16" height="16" rx="3.2"/><path d="m8.6 12.2 2.4 2.4 4.8-4.8"/></svg> Taken <span class="b">6</span></a><div class="grp">Financiën</div><a class="sub">Facturen</a><div class="grp">Personeel</div><a class="sub">Loon</a><div class="grp">Groei</div><a class="sub">Kandidaten & klanten</a><div class="grp">Marketing</div><a class="sub">Campagnes</a><div class="grp">Signalen & Markt</div><a class="sub ">Signalen</a><a class="sub on">Markt</a><div class="grp">Relaties</div><a class="sub">Klanten</a></nav><div class="foot nav"><a>⚙ Instellingen</a><a>⤶ Uitloggen</a></div></aside><div class="main"><div class="top"><div class="search"><svg class="" viewBox="0 0 24 24"  ><circle cx="10.5" cy="10.5" r="6.4"/><path d="m20 20-4.8-4.8"/></svg> Vraag Emma of zoek iets… <span class="k">⌘K</span></div>
+    <div class="sp"></div><div class="bell"><svg class="" viewBox="0 0 24 24"  ><path d="M18 8.4a6 6 0 0 0-12 0c0 6.4-2.6 8-2.6 8h17.2S18 14.8 18 8.4Z"/><path d="M13.6 20a2 2 0 0 1-3.2 0"/></svg></div>
+    <div class="who"><span class="av">IS</span> Ilze Spannenberg ▾</div></div><div class="body"><div class="head"><div class="bi" style="background:#9B6BE01a;color:#9B6BE0"><svg class="" viewBox="0 0 24 24"  ><path d="M12 3l7 2.8v5.2c0 4.4-3 7.5-7 8.8-4-1.3-7-4.4-7-8.8V5.8L12 3Z" fill="none"/><path d="M2.5 12s3.5-6.5 9.5-6.5S21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="2.6"/></svg></div>
+    <div><div class="eyebrow" style="color:#9B6BE0">Signalen & Markt</div><div class="title">Markt</div><div class="sub">Wie er in jouw straal zit — automatisch via KvK en SBI-codes.</div></div>
+    <div class="act"><button class="btn">Radius: 5 km ▾</button><button class="btn primary">Vernieuwen</button></div></div>
+<div class="kpis">
+ <div class="kpi"><div class="l"><span class="ci" style="background:#9B6BE01a;color:#9B6BE0"><svg class="" viewBox="0 0 24 24"  ><circle cx="12" cy="12" r="8.6"/><path d="M12 12l5-3"/><circle cx="12" cy="12" r="1"/></svg></span>Concurrenten in beeld</div>
+    <div class="v">9</div><div class="n ">Binnen 5 km van Heeten</div></div>
+ <div class="kpi"><div class="l"><span class="ci" style="background:#9B6BE01a;color:#9B6BE0"><svg class="" viewBox="0 0 24 24"  ><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg></span>Automatisch gedetecteerd</div>
+    <div class="v">via KvK</div><div class="n ">SBI 96.02 · kappers</div></div>
+ <div class="kpi"><div class="l"><span class="ci" style="background:#9A65121a;color:#9A6512"><svg class="" viewBox="0 0 24 24"  ><circle cx="12" cy="12" r="8.6"/><path d="M12 7.8v5M12 16.1v.2"/></svg></span>Nieuw deze week</div>
+    <div class="v">1</div><div class="n warn">Emma signaleerde 1 nieuwe zaak</div></div>
+ <div class="kpi"><div class="l"><span class="ci" style="background:#1F6E471a;color:#1F6E47"><svg class="" viewBox="0 0 24 24"  ><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>Laatste controle</div>
+    <div class="v">zojuist</div><div class="n up">Wekelijkse monitoring actief</div></div>
+</div>
+<div class="grid2">
+ <div class="card"><div class="ch"><svg class="" viewBox="0 0 24 24"  ><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg> Concurrenten op de kaart <span class="lk">Volledig scherm</span></div>
+  <div class="mapwrap">
+   <div class="street" style="left:0;top:46%;width:100%;height:10px"></div>
+   <div class="street" style="left:38%;top:0;width:9px;height:100%"></div>
+   <div class="street" style="left:0;top:74%;width:100%;height:7px;transform:rotate(-4deg)"></div>
+   <div class="dotc me" style="left:39%;top:50%"><div class="m"></div><div class="lbl" style="border-color:#EB5C43;color:#EB5C43">Jij</div></div>
+   <div class="dotc" style="left:20%;top:30%"><div class="m"></div><div class="lbl">Bright Studio</div></div>
+   <div class="dotc" style="left:62%;top:38%"><div class="m"></div><div class="lbl">Vorm & Vakwerk</div></div>
+   <div class="dotc" style="left:70%;top:68%"><div class="m"></div><div class="lbl">Noord Creatief</div></div>
+   <div class="dotc" style="left:28%;top:70%"><div class="m"></div><div class="lbl">De Werkplaats</div></div>
+  </div>
+ </div>
+ <div class="card"><div class="ch"><svg class="" viewBox="0 0 24 24"  ><circle cx="9.2" cy="8.4" r="3.3"/><path d="M3.4 19.4a5.8 5.8 0 0 1 11.6 0"/><path d="M16 5.5a3.3 3.3 0 0 1 0 5.9M20.6 19.4a5.8 5.8 0 0 0-3.7-5.2"/></svg> In de buurt</div>
+  <div class="row"><div class="ri" style="background:#9B6BE01a;color:#9B6BE0;font-weight:700;font-family:var(--disp)">B</div>
+     <div class="rt"><div class="h">Bright Studio</div><div class="p">Heeten · 1,2 km</div></div><div class="rr"><span class="pill warn">Nieuw</span></div></div>
+  <div class="row"><div class="ri" style="background:#9B6BE01a;color:#9B6BE0;font-weight:700;font-family:var(--disp)">V</div>
+     <div class="rt"><div class="h">Vorm & Vakwerk</div><div class="p">Raalte · 2,4 km</div></div><div class="rr"><span class="pill neut">Bekend</span></div></div>
+  <div class="row"><div class="ri" style="background:#9B6BE01a;color:#9B6BE0;font-weight:700;font-family:var(--disp)">N</div>
+     <div class="rt"><div class="h">Noord Creatief</div><div class="p">Nieuw Heeten · 3,1 km</div></div><div class="rr"><span class="pill neut">Bekend</span></div></div>
+  <div class="row"><div class="ri" style="background:#9B6BE01a;color:#9B6BE0;font-weight:700;font-family:var(--disp)">W</div>
+     <div class="rt"><div class="h">De Werkplaats</div><div class="p">Heeten · 3,6 km</div></div><div class="rr"><span class="pill neut">Bekend</span></div></div>
+  
+ </div>
+</div></div></div></body></html>

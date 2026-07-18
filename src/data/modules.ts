@@ -35,6 +35,11 @@ export type ModuleData = {
   intro: string;
   heroVig: string;
   does: { title: string; sub: string; feats: ModuleFeat[] };
+  /** Optioneel: functies die nog niet bestaan maar wel op de roadmap staan,
+   *  apart van `does.feats` (dat alleen aantoonbare, live functies bevat).
+   *  Briefing v2 §4.1: voor EmmaZiet moeten prijsvergelijking, reviews-
+   *  analyse en sentiment-over-tijd hier staan, niet bij `does.feats`. */
+  roadmap?: { title: string; items: string[] };
   steps: { title: string; items: ModuleStep[] };
   faq: ModuleFaq[];
 };
@@ -56,13 +61,100 @@ export const MODULE_TAGS: Record<string, string> = {
   loont:    'Loon en contracten, zonder gedoe.',
   vindt:    'Vind klanten en kandidaten die passen.',
   coacht:   'Coaching en voortgang voor jou en je team.',
-  ziet:     'Zie waar je staat in de markt.',
+  ziet:     'Weet wat je concurrenten in de buurt doen.',
   schrijft: 'Teksten die klinken als jij.',
   promoot:  'Zie welke euro écht omzet oplevert.',
 };
 
 export const MODULE_PRICE: Record<string, number> = {
   boekt:9, waakt:9, loont:19, vindt:9, coacht:9, ziet:9, schrijft:19, promoot:19,
+};
+
+/** SEO-metadata per modulepagina (doc 08 / SEO-plan). Los van `head`/`intro`
+ *  zodat de <title> en meta-description zoekwoorden dragen zonder de merk-H1
+ *  of de hero-tekst te veranderen. `title` mikt kort (<60 tekens) met het
+ *  zoekwoord vooraan; `desc` ~150-160 tekens. Gebruikt in generateMetadata
+ *  van modules/[id]/page.tsx. */
+export const MODULE_SEO: Record<string, { title: string; desc: string }> = {
+  boekt: {
+    title: 'EmmaBoekt · e-Boekhouden makkelijker, facturen in een klik',
+    desc: 'EmmaBoekt legt een rustige schil over e-Boekhouden.nl. Facturen maken, bonnetjes scannen, offertes versturen. Sneller werken, je boekhouding blijft waar hij is.',
+  },
+  waakt: {
+    title: 'EmmaWaakt · Financieel dashboard en advies op je cijfers',
+    desc: 'EmmaWaakt is je financiële dashboard: doelen, prognoses en wekelijks advies op je eigen cijfers. Zie hoe je bedrijf ervoor staat, zonder Excel. Vanaf €9.',
+  },
+  loont: {
+    title: 'EmmaLoont · Loonadministratie zonder loonbureau, vanaf €19',
+    desc: 'EmmaLoont doet je loonadministratie: loon berekenen conform cao, loonstroken, contracten en verlof. De loonkosten belanden direct in je boekhouding.',
+  },
+  vindt: {
+    title: 'EmmaVindt · Personeel en klanten vinden in je eigen regio',
+    desc: 'EmmaVindt zoekt personeel of klanten in je regio via het openbare KvK-register, met een fit-score per match. Lokaal, licht, zonder dure recruitmenttool.',
+  },
+  coacht: {
+    title: 'EmmaCoacht · Medewerkers coachen met structuur en cijfers',
+    desc: 'EmmaCoacht maakt coaching consistent: scorecards per medewerker, gesprekken vastgelegd en een aanzet op echte cijfers. Jij voert het gesprek, Emma denkt mee.',
+  },
+  ziet: {
+    title: 'EmmaZiet · Concurrenten in de buurt in beeld, automatisch',
+    desc: 'EmmaZiet vindt je concurrenten in de buurt via het KvK-register, zet ze op de kaart en meldt het als er een bijkomt. Weet wat er om je heen gebeurt. Vanaf €9.',
+  },
+  schrijft: {
+    title: 'EmmaSchrijft · Content en blogs schrijven in je eigen stem',
+    desc: 'EmmaSchrijft schrijft je blogs, e-mails en posts in je eigen stem, SEO-geoptimaliseerd. Van idee tot gepubliceerd, met een planner. Content die eindelijk gebeurt.',
+  },
+  promoot: {
+    title: 'EmmaPromoot · Zelf adverteren op Google en Meta, op omzet',
+    desc: 'EmmaPromoot maakt je advertenties compleet: beeld, tekst, campagne en meting op je echte omzet. Adverteren op Google en Meta zonder marketingbureau.',
+  },
+};
+
+/** Contextuele interne links per modulepagina (doc 08 / SEO-plan, Deel 3 punt 4
+ *  en briefing punt 5: minimaal 3 beschrijvende links per pagina). Elke anchor
+ *  is een beschrijvende zin, geen "lees meer". Gerenderd als prose-alinea in de
+ *  body van modules/[id]/page.tsx, los van het "Meer van Emma"-kaartenraster. */
+export const MODULE_RELATED: Record<string, { lead: string; links: { href: string; anchor: string }[] }> = {
+  boekt: { lead: 'EmmaBoekt werkt goed samen met', links: [
+    { href: '/modules/waakt', anchor: 'EmmaWaakt om je cijfers in de gaten te houden' },
+    { href: '/modules/loont', anchor: 'EmmaLoont voor je loonadministratie' },
+    { href: '/vergelijk', anchor: 'de vergelijking met losse boekhoudtools' },
+  ] },
+  waakt: { lead: 'EmmaWaakt werkt goed samen met', links: [
+    { href: '/modules/boekt', anchor: 'EmmaBoekt als bron voor je cijfers' },
+    { href: '/modules/coacht', anchor: 'EmmaCoacht om je team te begeleiden' },
+    { href: '/modules/promoot', anchor: 'EmmaPromoot om je advertenties op omzet te meten' },
+  ] },
+  loont: { lead: 'EmmaLoont werkt goed samen met', links: [
+    { href: '/modules/boekt', anchor: 'EmmaBoekt zodat de loonkosten in je boekhouding landen' },
+    { href: '/modules/coacht', anchor: 'EmmaCoacht om je mensen te begeleiden' },
+    { href: '/modules/vindt', anchor: 'EmmaVindt om nieuw personeel te vinden' },
+  ] },
+  vindt: { lead: 'EmmaVindt werkt goed samen met', links: [
+    { href: '/modules/schrijft', anchor: 'EmmaSchrijft om je aanbod te schrijven' },
+    { href: '/modules/coacht', anchor: 'EmmaCoacht om nieuwe mensen in te werken' },
+    { href: '/modules/ziet', anchor: 'EmmaZiet om je marktgebied te kennen' },
+  ] },
+  coacht: { lead: 'EmmaCoacht werkt goed samen met', links: [
+    { href: '/modules/waakt', anchor: 'EmmaWaakt voor de cijfers onder je gesprekken' },
+    { href: '/modules/loont', anchor: 'EmmaLoont voor je personeelsadministratie' },
+    { href: '/modules/vindt', anchor: 'EmmaVindt om nieuwe mensen te vinden' },
+  ] },
+  ziet: { lead: 'EmmaZiet werkt goed samen met', links: [
+    { href: '/modules/vindt', anchor: 'EmmaVindt om nieuwe klanten te vinden' },
+    { href: '/modules/schrijft', anchor: 'EmmaSchrijft om je content te plannen' },
+    { href: '/pakketten', anchor: 'een branchepakket waarin EmmaZiet zit' },
+  ] },
+  schrijft: { lead: 'EmmaSchrijft werkt goed samen met', links: [
+    { href: '/modules/promoot', anchor: 'EmmaPromoot voor je betaalde advertenties' },
+    { href: '/modules/vindt', anchor: 'EmmaVindt om klanten te vinden' },
+    { href: '/modules/ziet', anchor: 'EmmaZiet om te weten wat de buurt doet' },
+  ] },
+  promoot: { lead: 'EmmaPromoot werkt goed samen met', links: [
+    { href: '/modules/schrijft', anchor: 'EmmaSchrijft voor je organische content' },
+    { href: '/modules/waakt', anchor: 'EmmaWaakt om op je echte omzet te meten' },
+    { href: '/modules/vindt', anchor: 'EmmaVindt om nieuwe klanten te vinden' },
+  ] },
 };
 
 export const MODULE_ORDER = ['boekt','waakt','loont','vindt','coacht','ziet','schrijft','promoot'];
@@ -72,19 +164,40 @@ export const MODULE_ORDER = ['boekt','waakt','loont','vindt','coacht','ziet','sc
  *  van "lanceert in juli" naar "nu live" met directe aanmeldknoppen. */
 export const LAUNCHED = false;
 
-/** Lanceerstatus per module. `live: true` = te gebruiken via app.emmastudio.nl;
- *  anders toont de site "komt in {when}". Eén bron van waarheid voor homepage,
- *  modulepagina's en footer. */
+/** Lanceerstatus per module. `live: true` = de software draait (bevestigd
+ *  in Supabase-prod); `when` is de roadmap-aanduiding voor wat nog niet
+ *  draait. Eén bron van waarheid voor homepage, modulepagina's en footer.
+ *
+ *  Briefing v2 §4.1 (bevestigd via Supabase-tabellen in stap 0): Boekt,
+ *  Waakt en Ziet zijn de drie "Live"-modules — Ziet gedeeltelijk (zie
+ *  ziet.roadmap voor wat nog ontbreekt). De overige vijf zijn "Binnenkort",
+ *  zonder datum (briefing: "Geen datums. [...] Een gemiste datum doet meer
+ *  schade dan geen datum.").
+ *
+ *  `live` staat hier bewust LOS van `LAUNCHED`. `live` beschrijft of de
+ *  software draait (een technisch feit — Supabase toont actieve tabellen
+ *  en een draaiende tenant voor boekt/waakt/ziet). `LAUNCHED` beschrijft
+ *  of de publieke signup open staat (een marketingbeslissing). Dat zijn
+ *  onafhankelijke assen; ze aan elkaar knopen zou betekenen dat het
+ *  omzetten van de signup-knop ook de modulestatus verandert, of andersom.
+ *  `when` optioneel maken (`when?: string`) breekt de typecheck van
+ *  `JourneySection.tsx` (regel 74, `return st.when;` met retourtype
+ *  `string`) — een component, dus dit rondje niet aan te passen. Daarom
+ *  blijft `when: string` verplicht en wordt het een lege string voor
+ *  boekt/waakt/ziet: een module die draait heeft geen "komt in ...", en
+ *  elke huidige plek die `.when` gebruikt doet dat al alleen wanneer
+ *  `!live` (geverifieerd), dus deze lege string wordt nergens zichtbaar
+ *  geïnterpoleerd. */
 export type ModuleStatus = { live: boolean; when: string };
 export const MODULE_STATUS: Record<string, ModuleStatus> = {
-  boekt:    { live: LAUNCHED, when: 'juli 2026' },
-  waakt:    { live: false, when: 'augustus 2026' },
-  loont:    { live: false, when: 'september 2026' },
-  vindt:    { live: false, when: 'oktober 2026' },
-  coacht:   { live: false, when: 'november 2026' },
-  ziet:     { live: false, when: 'december 2026' },
-  schrijft: { live: false, when: 'januari 2027' },
-  promoot:  { live: false, when: 'februari 2027' },
+  boekt:    { live: true, when: '' },
+  waakt:    { live: true, when: '' },
+  loont:    { live: false, when: 'Binnenkort' },
+  vindt:    { live: false, when: 'Binnenkort' },
+  coacht:   { live: false, when: 'Binnenkort' },
+  ziet:     { live: true, when: '' },
+  schrijft: { live: false, when: 'Binnenkort' },
+  promoot:  { live: false, when: 'Binnenkort' },
 };
 
 export const APP_URL = 'https://app.emmastudio.nl';
@@ -92,13 +205,13 @@ export const APP_URL = 'https://app.emmastudio.nl';
 export const MODULES: Record<string, ModuleData> = {
   boekt:{
     id:'boekt', name:'Boekt', num:'01', price:9, accentVar:'--m-boekt',
-    chip:'werkt bovenop e-Boekhouden.nl',
+    chip:'Werkt bovenop e-Boekhouden.nl',
     head:'Boekhouden zonder je boekhoudsoftware aan te raken.',
-    intro:'EmmaBoekt is de vriendelijke schil om e-Boekhouden.nl. Je boekhouding blijft gewoon daar staan, maar het werk doe je voortaan in Emma: bonnetjes doorsturen, facturen maken, offertes versturen. Sneller, overzichtelijker en een stuk leuker.',
+    intro:'EmmaBoekt is de schil om e-Boekhouden.nl. Je boekhouding blijft daar staan, maar het werk doe je in Emma: bonnetjes doorsturen, facturen maken, offertes versturen. Je logt bijna nooit meer rechtstreeks in.',
     heroVig:'boekt_inlezen',
     does:{
       title:'Wat EmmaBoekt voor je doet.',
-      sub:'De dagelijkse boekhouding, teruggebracht tot een paar rustige handelingen. Jij bevestigt, Emma doet het typewerk.',
+      sub:'De dagelijkse boekhouding, teruggebracht tot een paar handelingen. Emma doet het typewerk, jij bevestigt.',
       feats:[
         { tag:'Slim inboeken', h:'Bonnetjes en facturen leest Emma zelf.',
           p:'Stuur een bon of inkomende factuur naar je inbox. Emma herkent de leverancier, het bedrag en de BTW, stelt de juiste grootboekrekening voor en legt uit waarom. Jij controleert en klikt op Boeken. Niets wordt automatisch geboekt.',
@@ -113,12 +226,12 @@ export const MODULES: Record<string, ModuleData> = {
           list:['Dagelijks overzicht van omzet en openstaand','BTW voorbereid voor de aangifte','Vraag Emma: antwoorden uit je eigen cijfers'],
           vig:'boekt_btw' },
         { tag:'e-Boekhouden.nl blijft', h:'De motor blijft waar hij is.',
-          p:'EmmaBoekt werkt bovenop e-Boekhouden.nl. Alles wat je in Emma doet, staat gewoon in je boekhouding. Geen migratie, geen dubbel werk, en je accountant houdt toegang zoals altijd. SnelStart volgt binnenkort.',
+          p:'EmmaBoekt werkt bovenop e-Boekhouden.nl. Alles wat je in Emma doet, staat gewoon in je boekhouding. Geen migratie, geen dubbel werk, en je accountant houdt toegang zoals altijd. SnelStart en Moneybird staan op de planning.',
           list:['Koppeling in een paar minuten, sleutel versleuteld','Geen migratie, geen dubbel werk','Je accountant houdt gewoon toegang'],
           vig:'boekt_schil' },
       ],
     },
-    steps:{ title:'Zo rustig werkt het.', items:[
+    steps:{ title:'Zo werkt het.', items:[
       { n:'01 · KOPPEL', h:'Verbind e-Boekhouden.nl', p:'Koppel je boekhouding in een paar minuten. Je sleutel wordt versleuteld opgeslagen en nooit getoond.' },
       { n:'02 · STUUR DOOR', h:'Bonnen naar je inbox', p:'Stuur bonnetjes en inkomende facturen door of sleep ze in je inbox. Emma leest ze en zet een voorstel klaar.' },
       { n:'03 · BEVESTIG', h:'Jij houdt de regie', p:'Controleer het voorstel van Emma, pas aan waar nodig en klik op Boeken. Niets gebeurt zonder jou.' },
@@ -128,22 +241,22 @@ export const MODULES: Record<string, ModuleData> = {
       { q:'Vervangt EmmaBoekt e-Boekhouden.nl?', a:'Nee, juist niet. e-Boekhouden.nl blijft de motor van je boekhouding en alles blijft daar netjes staan. Emma is de schil eromheen die het dagelijkse werk makkelijker, sneller en leuker maakt. Je logt alleen bijna nooit meer rechtstreeks in.' },
       { q:'Boekt Emma dingen automatisch?', a:'Nee. Emma leest je bonnen en facturen, herkent de bedragen en stelt de juiste boeking voor, met de reden erbij. Jij controleert en bevestigt. Niets verdwijnt vanzelf in je administratie.' },
       { q:'Werkt het samen met mijn accountant?', a:'Ja. Je accountant houdt gewoon toegang tot e-Boekhouden.nl en blijft eindverantwoordelijk. Emma neemt het voorbereidende werk over, zodat er minder uren overblijven om te factureren.' },
-      { q:'Ik gebruik SnelStart. Kan ik ook meedoen?', a:'Bijna. EmmaBoekt start met e-Boekhouden.nl; de koppeling met SnelStart volgt binnenkort. Laat je e-mail achter en je hoort het zodra die klaar is.' },
-      { q:'Wat kost EmmaBoekt?', a:'€9 per maand, exclusief btw. Je probeert Emma eerst 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 15% korting.' },
+      { q:'Ik gebruik SnelStart. Kan ik ook meedoen?', a:'Nog niet. EmmaBoekt werkt met e-Boekhouden.nl. De koppelingen met SnelStart en Moneybird staan op de planning, maar hebben nog geen datum. Laat je e-mail achter, dan hoor je het als ze er zijn.' },
+      { q:'Wat kost EmmaBoekt?', a:'€9 per maand, exclusief btw. Je probeert Emma eerst 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 10% korting.' },
       { q:'Kan ik de boekhoudmodule nu al gebruiken?', a: LAUNCHED
           ? 'Ja. De boekhoudmodule is de eerste module van Emma en is nu te gebruiken. Maak een account aan op app.emmastudio.nl en je bent binnen een paar minuten gekoppeld.'
-          : 'Bijna. De boekhoudmodule lanceert in juli 2026. Laat je e-mail achter en je hoort het op de dag dat je kunt starten.' },
+          : 'EmmaBoekt draait al, maar de aanmelding staat nog niet open. Laat je e-mail achter, dan hoor je het op de dag dat je kunt starten.' },
     ],
   },
   waakt:{
     id:'waakt', name:'Waakt', num:'02', price:9, accentVar:'--m-waakt',
-    chip:'al bewezen in de praktijk',
+    chip:'Werkt op je eigen cijfers',
     head:'Het financiële brein van je zaak.',
-    intro:'Doelen, prognoses en een wekelijks advies op je échte cijfers. Emma kijkt mee en zegt het op tijd als iets afwijkt, zodat je kunt sturen in plaats van het achteraf te ontdekken.',
+    intro:'EmmaWaakt is je financiële dashboard: doelen, prognoses en een wekelijks advies op je eigen cijfers. Emma kijkt mee en zegt het op tijd als iets afwijkt, zodat je stuurt in plaats van het achteraf te ontdekken bij de boekhouder.',
     heroVig:'waakt_doel',
     does:{
       title:'Wat EmmaWaakt voor je doet.',
-      sub:'Je cijfers, vertaald naar rust en richting. Geen dashboard om in te verdwalen, maar de paar dingen die er deze week toe doen.',
+      sub:'Je cijfers, vertaald naar richting. Geen dashboard om in te verdwalen, maar de dingen die er deze week toe doen, met advies erbij.',
       feats:[
         { tag:'Doelen', h:'Stel doelen, op elk niveau.', p:'Bepaal doelen voor je bedrijf en per medewerker. Emma houdt de voortgang bij en laat rustig zien waar je staat.',
           list:['Doelen op bedrijfs- en teamniveau','Voortgang automatisch bijgehouden','Altijd actueel, zonder bijwerken'], vig:'waakt_signaal' },
@@ -161,9 +274,12 @@ export const MODULES: Record<string, ModuleData> = {
     ] },
     faq:[
       { q:'Heb ik verstand van cijfers nodig?', a:'Nee. EmmaWaakt is juist bedoeld voor ondernemers die geen analist willen worden. Je krijgt de paar inzichten die ertoe doen in gewone taal, met een concrete suggestie erbij.' },
-      { q:'Werkt EmmaWaakt samen met EmmaBoekt?', a:'Ja. EmmaWaakt gebruikt je boekhoudcijfers uit EmmaBoekt als basis. Samen vormen ze het financiële hart van je onderneming, maar je kunt ook starten met alleen Waakt.' },
-      { q:'Wat kost EmmaWaakt?', a:'EmmaWaakt is bij de lancering los te gebruiken vanaf €9 per maand, exclusief btw. Het zit ook in elk branche-pakket. Maandelijks opzegbaar.' },
-      { q:'Kan ik het nu al gebruiken?', a:'Nog niet. We bouwen Emma op dit moment als platform; de aanpak is 18 maanden bewezen bij salon Blondes Incognito. Laat je e-mail achter en je hoort het als eerste.' },
+      { q:'Werkt EmmaWaakt samen met EmmaBoekt?', a:'Ja. Heb je EmmaBoekt, dan leest Waakt die cijfers direct mee. Heb je Boekt niet, dan upload je je omzet en kosten zelf. Waakt werkt allebei de manieren.' },
+      { q:'Wat kost EmmaWaakt?', a:'€9 per maand, exclusief btw. Je probeert Emma eerst 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 10% korting.' },
+      { q:'Kan ik het nu al gebruiken?', a: LAUNCHED
+          ? 'Ja. EmmaWaakt is nu te gebruiken. Maak een account aan op app.emmastudio.nl.'
+          : 'EmmaWaakt draait al, maar de aanmelding staat nog niet open. Laat je e-mail achter, dan hoor je het op de dag dat je kunt starten.' },
+      { q:'Verzint Emma cijfers als er geen data is?', a:'Nee. Als er geen gegevens zijn, zie je dat. Geen nul waar niets staat, geen schatting die eruitziet als een meting. Emma rekent niet zelf: de database rekent, Emma vertelt wat eruit komt.' },
     ],
   },
   loont:{
@@ -174,7 +290,7 @@ export const MODULES: Record<string, ModuleData> = {
     heroVig:'loont_strook',
     does:{
       title:'Wat EmmaLoont voor je doet.',
-      sub:'Alles rond je personeel, rustig geregeld. Geen los loonbureau meer, geen losse mappen met contracten.',
+      sub:'Alles rond je personeel, rustig geregeld. Van contract tot loonstrook, en de loonkosten belanden meteen in je boekhouding.',
       feats:[
         { tag:'Salaris', h:'Loonstroken die kloppen.', p:'Salarisadministratie met een CAO-engine voor jouw branche. Proforma\'s en loonstroken, klaar als nette PDF.',
           list:['CAO-engine voor o.a. Kappers en Fysio','Proforma\'s en loonstroken als PDF','Werkgeverslasten automatisch berekend'], vig:'loont_strook' },
@@ -182,6 +298,8 @@ export const MODULES: Record<string, ModuleData> = {
           list:['Arbeidsovereenkomsten op maat','Digitaal ondertekenen','Alles netjes bewaard op één plek'], vig:'loont_contract' },
         { tag:'Verlof & verzuim', h:'Saldo dat zichzelf bijhoudt.', p:'Verlof- en verzuimadministratie met een automatisch pro-rata saldo, zodat je nooit hoeft te rekenen.',
           list:['Verlofsaldo automatisch berekend','Verzuim overzichtelijk bijgehouden','Altijd actueel per medewerker'], vig:'loont_verlof' },
+        { tag:'Wel en niet', h:'Wat EmmaLoont wel en niet doet.', p:'EmmaLoont rekent het loon, maakt de loonstroken, regelt contracten en verlof, en boekt de loonkosten in je boekhouding. De loonaangifte bij de Belastingdienst doe je zelf via Mijn Belastingdienst Zakelijk, of via je administratiekantoor. Die koppeling staat op de roadmap.',
+          list:['Loon, loonstroken, contracten en verlof: ja','Loonkosten in je boekhouding: ja','Loonaangifte bij de Belastingdienst: nog niet'], vig:'loont_strook' },
       ],
     },
     steps:{ title:'Zo simpel werkt het.', items:[
@@ -193,8 +311,8 @@ export const MODULES: Record<string, ModuleData> = {
     faq:[
       { q:'Voor wie is EmmaLoont bedoeld?', a:'Voor ondernemers met één of meer medewerkers, in salons, zorgpraktijken en kleine teams. Werk je alleen, dan heb je deze module simpelweg niet nodig.' },
       { q:'Welke CAO\'s ondersteunt het?', a:'De CAO-engine is opgezet voor onder andere Kappers, Schoonheidsspecialisten, tandartsen (KNMT) en fysiotherapie. Welke CAO\'s er bij de lancering klaarstaan, communiceren we vooraf.' },
-      { q:'Vervangt het mijn loonbureau?', a:'Voor veel ondernemers wel. EmmaLoont neemt de loonadministratie over, inclusief loonstroken en werkgeverslasten. Twijfel je over een specifieke situatie, dan kun je je accountant laten meekijken.' },
-      { q:'Wat kost EmmaLoont en kan ik het nu gebruiken?', a:'EmmaLoont is bij de lancering los te gebruiken vanaf €19 per maand, exclusief btw, en zit in de pakketten voor Salons en Zorg. We bouwen het platform nu; laat je e-mail achter voor de start.' },
+      { q:'Vervangt het mijn loonbureau?', a:'Grotendeels. EmmaLoont rekent het loon, maakt de loonstroken, regelt contracten en verlof, en boekt de loonkosten in je boekhouding. Alleen de loonaangifte doe je zelf of via je administratiekantoor. Wat wel en niet inbegrepen is, lees je hierboven.' },
+      { q:'Wat kost EmmaLoont en kan ik het nu gebruiken?', a:'€19 per maand, exclusief btw, met 10% korting bij jaarbetaling. EmmaLoont is nog in ontwikkeling. Laat je e-mail achter, dan hoor je het zodra je kunt starten.' },
     ],
   },
   vindt:{
@@ -223,9 +341,9 @@ export const MODULES: Record<string, ModuleData> = {
     ] },
     faq:[
       { q:'Is dit een vacaturebank?', a:'Nee. EmmaVindt helpt je actief ontdekken wie in jouw buurt past, in plaats van te wachten op reacties. In sales-modus werkt het net zo, maar dan voor potentiële klanten.' },
-      { q:'Hoe zit het met privacy?', a:'EmmaVindt is opgezet met de AVG als uitgangspunt, inclusief een audit-log die bijhoudt wat er gebeurt. Jij houdt zicht en controle op wie je benadert.' },
+      { q:'Hoe zit het met privacy?', a:'De gegevens komen uit het openbare KvK-register en openbare bedrijfswebsites. Geen LinkedIn, geen social media. Dat mag niet volgens hun voorwaarden en brengt je account in gevaar. EmmaVindt werkt met de AVG als uitgangspunt en houdt met een audit-log bij wie je benadert.' },
       { q:'Voor wie is het handig?', a:'Voor ondernemers die personeel werven, zoals salons en zorgpraktijken, en voor wie nieuwe klanten zoekt, zoals ZZP\'ers en kleine teams.' },
-      { q:'Wat kost het en kan ik het nu gebruiken?', a:'EmmaVindt is bij de lancering los te gebruiken vanaf €9 per maand, exclusief btw. We bouwen het platform nu; laat je e-mail achter om als eerste te starten.' },
+      { q:'Wat kost het en kan ik het nu gebruiken?', a:'€9 per maand, exclusief btw, met 10% korting bij jaarbetaling. EmmaVindt is nog in ontwikkeling. Laat je e-mail achter, dan hoor je het zodra je kunt starten.' },
     ],
   },
   coacht:{
@@ -256,38 +374,52 @@ export const MODULES: Record<string, ModuleData> = {
       { q:'Voor wie is EmmaCoacht?', a:'Voor ondernemers met personeel dat ze willen ontwikkelen, zoals salons en zorgpraktijken. Werk je alleen, dan heb je deze module niet nodig.' },
       { q:'Waar komen de coachvragen vandaan?', a:'Uit de prestatiecijfers in EmmaWaakt. Loopt de productverkoop van iemand terug, dan stelt Emma voor daar het gesprek over te voeren. Jij bepaalt wat je ermee doet.' },
       { q:'Werkt het samen met de andere modules?', a:'Ja. EmmaCoacht leunt op EmmaWaakt voor de cijfers en sluit aan op EmmaLoont voor je personeelsadministratie. Je kunt ook met alleen Coacht beginnen.' },
-      { q:'Wat kost het en kan ik het nu gebruiken?', a:'EmmaCoacht is bij de lancering los te gebruiken vanaf €9 per maand, exclusief btw. We bouwen het platform nu; laat je e-mail achter voor de start.' },
+      { q:'Wat kost het en kan ik het nu gebruiken?', a:'€9 per maand, exclusief btw, met 10% korting bij jaarbetaling. EmmaCoacht is nog in ontwikkeling. Laat je e-mail achter, dan hoor je het zodra je kunt starten.' },
     ],
   },
   ziet:{
     id:'ziet', name:'Ziet', num:'06', price:9, accentVar:'--m-ziet',
-    chip:'lokale markt in beeld',
-    head:'Zie waar je staat in de markt.',
-    intro:'Markt-intelligentie die meedenkt. Hoe verhouden je prijzen zich tot de buurt, wie zijn je concurrenten, en wat zeggen je reviews? Eén keer per maand rustig samengevat.',
-    heroVig:'ziet_prijs',
+    chip:'Op basis van het KvK-register',
+    head:'Weet wat je concurrenten in de buurt doen.',
+    intro:'Emma zoekt in het KvK-register wie er in jouw vak binnen een straal om je heen zit, zet ze op de kaart, en zegt het als er iemand bijkomt. Jij bepaalt wie er op je lijst staat.',
+    heroVig:'ziet_concurrent',
     does:{
       title:'Wat EmmaZiet voor je doet.',
-      sub:'Je hoeft niet zelf de buurt af te speuren. Emma houdt de markt in de gaten en vat samen wat ertoe doet.',
+      sub:'Emma zoekt, jij kiest. De lijst is een voorstel, geen oordeel.',
       feats:[
-        { tag:'Prijsvergelijking', h:'Weet of je goed zit.', p:'Vergelijk je prijzen per dienst met vergelijkbare bedrijven in de buurt, zodat je bewust kunt kiezen.',
-          list:['Prijsvergelijking per dienst','Binnen jouw straal','Bewust kiezen, niet gokken'], vig:'ziet_prijs' },
-        { tag:'Concurrenten', h:'Weet wie er om je heen zit.', p:'Automatische detectie van concurrenten in de buurt, met een rustige maandelijkse update.',
-          list:['Concurrenten automatisch in kaart','Op basis van locatie en branche','Maandelijkse positie-update'], vig:'ziet_concurrent' },
-        { tag:'Reviews', h:'Hoor wat klanten zeggen.', p:'Je reviews verzameld en samengevat tot thema\'s, zodat je ziet waar je sterk in bent en wat beter kan.',
-          list:['Reviews op één plek','Samengevat tot thema\'s','Zie je sterke punten en kansen'], vig:'ziet_review' },
+        { tag:'Concurrent-detectie', h:'Emma zoekt, jij kiest.',
+          p:'Op basis van je SBI-code en een straal die je zelf instelt, zoekt Emma in het KvK-register wie er in jouw vak zit. Je krijgt een lijst en bepaalt zelf wie erop blijft staan.',
+          list:['Zoekt op SBI-code binnen jouw straal','Straal zelf instelbaar, per kilometer','Jij bepaalt wie op je lijst staat'],
+          vig:'ziet_concurrent' },
+        { tag:'Kaartvisualisatie', h:'Zie in één blik waar ze zitten.',
+          p:'Elke concurrent die je selecteert, staat op de kaart. Je ziet in één oogopslag wie er dichtbij zit en wie aan de rand van je gebied.',
+          list:['Alle geselecteerde concurrenten op één kaart','Je eigen adres uitgesloten','Klik door naar wat Emma van ze weet'],
+          vig:'ziet_concurrent' },
+        { tag:'Wekelijkse monitoring', h:'Emma let op, ook als jij dat niet doet.',
+          p:'Elke week kijkt Emma of er iemand nieuw is in jouw gebied. Zo ja, dan hoor je het. Niet elke week een mail, alleen als er echt iets verandert.',
+          list:['Wekelijkse controle op nieuwe inschrijvingen','Melding alleen als er iets verandert','Komt binnen bij je andere signalen'],
+          vig:'ziet_concurrent' },
       ],
     },
-    steps:{ title:'Zo zie je de markt.', items:[
-      { n:'01 · STEL IN', h:'Geef je werkgebied', p:'Bepaal je locatie en diensten. Emma weet waar en wat ze moet vergelijken.' },
-      { n:'02 · VERZAMEL', h:'Emma kijkt rond', p:'Prijzen, concurrenten en reviews in de buurt worden automatisch verzameld.' },
-      { n:'03 · SAMENVATTING', h:'Krijg het overzicht', p:'Eén keer per maand een rustige samenvatting van waar je staat.' },
-      { n:'04 · BESLIS', h:'Doe er iets mee', p:'Pas je prijzen aan, speel in op een kans, of laat het juist zoals het is.' },
+    roadmap:{
+      title:'Op de roadmap',
+      items:['Prijsvergelijking per dienst','Reviews-analyse per thema','Sentiment-over-tijd','Maandelijkse positie-update'],
+    },
+    steps:{ title:'Zo werkt het.', items:[
+      { n:'01 · STEL IN', h:'Geef je werkgebied', p:'Bepaal je locatie en de radius waarbinnen Emma moet zoeken.' },
+      { n:'02 · DETECTEER', h:'Emma zoekt automatisch', p:'Concurrenten in de buurt worden via KvK en SBI-codes automatisch gevonden.' },
+      { n:'03 · KIES', h:'Jij kiest', p:'Wie hoort erbij, wie niet. Emma doet een voorstel op basis van het register, jij weet wie je echte concurrent is.' },
+      { n:'04 · MONITORT', h:'Emma houdt bij', p:'Elke week een controle. Komt er iemand bij, dan hoor je het. En op de kaart zie je meteen waar.' },
     ] },
     faq:[
-      { q:'Hoe komt Emma aan deze gegevens?', a:'Uit openbare bronnen, zoals bedrijfsregisters en openbare reviews in jouw omgeving. EmmaZiet vat dat samen tot een rustig overzicht.' },
-      { q:'Voor wie is het vooral nuttig?', a:'Voor lokale dienstverleners zoals salons en zorgpraktijken, die willen weten hoe ze zich verhouden tot de buurt zonder er zelf onderzoek naar te doen.' },
-      { q:'Word ik er niet onrustig van?', a:'Daar is het juist niet voor. EmmaZiet stuurt geen alarmen, maar één rustige update per maand met wat er echt toe doet.' },
-      { q:'Wat kost het en kan ik het nu gebruiken?', a:'EmmaZiet is bij de lancering los te gebruiken vanaf €9 per maand, exclusief btw. We bouwen het platform nu; laat je e-mail achter voor de start.' },
+      { q:'Hoe komt Emma aan deze gegevens?', a:'De concurrenten komen uit het openbare KvK-register, op basis van je SBI-code en een straal die je zelf instelt. Reviews komen van Google. Geen social media, geen LinkedIn. Alleen openbare bronnen.' },
+      { q:'Voor wie is het vooral nuttig?', a:'Voor lokale dienstverleners zoals salons en zorgpraktijken, die willen weten wie er in hun buurt actief is zonder daar zelf naar te hoeven zoeken.' },
+      { q:'Word ik er niet onrustig van?', a:'Nee. EmmaZiet stuurt geen doorlopende alarmen, alleen een signaal als er daadwerkelijk een nieuwe concurrent bijkomt.' },
+      { q:'Komt er nog meer bij?', a:'Ja. Prijsvergelijking per dienst, reviews-analyse per thema, sentiment over tijd en een maandelijkse positie-update staan op de roadmap. Nu draait EmmaZiet op concurrent-detectie, de kaart en wekelijkse monitoring.' },
+      { q:'Wat kost EmmaZiet?', a:'€9 per maand, exclusief btw. Je probeert het eerst 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 10% korting.' },
+      { q:'Kan ik EmmaZiet nu al gebruiken?', a: LAUNCHED
+          ? 'Ja. EmmaZiet is nu te gebruiken. Maak een account aan op app.emmastudio.nl.'
+          : 'EmmaZiet draait al, maar de aanmelding staat nog niet open. Laat je e-mail achter, dan hoor je het op de dag dat je kunt starten.' },
     ],
   },
   schrijft:{
@@ -301,11 +433,13 @@ export const MODULES: Record<string, ModuleData> = {
       sub:'Van leeg scherm naar geplande content, zonder dat het uren kost of klinkt als een ander. Jij houdt de eindredactie.',
       feats:[
         { tag:'Eén planner', h:'Al je content op één plek.', p:'Een centrale planner voor blogs, social en e-mail, zodat je overzicht houdt over wat wanneer uitgaat.',
-          list:['Blog, social en e-mail samen','Kanban van idee tot gepland','Koppelt aan WordPress, Instagram, Mailchimp'], vig:'schrijft_kanban' },
+          list:['Blog, social en e-mail samen','Kanban van idee tot gepland','Publiceert naar WordPress en Mailchimp, plant voor Instagram'], vig:'schrijft_kanban' },
         { tag:'Jouw stem', h:'Geschreven zoals jij praat.', p:'Emma leert de toon van je bedrijf, zodat concepten klinken als jij, niet als een willekeurige tekst.',
           list:['Leert de stem van je bedrijf','Concepten als startpunt','Jij doet de eindredactie'], vig:'schrijft_stem' },
         { tag:'SEO', h:'Gevonden worden.', p:'SEO-teksten op basis van echte zoekwoorddata, zodat je content ook gevonden wordt.',
           list:['Op basis van zoekwoorddata','Praktische SEO, geen trucs','Klaar om te plannen'], vig:'schrijft_kanalen' },
+        { tag:'Organisch', h:'Schrijven, geen adverteren.', p:'EmmaSchrijft gaat over wat je onbetaald publiceert: blogs, e-mails en posts. Betaald adverteren, met advertentiebeelden en campagnes, is EmmaPromoot. En doorwrochte social-visuals horen er bewust niet bij: Emma maakt een eenvoudige visual bij je tekst, geen volledige beeldproductie.',
+          list:['Blogs, e-mail en posts: ja','Betaald adverteren: dat is EmmaPromoot','Eenvoudige visuals, geen social-beeldproductie'], vig:'schrijft_stem' },
       ],
     },
     steps:{ title:'Zo plan je je content.', items:[
@@ -316,14 +450,14 @@ export const MODULES: Record<string, ModuleData> = {
     ] },
     faq:[
       { q:'Schrijft Emma alles voor me?', a:'Emma maakt concepten als startpunt, in de stem van je bedrijf. Jij houdt altijd de eindredactie, zodat het klopt en klinkt als jij. Het neemt het lege scherm weg, niet je stem.' },
-      { q:'Met welke kanalen werkt het?', a:'EmmaSchrijft is opgezet om aan te sluiten op onder andere WordPress, Instagram, Facebook en Mailchimp, met SEO op basis van zoekwoorddata. Welke koppelingen bij de lancering klaarstaan, communiceren we vooraf.' },
+      { q:'Met welke kanalen werkt het?', a:'EmmaSchrijft publiceert naar WordPress en Mailchimp, met SEO op basis van zoekwoorddata. Social zoals Instagram plan je in de planner en publiceer je zelf. Welke koppelingen bij de lancering klaarstaan, communiceren we vooraf.' },
       { q:'Voor wie is het handig?', a:'Voor elke ondernemer die regelmatig content maakt maar er weinig tijd voor heeft, in alle branches en pakketten.' },
-      { q:'Wat kost het en kan ik het nu gebruiken?', a:'EmmaSchrijft is bij de lancering los te gebruiken vanaf €19 per maand, exclusief btw. We bouwen het platform nu; laat je e-mail achter voor de start.' },
+      { q:'Wat kost het en kan ik het nu gebruiken?', a:'€19 per maand, exclusief btw, met 10% korting bij jaarbetaling. EmmaSchrijft is nog in ontwikkeling. Laat je e-mail achter, dan hoor je het zodra je kunt starten.' },
     ],
   },
   promoot:{
     id:'promoot', name:'Promoot', num:'08', price:19, accentVar:'--m-promoot',
-    chip:'nieuw bij de lancering',
+    chip:'gekoppeld aan je echte omzet',
     head:'Zie welke euro écht werkt.',
     intro:'Alles rond geld in marketing. Google en Meta Ads in één overzicht, gekoppeld aan je cijfers, zodat je ziet welke advertentie echt omzet oplevert en welke niet.',
     heroVig:'promoot_attributie',
@@ -337,6 +471,8 @@ export const MODULES: Record<string, ModuleData> = {
           list:['Toegerekend aan je omzet','Inzicht per dienst','Stop met gokken op gevoel'], vig:'promoot_attributie' },
         { tag:'Budgetadvies', h:'Zet je geld waar het werkt.', p:'Een advies voor je budgetverdeling, direct gekoppeld aan de cijfers uit EmmaWaakt.',
           list:['Advies voor je budgetverdeling','Gekoppeld aan EmmaWaakt','Jij beslist, Emma onderbouwt'], vig:'promoot_budget' },
+        { tag:'Creatives', h:'Emma maakt de hele advertentie.', p:'Beeld én tekst, per platform op maat. Je kunt geen campagne draaien zonder creative, dus EmmaPromoot maakt ze: een advertentiebeeld en een pakkende tekst, klaar om te draaien op Google of Meta. Dat is het verschil met een dashboard dat alleen cijfers laat zien.',
+          list:['Advertentiebeeld en -tekst','Per platform op maat','Klaar om te draaien op Google en Meta'], vig:'promoot_kanalen' },
       ],
     },
     steps:{ title:'Zo adverteer je gericht.', items:[
@@ -346,10 +482,10 @@ export const MODULES: Record<string, ModuleData> = {
       { n:'04 · VERDEEL', h:'Stuur je budget', p:'Volg het advies om je budget te zetten waar het rendeert, of kies zelf.' },
     ] },
     faq:[
-      { q:'Is EmmaPromoot ook bewezen bij Blondes Incognito?', a:'Dit is de nieuwste van de acht modules en de enige die nog niet 18 maanden in de praktijk draaide. We bouwen hem nu mee op, op hetzelfde fundament als de rest. We zijn daar liever eerlijk over.' },
+      { q:'Is EmmaPromoot ook bewezen bij Blondes Incognito?', a:'EmmaPromoot is de enige module die nog niet 18 maanden in de praktijk draaide. De aanpak is beproefd, maar deze module bouwen we nu opnieuw op.' },
       { q:'Met welke platforms werkt het?', a:'EmmaPromoot is opgezet voor Google Ads en Meta Ads, met attributie op basis van je webstatistieken. Welke koppelingen bij de lancering klaarstaan, communiceren we vooraf.' },
-      { q:'Voor wie is het bedoeld?', a:'Voor ondernemers die advertentiebudget inzetten en willen weten of het rendeert, in plaats van blind door te betalen.' },
-      { q:'Wat kost het en kan ik het nu gebruiken?', a:'EmmaPromoot is bij de lancering los te gebruiken vanaf €19 per maand, exclusief btw. We bouwen het platform nu; laat je e-mail achter om als eerste te starten.' },
+      { q:'Voor wie is het bedoeld?', a:'Voor ondernemers met een actief advertentiebudget. Heb je dat niet, dan is dit niet de juiste module.' },
+      { q:'Wat kost het en kan ik het nu gebruiken?', a:'€19 per maand, exclusief btw, met 10% korting bij jaarbetaling. Het advertentiebudget zelf betaal je rechtstreeks aan Google of Meta. EmmaPromoot is nog in ontwikkeling. Laat je e-mail achter, dan hoor je het zodra je kunt starten.' },
     ],
   },
 };
@@ -433,18 +569,10 @@ export const VIGNETTES: Record<string, string> = {
     <div class="vig__row vig__row--head"><span class="vig__dot"></span> Voorbereiding</div>
     <div class="vig__insight"><span class="vig__spark">◆</span> Suggestie: <b>vraag naar productverkoop</b>, die liep terug</div>
     <div class="vig__li" style="margin-top:8px"><span class="vig__tick">✓</span><span>Op basis van je eigen cijfers</span></div>`,
-  ziet_prijs:`
-    <div class="vig__row vig__row--head"><span class="vig__dot"></span> Jouw prijs vs. de markt</div>
-    <div class="vig__scale"><span class="vig__band"></span><span class="vig__me" style="left:58%">jij</span><span class="vig__avg" style="left:50%"></span></div>
-    <div class="vig__legend"><span><i class="vig__lg vig__lg--me"></i> jouw tarief</span><span><i class="vig__lg"></i> gemiddelde in de buurt</span></div>`,
-  ziet_review:`
-    <div class="vig__row vig__row--head"><span class="vig__dot"></span> Reviews</div>
-    <div class="vig__li"><span class="vig__tick">✓</span><span>Jouw reviewscore</span><b class="vig__pill">sterk</b></div>
-    <div class="vig__insight"><span class="vig__spark">◆</span> Veel genoemd: <b>vriendelijkheid</b> en <b>resultaat</b></div>`,
   ziet_concurrent:`
     <div class="vig__row vig__row--head"><span class="vig__dot"></span> In de buurt</div>
     <div class="vig__li"><span class="vig__tick">✓</span><span>Concurrenten in kaart</span><b class="vig__pill">2 km</b></div>
-    <div class="vig__li"><span class="vig__tick">✓</span><span>Maandelijkse update</span><b class="vig__pill">rustig</b></div>`,
+    <div class="vig__li"><span class="vig__tick">✓</span><span>Wekelijkse update</span><b class="vig__pill">rustig</b></div>`,
   schrijft_kanban:`
     <div class="vig__row vig__row--head"><span class="vig__dot"></span> Contentplanner</div>
     <div class="vig__kan">

@@ -196,15 +196,17 @@ Emma heeft 8 modules — elke module is een Nederlands werkwoord. CamelCase: `Em
 
 ## 9b. Lanceerstatus (juli 2026) — leidend voor alle site-teksten
 
-**De boekhoudmodule lanceert in juli 2026** (volgende stap: livegang). De site heeft een **lanceerschakelaar**: `LAUNCHED` in `src/data/modules.ts`. Staat die op `false`, dan toont de site "lanceert in juli" met e-mailcapture; op `true` schakelen alle CTA's naar "Start 14 dagen gratis" richting **app.emmastudio.nl**. Bij livegang is de flip dus één regel.
+**`LAUNCHED`** in `src/data/modules.ts` is de publieke signup-schakelaar, niet de modulestatus. Staat die op `false`, dan toont de site "lanceert in juli" met e-mailcapture; op `true` schakelen de CTA's naar "Start 14 dagen gratis" richting **app.emmastudio.nl**. `LAUNCHED` zegt alleen of de signup open staat, niet of een module technisch draait (dat regelt `MODULE_STATUS`) en niet of een module op dit moment koopbaar is (`plans.purchasable` in Supabase, nu voor alle modules `false`). Draaien, koopbaar zijn en publiek gelanceerd zijn zijn drie onafhankelijke assen.
 
 **Naamgeving:** EmmaBoekt is een communicatietitel, geen productnaam. Het product is EmmaStudio met een boekhoudmodule. Defensieve domeinen zoals emmaboekt.nl verwijzen naar taakgerichte URL's (emmastudio.nl/boekhouding, redirect in next.config.ts).
 
 **Positionering EmmaBoekt:** de vriendelijke schil om **e-Boekhouden.nl**. e-Boekhouden.nl blijft de motor van de boekhouding; Emma maakt het dagelijkse werk makkelijker, sneller en leuker (bonnen slim inboeken, facturen en offertes maken, openstaande posten, Vraag Emma). SnelStart-koppeling volgt later. Kernbelofte: **Emma stelt voor, jij bevestigt — niets wordt automatisch geboekt.**
 
-**Roadmap overige modules** (bron van waarheid: `MODULE_STATUS` in `src/data/modules.ts`):
-Waakt aug 2026 · Loont sep 2026 · Vindt okt 2026 · Coacht nov 2026 · Ziet dec 2026 · Schrijft jan 2027 · Promoot feb 2027 · pakketten voorjaar 2027.
-Je betaalt per module; niet-live modules tonen "komt in [maand]" + wachtlijstformulier.
+**Modulestatus** (bron van waarheid: `MODULE_STATUS` in `src/data/modules.ts`, bevestigd via de Supabase-tabellen in stap 0 van de herbouw):
+- **Live**, de software draait: EmmaBoekt, EmmaWaakt, EmmaZiet. Ziet is gedeeltelijk live: alleen concurrent-detectie, kaartvisualisatie en wekelijkse monitoring. Prijsvergelijking, reviews-analyse en sentiment-over-tijd staan bij Ziet apart op de roadmap.
+- **Roadmap, zonder datum**: EmmaLoont, EmmaVindt, EmmaCoacht, EmmaSchrijft, EmmaPromoot. Je betaalt per module; niet-live modules tonen "Binnenkort", geen maand: een gemiste datum doet meer schade dan geen datum. Pakketten volgen zodra alle acht modules live zijn.
+
+"Live" betekent hier niet "koopbaar". Er is op dit moment geen enkele module af te rekenen: de signup staat server-side dicht en `plans.purchasable` staat op `false`. Draaien en verkopen zijn twee aparte assen.
 
 **Eigenaar Blondes Incognito (testimonial): Ilze Spannenberg, Heeten.**
 
