@@ -203,7 +203,7 @@ export const MODULES: Record<string, ModuleData> = {
     heroVig:'loont_strook',
     does:{
       title:'Wat EmmaLoont voor je doet.',
-      sub:'Alles rond je personeel, rustig geregeld. Geen los loonbureau meer, geen losse mappen met contracten.',
+      sub:'Alles rond je personeel, rustig geregeld. Van contract tot loonstrook, en de loonkosten belanden meteen in je boekhouding.',
       feats:[
         { tag:'Salaris', h:'Loonstroken die kloppen.', p:'Salarisadministratie met een CAO-engine voor jouw branche. Proforma\'s en loonstroken, klaar als nette PDF.',
           list:['CAO-engine voor o.a. Kappers en Fysio','Proforma\'s en loonstroken als PDF','Werkgeverslasten automatisch berekend'], vig:'loont_strook' },
@@ -211,6 +211,8 @@ export const MODULES: Record<string, ModuleData> = {
           list:['Arbeidsovereenkomsten op maat','Digitaal ondertekenen','Alles netjes bewaard op één plek'], vig:'loont_contract' },
         { tag:'Verlof & verzuim', h:'Saldo dat zichzelf bijhoudt.', p:'Verlof- en verzuimadministratie met een automatisch pro-rata saldo, zodat je nooit hoeft te rekenen.',
           list:['Verlofsaldo automatisch berekend','Verzuim overzichtelijk bijgehouden','Altijd actueel per medewerker'], vig:'loont_verlof' },
+        { tag:'Wel en niet', h:'Wat EmmaLoont wel en niet doet.', p:'EmmaLoont rekent het loon, maakt de loonstroken, regelt contracten en verlof, en boekt de loonkosten in je boekhouding. De loonaangifte bij de Belastingdienst doe je zelf via Mijn Belastingdienst Zakelijk, of via je administratiekantoor. Die koppeling staat op de roadmap.',
+          list:['Loon, loonstroken, contracten en verlof: ja','Loonkosten in je boekhouding: ja','Loonaangifte bij de Belastingdienst: nog niet'], vig:'loont_strook' },
       ],
     },
     steps:{ title:'Zo simpel werkt het.', items:[
@@ -222,8 +224,8 @@ export const MODULES: Record<string, ModuleData> = {
     faq:[
       { q:'Voor wie is EmmaLoont bedoeld?', a:'Voor ondernemers met één of meer medewerkers, in salons, zorgpraktijken en kleine teams. Werk je alleen, dan heb je deze module simpelweg niet nodig.' },
       { q:'Welke CAO\'s ondersteunt het?', a:'De CAO-engine is opgezet voor onder andere Kappers, Schoonheidsspecialisten, tandartsen (KNMT) en fysiotherapie. Welke CAO\'s er bij de lancering klaarstaan, communiceren we vooraf.' },
-      { q:'Vervangt het mijn loonbureau?', a:'Voor veel ondernemers wel. EmmaLoont neemt de loonadministratie over, inclusief loonstroken en werkgeverslasten. Twijfel je over een specifieke situatie, dan kun je je accountant laten meekijken.' },
-      { q:'Wat kost EmmaLoont en kan ik het nu gebruiken?', a:'EmmaLoont is bij de lancering los te gebruiken vanaf €19 per maand, exclusief btw, en zit in de pakketten voor Salons en Zorg. We bouwen het platform nu; laat je e-mail achter voor de start.' },
+      { q:'Vervangt het mijn loonbureau?', a:'Grotendeels. EmmaLoont rekent het loon, maakt de loonstroken, regelt contracten en verlof, en boekt de loonkosten in je boekhouding. Alleen de loonaangifte doe je zelf of via je administratiekantoor. Wat wel en niet inbegrepen is, lees je hierboven.' },
+      { q:'Wat kost EmmaLoont en kan ik het nu gebruiken?', a:'€19 per maand, exclusief btw, met 10% korting bij jaarbetaling. EmmaLoont is nog in ontwikkeling. Laat je e-mail achter, dan hoor je het zodra je kunt starten.' },
     ],
   },
   vindt:{
@@ -252,9 +254,9 @@ export const MODULES: Record<string, ModuleData> = {
     ] },
     faq:[
       { q:'Is dit een vacaturebank?', a:'Nee. EmmaVindt helpt je actief ontdekken wie in jouw buurt past, in plaats van te wachten op reacties. In sales-modus werkt het net zo, maar dan voor potentiële klanten.' },
-      { q:'Hoe zit het met privacy?', a:'EmmaVindt is opgezet met de AVG als uitgangspunt, inclusief een audit-log die bijhoudt wat er gebeurt. Jij houdt zicht en controle op wie je benadert.' },
+      { q:'Hoe zit het met privacy?', a:'De gegevens komen uit het openbare KvK-register en openbare bedrijfswebsites. Geen LinkedIn, geen social media. Dat mag niet volgens hun voorwaarden en brengt je account in gevaar. EmmaVindt werkt met de AVG als uitgangspunt en houdt met een audit-log bij wie je benadert.' },
       { q:'Voor wie is het handig?', a:'Voor ondernemers die personeel werven, zoals salons en zorgpraktijken, en voor wie nieuwe klanten zoekt, zoals ZZP\'ers en kleine teams.' },
-      { q:'Wat kost het en kan ik het nu gebruiken?', a:'EmmaVindt is bij de lancering los te gebruiken vanaf €9 per maand, exclusief btw. We bouwen het platform nu; laat je e-mail achter om als eerste te starten.' },
+      { q:'Wat kost het en kan ik het nu gebruiken?', a:'€9 per maand, exclusief btw, met 10% korting bij jaarbetaling. EmmaVindt is nog in ontwikkeling. Laat je e-mail achter, dan hoor je het zodra je kunt starten.' },
     ],
   },
   coacht:{
@@ -285,7 +287,7 @@ export const MODULES: Record<string, ModuleData> = {
       { q:'Voor wie is EmmaCoacht?', a:'Voor ondernemers met personeel dat ze willen ontwikkelen, zoals salons en zorgpraktijken. Werk je alleen, dan heb je deze module niet nodig.' },
       { q:'Waar komen de coachvragen vandaan?', a:'Uit de prestatiecijfers in EmmaWaakt. Loopt de productverkoop van iemand terug, dan stelt Emma voor daar het gesprek over te voeren. Jij bepaalt wat je ermee doet.' },
       { q:'Werkt het samen met de andere modules?', a:'Ja. EmmaCoacht leunt op EmmaWaakt voor de cijfers en sluit aan op EmmaLoont voor je personeelsadministratie. Je kunt ook met alleen Coacht beginnen.' },
-      { q:'Wat kost het en kan ik het nu gebruiken?', a:'EmmaCoacht is bij de lancering los te gebruiken vanaf €9 per maand, exclusief btw. We bouwen het platform nu; laat je e-mail achter voor de start.' },
+      { q:'Wat kost het en kan ik het nu gebruiken?', a:'€9 per maand, exclusief btw, met 10% korting bij jaarbetaling. EmmaCoacht is nog in ontwikkeling. Laat je e-mail achter, dan hoor je het zodra je kunt starten.' },
     ],
   },
   ziet:{
@@ -344,11 +346,13 @@ export const MODULES: Record<string, ModuleData> = {
       sub:'Van leeg scherm naar geplande content, zonder dat het uren kost of klinkt als een ander. Jij houdt de eindredactie.',
       feats:[
         { tag:'Eén planner', h:'Al je content op één plek.', p:'Een centrale planner voor blogs, social en e-mail, zodat je overzicht houdt over wat wanneer uitgaat.',
-          list:['Blog, social en e-mail samen','Kanban van idee tot gepland','Koppelt aan WordPress, Instagram, Mailchimp'], vig:'schrijft_kanban' },
+          list:['Blog, social en e-mail samen','Kanban van idee tot gepland','Publiceert naar WordPress en Mailchimp, plant voor Instagram'], vig:'schrijft_kanban' },
         { tag:'Jouw stem', h:'Geschreven zoals jij praat.', p:'Emma leert de toon van je bedrijf, zodat concepten klinken als jij, niet als een willekeurige tekst.',
           list:['Leert de stem van je bedrijf','Concepten als startpunt','Jij doet de eindredactie'], vig:'schrijft_stem' },
         { tag:'SEO', h:'Gevonden worden.', p:'SEO-teksten op basis van echte zoekwoorddata, zodat je content ook gevonden wordt.',
           list:['Op basis van zoekwoorddata','Praktische SEO, geen trucs','Klaar om te plannen'], vig:'schrijft_kanalen' },
+        { tag:'Organisch', h:'Schrijven, geen adverteren.', p:'EmmaSchrijft gaat over wat je onbetaald publiceert: blogs, e-mails en posts. Betaald adverteren, met advertentiebeelden en campagnes, is EmmaPromoot. En doorwrochte social-visuals horen er bewust niet bij: Emma maakt een eenvoudige visual bij je tekst, geen volledige beeldproductie.',
+          list:['Blogs, e-mail en posts: ja','Betaald adverteren: dat is EmmaPromoot','Eenvoudige visuals, geen social-beeldproductie'], vig:'schrijft_stem' },
       ],
     },
     steps:{ title:'Zo plan je je content.', items:[
@@ -359,14 +363,14 @@ export const MODULES: Record<string, ModuleData> = {
     ] },
     faq:[
       { q:'Schrijft Emma alles voor me?', a:'Emma maakt concepten als startpunt, in de stem van je bedrijf. Jij houdt altijd de eindredactie, zodat het klopt en klinkt als jij. Het neemt het lege scherm weg, niet je stem.' },
-      { q:'Met welke kanalen werkt het?', a:'EmmaSchrijft is opgezet om aan te sluiten op onder andere WordPress, Instagram, Facebook en Mailchimp, met SEO op basis van zoekwoorddata. Welke koppelingen bij de lancering klaarstaan, communiceren we vooraf.' },
+      { q:'Met welke kanalen werkt het?', a:'EmmaSchrijft publiceert naar WordPress en Mailchimp, met SEO op basis van zoekwoorddata. Social zoals Instagram plan je in de planner en publiceer je zelf. Welke koppelingen bij de lancering klaarstaan, communiceren we vooraf.' },
       { q:'Voor wie is het handig?', a:'Voor elke ondernemer die regelmatig content maakt maar er weinig tijd voor heeft, in alle branches en pakketten.' },
-      { q:'Wat kost het en kan ik het nu gebruiken?', a:'EmmaSchrijft is bij de lancering los te gebruiken vanaf €19 per maand, exclusief btw. We bouwen het platform nu; laat je e-mail achter voor de start.' },
+      { q:'Wat kost het en kan ik het nu gebruiken?', a:'€19 per maand, exclusief btw, met 10% korting bij jaarbetaling. EmmaSchrijft is nog in ontwikkeling. Laat je e-mail achter, dan hoor je het zodra je kunt starten.' },
     ],
   },
   promoot:{
     id:'promoot', name:'Promoot', num:'08', price:19, accentVar:'--m-promoot',
-    chip:'nieuw bij de lancering',
+    chip:'gekoppeld aan je echte omzet',
     head:'Zie welke euro écht werkt.',
     intro:'Alles rond geld in marketing. Google en Meta Ads in één overzicht, gekoppeld aan je cijfers, zodat je ziet welke advertentie echt omzet oplevert en welke niet.',
     heroVig:'promoot_attributie',
@@ -380,6 +384,8 @@ export const MODULES: Record<string, ModuleData> = {
           list:['Toegerekend aan je omzet','Inzicht per dienst','Stop met gokken op gevoel'], vig:'promoot_attributie' },
         { tag:'Budgetadvies', h:'Zet je geld waar het werkt.', p:'Een advies voor je budgetverdeling, direct gekoppeld aan de cijfers uit EmmaWaakt.',
           list:['Advies voor je budgetverdeling','Gekoppeld aan EmmaWaakt','Jij beslist, Emma onderbouwt'], vig:'promoot_budget' },
+        { tag:'Creatives', h:'Emma maakt de hele advertentie.', p:'Beeld én tekst, per platform op maat. Je kunt geen campagne draaien zonder creative, dus EmmaPromoot maakt ze: een advertentiebeeld en een pakkende tekst, klaar om te draaien op Google of Meta. Dat is het verschil met een dashboard dat alleen cijfers laat zien.',
+          list:['Advertentiebeeld en -tekst','Per platform op maat','Klaar om te draaien op Google en Meta'], vig:'promoot_kanalen' },
       ],
     },
     steps:{ title:'Zo adverteer je gericht.', items:[
@@ -389,10 +395,10 @@ export const MODULES: Record<string, ModuleData> = {
       { n:'04 · VERDEEL', h:'Stuur je budget', p:'Volg het advies om je budget te zetten waar het rendeert, of kies zelf.' },
     ] },
     faq:[
-      { q:'Is EmmaPromoot ook bewezen bij Blondes Incognito?', a:'Dit is de nieuwste van de acht modules en de enige die nog niet 18 maanden in de praktijk draaide. We bouwen hem nu mee op, op hetzelfde fundament als de rest. We zijn daar liever eerlijk over.' },
+      { q:'Is EmmaPromoot ook bewezen bij Blondes Incognito?', a:'EmmaPromoot is de enige module die nog niet 18 maanden in de praktijk draaide. De aanpak is beproefd, maar deze module bouwen we nu opnieuw op.' },
       { q:'Met welke platforms werkt het?', a:'EmmaPromoot is opgezet voor Google Ads en Meta Ads, met attributie op basis van je webstatistieken. Welke koppelingen bij de lancering klaarstaan, communiceren we vooraf.' },
-      { q:'Voor wie is het bedoeld?', a:'Voor ondernemers die advertentiebudget inzetten en willen weten of het rendeert, in plaats van blind door te betalen.' },
-      { q:'Wat kost het en kan ik het nu gebruiken?', a:'EmmaPromoot is bij de lancering los te gebruiken vanaf €19 per maand, exclusief btw. We bouwen het platform nu; laat je e-mail achter om als eerste te starten.' },
+      { q:'Voor wie is het bedoeld?', a:'Voor ondernemers met een actief advertentiebudget. Heb je dat niet, dan is dit niet de juiste module.' },
+      { q:'Wat kost het en kan ik het nu gebruiken?', a:'€19 per maand, exclusief btw, met 10% korting bij jaarbetaling. Het advertentiebudget zelf betaal je rechtstreeks aan Google of Meta. EmmaPromoot is nog in ontwikkeling. Laat je e-mail achter, dan hoor je het zodra je kunt starten.' },
     ],
   },
 };
