@@ -252,7 +252,7 @@ export const MODULES: Record<string, ModuleData> = {
     id:'waakt', name:'Waakt', num:'02', price:9, accentVar:'--m-waakt',
     chip:'Werkt op je eigen cijfers',
     head:'Het financiële brein van je zaak.',
-    intro:'Doelen, prognoses en een wekelijks advies op je eigen cijfers. Emma kijkt mee en zegt het op tijd als iets afwijkt, zodat je stuurt in plaats van het achteraf te ontdekken bij de boekhouder.',
+    intro:'EmmaWaakt is je financiële dashboard: doelen, prognoses en een wekelijks advies op je eigen cijfers. Emma kijkt mee en zegt het op tijd als iets afwijkt, zodat je stuurt in plaats van het achteraf te ontdekken bij de boekhouder.',
     heroVig:'waakt_doel',
     does:{
       title:'Wat EmmaWaakt voor je doet.',
