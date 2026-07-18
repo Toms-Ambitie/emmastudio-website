@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
-import CookieBanner from '@/components/CookieBanner';
+import Analytics from '@/components/Analytics';
 import ScrollReveal from '@/components/ScrollReveal';
 import ScrollReset from '@/components/ScrollReset';
 
@@ -32,6 +32,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="nl">
       <body>
+        {/* Google Tag Manager (noscript) — server-rendered, direct na opening
+            <body>, los van de JS-keten zodat bezoekers zonder JavaScript de
+            fallback-iframe ook krijgen. */}
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: '<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PL387HVM" height="0" width="0" style="display:none;visibility:hidden"></iframe>',
+          }}
+        />
+
+        {/* Consent Mode v2 (Advanced): Consently eerst, GTM geketend erná. Zie Analytics.tsx. */}
+        <Analytics />
+
         <ScrollReset />
         <a
           href="#main-content"
@@ -42,7 +54,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         {children}
         <Footer />
-        <CookieBanner />
         <ScrollReveal />
       </body>
     </html>

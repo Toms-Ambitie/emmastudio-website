@@ -547,25 +547,6 @@ h1,h2,h3{ font-family:var(--display); font-weight:800; line-height:1.0; letter-s
 .faq__a p{ padding:0 4px 24px; color:var(--ink-soft); font-size:16px; line-height:1.6; max-width:60ch; }
 
 /* ============================================================
-   COOKIE BANNER
-   ============================================================ */
-
-.cookie{ position:fixed; left:clamp(16px,3vw,32px); bottom:clamp(16px,3vw,32px); z-index:70;
-  width:min(440px, calc(100vw - 32px)); background:var(--ink); color:var(--creme);
-  border-radius:24px; padding:26px 28px 24px; box-shadow:0 30px 70px -24px rgba(10,12,10,.7);
-  transform:translateY(calc(100% + 40px)); opacity:0; transition:transform .6s var(--ease), opacity .5s; }
-.cookie.show{ transform:translateY(0); opacity:1; }
-.cookie__eyebrow{ font-family:var(--mono); font-size:12.5px; letter-spacing:.18em; text-transform:uppercase;
-  color:rgba(251,244,234,.78); font-weight:500; display:inline-flex; align-items:center; gap:.7em; margin-bottom:16px; }
-.cookie__eyebrow .tick{ width:7px; height:7px; border-radius:50%; background:var(--coral); }
-.cookie__txt{ font-size:16px; line-height:1.5; color:rgba(251,244,234,.86); margin-bottom:22px; }
-.cookie__row{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
-.cookie__ghost{ background:transparent; color:var(--creme); box-shadow:inset 0 0 0 1.5px rgba(251,244,234,.3); }
-.cookie__ghost:hover{ box-shadow:inset 0 0 0 1.5px var(--creme); transform:translateY(-2px); }
-.cookie__more{ margin-left:auto; font-size:15px; color:rgba(251,244,234,.6); text-decoration:underline; text-underline-offset:3px; transition:color .2s; }
-.cookie__more:hover{ color:var(--creme); }
-
-/* ============================================================
    SECURITY
    ============================================================ */
 
@@ -661,8 +642,6 @@ h1,h2,h3{ font-family:var(--display); font-weight:800; line-height:1.0; letter-s
   .scene__cta{ width:100%; justify-content:center; }
   .hero__cta .btn, .closer .btn, .cta .btn{ width:100%; justify-content:center; }
   .security__badges{ grid-template-columns:1fr; }
-  .cookie__row .btn{ flex:1; justify-content:center; }
-  .cookie__more{ margin-left:0; width:100%; text-align:center; margin-top:4px; }
 }
 @media (max-width:860px){
   .journey.vertical .scene__inner{ grid-template-columns:1fr; gap:36px; }
