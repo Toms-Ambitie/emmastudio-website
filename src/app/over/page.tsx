@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { APP_URL, LAUNCHED } from '@/data/modules';
+import { ILZE_QUOTE } from '@/data/proof';
 
 const SITE = 'https://www.emmastudio.nl';
 
@@ -35,7 +36,7 @@ export default function Over() {
             <span className="em-label text-emma-coral">Over ons</span>
           </div>
           <h1 className="mt-3 max-w-4xl font-display text-4xl font-bold tracking-tight text-emma-ink md:text-5xl lg:text-6xl">Gebouwd door ondernemers, voor ondernemers.</h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-emma-ink-2">Toms Ambitie maakt software die het dagelijkse werk van ondernemers eenvoudiger maakt. Geen hype, geen overbelofte. Gewoon eerlijk bouwen.</p>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-emma-ink-2"><a href="https://www.toms-ambitie.nl/" target="_blank" rel="noopener noreferrer" className="font-semibold text-emma-coral hover:underline">Toms Ambitie</a> maakt software die het dagelijkse werk van ondernemers eenvoudiger maakt. Geen hype, geen overbelofte. Gewoon eerlijk bouwen.</p>
         </div>
       </section>
 
@@ -67,7 +68,7 @@ export default function Over() {
 
           <figure className="flex flex-col justify-end rounded-emma-card border border-emma-line bg-emma-creme p-8 md:p-10">
             <blockquote className="font-display text-xl font-bold leading-snug tracking-tight text-emma-ink md:text-2xl">
-              &ldquo;Ik hoef niet meer na te denken over de administratie. Emma doet het gewoon.&rdquo;
+              &ldquo;{ILZE_QUOTE.quote}&rdquo;
             </blockquote>
             <figcaption className="mt-6 flex items-center gap-3.5">
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-emma-coral font-display text-lg font-extrabold text-white" aria-hidden="true">I</span>
@@ -114,7 +115,7 @@ export default function Over() {
           <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-emma-ink-2">
             {LAUNCHED
               ? 'De boekhoudmodule, de eerste module van Emma, is live. Koppel e-Boekhouden.nl en probeer het 14 dagen gratis.'
-              : 'De boekhoudmodule, de eerste module van Emma, lanceert in juli. Laat je e-mail achter op de homepage en je hoort het als eerste.'}
+              : 'De boekhoudmodule van Emma draait al, maar de aanmelding staat nog niet open. Laat je e-mail achter en je hoort het als eerste zodra je kunt starten.'}
           </p>
           <div className="mt-7 flex justify-center">
             {LAUNCHED ? (

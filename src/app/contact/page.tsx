@@ -35,8 +35,8 @@ export default function Contact() {
             <span className="flex h-2 w-2 rounded-full bg-emma-coral" aria-hidden="true" />
             <span className="em-label text-emma-coral">Contact</span>
           </div>
-          <h1 className="mt-3 max-w-3xl font-display text-4xl font-bold tracking-tight text-emma-ink md:text-5xl lg:text-6xl">We horen graag van je.</h1>
-          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-emma-ink-2">Een vraag, een idee, of gewoon benieuwd waar we mee bezig zijn? Stuur ons een bericht. We lezen alles zelf.</p>
+          <h1 className="mt-3 max-w-3xl font-display text-4xl font-bold tracking-tight text-emma-ink md:text-5xl lg:text-6xl">Even contact.</h1>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-emma-ink-2">Een vraag over Emma, een idee, of gewoon kennismaken? Laat een bericht achter, we lezen alles zelf.</p>
         </div>
       </section>
 
@@ -62,7 +62,7 @@ export default function Contact() {
                 </PointIcon>
                 <div className="text-sm">
                   <b className="block font-semibold text-emma-ink">Reactietijd</b>
-                  <span className="text-emma-ink-2">Meestal binnen twee werkdagen</span>
+                  <span className="text-emma-ink-2">Meestal binnen een paar werkdagen</span>
                 </div>
               </div>
               <div className="flex items-center gap-3.5">
