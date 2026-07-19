@@ -157,7 +157,10 @@ export const MODULE_RELATED: Record<string, { lead: string; links: { href: strin
   ] },
 };
 
-export const MODULE_ORDER = ['boekt','waakt','loont','vindt','coacht','ziet','schrijft','promoot'];
+/** Natuurlijke/canonieke modulevolgorde (nummering 01-08). Voor de weergave
+ *  gebruiken we niet deze array maar MODULE_ORDER hieronder, die live modules
+ *  vooraan zet. */
+const MODULE_BASE_ORDER = ['boekt','waakt','loont','vindt','coacht','ziet','schrijft','promoot'];
 
 /** DE LANCEERSCHAKELAAR. Zet op true zodra de boekhoudmodule live is op
  *  app.emmastudio.nl. Alle teksten en CTA's op de site schakelen dan mee
@@ -199,6 +202,16 @@ export const MODULE_STATUS: Record<string, ModuleStatus> = {
   schrijft: { live: false, when: 'Binnenkort' },
   promoot:  { live: false, when: 'Binnenkort' },
 };
+
+/** DE weergavevolgorde overal op de site (homepage-grid + slider, /modules-
+ *  grid, nav, footer, "meer van Emma"). Regel: LIVE modules altijd vóór de
+ *  "binnenkort"-modules, met binnen elke groep de canonieke volgorde. Dit is
+ *  een STABIELE sortering op MODULE_BASE_ORDER, dus zodra een module live gaat
+ *  (MODULE_STATUS[...].live = true) schuift die vanzelf naar voren. Nu:
+ *  Boekt · Waakt · Vindt · Ziet · Loont · Coacht · Schrijft · Promoot. */
+export const MODULE_ORDER = [...MODULE_BASE_ORDER].sort(
+  (a, b) => Number(MODULE_STATUS[b].live) - Number(MODULE_STATUS[a].live)
+);
 
 export const APP_URL = 'https://app.emmastudio.nl';
 
