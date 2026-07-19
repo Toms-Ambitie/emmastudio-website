@@ -332,7 +332,10 @@ function ModulesSection() {
           {MODULE_ORDER.map((id) => (
             <Link key={id} href={`/modules/${id}`} data-stagger-item className="group relative flex flex-col overflow-hidden rounded-emma-card border border-emma-line bg-emma-paper p-6 transition-all hover:shadow-emma-hover hover:-translate-y-1">
               <div data-module-bar className="absolute left-0 top-0 h-full w-1 origin-top" style={{ backgroundColor: `var(--m-${id})` }} />
-              <div className="flex h-12 w-12 items-center justify-center rounded-emma-squircle transition-colors" style={{ backgroundColor: `color-mix(in srgb, var(--m-${id}) 10%, transparent)`, color: `var(--m-${id})` }}><ModuleGlyph id={id} size={24} /></div>
+              <div className="flex items-start justify-between">
+                <div className="flex h-12 w-12 items-center justify-center rounded-emma-squircle transition-colors" style={{ backgroundColor: `color-mix(in srgb, var(--m-${id}) 10%, transparent)`, color: `var(--m-${id})` }}><ModuleGlyph id={id} size={24} /></div>
+                <StatusBadge id={id} />
+              </div>
               <h3 className="mt-5 font-display text-xl font-bold text-emma-ink">{emmaName(id)}</h3>
               <p className="mt-2 text-sm leading-relaxed text-emma-ink-2">{MODULE_TAGS[id]}</p>
               <div className="mt-auto flex items-center justify-between pt-5">
@@ -495,6 +498,12 @@ function PriceComparison() {
 
 /* ==================== MODULE-PRIJZEN (slider) ==================== */
 
+/* Aantal USP-rijen dat elke sliderkaart reserveert = het maximum over alle
+ * modules (sommige hebben er 4, sommige 3). Kortere lijsten vullen we aan met
+ * onzichtbare spacer-rijen, zodat alle kaarten even hoog zijn en de vorige/
+ * volgende-pijltjes niet verspringen bij het doorklikken. */
+const SLIDER_FEAT_ROWS = Math.min(5, Math.max(...MODULE_ORDER.map((mid) => MODULES[mid].does.feats.length)));
+
 function ModulePrices() {
   const [activeModule, setActiveModule] = useState(0);
 
@@ -540,7 +549,7 @@ function ModulePrices() {
               </div>
               <div className="flex-1">
                 <h3 className="font-display text-xl font-bold text-emma-ink">{emmaName(id)}</h3>
-                <p className="text-sm text-emma-subtext">{MODULE_TAGS[id]}</p>
+                <p className="min-h-[2.5rem] text-sm text-emma-subtext">{MODULE_TAGS[id]}</p>
               </div>
               <StatusBadge id={id} className="self-start" />
             </div>
@@ -559,14 +568,17 @@ function ModulePrices() {
 
             <div className="px-6 pb-4">
               <ul className="space-y-2">
-                {m.does.feats.slice(0, 5).map((f, i) => (
-                  <li key={i} className="flex items-start gap-2.5">
-                    <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: `color-mix(in srgb, ${hex} 12%, transparent)` }} aria-hidden="true">
-                      <IconCheck size={12} style={{ color: hex }} />
-                    </div>
-                    <span className="text-sm text-emma-ink-2">{f.h}</span>
-                  </li>
-                ))}
+                {Array.from({ length: SLIDER_FEAT_ROWS }).map((_, i) => {
+                  const f = m.does.feats[i];
+                  return (
+                    <li key={i} className={`flex items-start gap-2.5 ${f ? '' : 'invisible'}`} aria-hidden={f ? undefined : true}>
+                      <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full" style={{ backgroundColor: `color-mix(in srgb, ${hex} 12%, transparent)` }} aria-hidden="true">
+                        <IconCheck size={12} style={{ color: hex }} />
+                      </div>
+                      <span className="text-sm text-emma-ink-2">{f ? f.h : ' '}</span>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
 

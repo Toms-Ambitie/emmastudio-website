@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { MODULES, ICONS, MODULE_TAGS, MODULE_PRICE, MODULE_ORDER, MODULE_STATUS } from '@/data/modules';
+import { MODULES, ICONS, MODULE_TAGS, MODULE_PRICE, MODULE_ORDER } from '@/data/modules';
 import { MODULES_SECTION } from '@/data/home';
 import StatusBadge from '@/components/StatusBadge';
 
@@ -55,7 +55,6 @@ export default function Modules() {
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 md:gap-6">
             {MODULE_ORDER.map((id) => {
               const mc = `var(--m-${id})`;
-              const status = MODULE_STATUS[id];
               return (
                 <Link
                   key={id}
@@ -72,10 +71,6 @@ export default function Modules() {
                   <p className="mt-4 flex-1 text-sm leading-relaxed text-emma-ink-2">{MODULE_TAGS[id]}</p>
                   <div className="mt-5 flex items-center justify-between border-t border-emma-line pt-4">
                     <span className="text-xs text-emma-subtext">
-                      {status.live
-                        ? <span className="inline-flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-emma-success" aria-hidden="true" />Live</span>
-                        : 'Binnenkort'}
-                      <span className="mx-1.5">·</span>
                       <b className="text-emma-ink" style={{ fontVariantNumeric: 'tabular-nums' }}>€{MODULE_PRICE[id]}/mnd</b>
                     </span>
                     <span className="text-sm font-semibold text-emma-coral transition-transform group-hover:translate-x-0.5" aria-hidden="true">→</span>
