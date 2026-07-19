@@ -21,8 +21,8 @@
      EmmaStudio zelf) is vervangen door HERO_BADGE uit proof.ts
      ("Gebouwd op 18 maanden praktijk", §3.2/§4.3) — die wordt in de
      component uit proof.ts gehaald, niet hier gedupliceerd.
-   - De CTA ging naar {APP_URL}/register (dode funnel, signup dicht). In de
-     component schakelt de CTA met LAUNCHED: nu wachtlijst, straks signup. */
+   - De hero-CTA schakelt met LAUNCHED: nu open → "Begin vandaag" naar
+     SIGNUP_URL (app.emmastudio.nl/signup). */
 export const HERO = {
   eyebrow: 'Software voor ondernemers',
   titleLine1: 'Jij doet je werk.',
@@ -169,7 +169,7 @@ export const FAQ = {
     { q: 'Kan ik met een module beginnen en later uitbreiden?', a: 'Ja. Elke module is zelfstandig levensvatbaar. Begin met EmmaBoekt voor EUR 9 per maand. Voeg er later andere modules aan toe. Een module aanzetten is een rij toevoegen, geen code schrijven.' },
     { q: 'Wat als ik stop met Emma?', a: 'Je verliest geen data. Alles wat je via Emma doet, landt ook in je onderliggende pakket. Emma is een schil, geen kooi. Je data blijft van jou.' },
     { q: 'Wat kost Emma?', a: 'Standaard-modules kosten EUR 9 per maand, premium-modules EUR 19 per maand, exclusief btw. Je begint met 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 10% korting.' },
-    { q: 'Welke modules kan ik nu gebruiken?', a: 'Drie: EmmaBoekt voor je boekhouding, EmmaWaakt voor je cijfers en EmmaZiet voor je concurrenten. De andere vijf zijn in ontwikkeling. Op elke modulepagina zie je waar hij staat.' },
+    { q: 'Welke modules kan ik nu gebruiken?', a: 'Vier: EmmaBoekt voor je boekhouding, EmmaWaakt voor je cijfers, EmmaZiet voor je concurrenten en EmmaVindt voor klanten en personeel. Elk €9 per maand, 14 dagen gratis en zonder creditcard. De andere vier zijn in ontwikkeling. Op elke modulepagina zie je waar hij staat.' },
     { q: 'Hoe zit het met privacy en beveiliging?', a: 'Je bedrijfsdata staat binnen de Europese Unie, op servers in Frankfurt. Onze website en e-mailverzending lopen via Amerikaanse dienstverleners onder Europese standaardcontractbepalingen. Je gegevens worden alleen verwerkt om Emma te laten werken: geen verkoop aan derden, geen tracking. De koppeling met je boekhouding is versleuteld en voldoet aan de AVG.' },
   ],
 };

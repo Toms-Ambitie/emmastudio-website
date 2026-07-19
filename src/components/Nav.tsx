@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import {
   APP_URL,
+  SIGNUP_URL,
   LAUNCHED,
   MODULE_ORDER,
   MODULE_TAGS,
@@ -21,8 +22,8 @@ import { IconArrow } from '@/components/emma/icons';
  * - Modules uit de datalaag (MODULE_ORDER / MODULE_TAGS / MODULES / ICONS,
  *   kleur var(--m-{id})), niet de hardcoded MODULES_NAV-lijst.
  * - Routes: /over-ons → /over, /blog "Blog" → /kennisbank "Kennisbank".
- * - CTA: /register is een dode funnel zolang LAUNCHED=false → wachtlijst-
- *   patroon met de LAUNCHED-ternary. "Inloggen" → APP_URL.
+ * - CTA schakelt met LAUNCHED: nu open → "Aan de slag" naar SIGNUP_URL
+ *   (app.emmastudio.nl/signup). "Inloggen" → APP_URL.
  * - Logo: NIET de <Wordmark> (natypen van het merk schendt CLAUDE.md §4/§12),
  *   maar de meegeleverde SVG-vector. Geen eigen window.scrollTo op de logo-
  *   klik: ScrollEffects/Lenis handelt "logo → naar boven" al af.
@@ -190,7 +191,7 @@ export default function Nav() {
           </a>
           {LAUNCHED ? (
             <a
-              href={`${APP_URL}/register`}
+              href={SIGNUP_URL}
               className="group hidden items-center gap-1.5 rounded-emma-pill bg-emma-coral-strong px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-emma-coral-deep active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emma-ink sm:inline-flex"
             >
               Aan de slag
@@ -259,7 +260,7 @@ export default function Nav() {
               <Link href="/kennisbank" onClick={() => setMobileOpen(false)} className="rounded-lg px-3 py-2.5 text-sm font-medium text-emma-ink hover:bg-emma-creme">Kennisbank</Link>
               <a href={APP_URL} onClick={() => setMobileOpen(false)} className="rounded-lg px-3 py-2.5 text-sm font-medium text-emma-ink-2 hover:bg-emma-creme">Inloggen</a>
               {LAUNCHED ? (
-                <a href={`${APP_URL}/register`} onClick={() => setMobileOpen(false)} className="mt-2 rounded-emma-btn bg-emma-coral-strong px-4 py-2.5 text-center text-sm font-semibold text-white">Aan de slag</a>
+                <a href={SIGNUP_URL} onClick={() => setMobileOpen(false)} className="mt-2 rounded-emma-btn bg-emma-coral-strong px-4 py-2.5 text-center text-sm font-semibold text-white">Aan de slag</a>
               ) : (
                 <Link href={WAITLIST_ANCHOR} onClick={() => setMobileOpen(false)} className="mt-2 rounded-emma-btn bg-emma-coral-strong px-4 py-2.5 text-center text-sm font-semibold text-white">Houd me op de hoogte</Link>
               )}

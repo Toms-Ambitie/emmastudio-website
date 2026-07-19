@@ -31,7 +31,7 @@ import { IconArrow, IconCheck, IconShield, IconLink, IconSparkChat } from './ico
 import WaitlistForm from '@/components/WaitlistForm';
 
 import {
-  MODULE_ORDER, MODULE_TAGS, MODULE_PRICE, MODULES, ICONS, APP_URL, LAUNCHED,
+  MODULE_ORDER, MODULE_TAGS, MODULE_PRICE, MODULES, ICONS, MODULE_STATUS, SIGNUP_URL, LAUNCHED,
 } from '@/data/modules';
 import { PACKAGES } from '@/data/packages';
 import { ILZE_QUOTE, STATS, HERO_BADGE, PROOF_INTRO } from '@/data/proof';
@@ -104,7 +104,7 @@ function Hero() {
             </p>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
               {LAUNCHED ? (
-                <a href={`${APP_URL}/register`} className="group inline-flex items-center justify-center gap-2 rounded-emma-btn bg-emma-coral-strong px-7 py-3.5 text-base font-semibold text-white shadow-emma-card transition-all hover:bg-emma-coral-deep hover:shadow-emma-hover active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emma-boekt">
+                <a href={SIGNUP_URL} className="group inline-flex items-center justify-center gap-2 rounded-emma-btn bg-emma-coral-strong px-7 py-3.5 text-base font-semibold text-white shadow-emma-card transition-all hover:bg-emma-coral-deep hover:shadow-emma-hover active:translate-y-px focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emma-boekt">
                   Begin vandaag
                   <IconArrow size={18} className="transition-transform duration-300 group-hover:translate-x-1" />
                 </a>
@@ -548,7 +548,11 @@ function ModulePrices() {
                 <span className="font-display text-4xl font-bold text-emma-ink em-num">EUR {MODULE_PRICE[id]}</span>
                 <span className="text-sm text-emma-subtext">per maand, excl. BTW</span>
               </div>
-              <p className="mt-2 text-sm font-medium text-emma-success">Eerst 14 dagen gratis proberen</p>
+              {MODULE_STATUS[id].live && LAUNCHED ? (
+                <p className="mt-2 text-sm font-medium text-emma-success">14 dagen gratis proberen, geen creditcard nodig</p>
+              ) : (
+                <p className="mt-2 text-sm font-medium text-emma-subtext">Binnenkort beschikbaar</p>
+              )}
             </div>
 
             <div className="px-6 pb-4">
@@ -818,7 +822,7 @@ function StickyCTA() {
         <span className="flex h-2 w-2 rounded-full bg-emma-coral" aria-hidden="true" />
         <span className="text-sm font-medium text-emma-creme">{STICKY_CTA.text}</span>
         {LAUNCHED ? (
-          <a href={APP_URL} className="rounded-emma-pill bg-emma-coral-strong px-4 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-emma-coral-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Open Emma</a>
+          <a href={SIGNUP_URL} className="rounded-emma-pill bg-emma-coral-strong px-4 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-emma-coral-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Begin vandaag</a>
         ) : (
           <a href={WAITLIST_ANCHOR} className="rounded-emma-pill bg-emma-coral-strong px-4 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-emma-coral-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Naar de wachtlijst</a>
         )}

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
   MODULES, ICONS, MODULE_TAGS, MODULE_PRICE, MODULE_ORDER, MODULE_STATUS,
-  MODULE_SEO, MODULE_RELATED, APP_URL, LAUNCHED, VIGNETTES,
+  MODULE_SEO, MODULE_RELATED, SIGNUP_URL, PROVEN_IN_PRACTICE, LAUNCHED, VIGNETTES,
 } from '@/data/modules';
 import WaitlistForm from '@/components/WaitlistForm';
 import ModuleFaq from '@/components/ModuleFaq';
@@ -65,13 +65,12 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
   const mc = `var(--m-${id})`;
   const tint = (pct: number) => `color-mix(in srgb, ${mc} ${pct}%, transparent)`;
 
-  /* Drie assen (briefing §4.1):
-     - draait      = status.live  (technisch feit uit MODULE_STATUS)
-     - koopbaar    = LAUNCHED      (publieke signup-schakelaar; nu false → niets koopbaar)
-     - roadmap     = !status.live
-     Alleen bij draait ÉN signup-open tonen we de echte signup-CTA naar
-     app.emmastudio.nl. Anders wachtlijst — nooit een dode /register-funnel.
-     Zodra Tom LAUNCHED aanzet, schakelen live-modules mee zonder herbouw. */
+  /* Twee assen bepalen de CTA:
+     - draait/beschikbaar = status.live  (technisch feit uit MODULE_STATUS)
+     - signup open        = LAUNCHED      (publieke schakelaar; nu true)
+     canSignup = beide → de echte signup-CTA naar SIGNUP_URL. Anders wachtlijst,
+     nooit een dode funnel. Nu aanmeldbaar: boekt/waakt/ziet/vindt; de overige
+     vier hebben live:false en tonen "Binnenkort" + wachtlijst. */
   const canSignup = status.live && LAUNCHED;
 
   /* JSON-LD (doc 08 / SEO-plan): SoftwareApplication met een eerlijke offer +
@@ -97,7 +96,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
           price: mod.price,
           priceCurrency: 'EUR',
           availability: canSignup ? 'https://schema.org/InStock' : 'https://schema.org/PreOrder',
-          url: canSignup ? APP_URL : `${SITE}/modules/${id}`,
+          url: canSignup ? SIGNUP_URL : `${SITE}/modules/${id}`,
         },
         publisher: { '@type': 'Organization', name: 'Emma', legalName: 'Toms Ambitie', url: SITE },
       },
@@ -143,7 +142,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               {canSignup ? (
                 <>
-                  <a href={APP_URL} className="group inline-flex items-center justify-center gap-2 rounded-emma-btn bg-emma-coral-strong px-6 py-3 text-base font-semibold text-white transition-all hover:bg-emma-coral-deep active:translate-y-px">
+                  <a href={SIGNUP_URL} className="group inline-flex items-center justify-center gap-2 rounded-emma-btn bg-emma-coral-strong px-6 py-3 text-base font-semibold text-white transition-all hover:bg-emma-coral-deep active:translate-y-px">
                     Start 14 dagen gratis
                     <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
                   </a>
@@ -167,7 +166,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
             <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2">
               <span className="flex items-center gap-2 text-sm text-emma-subtext">
                 <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: mc }} aria-hidden="true" />
-                {status.live ? 'Draait dagelijks in de praktijk' : 'Op de roadmap'}
+                {status.live ? (PROVEN_IN_PRACTICE.includes(id) ? 'Draait dagelijks in de praktijk' : 'Nu beschikbaar') : 'Op de roadmap'}
               </span>
               <span className="flex items-center gap-2 text-sm text-emma-subtext">
                 <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: mc }} aria-hidden="true" />
@@ -322,9 +321,9 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
           {canSignup ? (
             <>
               <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-emma-ink md:text-4xl">Begin zonder gedoe<span style={{ color: mc }}>.</span></h2>
-              <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-emma-ink-2">Maak een account op app.emmastudio.nl en start meteen. De eerste 14 dagen zijn gratis.</p>
+              <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-emma-ink-2">Maak een account aan en start meteen. De eerste 14 dagen zijn gratis, geen creditcard nodig.</p>
               <div className="mt-7 flex justify-center">
-                <a className="group inline-flex items-center justify-center gap-2 rounded-emma-btn bg-emma-coral-strong px-7 py-3.5 text-base font-semibold text-white transition-all hover:bg-emma-coral-deep active:translate-y-px" href={APP_URL}>
+                <a className="group inline-flex items-center justify-center gap-2 rounded-emma-btn bg-emma-coral-strong px-7 py-3.5 text-base font-semibold text-white transition-all hover:bg-emma-coral-deep active:translate-y-px" href={SIGNUP_URL}>
                   Start 14 dagen gratis
                   <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
                 </a>
@@ -348,6 +347,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
           {canSignup && (
             <div className="mt-7 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-emma-subtext">
               <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: mc }} aria-hidden="true" />14 dagen gratis proberen</span>
+              <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: mc }} aria-hidden="true" />Geen creditcard nodig</span>
               <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: mc }} aria-hidden="true" />Maandelijks opzegbaar</span>
               <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: mc }} aria-hidden="true" />Excl. btw</span>
             </div>

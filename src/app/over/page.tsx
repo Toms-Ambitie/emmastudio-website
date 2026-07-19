@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { APP_URL, LAUNCHED } from '@/data/modules';
+import { SIGNUP_URL, LAUNCHED } from '@/data/modules';
 import { ILZE_QUOTE } from '@/data/proof';
 
 const SITE = 'https://www.emmastudio.nl';
@@ -122,7 +122,7 @@ export default function Over() {
           </p>
           <div className="mt-7 flex justify-center">
             {LAUNCHED ? (
-              <a className="group inline-flex items-center justify-center gap-2 rounded-emma-btn bg-emma-coral-strong px-7 py-3.5 text-base font-semibold text-white transition-all hover:bg-emma-coral-deep active:translate-y-px" href={APP_URL}>
+              <a className="group inline-flex items-center justify-center gap-2 rounded-emma-btn bg-emma-coral-strong px-7 py-3.5 text-base font-semibold text-white transition-all hover:bg-emma-coral-deep active:translate-y-px" href={SIGNUP_URL}>
                 Start 14 dagen gratis
                 <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
               </a>

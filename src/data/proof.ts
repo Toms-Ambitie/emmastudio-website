@@ -13,7 +13,7 @@ export const ILZE_QUOTE = {
   stats: [
     { value: '18+ mnd', label: 'dagelijks in productie' },
     { value: '1 salon', label: 'waar de logica is bewezen' },
-    { value: '3 modules', label: 'live op het platform' },
+    { value: '4 modules', label: 'nu beschikbaar op het platform' },
   ],
 };
 
