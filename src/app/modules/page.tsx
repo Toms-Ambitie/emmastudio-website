@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { MODULES, ICONS, MODULE_TAGS, MODULE_PRICE, MODULE_ORDER, MODULE_STATUS } from '@/data/modules';
 import { MODULES_SECTION } from '@/data/home';
+import StatusBadge from '@/components/StatusBadge';
 
 const SITE = 'https://www.emmastudio.nl';
 
@@ -66,6 +67,7 @@ export default function Modules() {
                       <Glyph id={id} size={22} />
                     </span>
                     <span className="font-display text-lg font-bold text-emma-ink">Emma{MODULES[id].name}</span>
+                    <StatusBadge id={id} className="ml-auto" />
                   </div>
                   <p className="mt-4 flex-1 text-sm leading-relaxed text-emma-ink-2">{MODULE_TAGS[id]}</p>
                   <div className="mt-5 flex items-center justify-between border-t border-emma-line pt-4">

@@ -29,6 +29,7 @@ import { KineticText } from './KineticText';
 import { AnimatedCounter } from './AnimatedCounter';
 import { IconArrow, IconCheck, IconShield, IconLink, IconSparkChat } from './icons';
 import WaitlistForm from '@/components/WaitlistForm';
+import StatusBadge from '@/components/StatusBadge';
 
 import {
   MODULE_ORDER, MODULE_TAGS, MODULE_PRICE, MODULES, ICONS, MODULE_STATUS, SIGNUP_URL, LAUNCHED,
@@ -541,6 +542,7 @@ function ModulePrices() {
                 <h3 className="font-display text-xl font-bold text-emma-ink">{emmaName(id)}</h3>
                 <p className="text-sm text-emma-subtext">{MODULE_TAGS[id]}</p>
               </div>
+              <StatusBadge id={id} className="self-start" />
             </div>
 
             <div className="px-6 pb-4">
