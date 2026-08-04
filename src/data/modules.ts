@@ -230,7 +230,7 @@ export const MODULES: Record<string, ModuleData> = {
     id:'boekt', name:'Boekt', num:'01', price:9, accentVar:'--m-boekt',
     chip:'Werkt bovenop e-Boekhouden.nl',
     head:'Boekhouden zonder je boekhoudsoftware aan te raken.',
-    intro:'EmmaBoekt is de schil om e-Boekhouden.nl. Je boekhouding blijft daar staan, maar het werk doe je in Emma: bonnetjes doorsturen, facturen maken, offertes versturen. Je logt bijna nooit meer rechtstreeks in.',
+    intro:'EmmaBoekt is de schil om e-Boekhouden.nl. Je boekhouding blijft daar staan, maar het werk doe je in Emma: bonnetjes doorsturen, facturen maken, offertes versturen. Je logt bijna nooit meer rechtstreeks in. Let op: EmmaBoekt werkt alleen mét een gekoppeld boekhoudpakket. Op dit moment koppelen we met e-Boekhouden.nl; SnelStart en Moneybird volgen. Gebruik je iets anders, dan kan EmmaBoekt nog niets voor je doen en is EmmaWaakt het betere begin.',
     heroVig:'boekt_inlezen',
     does:{
       title:'Wat EmmaBoekt voor je doet.',
@@ -273,9 +273,9 @@ export const MODULES: Record<string, ModuleData> = {
   },
   waakt:{
     id:'waakt', name:'Waakt', num:'02', price:9, accentVar:'--m-waakt',
-    chip:'Werkt op je eigen cijfers',
+    chip:'Werkt ook zonder boekhoudkoppeling',
     head:'Het financiële brein van je zaak.',
-    intro:'EmmaWaakt is je financiële dashboard: doelen, prognoses en een wekelijks advies op je eigen cijfers. Emma kijkt mee en zegt het op tijd als iets afwijkt, zodat je stuurt in plaats van het achteraf te ontdekken bij de boekhouder.',
+    intro:'EmmaWaakt is je financiële dashboard: doelen, prognoses en een wekelijks advies op je eigen cijfers. Emma kijkt mee en zegt het op tijd als iets afwijkt, zodat je stuurt in plaats van het achteraf te ontdekken bij de boekhouder. Je hebt er geen boekhoudkoppeling voor nodig: heb je die niet, dan upload je je omzet en kosten met de hand en werkt alles verder hetzelfde.',
     heroVig:'waakt_doel',
     does:{
       title:'Wat EmmaWaakt voor je doet.',
