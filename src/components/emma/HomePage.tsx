@@ -21,6 +21,7 @@
 import { useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { ClientOnly } from './ClientOnly';
 import { ScrollEffects } from './ScrollEffects';
@@ -36,7 +37,7 @@ import {
 } from '@/data/modules';
 import { PACKAGES } from '@/data/packages';
 import { ILZE_QUOTE, STATS, HERO_BADGE, PROOF_INTRO } from '@/data/proof';
-import { ARTICLES } from '@/data/articles';
+import type { Article } from '@/data/articles';
 import {
   HERO, THREE_PROBLEMS, PROBLEM_PULL, MANIFESTO, SHOWCASE, SOLUTION,
   MODULES_SECTION, HOW_IT_WORKS, PRICE_COMPARISON, MODULE_PRICES,
@@ -792,8 +793,11 @@ function Faq() {
 
 /* ==================== KENNISBANK-PREVIEW ==================== */
 
-function KbPreview() {
-  const posts = ARTICLES.slice(0, 3);
+// De artikelen komen als prop binnen, niet uit ARTICLES.slice(0, 3). Twee redenen:
+// die slice pakte de eerste drie uit de array, en die volgorde zegt niets over hoe
+// recent iets is. En het coverbeeld vraagt een bestandscontrole, en die kan alleen
+// server-side. Beide gebeuren nu in app/page.tsx, waar dat wel mag.
+function KbPreview({ posts }: { posts: Article[] }) {
   return (
     <Section className="py-20 md:py-32">
       <div data-reveal className="flex items-end justify-between">
@@ -807,8 +811,15 @@ function KbPreview() {
         {posts.map((post) => (
           <Link key={post.slug} href={`/kennisbank/${post.slug}`} data-stagger-item className="group flex flex-col overflow-hidden rounded-emma-card border border-emma-line bg-emma-paper transition-all hover:shadow-emma-hover hover:-translate-y-1">
             <div className="relative aspect-[16/10] overflow-hidden" style={{ backgroundColor: post.accent }}>
-              <div className="absolute inset-0 opacity-20" style={{ background: `radial-gradient(circle at 30% 30%, #fff 0%, transparent 60%)` }} aria-hidden="true" />
-              <div className="absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-emma-squircle bg-white/15 text-white" aria-hidden="true">
+              {post.image ? (
+                <>
+                  <Image src={post.image} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-black/20" aria-hidden="true" />
+                </>
+              ) : (
+                <div className="absolute inset-0 opacity-20" style={{ background: `radial-gradient(circle at 30% 30%, #fff 0%, transparent 60%)` }} aria-hidden="true" />
+              )}
+              <div className={`absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-emma-squircle text-white ${post.image ? 'bg-black/30 backdrop-blur-sm' : 'bg-white/15'}`} aria-hidden="true">
                 <ModuleGlyph id={post.glyph} size={22} />
               </div>
               <div className="absolute left-4 bottom-4"><span className="rounded-emma-pill bg-black/25 px-2.5 py-1 text-xs font-medium text-white backdrop-blur-sm">{post.cat}</span></div>
@@ -847,7 +858,7 @@ function StickyCTA() {
 
 /* ==================== PAGINA ==================== */
 
-export default function HomePage() {
+export default function HomePage({ kbPosts }: { kbPosts: Article[] }) {
   return (
     <>
       <main id="main-content">
@@ -865,7 +876,7 @@ export default function HomePage() {
         <Proof />
         <Security />
         <Faq />
-        <KbPreview />
+        <KbPreview posts={kbPosts} />
       </main>
       <ClientOnly><ScrollEffects /></ClientOnly>
       <ClientOnly><StickyCTA /></ClientOnly>
