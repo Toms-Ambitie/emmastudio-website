@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { ICONS } from '@/data/modules';
 import { ARTICLES, ARTICLE_SEO_TITLE, ARTICLE_RELATED } from '@/data/articles';
 import type { Article, ArticleBlock } from '@/data/articles';
+import { metBeeld } from '@/data/coverbeeld';
 
 const SITE = 'https://www.emmastudio.nl';
 
@@ -74,6 +76,23 @@ function Check({ color }: { color: string }) {
   );
 }
 
+/** Coverlaag met terugval: foto als die er is, anders het gekleurde vlak met
+ *  watermerk. Zelfde patroon als op de overzichtspagina. */
+function CoverLayer({ article, decorSize, sizes, priority = false }: {
+  article: { image?: string; glyph: string };
+  decorSize: number;
+  sizes: string;
+  priority?: boolean;
+}) {
+  if (!article.image) return <CoverDecor glyph={article.glyph} size={decorSize} />;
+  return (
+    <>
+      <Image src={article.image} alt="" fill sizes={sizes} priority={priority} className="object-cover" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-black/20" aria-hidden="true" />
+    </>
+  );
+}
+
 /** Gelaagde radials + groot subtiel glyph-watermerk — geeft de gekleurde
  *  header een bewuste uitstraling i.p.v. een vlak placeholder-vlak. */
 function CoverDecor({ glyph, size = 150 }: { glyph: string; size?: number }) {
@@ -140,10 +159,12 @@ function jsonLd(article: Article) {
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const article = ARTICLES.find(a => a.slug === slug);
-  if (!article) notFound();
+  const gevonden = ARTICLES.find(a => a.slug === slug);
+  if (!gevonden) notFound();
+  // Zelfde terugval als op de overzichtspagina: geen bestand, geen foto.
+  const article = metBeeld(gevonden);
 
-  const others = ARTICLES.filter(a => a.slug !== article.slug);
+  const others = ARTICLES.filter(a => a.slug !== article.slug).map(metBeeld);
   const accent = article.accent;
 
   return (
@@ -173,11 +194,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      {/* Cover (gekleurde placeholder tot er foto's zijn) */}
+      {/* Cover: foto van het artikel, met het gekleurde vlak als terugval. */}
       <section className="px-5 pt-10 md:px-8 lg:px-10">
         <div className="mx-auto max-w-4xl">
           <div className="relative flex h-56 items-center justify-center overflow-hidden rounded-emma-card md:h-72" style={{ backgroundColor: accent }}>
-            <CoverDecor glyph={article.glyph} size={240} />
+            <CoverLayer article={article} decorSize={240} priority sizes="(max-width: 896px) 100vw, 896px" />
             <div className="relative flex h-16 w-16 items-center justify-center rounded-emma-squircle bg-white/15 text-white" aria-hidden="true">
               <Glyph id={article.glyph} size={34} />
             </div>
@@ -223,7 +244,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                   className="group flex flex-col overflow-hidden rounded-emma-card border border-emma-line bg-emma-paper transition-all hover:shadow-emma-hover hover:-translate-y-1"
                 >
                   <div className="relative aspect-[16/10] overflow-hidden" style={{ backgroundColor: other.accent }}>
-                    <CoverDecor glyph={other.glyph} size={128} />
+                    <CoverLayer article={other} decorSize={128}
+                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
                     <div className="absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-emma-squircle bg-white/15 text-white" aria-hidden="true">
                       <Glyph id={other.glyph} size={22} />
                     </div>

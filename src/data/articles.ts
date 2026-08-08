@@ -16,6 +16,9 @@ export type Article = {
   dek: string;
   date: string;
   read: string;
+  /** Coverbeeld in /public/kennisbank/. Ontbreekt het bestand, dan valt de kaart
+   *  terug op het gekleurde vlak met glyph-watermerk. */
+  image?: string;
   author: string;
   featured?: boolean;
   /** Voorbereiding op de latere blog/kennisbank-splitsing. Nu nog geen filter
@@ -91,6 +94,7 @@ export const ARTICLES: Article[] = [
     dek: 'Emma is niet op een whiteboard bedacht. Ze begon als gereedschap voor één salon, en groeide uit tot software voor ondernemers die de randzaken er zelf bij doen.',
     date: '8 augustus 2026',
     read: '4 min',
+    image: '/kennisbank/hoe-we-emma-bouwen.jpg',
     author: 'Het team van Emma',
     featured: true,
     body: [
@@ -128,6 +132,7 @@ export const ARTICLES: Article[] = [
     dek: 'De meeste ondernemers weten pas hoe het écht gaat als de cijfers van de accountant binnen zijn. Dat kan anders, en rustiger.',
     date: '28 mei 2026',
     read: '3 min',
+    image: '/kennisbank/grip-op-je-cijfers.jpg',
     author: 'Het team van Emma',
     body: [
       { t: 'p', v: 'Vraag een ondernemer hoe het met de zaak gaat en je krijgt vaak een gevoel terug, geen getal. Druk, rustig, het loopt wel. Dat gevoel klopt meestal aardig. Maar het is geen sturing, en zeker geen rust.' },
@@ -161,6 +166,7 @@ export const ARTICLES: Article[] = [
     dek: 'Emma leest je inkomende facturen, stelt de boeking voor en legt uit waarom. Jij bevestigt. Zo werkt dat, en zo bewust is dat gebouwd.',
     date: '8 augustus 2026',
     read: '3 min',
+    image: '/kennisbank/bonnen-en-facturen-inboeken.jpg',
     author: 'Het team van Emma',
     body: [
       { t: 'p', v: 'Inkomende facturen verwerken is het werk waar niemand voor kiest. Een stapel bonnen, een pakket dat om een grootboekrekening vraagt, en de vage twijfel of je die tankbeurt vorige maand ook zo geboekt hebt.' },
@@ -190,6 +196,7 @@ export const ARTICLES: Article[] = [
     dek: 'Een loonbureau kost al snel honderd euro per maand of meer. Wat je daarvan zelf kunt doen, en waar de grens ligt die je moet kennen voordat je begint.',
     date: '8 augustus 2026',
     read: '3 min',
+    image: '/kennisbank/loon-zonder-loonbureau.jpg',
     author: 'Het team van Emma',
     body: [
       { t: 'p', v: 'Zodra je één medewerker in dienst neemt, verandert je administratie. Loon berekenen, premies afdragen, een loonstrook maken, verlof bijhouden, en dat elke maand opnieuw. De meeste kleine ondernemers besteden dat uit, en betalen daar honderd tot driehonderd euro per maand voor.' },
@@ -233,6 +240,7 @@ export const ARTICLES: Article[] = [
     dek: 'Je concurrenten zijn openbaar: hun inschrijving, hun prijzen, hun reviews. Alleen zoekt niemand dat elke maand na. Zo doet Emma dat wel.',
     date: '8 augustus 2026',
     read: '3 min',
+    image: '/kennisbank/weten-wat-de-buurt-vraagt.jpg',
     author: 'Het team van Emma',
     body: [
       { t: 'p', v: 'Bijna elke lokale ondernemer heeft een globaal idee van wat de buurt vraagt. Dat idee komt uit een gesprek, een blik op een website, of een klant die iets liet vallen. Het is zelden actueel en meestal onvolledig.' },
@@ -263,6 +271,7 @@ export const ARTICLES: Article[] = [
     dek: 'Dezelfde techniek, twee heel verschillende vragen. Waarom die bij Emma op aparte schermen staan, en waarom LinkedIn er bewust buiten blijft.',
     date: '8 augustus 2026',
     read: '3 min',
+    image: '/kennisbank/klanten-en-personeel-vinden.jpg',
     author: 'Het team van Emma',
     body: [
       { t: 'p', v: 'Twee vragen die vaak op hetzelfde moment spelen bij een kleine ondernemer. Ik heb meer klanten nodig. Of: ik heb er iemand bij nodig. Ze voelen totaal verschillend, maar eronder zit dezelfde vraag: wie zit er in mijn buurt, en past die bij mij?' },
@@ -300,6 +309,7 @@ export const ARTICLES: Article[] = [
     dek: 'Drie gewoontes die geen software nodig hebben om te beginnen, en die je meteen iets opleveren.',
     date: '21 mei 2026',
     read: '3 min',
+    image: '/kennisbank/tips-per-branche.jpg',
     author: 'Het team van Emma',
     body: [
       { t: 'p', v: 'Goede gewoontes hoeven niet groot te zijn. De ondernemers die het rustig hebben zijn vaak niet degenen die het hardst werken, maar degenen die een paar slimme dingen standaard hebben gemaakt. Hier zijn er drie, per type onderneming, en je kunt ze alle drie morgen beginnen.' },

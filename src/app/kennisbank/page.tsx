@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ICONS } from '@/data/modules';
 import { ARTICLES } from '@/data/articles';
+import { metBeeld } from '@/data/coverbeeld';
 
 export const metadata: Metadata = {
   title: 'Kennisbank · Emma',
@@ -37,6 +39,28 @@ function ArrowRight({ size = 14 }: { size?: number }) {
   );
 }
 
+/** Coverlaag met terugval. Is er een foto, dan die, met een verloop eroverheen
+ *  zodat de categoriechip en het glyph-icoon leesbaar blijven op elk beeld.
+ *  Ontbreekt de foto, dan blijft het gekleurde vlak met watermerk staan zoals
+ *  het was. De accentkleur staat er in beide gevallen onder, dus tijdens het
+ *  laden valt er nooit een wit gat. */
+function CoverLayer({ article, decorSize, sizes, priority = false }: {
+  article: { image?: string; glyph: string; title: string };
+  decorSize: number;
+  sizes: string;
+  priority?: boolean;
+}) {
+  if (!article.image) return <CoverDecor glyph={article.glyph} size={decorSize} />;
+  return (
+    <>
+      {/* alt is leeg: de kaart draagt de titel al als tekst, dus een beschrijving
+          hier zou een schermlezer de kop twee keer laten voorlezen. */}
+      <Image src={article.image} alt="" fill sizes={sizes} priority={priority} className="object-cover" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-black/20" aria-hidden="true" />
+    </>
+  );
+}
+
 /** Cover-decoratie: gelaagde radials + een groot, subtiel glyph-watermerk in
  *  de module-eigen lijn. Geeft de gekleurde header een bewuste, merk-eigen
  *  uitstraling in plaats van een vlak placeholder-vlak. */
@@ -51,8 +75,10 @@ function CoverDecor({ glyph, size = 150 }: { glyph: string; size?: number }) {
 }
 
 export default function Kennisbank() {
-  const featured = ARTICLES.find(a => a.featured);
-  const rest = ARTICLES.filter(a => !a.featured);
+  // metBeeld zet `image` terug op undefined als het bestand er niet is, zodat de
+  // kaart terugvalt op het gekleurde vlak in plaats van een leeg donker gat.
+  const featured = ARTICLES.filter(a => a.featured).map(metBeeld)[0];
+  const rest = ARTICLES.filter(a => !a.featured).map(metBeeld);
 
   return (
     <main id="main-content">
@@ -81,7 +107,8 @@ export default function Kennisbank() {
               className="group grid overflow-hidden rounded-emma-card border border-emma-line bg-emma-paper transition-all hover:shadow-emma-hover hover:-translate-y-0.5 md:grid-cols-2"
             >
               <div className="relative aspect-[16/10] overflow-hidden md:aspect-auto md:min-h-[340px]" style={{ backgroundColor: featured.accent }}>
-                <CoverDecor glyph={featured.glyph} size={200} />
+                <CoverLayer article={featured} decorSize={200} priority
+                            sizes="(max-width: 768px) 100vw, 50vw" />
                 <div className="absolute left-5 top-5 flex h-12 w-12 items-center justify-center rounded-emma-squircle bg-white/15 text-white" aria-hidden="true">
                   <Glyph id={featured.glyph} size={26} />
                 </div>
@@ -121,7 +148,8 @@ export default function Kennisbank() {
                 className="group flex flex-col overflow-hidden rounded-emma-card border border-emma-line bg-emma-paper transition-all hover:shadow-emma-hover hover:-translate-y-1"
               >
                 <div className="relative aspect-[16/10] overflow-hidden" style={{ backgroundColor: article.accent }}>
-                  <CoverDecor glyph={article.glyph} size={128} />
+                  <CoverLayer article={article} decorSize={128}
+                              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
                   <div className="absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-emma-squircle bg-white/15 text-white" aria-hidden="true">
                     <Glyph id={article.glyph} size={22} />
                   </div>
