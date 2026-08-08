@@ -109,7 +109,7 @@ export default function Kennisbank() {
               <div className="relative aspect-[16/10] overflow-hidden md:aspect-auto md:min-h-[340px]" style={{ backgroundColor: featured.accent }}>
                 <CoverLayer article={featured} decorSize={200} priority
                             sizes="(max-width: 768px) 100vw, 50vw" />
-                <div className="absolute left-5 top-5 flex h-12 w-12 items-center justify-center rounded-emma-squircle bg-white/15 text-white" aria-hidden="true">
+                <div className={`absolute left-5 top-5 flex h-12 w-12 items-center justify-center rounded-emma-squircle text-white ${featured.image ? 'bg-black/30 backdrop-blur-sm' : 'bg-white/15'}`} aria-hidden="true">
                   <Glyph id={featured.glyph} size={26} />
                 </div>
                 <div className="absolute left-5 bottom-5">
@@ -150,7 +150,7 @@ export default function Kennisbank() {
                 <div className="relative aspect-[16/10] overflow-hidden" style={{ backgroundColor: article.accent }}>
                   <CoverLayer article={article} decorSize={128}
                               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
-                  <div className="absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-emma-squircle bg-white/15 text-white" aria-hidden="true">
+                  <div className={`absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-emma-squircle text-white ${article.image ? 'bg-black/30 backdrop-blur-sm' : 'bg-white/15'}`} aria-hidden="true">
                     <Glyph id={article.glyph} size={22} />
                   </div>
                   <div className="absolute left-4 bottom-4">

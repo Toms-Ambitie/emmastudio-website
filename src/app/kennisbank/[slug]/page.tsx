@@ -199,9 +199,11 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <div className="mx-auto max-w-4xl">
           <div className="relative flex h-56 items-center justify-center overflow-hidden rounded-emma-card md:h-72" style={{ backgroundColor: accent }}>
             <CoverLayer article={article} decorSize={240} priority sizes="(max-width: 896px) 100vw, 896px" />
-            <div className="relative flex h-16 w-16 items-center justify-center rounded-emma-squircle bg-white/15 text-white" aria-hidden="true">
-              <Glyph id={article.glyph} size={34} />
-            </div>
+            {!article.image && (
+              <div className="relative flex h-16 w-16 items-center justify-center rounded-emma-squircle bg-white/15 text-white" aria-hidden="true">
+                <Glyph id={article.glyph} size={34} />
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -246,7 +248,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                   <div className="relative aspect-[16/10] overflow-hidden" style={{ backgroundColor: other.accent }}>
                     <CoverLayer article={other} decorSize={128}
                                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
-                    <div className="absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-emma-squircle bg-white/15 text-white" aria-hidden="true">
+                    <div className={`absolute left-4 top-4 flex h-11 w-11 items-center justify-center rounded-emma-squircle text-white ${other.image ? 'bg-black/30 backdrop-blur-sm' : 'bg-white/15'}`} aria-hidden="true">
                       <Glyph id={other.glyph} size={22} />
                     </div>
                     <div className="absolute left-4 bottom-4">
