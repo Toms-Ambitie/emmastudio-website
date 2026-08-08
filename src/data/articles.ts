@@ -83,6 +83,25 @@ export const ARTICLE_RELATED: Record<string, { lead: string; links: { href: stri
   ] },
 };
 
+const MAANDEN = ['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
+
+/** "19 juni 2026" omzetten naar een sorteerbaar getal (20260619).
+ *  De datum staat als leesbare Nederlandse tekst in de data, want die tekst wordt
+ *  ook getoond. Zonder deze sleutel zou de volgorde op de pagina de volgorde van
+ *  de array zijn, en die zegt niets over hoe recent een artikel is. */
+export function datumSleutel(datum: string): number {
+  const m = datum.trim().match(/^(\d{1,2})\s+([a-zA-Z]+)\s+(\d{4})$/);
+  if (!m) return 0;
+  const maand = MAANDEN.indexOf(m[2].toLowerCase());
+  if (maand < 0) return 0;
+  return Number(m[3]) * 10000 + (maand + 1) * 100 + Number(m[1]);
+}
+
+/** Nieuwste eerst. */
+export function nieuwsteEerst<T extends { date: string }>(lijst: T[]): T[] {
+  return [...lijst].sort((a, b) => datumSleutel(b.date) - datumSleutel(a.date));
+}
+
 export const ARTICLES: Article[] = [
   {
     slug: 'hoe-we-emma-bouwen',
@@ -164,7 +183,7 @@ export const ARTICLES: Article[] = [
     section: 'kennisbank',
     title: 'Bonnetjes inboeken zonder zelf te typen',
     dek: 'Emma leest je inkomende facturen, stelt de boeking voor en legt uit waarom. Jij bevestigt. Zo werkt dat, en zo bewust is dat gebouwd.',
-    date: '8 augustus 2026',
+    date: '19 juni 2026',
     read: '3 min',
     image: '/kennisbank/bonnen-en-facturen-inboeken.jpg',
     author: 'Het team van Emma',
@@ -194,7 +213,7 @@ export const ARTICLES: Article[] = [
     section: 'kennisbank',
     title: 'Loonstroken draaien zonder loonbureau: wat wel en niet kan',
     dek: 'Een loonbureau kost al snel honderd euro per maand of meer. Wat je daarvan zelf kunt doen, en waar de grens ligt die je moet kennen voordat je begint.',
-    date: '8 augustus 2026',
+    date: '5 augustus 2026',
     read: '3 min',
     image: '/kennisbank/loon-zonder-loonbureau.jpg',
     author: 'Het team van Emma',
@@ -238,7 +257,7 @@ export const ARTICLES: Article[] = [
     section: 'kennisbank',
     title: 'Weten wat de salon drie straten verderop vraagt',
     dek: 'Je concurrenten zijn openbaar: hun inschrijving, hun prijzen, hun reviews. Alleen zoekt niemand dat elke maand na. Zo doet Emma dat wel.',
-    date: '8 augustus 2026',
+    date: '10 juli 2026',
     read: '3 min',
     image: '/kennisbank/weten-wat-de-buurt-vraagt.jpg',
     author: 'Het team van Emma',
@@ -269,7 +288,7 @@ export const ARTICLES: Article[] = [
     section: 'kennisbank',
     title: 'Klanten of personeel vinden in je eigen regio',
     dek: 'Dezelfde techniek, twee heel verschillende vragen. Waarom die bij Emma op aparte schermen staan, en waarom LinkedIn er bewust buiten blijft.',
-    date: '8 augustus 2026',
+    date: '24 juli 2026',
     read: '3 min',
     image: '/kennisbank/klanten-en-personeel-vinden.jpg',
     author: 'Het team van Emma',

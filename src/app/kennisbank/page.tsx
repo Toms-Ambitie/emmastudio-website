@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ICONS } from '@/data/modules';
-import { ARTICLES } from '@/data/articles';
+import { ARTICLES, nieuwsteEerst } from '@/data/articles';
 import { metBeeld } from '@/data/coverbeeld';
 
 export const metadata: Metadata = {
@@ -78,7 +78,7 @@ export default function Kennisbank() {
   // metBeeld zet `image` terug op undefined als het bestand er niet is, zodat de
   // kaart terugvalt op het gekleurde vlak in plaats van een leeg donker gat.
   const featured = ARTICLES.filter(a => a.featured).map(metBeeld)[0];
-  const rest = ARTICLES.filter(a => !a.featured).map(metBeeld);
+  const rest = nieuwsteEerst(ARTICLES.filter(a => !a.featured)).map(metBeeld);
 
   return (
     <main id="main-content">
