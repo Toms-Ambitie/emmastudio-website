@@ -171,11 +171,17 @@ export const LAUNCHED = true;
  *  in Supabase-prod); `when` is de roadmap-aanduiding voor wat nog niet
  *  draait. Eén bron van waarheid voor homepage, modulepagina's en footer.
  *
- *  Briefing v2 §4.1 (bevestigd via Supabase-tabellen in stap 0): Boekt,
- *  Waakt en Ziet zijn de drie "Live"-modules — Ziet gedeeltelijk (zie
- *  ziet.roadmap voor wat nog ontbreekt). De overige vijf zijn "Binnenkort",
- *  zonder datum (briefing: "Geen datums. [...] Een gemiste datum doet meer
- *  schade dan geen datum.").
+ *  Stand 8 augustus 2026, gemeten en vastgelegd in emmastudio-app/docs/
+ *  FUNCTIES.md: vijf modules draaien en staan op `plans.purchasable = true`
+ *  op prod (boekt, waakt, ziet, vindt, loont). EmmaLoont stond hier ten
+ *  onrechte op "Binnenkort" terwijl hij op prod al te koop was: loonrun,
+ *  loonstroken, proforma's, contracten, verlof, verzuim, declaraties,
+ *  journaalpost en cao-beheer zijn alle gebouwd en op dev gedraaid.
+ *  EmmaZiet is niet langer "gedeeltelijk": prijsvergelijking, reviews en
+ *  sentiment-over-tijd draaien ook, dus het roadmap-blok is vervallen.
+ *  Coacht, Schrijft en Promoot bestaan niet: geen scherm, geen tabel, geen
+ *  edge function. Die blijven "Binnenkort" zonder datum (briefing: "Geen
+ *  datums. [...] Een gemiste datum doet meer schade dan geen datum.").
  *
  *  `live` staat hier bewust LOS van `LAUNCHED`. `live` beschrijft of de
  *  software draait (een technisch feit — Supabase toont actieve tabellen
@@ -195,7 +201,7 @@ export type ModuleStatus = { live: boolean; when: string };
 export const MODULE_STATUS: Record<string, ModuleStatus> = {
   boekt:    { live: true, when: '' },
   waakt:    { live: true, when: '' },
-  loont:    { live: false, when: 'Binnenkort' },
+  loont:    { live: true, when: '' },
   vindt:    { live: true, when: '' },
   coacht:   { live: false, when: 'Binnenkort' },
   ziet:     { live: true, when: '' },
@@ -244,10 +250,10 @@ export const MODULES: Record<string, ModuleData> = {
           p:'Maak en verstuur facturen en offertes vanuit één rustig scherm. Emma onthoudt je klanten en je tarieven, en een geaccepteerde offerte zet je met één klik om naar een factuur.',
           list:['Facturen en offertes in je eigen stijl','Offerte geaccepteerd? Eén klik naar factuur','Openstaande posten en herinneringen in beeld'],
           vig:'boekt_factuur' },
-        { tag:'Overzicht & BTW', h:'Je cijfers in gewone taal.',
-          p:'Omzet, cashflow en openstaande facturen in één oogopslag, met de BTW het hele kwartaal bijgehouden. Vraag Emma iets over je cijfers en je krijgt antwoord op basis van je eigen boekhouding.',
-          list:['Dagelijks overzicht van omzet en openstaand','BTW voorbereid voor de aangifte','Vraag Emma: antwoorden uit je eigen cijfers'],
-          vig:'boekt_btw' },
+        { tag:'Openstaande posten', h:'Zie wie er nog moet betalen.',
+          p:'Debiteuren en crediteuren live uit je boekhouding, met per klant het openstaande bedrag en de betaalgeschiedenis. Loopt een factuur te ver achter, dan zegt Emma dat, en verstuur je met een paar klikken een herinnering.',
+          list:['Debiteuren en crediteuren live uit je boekhouding','Openstaand bedrag en betaalgedrag per klant','Herinnering en laatste aanmaning vanuit Emma'],
+          vig:'boekt_openstaand' },
         { tag:'e-Boekhouden.nl blijft', h:'De motor blijft waar hij is.',
           p:'EmmaBoekt werkt bovenop e-Boekhouden.nl. Alles wat je in Emma doet, staat gewoon in je boekhouding. Geen migratie, geen dubbel werk, en je accountant houdt toegang zoals altijd. SnelStart en Moneybird staan op de planning.',
           list:['Koppeling in een paar minuten, sleutel versleuteld','Geen migratie, geen dubbel werk','Je accountant houdt gewoon toegang'],
@@ -309,33 +315,41 @@ export const MODULES: Record<string, ModuleData> = {
     id:'loont', name:'Loont', num:'03', price:19, accentVar:'--m-loont',
     chip:'met CAO-engine voor jouw branche',
     head:'Loon en contracten, zonder gedoe.',
-    intro:'De volledige HR-administratie op één plek. Loonstroken, contracten met digitale ondertekening, en verlof en verzuim, met de CAO van jouw branche al ingebouwd.',
+    intro:'De personeelsadministratie op één plek. Loonstroken, contracten, verlof, verzuim en declaraties, met de cao van jouw branche al ingelezen. De loonkosten landen daarna in je boekhouding.',
     heroVig:'loont_strook',
     does:{
       title:'Wat EmmaLoont voor je doet.',
       sub:'Alles rond je personeel, rustig geregeld. Van contract tot loonstrook, en de loonkosten belanden meteen in je boekhouding.',
       feats:[
-        { tag:'Salaris', h:'Loonstroken die kloppen.', p:'Salarisadministratie met een CAO-engine voor jouw branche. Proforma\'s en loonstroken, klaar als nette PDF.',
-          list:['CAO-engine voor o.a. Kappers en Fysio','Proforma\'s en loonstroken als PDF','Werkgeverslasten automatisch berekend'], vig:'loont_strook' },
-        { tag:'Contracten', h:'Contracten in een paar minuten.', p:'Een contractgenerator met digitale ondertekening. Stel op, stuur door, en laat veilig tekenen.',
-          list:['Arbeidsovereenkomsten op maat','Digitaal ondertekenen','Alles netjes bewaard op één plek'], vig:'loont_contract' },
-        { tag:'Verlof & verzuim', h:'Saldo dat zichzelf bijhoudt.', p:'Verlof- en verzuimadministratie met een automatisch pro-rata saldo, zodat je nooit hoeft te rekenen.',
-          list:['Verlofsaldo automatisch berekend','Verzuim overzichtelijk bijgehouden','Altijd actueel per medewerker'], vig:'loont_verlof' },
-        { tag:'Wel en niet', h:'Wat EmmaLoont wel en niet doet.', p:'EmmaLoont rekent het loon, maakt de loonstroken, regelt contracten en verlof, en boekt de loonkosten in je boekhouding. De loonaangifte bij de Belastingdienst doe je zelf via Mijn Belastingdienst Zakelijk, of via je administratiekantoor. Die koppeling staat op de roadmap.',
-          list:['Loon, loonstroken, contracten en verlof: ja','Loonkosten in je boekhouding: ja','Loonaangifte bij de Belastingdienst: nog niet'], vig:'loont_strook' },
+        { tag:'Salaris', h:'Loonstroken die kloppen.', p:'Draai de loonronde met de cao van jouw branche als basis. Emma bereidt voor, jij controleert, en de loonstroken gaan als nette PDF naar je mensen. Werkgeverslasten rekent Emma mee.',
+          list:['Loonronde voorbereiden, controleren, versturen','Loonstroken als PDF, per e-mail verstuurd','Werkgeverslasten automatisch berekend'], vig:'loont_strook' },
+        { tag:'Cao', h:'De cao staat er al in.', p:'Emma leest de cao-loontabellen in en houdt de versies bij. Bij het vastleggen van een contract zie je de bijbehorende schaal ernaast staan, en een waarschuwing als je eronder gaat zitten.',
+          list:['Cao-loontabellen ingelezen en per versie bewaard','De schaal staat naast je contract, als hulp','Waarschuwing onder de schaal, jij beslist'], vig:'loont_contract' },
+        { tag:'Contracten', h:'Contracten vastgelegd op één plek.', p:'Leg per medewerker het contract vast met uren, functie en beloning. Elke wijziging wordt een nieuwe versie, zodat je altijd terug kunt zien wat er wanneer gold.',
+          list:['Contract per medewerker, met versiehistorie','De cao-schaal ernaast als ondergrens','Alles netjes bewaard op één plek'], vig:'loont_contract' },
+        { tag:'Verlof, verzuim & declaraties', h:'Bijgehouden zonder rekenwerk.', p:'Je medewerker vraagt verlof aan, jij keurt goed. Ziekmeldingen en declaraties lopen langs dezelfde weg: indienen, beoordelen, afhandelen.',
+          list:['Verlof aanvragen en goedkeuren','Verzuim in- en uitmelden','Declaraties indienen, beoordelen en verwerken'], vig:'loont_verlof' },
+        { tag:'Boekhouding', h:'De loonkosten in je boekhouding.', p:'Na de loonronde zet Emma de loonjournaalpost klaar. Heb je EmmaBoekt, dan boekt hij door naar je boekhouding. Heb je die niet, dan krijg je een CSV voor je eigen pakket of je kantoor.',
+          list:['Loonjournaalpost automatisch klaargezet','Grootboekrekeningen eenmalig gekoppeld','Zonder EmmaBoekt: export als CSV'], vig:'loont_strook' },
+        { tag:'Wel en niet', h:'Wat EmmaLoont wel en niet doet.', p:'EmmaLoont rekent het loon, maakt de loonstroken, legt contracten vast, houdt verlof, verzuim en declaraties bij, en zet de loonkosten in je boekhouding. De loonaangifte bij de Belastingdienst doe je zelf via Mijn Belastingdienst Zakelijk, of via je administratiekantoor. Contracten worden vastgelegd, niet digitaal ondertekend.',
+          list:['Loon, loonstroken, contracten en verlof: ja','Loonkosten in je boekhouding: ja','Loonaangifte en digitaal tekenen: nog niet'], vig:'loont_strook' },
       ],
     },
-    steps:{ title:'Zo simpel werkt het.', items:[
-      { n:'01 · KIES CAO', h:'Stel je branche in', p:'Kies de CAO die bij je past. Emma zet de regels en berekeningen voor je klaar.' },
-      { n:'02 · VOEG TOE', h:'Zet je team erin', p:'Voeg je medewerkers toe met hun gegevens. De rest rekent Emma uit.' },
-      { n:'03 · DRAAI', h:'Draai de loonronde', p:'Loonstroken, werkgeverslasten en vakantiegeld staan klaar als nette PDF.' },
-      { n:'04 · REGEL', h:'Contracten & verlof', p:'Stel contracten op, laat digitaal tekenen, en houd verlof en verzuim moeiteloos bij.' },
+    steps:{ title:'Zo werkt het.', items:[
+      { n:'01 · KIES CAO', h:'Stel je branche in', p:'Kies de cao die bij je past, of geef aan dat je er geen volgt. Emma zet de loontabellen klaar.' },
+      { n:'02 · VOEG TOE', h:'Zet je team erin', p:'Voeg je medewerkers toe en leg per persoon het contract vast. De schaal uit de cao staat ernaast.' },
+      { n:'03 · DRAAI', h:'Draai de loonronde', p:'Emma bereidt de ronde voor, jij controleert. De loonstroken gaan als PDF naar je mensen.' },
+      { n:'04 · BOEK', h:'Loonkosten in je boekhouding', p:'De loonjournaalpost staat klaar. Met EmmaBoekt boekt hij door, anders krijg je een CSV.' },
     ] },
     faq:[
       { q:'Voor wie is EmmaLoont bedoeld?', a:'Voor ondernemers met één of meer medewerkers, in salons, zorgpraktijken en kleine teams. Werk je alleen, dan heb je deze module simpelweg niet nodig.' },
-      { q:'Welke CAO\'s ondersteunt het?', a:'De CAO-engine is opgezet voor onder andere Kappers, Schoonheidsspecialisten, tandartsen (KNMT) en fysiotherapie. Welke CAO\'s er bij de lancering klaarstaan, communiceren we vooraf.' },
-      { q:'Vervangt het mijn loonbureau?', a:'Grotendeels. EmmaLoont rekent het loon, maakt de loonstroken, regelt contracten en verlof, en boekt de loonkosten in je boekhouding. Alleen de loonaangifte doe je zelf of via je administratiekantoor. Wat wel en niet inbegrepen is, lees je hierboven.' },
-      { q:'Wat kost EmmaLoont en kan ik het nu gebruiken?', a:'€19 per maand, exclusief btw, met 10% korting bij jaarbetaling. EmmaLoont is nog in ontwikkeling. Laat je e-mail achter, dan hoor je het zodra je kunt starten.' },
+      { q:'Welke cao\'s ondersteunt het?', a:'Emma leest openbare cao-loontabellen in en bewaart ze per versie. Kappers is de eerste, en er staan er inmiddels tientallen klaar. Volg je geen cao, dan kan dat ook: je legt het contract dan gewoon vast zonder schaal ernaast. Twijfel je of jouw cao erbij zit, mail dan even naar info@emmastudio.nl.' },
+      { q:'Vervangt het mijn loonbureau?', a:'Grotendeels, maar niet helemaal. EmmaLoont rekent het loon, maakt de loonstroken, legt contracten vast, houdt verlof, verzuim en declaraties bij en zet de loonkosten in je boekhouding. De loonaangifte bij de Belastingdienst doe je zelf via Mijn Belastingdienst Zakelijk, wat mag bij tien of minder werknemers, of je laat die bij je administratiekantoor.' },
+      { q:'Kan ik contracten digitaal laten ondertekenen?', a:'Nog niet. Je legt het contract vast in Emma, met alle afspraken en een versiehistorie, maar ondertekenen gebeurt buiten Emma om. Digitaal ondertekenen staat op de planning zonder datum.' },
+      { q:'Wat als ik onder de cao-schaal wil betalen?', a:'Dat mag, en Emma houdt je niet tegen. Er zijn legitieme redenen voor, bijvoorbeeld een andere urenbasis of functie. Wat Emma wel doet: de schaal ernaast zetten en waarschuwen als je eronder gaat zitten, zodat je het bewust doet.' },
+      { q:'Wat kost EmmaLoont en kan ik het nu gebruiken?', a: LAUNCHED
+          ? 'Ja, EmmaLoont is nu te gebruiken. €19 per maand, exclusief btw, met 10% korting bij jaarbetaling. Je probeert het 14 dagen gratis, zonder creditcard. Maak een account aan op app.emmastudio.nl/signup.'
+          : '€19 per maand, exclusief btw, met 10% korting bij jaarbetaling. EmmaLoont draait al, maar de aanmelding staat nog niet open. Laat je e-mail achter, dan hoor je het zodra je kunt starten.' },
     ],
   },
   vindt:{
@@ -420,15 +434,19 @@ export const MODULES: Record<string, ModuleData> = {
           p:'Elke concurrent die je selecteert, staat op de kaart. Je ziet in één oogopslag wie er dichtbij zit en wie aan de rand van je gebied.',
           list:['Alle geselecteerde concurrenten op één kaart','Je eigen adres uitgesloten','Klik door naar wat Emma van ze weet'],
           vig:'ziet_concurrent' },
+        { tag:'Prijsvergelijking', h:'Wat vragen ze verderop?',
+          p:'Zet je eigen diensten en prijzen erin. Emma haalt de prijzen van de websites van je concurrenten op en legt ze ernaast. Alleen bij diensten die jij hebt gekoppeld, want een verzonnen vergelijking is erger dan geen vergelijking.',
+          list:['Prijzen van concurrent-websites uitgelezen','Per dienst naast je eigen prijs gelegd','Niet gekoppeld is niet vergeleken, nooit gegokt'],
+          vig:'ziet_prijs' },
+        { tag:'Reviews & positie', h:'Hoe sta jij ervoor tegenover de buurt?',
+          p:'Emma haalt de Google-reviews van je concurrenten op, haalt de thema\'s eruit en houdt bij of het sentiment beter of slechter wordt. Daarboven staat het antwoord op de vraag waar het echt om gaat: waar sta jij.',
+          list:['Reviewscore en thema\'s per concurrent','Sentiment over tijd, verbetert of verslechtert het','Positie-update: waar sta jij in de buurt'],
+          vig:'ziet_review' },
         { tag:'Wekelijkse monitoring', h:'Emma let op, ook als jij dat niet doet.',
           p:'Elke week kijkt Emma of er iemand nieuw is in jouw gebied. Zo ja, dan hoor je het. Niet elke week een mail, alleen als er echt iets verandert.',
           list:['Wekelijkse controle op nieuwe inschrijvingen','Melding alleen als er iets verandert','Komt binnen bij je andere signalen'],
           vig:'ziet_concurrent' },
       ],
-    },
-    roadmap:{
-      title:'Op de roadmap',
-      items:['Prijsvergelijking per dienst','Reviews-analyse per thema','Sentiment-over-tijd','Maandelijkse positie-update'],
     },
     steps:{ title:'Zo werkt het.', items:[
       { n:'01 · STEL IN', h:'Geef je werkgebied', p:'Bepaal je locatie en de radius waarbinnen Emma moet zoeken.' },
@@ -440,7 +458,8 @@ export const MODULES: Record<string, ModuleData> = {
       { q:'Hoe komt Emma aan deze gegevens?', a:'De concurrenten komen uit het openbare KvK-register, op basis van je SBI-code en een straal die je zelf instelt. Reviews komen van Google. Geen social media, geen LinkedIn. Alleen openbare bronnen.' },
       { q:'Voor wie is het vooral nuttig?', a:'Voor lokale dienstverleners zoals salons en zorgpraktijken, die willen weten wie er in hun buurt actief is zonder daar zelf naar te hoeven zoeken.' },
       { q:'Word ik er niet onrustig van?', a:'Nee. EmmaZiet stuurt geen doorlopende alarmen, alleen een signaal als er daadwerkelijk een nieuwe concurrent bijkomt.' },
-      { q:'Komt er nog meer bij?', a:'Ja. Prijsvergelijking per dienst, reviews-analyse per thema, sentiment over tijd en een maandelijkse positie-update staan op de roadmap. Nu draait EmmaZiet op concurrent-detectie, de kaart en wekelijkse monitoring.' },
+      { q:'Hoe betrouwbaar is de prijsvergelijking?', a:'Emma leest de prijzen van de websites van je concurrenten. Staat er geen prijslijst op een site, dan is er niets te vergelijken en zegt Emma dat ook. Je koppelt zelf welke dienst van jou bij welke dienst van hen hoort. Zonder die koppeling toont Emma geen vergelijking, want een gegokte match is erger dan een lege plek.' },
+      { q:'Waar komen de reviews vandaan?', a:'Van Google. Emma haalt de reviews van je concurrenten op, haalt er de terugkerende thema\'s uit en houdt bij of het sentiment beter of slechter wordt. Je ziet ook je eigen positie ertegenover.' },
       { q:'Wat kost EmmaZiet?', a:'€9 per maand, exclusief btw. Je probeert het eerst 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 10% korting.' },
       { q:'Kan ik EmmaZiet nu al gebruiken?', a: LAUNCHED
           ? 'Ja. EmmaZiet is nu te gebruiken. Je probeert het 14 dagen gratis, zonder creditcard. Maak een account aan op app.emmastudio.nl/signup.'
@@ -525,12 +544,12 @@ export const VIGNETTES: Record<string, string> = {
     <div class="vig__row vig__row--head"><span class="vig__dot"></span> Inkomende post</div>
     <div class="vig__li vig__li--soft"><span class="vig__scan"></span><span>Leverancier · PDF</span><b class="vig__pill vig__pill--w">inlezen…</b></div>
     <div class="vig__li"><span class="vig__tick">✓</span><span>Bedrag &amp; BTW herkend</span><b class="vig__pill">geboekt</b></div>
-    <div class="vig__insight"><span class="vig__spark">◆</span> Emma boekt automatisch op de juiste <b>grootboekrekening</b></div>`,
-  boekt_btw:`
-    <div class="vig__row vig__row--head"><span class="vig__dot"></span> BTW-aangifte · Q2</div>
-    <div class="vig__pay"><span>Omzet hoog tarief</span><i></i></div>
-    <div class="vig__pay"><span>Voorbelasting</span><i style="width:46%"></i></div>
-    <div class="vig__bar"><span>Aangifte voorbereid, klaar om te controleren</span><i></i></div>`,
+    <div class="vig__insight"><span class="vig__spark">◆</span> Emma stelt de <b>grootboekrekening</b> voor, jij bevestigt</div>`,
+  boekt_openstaand:`
+    <div class="vig__row vig__row--head"><span class="vig__dot"></span> Openstaand</div>
+    <div class="vig__pay"><span>Debiteuren</span><i></i></div>
+    <div class="vig__pay"><span>Waarvan te laat</span><i style="width:46%"></i></div>
+    <div class="vig__bar"><span>Twee facturen langer dan 30 dagen open</span><i></i></div>`,
   boekt_schil:`
     <div class="vig__row vig__row--head"><span class="vig__dot"></span> Gekoppeld</div>
     <div class="vig__li"><span class="vig__tick">✓</span><span>eBoekhouden.nl</span><b class="vig__pill">verbonden</b></div>
@@ -598,6 +617,14 @@ export const VIGNETTES: Record<string, string> = {
     <div class="vig__row vig__row--head"><span class="vig__dot"></span> In de buurt</div>
     <div class="vig__li"><span class="vig__tick">✓</span><span>Concurrenten in kaart</span><b class="vig__pill">2 km</b></div>
     <div class="vig__li"><span class="vig__tick">✓</span><span>Wekelijkse update</span><b class="vig__pill">rustig</b></div>`,
+  ziet_prijs:`
+    <div class="vig__row vig__row--head"><span class="vig__dot"></span> Prijs per dienst</div>
+    <div class="vig__li"><span class="vig__tick">✓</span><span>Knippen</span><b class="vig__pill">gelijk</b></div>
+    <div class="vig__li"><span class="vig__tick">✓</span><span>Highlights</span><b class="vig__pill">8% onder</b></div>`,
+  ziet_review:`
+    <div class="vig__row vig__row--head"><span class="vig__dot"></span> Jouw positie</div>
+    <div class="vig__li"><span class="vig__tick">✓</span><span>Jouw score</span><b class="vig__pill">4,7</b></div>
+    <div class="vig__li"><span class="vig__tick">✓</span><span>Buurtgemiddelde</span><b class="vig__pill">4,4</b></div>`,
   schrijft_kanban:`
     <div class="vig__row vig__row--head"><span class="vig__dot"></span> Contentplanner</div>
     <div class="vig__kan">

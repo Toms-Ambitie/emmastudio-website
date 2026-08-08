@@ -8,15 +8,15 @@ const SCENES = [
   { id:'boekt', name:'Boekt', price:9,
     head:'Boekhouden zonder je software aan te raken.',
     desc:'De vriendelijke schil om e-Boekhouden.nl. Emma leest bonnen en facturen voor je in en zet ze klaar, jij bevestigt. Je boekhouding blijft precies waar die is.',
-    bullets:['Bonnen en facturen slim ingelezen','Facturen en offertes in een paar klikken','BTW voorbereid voor de aangifte'] },
+    bullets:['Bonnen en facturen slim ingelezen','Facturen en offertes in een paar klikken','Openstaande posten en herinneringen in beeld'] },
   { id:'waakt', name:'Waakt', price:9,
     head:'Het financiële brein van je zaak.',
     desc:'Doelen, prognoses en een wekelijks advies op je échte cijfers. Emma kijkt mee en zegt het op tijd als iets afwijkt.',
     bullets:['Doelen op bedrijfs- en teamniveau','Prognoses op werkelijke data','Elke week drie concrete acties'] },
   { id:'loont', name:'Loont', price:19,
     head:'Loon en contracten, zonder gedoe.',
-    desc:'De volledige HR-administratie. Loonstroken, contracten met digitale ondertekening, verlof en verzuim, met de CAO van jouw branche ingebouwd.',
-    bullets:['Salaris met CAO-engine','Contracten digitaal getekend','Verlof & verzuim automatisch bijgehouden'] },
+    desc:'De personeelsadministratie. Loonronde en loonstroken, contracten, verlof, verzuim en declaraties, met de cao van jouw branche al ingelezen.',
+    bullets:['Loonronde met de cao als basis','Contracten vastgelegd, met versiehistorie','Verlof, verzuim en declaraties bijgehouden'] },
   { id:'ziet', name:'Ziet', price:9,
     head:'Zie waar je staat in de markt.',
     desc:'Markt-intelligentie die meedenkt. Prijsvergelijking in de buurt, concurrenten in beeld en reviews samengevat tot wat ertoe doet.',
@@ -41,7 +41,7 @@ const VIGNETTES: Record<string, string> = {
     <div class="vig__li"><span class="vig__tick">✓</span><span>Gamma · € 86,20</span><b class="vig__pill">geboekt</b></div>
     <div class="vig__li"><span class="vig__tick">✓</span><span>Factuur verstuurd</span><b class="vig__pill">verzonden</b></div>
     <div class="vig__li vig__li--soft"><span class="vig__scan"></span><span>Inkomende factuur</span><b class="vig__pill vig__pill--w">inlezen…</b></div>
-    <div class="vig__bar"><span>BTW-aangifte · voorbereid</span><i></i></div>`,
+    <div class="vig__bar"><span>Openstaande posten · bijgewerkt</span><i></i></div>`,
   waakt:`<div class="vig__row vig__row--head"><span class="vig__dot"></span> Omzet vs. doel</div>
     <div class="vig__chart"><i style="height:42%"></i><i style="height:58%"></i><i style="height:49%"></i><i style="height:70%"></i><i style="height:63%"></i><i style="height:82%"></i></div>
     <div class="vig__insight"><span class="vig__spark">◆</span> Productverkoop loopt iets achter. <b>3 acties</b> voor deze week</div>`,
