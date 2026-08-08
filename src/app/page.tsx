@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import HomePage from '@/components/emma/HomePage';
 import { FAQ } from '@/data/home';
+import { ARTICLES, nieuwsteEerst } from '@/data/articles';
+import { metBeeld } from '@/data/coverbeeld';
 
 const SITE = 'https://www.emmastudio.nl';
 
@@ -46,10 +48,14 @@ const jsonLd = {
 };
 
 export default function Page() {
+  // De kennisbank-preview op de homepage toonde de eerste drie uit de array en
+  // zonder coverbeeld. Hier gekozen en niet in HomePage zelf, want dat is een
+  // client component en de bestandscontrole van metBeeld draait op de server.
+  const kbPosts = nieuwsteEerst(ARTICLES).slice(0, 3).map(metBeeld);
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <HomePage />
+      <HomePage kbPosts={kbPosts} />
     </>
   );
 }
