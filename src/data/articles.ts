@@ -88,16 +88,28 @@ const MAANDEN = ['januari','februari','maart','april','mei','juni','juli','augus
 /** "19 juni 2026" omzetten naar een sorteerbaar getal (20260619).
  *  De datum staat als leesbare Nederlandse tekst in de data, want die tekst wordt
  *  ook getoond. Zonder deze sleutel zou de volgorde op de pagina de volgorde van
- *  de array zijn, en die zegt niets over hoe recent een artikel is. */
+ *  de array zijn, en die zegt niets over hoe recent een artikel is.
+ *
+ *  Waarom dit een fout gooit en geen 0 teruggeeft: bij 0 zakt het artikel stil
+ *  naar de onderkant. Je schrijft "15 sept 2026" in plaats van "15 september
+ *  2026", je publiceert, en je nieuwste stuk verschijnt nergens bovenaan zonder
+ *  dat iets je waarschuwt. Deze pagina's worden bij de build gegenereerd, dus een
+ *  fout hier breekt de build en zie je het meteen in plaats van weken later. */
 export function datumSleutel(datum: string): number {
   const m = datum.trim().match(/^(\d{1,2})\s+([a-zA-Z]+)\s+(\d{4})$/);
-  if (!m) return 0;
-  const maand = MAANDEN.indexOf(m[2].toLowerCase());
-  if (maand < 0) return 0;
+  const maand = m ? MAANDEN.indexOf(m[2].toLowerCase()) : -1;
+  if (!m || maand < 0) {
+    throw new Error(
+      `Onleesbare artikeldatum: "${datum}". Schrijf hem voluit als "15 september 2026" ` +
+      `(dag, volledige Nederlandse maandnaam, jaar). Afkortingen als "sept" en notaties ` +
+      `als "15-09-2026" worden niet herkend.`,
+    );
+  }
   return Number(m[3]) * 10000 + (maand + 1) * 100 + Number(m[1]);
 }
 
-/** Nieuwste eerst. */
+/** Nieuwste eerst. Nieuwe artikelen komen hierdoor vanzelf bovenaan te staan,
+ *  op /kennisbank en in de preview op de homepage. */
 export function nieuwsteEerst<T extends { date: string }>(lijst: T[]): T[] {
   return [...lijst].sort((a, b) => datumSleutel(b.date) - datumSleutel(a.date));
 }
