@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { ICONS } from '@/data/modules';
-import { ARTICLES, ARTICLE_SEO_TITLE, ARTICLE_RELATED } from '@/data/articles';
+import { ARTICLES, ARTICLE_SEO_TITLE, ARTICLE_RELATED, nieuwsteEerst } from '@/data/articles';
 import type { Article, ArticleBlock } from '@/data/articles';
 import { metBeeld } from '@/data/coverbeeld';
 
@@ -164,7 +164,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   // Zelfde terugval als op de overzichtspagina: geen bestand, geen foto.
   const article = metBeeld(gevonden);
 
-  const others = ARTICLES.filter(a => a.slug !== article.slug).map(metBeeld);
+  const others = nieuwsteEerst(ARTICLES.filter(a => a.slug !== article.slug)).map(metBeeld);
   const accent = article.accent;
 
   return (
