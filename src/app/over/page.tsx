@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
 const VALUES = [
   { n: '01', h: 'Rust is een functie.', p: 'Software hoeft je niet te activeren, activeren, activeren. Een goed product doet zijn werk zonder dat jij er elke dag aan hoeft te denken.' },
-  { n: '02', h: 'Eerlijk bouwen.', p: 'We vertellen wat werkt en wat nog niet. EmmaPromoot is de enige module die nog niet 18 maanden in de praktijk heeft gedraaid. Dat zeggen we gewoon.' },
+  { n: '02', h: 'Eerlijk bouwen.', p: 'We vertellen wat werkt en wat nog niet. Vijf van de acht modules zijn er nu, drie nog niet. Waar iets ontbreekt, zeggen we dat op de modulepagina zelf, zonder er een datum bij te verzinnen.' },
   { n: '03', h: 'Jij houdt de regie.', p: 'Emma doet het werk, maar jij beslist. Geen verrassingen, geen automatische acties buiten jouw medeweten. Software die werkt voor jou, niet andersom.' },
   { n: '04', h: 'Lokaal en echt.', p: 'Emma is gemaakt voor Nederlandse ondernemers: met Nederlandse BTW, CAO-wetgeving en AVG als uitgangspunt, niet als bijzaak.' },
 ];

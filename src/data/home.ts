@@ -87,7 +87,7 @@ export const HOW_IT_WORKS = {
     { num: '01', title: 'Kies je modules', desc: 'Elke module staat zelfstandig. Begin met een, voeg er later meer toe.' },
     { num: '02', title: 'Koppel je data', desc: 'Emma leest live uit je boekhouding. Eén waarheid per cijfer, geen overtypen.' },
     { num: '03', title: 'Emma doet het werk', desc: 'Bonnen inlezen, facturen maken, signalen opmerken. Emma stelt voor, jij bevestigt.' },
-    { num: '04', title: 'Vraag Emma', desc: 'Een vraag over je cijfers, een antwoord uit je eigen boekhouding. Geen zoektocht door zes systemen.' },
+    { num: '04', title: 'Jij bepaalt', desc: 'Emma legt uit waarom ze iets voorstelt. Jij bevestigt, past aan of laat het staan. Niets gaat je administratie in zonder jou.' },
   ],
 };
 

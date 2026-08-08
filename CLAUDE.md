@@ -188,13 +188,17 @@ Emma heeft 8 modules — elke module is een Nederlands werkwoord. CamelCase: `Em
 - Standaard-modules à **€9/mnd** — functioneel werk dat Emma overneemt
 - Premium-modules à **€19/mnd** — werk dat anders door medewerker of bureau gedaan wordt
 - Som van alle 8 losse: €102/mnd
-- Prijzen exclusief BTW · 14 dagen gratis proefperiode · maandelijks opzegbaar · 15% korting bij jaarbetaling
+- Prijzen exclusief BTW · 14 dagen gratis proefperiode · maandelijks opzegbaar · 10% korting bij jaarbetaling
 
 **Geen module:** AI-chat (platform-feature, altijd beschikbaar) · Medewerker-view (rol/view)
 
 ---
 
-## 9b. Lanceerstatus (juli 2026) — leidend voor alle site-teksten
+## 9b. Lanceerstatus (8 augustus 2026) — leidend voor alle site-teksten
+
+> **Bron van waarheid voor functies en status:** `emmastudio-app/docs/FUNCTIES.md`.
+> Dat document is gemeten tegen de code, Supabase prod/dev en de `plans`-tabel.
+> Spreekt dit bestand het tegen, dan wint FUNCTIES.md en wordt dit bijgewerkt.
 
 **`LAUNCHED`** in `src/data/modules.ts` is de publieke signup-schakelaar, niet de modulestatus. Staat die op `false`, dan toont de site "lanceert in juli" met e-mailcapture; op `true` schakelen de CTA's naar "Start 14 dagen gratis" richting **app.emmastudio.nl**. `LAUNCHED` zegt alleen of de signup open staat, niet of een module technisch draait (dat regelt `MODULE_STATUS`) en niet of een module op dit moment koopbaar is (`plans.purchasable` in Supabase, nu voor alle modules `false`). Draaien, koopbaar zijn en publiek gelanceerd zijn zijn drie onafhankelijke assen.
 
@@ -202,11 +206,21 @@ Emma heeft 8 modules — elke module is een Nederlands werkwoord. CamelCase: `Em
 
 **Positionering EmmaBoekt:** de vriendelijke schil om **e-Boekhouden.nl**. e-Boekhouden.nl blijft de motor van de boekhouding; Emma maakt het dagelijkse werk makkelijker, sneller en leuker (bonnen slim inboeken, facturen en offertes maken, openstaande posten, Vraag Emma). SnelStart-koppeling volgt later. Kernbelofte: **Emma stelt voor, jij bevestigt — niets wordt automatisch geboekt.**
 
-**Modulestatus** (bron van waarheid: `MODULE_STATUS` in `src/data/modules.ts`, bevestigd via de Supabase-tabellen in stap 0 van de herbouw):
-- **Live**, de software draait: EmmaBoekt, EmmaWaakt, EmmaZiet. Ziet is gedeeltelijk live: alleen concurrent-detectie, kaartvisualisatie en wekelijkse monitoring. Prijsvergelijking, reviews-analyse en sentiment-over-tijd staan bij Ziet apart op de roadmap.
-- **Roadmap, zonder datum**: EmmaLoont, EmmaVindt, EmmaCoacht, EmmaSchrijft, EmmaPromoot. Je betaalt per module; niet-live modules tonen "Binnenkort", geen maand: een gemiste datum doet meer schade dan geen datum. Pakketten volgen zodra alle acht modules live zijn.
+**Modulestatus** (bron van waarheid: `MODULE_STATUS` in `src/data/modules.ts`, gemeten tegen Supabase prod op 8 augustus 2026):
+- **Live én koopbaar** (`plans.purchasable = true`): EmmaBoekt, EmmaWaakt, EmmaZiet, EmmaVindt, **EmmaLoont**. Vijf van de acht.
+- **Niet gebouwd**: EmmaCoacht, EmmaSchrijft, EmmaPromoot. Geen scherm, geen tabel, geen edge function. Die tonen "Binnenkort", zonder maand: een gemiste datum doet meer schade dan geen datum.
+- **Pakketten** staan alle vier op `purchasable = false, active = false`. Nog niet te koop. Pakketten volgen zodra alle acht modules live zijn.
 
-"Live" betekent hier niet "koopbaar". Er is op dit moment geen enkele module af te rekenen: de signup staat server-side dicht en `plans.purchasable` staat op `false`. Draaien en verkopen zijn twee aparte assen.
+EmmaZiet is **niet langer gedeeltelijk**. Prijsvergelijking, reviews-analyse, sentiment over tijd en de positie-update zijn gebouwd en gedraaid. Het roadmap-blok bij Ziet is vervallen.
+
+EmmaLoont stond tot 8 augustus ten onrechte op "Binnenkort" terwijl hij op prod al te koop was. Nu live op de site.
+
+**Drie claims die NIET waargemaakt worden — nooit op de site zetten:**
+- **Vraag Emma / de copilot bestaat niet.** In de app staat een paneel met "Binnenkort". Geen chat, geen antwoorden uit je eigen cijfers.
+- **Geen BTW-scherm en geen BTW-aangifte.** EmmaBoekt bereidt geen aangifte voor.
+- **Geen digitale ondertekening van contracten.** EmmaLoont legt contracten vast, laat ze niet tekenen.
+
+"Live" betekent hier: bereikbaar en werkend op prod. Het betekent niet "in dagelijks gebruik door klanten" — op prod staan 2 tenants en is het gebruik nog minimaal. Het functiebewijs staat grotendeels op dev.
 
 **Eigenaar Blondes Incognito (testimonial): Ilze Spannenberg, Heeten.**
 
@@ -220,12 +234,14 @@ Format: `Emma voor [branche]` — geen sub-merken, geen aparte logo's.
 
 | Pakket              | Modules                                              | À la carte | Pakketprijs | Korting |
 |---------------------|------------------------------------------------------|------------|-------------|---------|
-| Emma voor Salons    | 7 — alles behalve EmmaPromoot                        | €83/mnd    | €59/mnd     | 29%     |
-| Emma voor Zorg      | 5 — Boekt + Waakt + Loont + Vindt + Coacht           | €55/mnd    | €39/mnd     | 29%     |
-| Emma voor ZZP'ers   | 4 — Boekt + Waakt + Vindt + Schrijft                 | €46/mnd    | €29/mnd     | 37%     |
-| Emma Compleet       | Alle 8 modules                                       | €102/mnd   | €69/mnd     | 32%     |
+| Emma voor ZZP'ers   | 4 — Boekt + Waakt + Vindt + Schrijft                 | €46/mnd    | €37/mnd     | 20%     |
+| Emma voor Zorg      | 5 — Boekt + Waakt + Loont + Vindt + Coacht           | €55/mnd    | €44/mnd     | 20%     |
+| Emma voor Salons    | 7 — alles behalve EmmaPromoot                        | €83/mnd    | €66/mnd     | 20%     |
+| Emma Compleet       | Alle 8 modules                                       | €102/mnd   | €77/mnd     | 25%     |
 
-Pakketten zijn marketing-bundels, geen aparte producten. Zelfde software, andere module-configuratie.
+Deze prijzen staan zo in `src/data/packages.ts`, in de Module-atlas én in de `plans`-tabel op prod. De oudere reeks 29/39/59/69 die hier eerder stond, is achterhaald.
+
+Pakketten zijn marketing-bundels, geen aparte producten. Zelfde software, andere module-configuratie. Geen enkel pakket is op dit moment koopbaar.
 
 ---
 
