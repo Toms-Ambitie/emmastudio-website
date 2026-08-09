@@ -25,8 +25,8 @@ export default function AlgemeneVoorwaarden() {
             <h2>Artikel 1 — Definities</h2>
             <p>In deze voorwaarden wordt verstaan onder:</p>
             <ul>
-              <li><b>Emma:</b> het softwareplatform dat door Toms Ambitie wordt aangeboden via emmastudio.nl, inclusief alle bijbehorende modules en diensten.</li>
-              <li><b>Toms Ambitie:</b> Toms Ambitie, gevestigd aan de {BEDRIJF.straat}, {BEDRIJF.postcode} {BEDRIJF.plaats}, ingeschreven in het handelsregister van de Kamer van Koophandel onder nummer {BEDRIJF.kvk}, btw-identificatienummer {BEDRIJF.btw}.</li>
+              <li><b>Emma:</b> het softwareplatform dat door Toms Ambitie wordt aangeboden via emmastudio.nl, inclusief alle bijbehorende modules en diensten. Emma en EmmaStudio zijn handelsnamen van Toms Ambitie en geen zelfstandige ondernemingen.</li>
+              <li><b>Toms Ambitie:</b> de {BEDRIJF.rechtsvorm} Toms Ambitie, gevestigd aan de {BEDRIJF.straat}, {BEDRIJF.postcode} {BEDRIJF.plaats}, ingeschreven in het handelsregister van de Kamer van Koophandel onder nummer {BEDRIJF.kvk}, btw-identificatienummer {BEDRIJF.btw}.</li>
               <li><b>Klant:</b> de natuurlijke persoon die handelt in de uitoefening van een beroep of bedrijf, of de rechtspersoon, die een abonnement afsluit op Emma.</li>
               <li><b>Module:</b> een afzonderlijk onderdeel van Emma, zoals EmmaBoekt, EmmaWaakt, EmmaLoont, EmmaVindt, EmmaCoacht, EmmaZiet, EmmaSchrijft of EmmaPromoot.</li>
               <li><b>Overeenkomst:</b> de abonnementsovereenkomst tussen Toms Ambitie en de Klant.</li>
@@ -90,7 +90,7 @@ export default function AlgemeneVoorwaarden() {
             <h2>Artikel 11 — Aansprakelijkheid</h2>
             <p>11.1 De totale aansprakelijkheid van Toms Ambitie is beperkt tot directe schade en bedraagt maximaal het bedrag dat de Klant in de drie kalendermaanden voorafgaand aan de schadeveroorzakende gebeurtenis aan abonnementskosten heeft betaald.</p>
             <p>11.2 Toms Ambitie is in geen geval aansprakelijk voor indirecte schade, gevolgschade, gederfde winst, gemiste besparingen of schade door bedrijfsstagnatie.</p>
-            <p>11.3 De aansprakelijkheidsbeperkingen in dit artikel gelden niet in geval van opzet of bewuste roekeloosheid van Toms Ambitie of diens leidinggevende medewerkers.</p>
+            <p>11.3 De aansprakelijkheidsbeperkingen in dit artikel gelden niet in geval van opzet of bewuste roekeloosheid van Toms Ambitie.</p>
 
             <h2>Artikel 12 — Overmacht</h2>
             <p>Toms Ambitie is niet gehouden tot nakoming van enige verplichting indien sprake is van overmacht, waaronder begrepen storingen bij hostingproviders, DDoS-aanvallen, internetstoringen en overheidsmaatregelen.</p>
@@ -107,7 +107,7 @@ export default function AlgemeneVoorwaarden() {
             <h2>Artikel 15 — Contact</h2>
             <p>Vragen over deze algemene voorwaarden? Neem contact op via <Link href="/contact">emmastudio.nl/contact</Link> of mail naar <a href="mailto:info@emmastudio.nl">info@emmastudio.nl</a>.</p>
             <p>
-              <b>{BEDRIJF.naam}</b><br />
+              <b>{BEDRIJF.naam}</b> ({BEDRIJF.rechtsvorm}), handelend onder de naam EmmaStudio<br />
               {BEDRIJF.straat}<br />
               {BEDRIJF.postcode} {BEDRIJF.plaats}, {BEDRIJF.land}<br />
               KvK: {BEDRIJF.kvk}<br />
