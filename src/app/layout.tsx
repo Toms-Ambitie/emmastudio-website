@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import Analytics from '@/components/Analytics';
 import ScrollReveal from '@/components/ScrollReveal';
 import ScrollReset from '@/components/ScrollReset';
+import ChatKnop from '@/components/ChatKnop';
 
 export const metadata: Metadata = {
   title: 'Emma · Jij doet je werk. Emma de rest.',
@@ -56,6 +57,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         <Footer />
         <ScrollReveal />
+        {/* De assistent, op elke pagina bereikbaar. Onderaan gemonteerd zodat
+            hij als laatste in de DOM staat en de tabvolgorde van de pagina
+            niet onderbreekt. Gaat nooit vanzelf open — zie ChatKnop.tsx. */}
+        <ChatKnop />
       </body>
     </html>
   );
