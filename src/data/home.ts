@@ -208,11 +208,11 @@ export const FAQ = {
   eyebrow: 'Vragen',
   title: 'Goede vragen.',
   items: [
-    { q: 'Moet ik mijn boekhoudsoftware vervangen?', a: 'Nee. EmmaBoekt is een schil rond je bestaande pakket (e-Boekhouden, SnelStart, Moneybird). Het onderliggende pakket blijft de bron van waarheid. Stop je met Emma? Dan staat je volledige administratie gewoon in je eigen pakket.' },
+    { q: 'Moet ik mijn boekhoudsoftware vervangen?', a: 'Nee. EmmaBoekt is een schil rond je bestaande boekhoudpakket. De koppeling werkt op dit moment met e-Boekhouden.nl. SnelStart en Moneybird staan op de planning, nog zonder datum. Het onderliggende pakket blijft de bron van waarheid. Stop je met Emma? Dan staat je volledige administratie gewoon in je eigen pakket.' },
     { q: 'Kan ik met een module beginnen en later uitbreiden?', a: 'Ja. Elke module is zelfstandig levensvatbaar. Begin met EmmaBoekt voor EUR 9 per maand. Voeg er later andere modules aan toe. Een module aanzetten is een rij toevoegen, geen code schrijven.' },
     { q: 'Wat als ik stop met Emma?', a: 'Je verliest geen data. Alles wat je via Emma doet, landt ook in je onderliggende pakket. Emma is een schil, geen kooi. Je data blijft van jou.' },
     { q: 'Wat kost Emma?', a: 'Standaard-modules kosten EUR 9 per maand, premium-modules EUR 19 per maand, exclusief btw. Je begint met 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 10% korting.' },
-    { q: 'Welke modules kan ik nu gebruiken?', a: 'Vier: EmmaBoekt voor je boekhouding, EmmaWaakt voor je cijfers, EmmaZiet voor je concurrenten en EmmaVindt voor klanten en personeel. Elk €9 per maand, 14 dagen gratis en zonder creditcard. De andere vier zijn in ontwikkeling. Op elke modulepagina zie je waar hij staat.' },
+    { q: 'Welke modules kan ik nu gebruiken?', a: 'Vijf. EmmaBoekt voor je boekhouding, EmmaWaakt voor je cijfers, EmmaZiet voor je concurrenten en EmmaVindt voor klanten en personeel kosten elk €9 per maand. EmmaLoont voor loon, contracten en verlof kost €19. Je begint met 14 dagen gratis, zonder creditcard. De andere drie zijn in ontwikkeling. Op elke modulepagina zie je waar een module staat.' },
     { q: 'Hoe zit het met privacy en beveiliging?', a: 'Je bedrijfsdata staat binnen de Europese Unie, op servers in Frankfurt. Onze website en e-mailverzending lopen via Amerikaanse dienstverleners onder Europese standaardcontractbepalingen. Je gegevens worden alleen verwerkt om Emma te laten werken: geen verkoop aan derden, geen tracking. De koppeling met je boekhouding is versleuteld en voldoet aan de AVG.' },
   ],
 };
