@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import ChatVenster from '@/components/ChatVenster';
+import ChatAlleen from '@/components/ChatAlleen';
 
 /* Testpagina voor de chat-assistent. Bewust een eigen pagina en nog geen
    knop op de site: eerst zelf stukmaken, dan pas aan bezoekers laten zien.
@@ -45,7 +45,7 @@ export default function ChatTest() {
 
         <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
           <div className="h-[70vh] min-h-[520px]">
-            <ChatVenster />
+            <ChatAlleen />
           </div>
 
           <aside>

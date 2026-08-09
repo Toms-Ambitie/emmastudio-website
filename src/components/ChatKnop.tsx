@@ -3,6 +3,7 @@
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import ChatVenster from './ChatVenster';
+import { useChat } from './useChat';
 
 /* ── CHATKNOP ───────────────────────────────────────────────────────────────
    De zwevende knop rechtsonder, op elke pagina. Gemonteerd in layout.tsx.
@@ -26,6 +27,12 @@ export default function ChatKnop() {
   const paneelRef = useRef<HTMLDivElement>(null);
   const knopRef = useRef<HTMLButtonElement>(null);
   const pad = usePathname();
+
+  /* Het gesprek leeft hier, niet in het venster. ChatKnop hangt in layout.tsx
+     en blijft in de app-router gemonteerd bij navigatie, dus een bezoeker die
+     het paneel sluit of doorklikt naar een andere pagina raakt zijn vraag niet
+     kwijt. */
+  const chat = useChat();
 
   /* Focus alleen terugzetten als de knop echt zichtbaar is. Op mobiel is hij
      verborgen zolang het paneel open staat, en focus() op een element met
@@ -96,7 +103,7 @@ export default function ChatKnop() {
                 <path d="M6 6l12 12M18 6L6 18" />
               </svg>
             </button>
-            <ChatVenster />
+            <ChatVenster chat={chat} />
           </div>
         </div>
       )}

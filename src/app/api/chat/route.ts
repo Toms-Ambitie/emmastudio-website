@@ -103,14 +103,20 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 async function stuurDoor(
   invoer: { email: string; vraag: string; waarom: string },
   gesprek: Beurt[],
-): Promise<string> {
+): Promise<{ gelukt: boolean; voorModel: string }> {
   if (!EMAIL_RE.test(invoer.email)) {
-    return 'Dat e-mailadres ziet er niet geldig uit. Vraag het opnieuw en probeer daarna nog eens.';
+    return {
+      gelukt: false,
+      voorModel: 'Dat e-mailadres ziet er niet geldig uit. Vraag het opnieuw en probeer daarna nog eens.',
+    };
   }
   if (!RESEND_API_KEY) {
     // Luid falen in het log, zacht falen naar de bezoeker: die kan er niets mee.
     console.error('[chat] doorzetten mislukt: RESEND_API_KEY ontbreekt');
-    return 'Doorzetten lukt op dit moment niet. Verwijs de bezoeker naar het contactformulier op /contact.';
+    return {
+      gelukt: false,
+      voorModel: 'Doorzetten lukt op dit moment niet. Verwijs de bezoeker naar het contactformulier op /contact.',
+    };
   }
 
   const transcript = gesprek
@@ -139,9 +145,15 @@ async function stuurDoor(
 
   if (!res.ok) {
     console.error('[chat] doorzetten mislukt:', res.status, await res.text().catch(() => ''));
-    return 'Doorzetten lukt op dit moment niet. Verwijs de bezoeker naar het contactformulier op /contact.';
+    return {
+      gelukt: false,
+      voorModel: 'Doorzetten lukt op dit moment niet. Verwijs de bezoeker naar het contactformulier op /contact.',
+    };
   }
-  return `Doorgezet naar Tom. Bevestig dat kort en zeg dat het antwoord meestal binnen een paar werkdagen op ${invoer.email} komt.`;
+  return {
+    gelukt: true,
+    voorModel: `Doorgezet naar Tom. Bevestig dat kort en zeg dat het antwoord meestal binnen een paar werkdagen op ${invoer.email} komt.`,
+  };
 }
 
 export async function POST(req: Request) {
@@ -193,6 +205,16 @@ export async function POST(req: Request) {
       const stuur = (soort: string, waarde: unknown) =>
         controller.enqueue(encoder.encode(JSON.stringify({ soort, waarde }) + '\n'));
 
+      /* Bijhouden of er überhaupt tekst naar de bezoeker ging. Zonder deze
+         teller kan het gesprek eindigen met een leeg antwoordvak: als de lus
+         op is terwijl het model nog een tool aanroept, is er niets gestreamd
+         en staart de bezoeker naar niets. Stilte is hier de ergste uitkomst. */
+      let ietsGezegd = false;
+      const stuurTekst = (t: string) => {
+        ietsGezegd = true;
+        stuur('tekst', t);
+      };
+
       try {
         /* Maximaal twee ronden: één antwoord, of één toolaanroep gevolgd door
            het antwoord daarop. Meer heeft deze assistent niet nodig, en een
@@ -216,7 +238,7 @@ export async function POST(req: Request) {
             messages,
           });
 
-          antwoord.on('text', t => stuur('tekst', t));
+          antwoord.on('text', stuurTekst);
           const bericht = await antwoord.finalMessage();
 
           if (bericht.stop_reason !== 'tool_use') break;
@@ -229,21 +251,37 @@ export async function POST(req: Request) {
           const resultaten: Anthropic.ToolResultBlockParam[] = [];
           for (const a of aanroepen) {
             const invoer = a.input as { email?: string; vraag?: string; waarom?: string };
-            stuur('doorgezet', { email: invoer.email ?? '' });
+            const uitkomst = await stuurDoor(
+              {
+                email: String(invoer.email ?? ''),
+                vraag: String(invoer.vraag ?? ''),
+                waarom: String(invoer.waarom ?? ''),
+              },
+              gesprek,
+            );
+            /* Het bevestigingsblokje pas NA een geslaagde verzending. Het stond
+               hiervoor, en dan las de bezoeker "je vraag is doorgezet naar Tom"
+               terwijl de mail was mislukt — een onwaarheid op het moment dat
+               vertrouwen er het meest toe doet. Het model krijgt in dat geval
+               een andere tekst terug en zegt zelf iets anders; die twee mochten
+               niet uit elkaar lopen. */
+            if (uitkomst.gelukt) stuur('doorgezet', { email: invoer.email ?? '' });
             resultaten.push({
               type: 'tool_result',
               tool_use_id: a.id,
-              content: await stuurDoor(
-                {
-                  email: String(invoer.email ?? ''),
-                  vraag: String(invoer.vraag ?? ''),
-                  waarom: String(invoer.waarom ?? ''),
-                },
-                gesprek,
-              ),
+              content: uitkomst.voorModel,
+              is_error: !uitkomst.gelukt,
             });
           }
           messages.push({ role: 'user', content: resultaten });
+        }
+        if (!ietsGezegd) {
+          // Het model bleef gereedschap aanroepen tot de lus op was. Zeg dan
+          // iets bruikbaars in plaats van niets.
+          stuur(
+            'tekst',
+            'Ik kom er even niet uit. Mail je vraag naar info@emmastudio.nl, dan kijkt Tom ernaar.',
+          );
         }
         stuur('klaar', true);
       } catch (e) {

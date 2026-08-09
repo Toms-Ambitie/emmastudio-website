@@ -2,16 +2,15 @@
 
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import type { Chat } from './useChat';
 
 /* ── CHATVENSTER ────────────────────────────────────────────────────────────
-   Het gesprek staat alleen in de state van deze component. Niets in
-   localStorage, niets in een cookie: dan hoeft er ook geen toestemming voor
-   gevraagd te worden en verdwijnt het bij het sluiten van het tabblad.
+   Alleen weergave. Het gesprek zelf zit in useChat() en wordt van buiten
+   meegegeven, zodat het blijft bestaan als dit venster wordt weggehaald --
+   zie de toelichting in useChat.ts.
 
    Huisstijl: rustig. Geen sparkles, geen robot-icoon, geen typende puntjes
    die op een mens moeten lijken. Emma is een assistent, geen personage. */
-
-type Beurt = { rol: 'gebruiker' | 'emma'; tekst: string };
 
 const OPENING =
   'Hoi. Ik ben Emma. Vraag me wat je wilt weten over EmmaStudio — wat de ' +
@@ -24,12 +23,9 @@ const VOORBEELDEN = [
   'Wat kan EmmaLoont precies?',
 ];
 
-export default function ChatVenster() {
-  const [beurten, setBeurten] = useState<Beurt[]>([]);
+export default function ChatVenster({ chat }: { chat: Chat }) {
+  const { beurten, bezig, fout, doorgezet, verstuur } = chat;
   const [invoer, setInvoer] = useState('');
-  const [bezig, setBezig] = useState(false);
-  const [fout, setFout] = useState<string | null>(null);
-  const [doorgezet, setDoorgezet] = useState(false);
 
   const bodemRef = useRef<HTMLDivElement>(null);
   const invoerRef = useRef<HTMLTextAreaElement>(null);
@@ -39,69 +35,11 @@ export default function ChatVenster() {
     bodemRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [beurten, bezig]);
 
-  async function verstuur(tekst: string) {
-    const vraag = tekst.trim();
-    if (!vraag || bezig) return;
-
-    setFout(null);
-    setDoorgezet(false);
+  const stuur = (tekst: string) => {
+    if (!tekst.trim() || bezig) return;
     setInvoer('');
-    const nieuw: Beurt[] = [...beurten, { rol: 'gebruiker', tekst: vraag }];
-    setBeurten(nieuw);
-    setBezig(true);
-
-    try {
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ gesprek: nieuw }),
-      });
-
-      if (!res.ok || !res.body) {
-        const j = await res.json().catch(() => null);
-        throw new Error(j?.error ?? 'Er ging iets mis.');
-      }
-
-      // De server stuurt één JSON-object per regel (ndjson). Een chunk kan
-      // midden in een regel eindigen, dus wat overblijft bewaren we.
-      const lezer = res.body.getReader();
-      const decoder = new TextDecoder();
-      let rest = '';
-      let antwoord = '';
-      setBeurten([...nieuw, { rol: 'emma', tekst: '' }]);
-
-      for (;;) {
-        const { done, value } = await lezer.read();
-        if (done) break;
-        rest += decoder.decode(value, { stream: true });
-        const regels = rest.split('\n');
-        rest = regels.pop() ?? '';
-
-        for (const regel of regels) {
-          if (!regel.trim()) continue;
-          let bericht: { soort: string; waarde: unknown };
-          try {
-            bericht = JSON.parse(regel);
-          } catch {
-            continue;
-          }
-          if (bericht.soort === 'tekst') {
-            antwoord += String(bericht.waarde);
-            setBeurten([...nieuw, { rol: 'emma', tekst: antwoord }]);
-          } else if (bericht.soort === 'doorgezet') {
-            setDoorgezet(true);
-          } else if (bericht.soort === 'fout') {
-            setFout(String(bericht.waarde));
-          }
-        }
-      }
-    } catch (e) {
-      setFout(e instanceof Error ? e.message : 'Er ging iets mis.');
-    } finally {
-      setBezig(false);
-      invoerRef.current?.focus();
-    }
-  }
+    void verstuur(tekst).finally(() => invoerRef.current?.focus());
+  };
 
   const leeg = beurten.length === 0;
 
@@ -129,7 +67,7 @@ export default function ChatVenster() {
               <button
                 key={v}
                 type="button"
-                onClick={() => verstuur(v)}
+                onClick={() => stuur(v)}
                 className="rounded-emma-pill border border-emma-line px-3 py-1.5 text-xs text-emma-ink-2 transition-colors hover:border-emma-coral hover:text-emma-ink"
               >
                 {v}
@@ -179,7 +117,7 @@ export default function ChatVenster() {
       <form
         onSubmit={e => {
           e.preventDefault();
-          void verstuur(invoer);
+          stuur(invoer);
         }}
         className="border-t border-emma-line px-4 py-3"
       >
@@ -196,7 +134,7 @@ export default function ChatVenster() {
               // Enter verstuurt, shift+enter maakt een nieuwe regel.
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
-                void verstuur(invoer);
+                stuur(invoer);
               }
             }}
             rows={1}
