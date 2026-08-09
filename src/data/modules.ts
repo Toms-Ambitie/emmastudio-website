@@ -1,5 +1,5 @@
 export type ModuleVignette = {
-  type: 'factuur' | 'inlezen' | 'btw' | 'schil' | 'doel' | 'prognose' | 'signaal' |
+  type: 'factuur' | 'inlezen' | 'schil' | 'doel' | 'prognose' | 'signaal' |
         'strook' | 'contract' | 'verlof' | 'pipeline' | 'score' | 'klant' |
         'scorecard' | 'checkin' | 'vraag' | 'prijs' | 'review' | 'concurrent' |
         'kanban' | 'kanalen' | 'stem' | 'campagnes' | 'attributie' | 'budget';
@@ -553,7 +553,7 @@ export const VIGNETTES: Record<string, string> = {
   boekt_schil:`
     <div class="vig__row vig__row--head"><span class="vig__dot"></span> Gekoppeld</div>
     <div class="vig__li"><span class="vig__tick">✓</span><span>eBoekhouden.nl</span><b class="vig__pill">verbonden</b></div>
-    <div class="vig__li"><span class="vig__tick">✓</span><span>SnelStart</span><b class="vig__pill">verbonden</b></div>
+    <div class="vig__li vig__li--soft"><span class="vig__scan"></span><span>SnelStart</span><b class="vig__pill vig__pill--w">binnenkort</b></div>
     <div class="vig__insight"><span class="vig__spark">◆</span> Jij werkt in Emma. Je cijfers blijven <b>op hun plek</b></div>`,
   waakt_doel:`
     <div class="vig__row vig__row--head"><span class="vig__dot"></span> Omzet vs. doel</div>
@@ -578,8 +578,8 @@ export const VIGNETTES: Record<string, string> = {
     <div class="vig__li" style="margin-top:12px"><span class="vig__tick">✓</span><span>Loonstrook · PDF</span><b class="vig__pill">klaar</b></div>`,
   loont_contract:`
     <div class="vig__row vig__row--head"><span class="vig__dot"></span> Contract</div>
-    <div class="vig__li"><span class="vig__tick">✓</span><span>Arbeidsovereenkomst</span><b class="vig__pill">opgesteld</b></div>
-    <div class="vig__li vig__li--soft"><span class="vig__scan"></span><span>Digitale ondertekening</span><b class="vig__pill vig__pill--w">verstuurd</b></div>
+    <div class="vig__li"><span class="vig__tick">✓</span><span>Arbeidsovereenkomst</span><b class="vig__pill">vastgelegd</b></div>
+    <div class="vig__li vig__li--soft"><span class="vig__scan"></span><span>Versiehistorie</span><b class="vig__pill vig__pill--w">bewaard</b></div>
     <div class="vig__insight"><span class="vig__spark">◆</span> Met de <b>CAO van jouw branche</b> als basis</div>`,
   loont_verlof:`
     <div class="vig__row vig__row--head"><span class="vig__dot"></span> Verlof &amp; verzuim</div>
