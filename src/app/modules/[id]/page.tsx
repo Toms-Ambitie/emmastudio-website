@@ -1,10 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import {
   MODULES, ICONS, MODULE_TAGS, MODULE_PRICE, MODULE_ORDER, MODULE_STATUS,
   MODULE_SEO, MODULE_RELATED, SIGNUP_URL, PROVEN_IN_PRACTICE, LAUNCHED, VIGNETTES,
+  MODULE_SHOT,
 } from '@/data/modules';
+import { metBeeld } from '@/data/coverbeeld';
 import WaitlistForm from '@/components/WaitlistForm';
 import ModuleFaq from '@/components/ModuleFaq';
 
@@ -62,6 +65,8 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
 
   const others = MODULE_ORDER.filter(k => k !== id);
   const status = MODULE_STATUS[id];
+  // Alleen een afdruk tonen als het bestand er ook echt staat.
+  const shot = metBeeld({ image: MODULE_SHOT[id] }).image;
   const mc = `var(--m-${id})`;
   const tint = (pct: number) => `color-mix(in srgb, ${mc} ${pct}%, transparent)`;
 
@@ -134,6 +139,12 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
               )}
             </div>
 
+            {/* break-words blijft nodig: zonder vangnet loopt een lang woord
+                buiten de kolom. Waar het afbreekt, bepaalt een zacht
+                afbreekstreepje (­) in de kop zelf, zie modules.ts.
+                `hyphens: auto` is bewust niet gebruikt: dat leunt op
+                woordafbreekregels die niet op elke machine aanwezig zijn, en
+                deed hier in de browser aantoonbaar niets. */}
             <h1 className="mt-5 break-words font-display text-[2rem] font-bold leading-[1.08] tracking-tight text-emma-ink sm:text-4xl md:text-5xl lg:text-6xl">
               {mod.head.replace(/\.$/, '')}<span style={{ color: mc }}>.</span>
             </h1>
@@ -175,7 +186,11 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
             </div>
           </div>
 
-          {/* Impressie-kaart (vignette) */}
+          {/* Het scherm zelf als er een afdruk ligt, anders de gestileerde
+              impressie. Het label verschilt bewust: "uit de app" mag alleen
+              boven een echte afdruk staan. metBeeld controleert tijdens de
+              build of het bestand er werkelijk is, zodat een ontbrekend
+              bestand terugvalt op de impressie in plaats van een leeg vlak. */}
           <div className="relative min-w-0">
             <div className="pointer-events-none absolute -inset-4 -z-10 rounded-[32px] opacity-40 blur-2xl" style={{ background: `radial-gradient(circle at 60% 40%, ${tint(45)} 0%, transparent 70%)` }} aria-hidden="true" />
             <div className="overflow-hidden rounded-emma-card border border-emma-line bg-emma-paper p-5 shadow-emma-pop" style={{ ['--mc' as string]: mc }}>
@@ -184,9 +199,24 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
                   <Glyph id={id} size={18} />
                 </span>
                 <span className="text-sm font-semibold text-emma-ink">Emma{mod.name}</span>
-                <span className="ml-auto rounded-emma-pill bg-emma-creme px-2.5 py-1 text-xs font-medium text-emma-subtext">impressie</span>
+                <span className="ml-auto rounded-emma-pill bg-emma-creme px-2.5 py-1 text-xs font-medium text-emma-subtext">
+                  {shot ? 'uit de app' : 'impressie'}
+                </span>
               </div>
-              <div className="vig__body" dangerouslySetInnerHTML={{ __html: VIGNETTES[mod.heroVig] || '' }} />
+              {shot ? (
+                <div className="relative aspect-[3/2] w-full overflow-hidden rounded-emma-squircle border border-emma-line bg-emma-creme">
+                  <Image
+                    src={shot}
+                    alt={`Het scherm van Emma${mod.name} in de app`}
+                    fill
+                    sizes="(max-width: 1024px) 92vw, 46vw"
+                    priority
+                    className="object-cover object-left-top"
+                  />
+                </div>
+              ) : (
+                <div className="vig__body" dangerouslySetInnerHTML={{ __html: VIGNETTES[mod.heroVig] || '' }} />
+              )}
             </div>
           </div>
         </div>
