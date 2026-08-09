@@ -32,16 +32,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="nl">
       <body>
-        {/* Google Tag Manager (noscript) — server-rendered, direct na opening
-            <body>, los van de JS-keten zodat bezoekers zonder JavaScript de
-            fallback-iframe ook krijgen. */}
-        <noscript
-          dangerouslySetInnerHTML={{
-            __html: '<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PL387HVM" height="0" width="0" style="display:none;visibility:hidden"></iframe>',
-          }}
-        />
+        {/* GEEN GTM-noscript-iframe hier. Die stond er wel, server-rendered direct
+            na <body>, als fallback voor bezoekers zonder JavaScript. Maar hij laadde
+            onvoorwaardelijk: buiten Consently om, dus vóór en zonder toestemming.
+            Dat is precies wat Analytics.tsx belooft te voorkomen ("geen CMP betekent
+            geen tracking"), en het is een verzoek naar Google bij élke paginaweergave.
 
-        {/* Consent Mode v2 (Advanced): Consently eerst, GTM geketend erná. Zie Analytics.tsx. */}
+            De fallback was bovendien weinig waard: zonder JavaScript kan GTM geen
+            enkele tag uitvoeren, dus de iframe leverde hooguit een ruwe hit op.
+            Een consent-keten die op één plek lekt is geen consent-keten. Weg dus.
+
+            Consent Mode v2 (Advanced): Consently eerst, GTM geketend erná. Zie Analytics.tsx. */}
         <Analytics />
 
         <ScrollReset />

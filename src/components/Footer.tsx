@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { MODULE_ORDER, MODULE_STATUS, APP_URL, SIGNUP_URL, LAUNCHED } from '@/data/modules';
+import { BEDRIJF } from '@/data/bedrijf';
 
 function cap(s: string) { return s.charAt(0).toUpperCase() + s.slice(1); }
 
@@ -38,10 +39,22 @@ export default function Footer() {
             <Link href="/over">Over Toms Ambitie</Link>
             <Link href="/algemene-voorwaarden">Algemene voorwaarden</Link>
             <Link href="/privacy">Privacyverklaring</Link>
+            <Link href="/cookiebeleid">Cookiebeleid</Link>
+            <Link href="/verwerkersovereenkomst">Verwerkersovereenkomst</Link>
           </div>
         </div>
+        {/* Identiteitsgegevens (art. 3:15d BW): naam, bezoekadres, KvK- en
+            btw-nummer horen voor een betaalde online dienst vindbaar te zijn.
+            De footer is de plek waar bezoekers ze verwachten. Uit één bron,
+            zie src/data/bedrijf.ts. Bankgegevens staan er bewust NIET bij. */}
         <div className="foot__bot">
-          <span className="mono">WWW.EMMASTUDIO.NL · TOMS AMBITIE · ZWOLLE</span>
+          <span className="mono">
+            {BEDRIJF.naam.toUpperCase()} · {BEDRIJF.straat.toUpperCase()} · {BEDRIJF.postcode} {BEDRIJF.plaats.toUpperCase()}
+          </span>
+          <span className="mono">KVK {BEDRIJF.kvk} · BTW {BEDRIJF.btw}</span>
+        </div>
+        <div className="foot__bot">
+          <span className="mono">WWW.EMMASTUDIO.NL</span>
           <span className="mono">© 2026 · Jij doet je werk. Emma de rest.</span>
         </div>
       </div>

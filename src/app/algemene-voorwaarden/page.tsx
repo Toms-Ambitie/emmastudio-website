@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { BEDRIJF, ADRES_KORT, NUMMERS_KORT } from '@/data/bedrijf';
 
 export const metadata: Metadata = {
   title: 'Algemene Voorwaarden · Emma',
@@ -19,13 +20,13 @@ export default function AlgemeneVoorwaarden() {
             </div>
 
             <h1>Algemene Voorwaarden</h1>
-            <p className="legal__meta">Toms Ambitie · Versie 1.0 · Ingangsdatum: 1 juli 2026</p>
+            <p className="legal__meta">Toms Ambitie · Versie 1.1 · Ingangsdatum: 9 augustus 2026</p>
 
             <h2>Artikel 1 — Definities</h2>
             <p>In deze voorwaarden wordt verstaan onder:</p>
             <ul>
               <li><b>Emma:</b> het softwareplatform dat door Toms Ambitie wordt aangeboden via emmastudio.nl, inclusief alle bijbehorende modules en diensten.</li>
-              <li><b>Toms Ambitie:</b> de besloten vennootschap Toms Ambitie, gevestigd te Zwolle, ingeschreven in het handelsregister van de Kamer van Koophandel.</li>
+              <li><b>Toms Ambitie:</b> Toms Ambitie, gevestigd aan de {BEDRIJF.straat}, {BEDRIJF.postcode} {BEDRIJF.plaats}, ingeschreven in het handelsregister van de Kamer van Koophandel onder nummer {BEDRIJF.kvk}, btw-identificatienummer {BEDRIJF.btw}.</li>
               <li><b>Klant:</b> de natuurlijke persoon die handelt in de uitoefening van een beroep of bedrijf, of de rechtspersoon, die een abonnement afsluit op Emma.</li>
               <li><b>Module:</b> een afzonderlijk onderdeel van Emma, zoals EmmaBoekt, EmmaWaakt, EmmaLoont, EmmaVindt, EmmaCoacht, EmmaZiet, EmmaSchrijft of EmmaPromoot.</li>
               <li><b>Overeenkomst:</b> de abonnementsovereenkomst tussen Toms Ambitie en de Klant.</li>
@@ -38,7 +39,7 @@ export default function AlgemeneVoorwaarden() {
             <p>2.3 De toepasselijkheid van eventuele inkoop- of andere voorwaarden van de Klant wordt uitdrukkelijk van de hand gewezen.</p>
 
             <h2>Artikel 3 — Account en toegang</h2>
-            <p>3.1 Om gebruik te kunnen maken van Emma dient de Klant een account aan te maken via emmastudio.nl.</p>
+            <p>3.1 Om gebruik te kunnen maken van Emma dient de Klant een account aan te maken via app.emmastudio.nl/signup.</p>
             <p>3.2 De Klant is verantwoordelijk voor het geheimhouden van zijn inloggegevens en is aansprakelijk voor alle handelingen die via zijn account worden verricht.</p>
             <p>3.3 De Klant stelt Toms Ambitie onverwijld op de hoogte indien hij een vermoeden heeft van ongeautoriseerd gebruik van zijn account.</p>
             <p>3.4 Toms Ambitie behoudt zich het recht voor een account tijdelijk of permanent op te schorten bij schending van deze voorwaarden.</p>
@@ -52,9 +53,11 @@ export default function AlgemeneVoorwaarden() {
             <p>4.6 Toms Ambitie behoudt zich het recht voor de prijzen aan te passen. Prijswijzigingen worden minimaal 30 dagen van tevoren per e-mail aan de Klant medegedeeld.</p>
 
             <h2>Artikel 5 — Gratis proefperiode</h2>
-            <p>5.1 Nieuwe Klanten hebben recht op een gratis proefperiode van 14 dagen.</p>
-            <p>5.2 Na afloop van de proefperiode wordt het abonnement automatisch omgezet naar een betaald abonnement, tenzij de Klant het abonnement vóór het einde van de proefperiode opzegt.</p>
-            <p>5.3 Tijdens de proefperiode zijn alle door de Klant geselecteerde modules volledig beschikbaar.</p>
+            <p>5.1 Nieuwe Klanten hebben recht op een gratis proefperiode van 14 dagen. Voor het starten van de proefperiode wordt geen betaalmiddel gevraagd.</p>
+            <p>5.2 De proefperiode gaat <b>niet</b> automatisch over in een betaald abonnement. Heeft de Klant aan het einde van de proefperiode geen betaalmiddel toegevoegd, dan wordt het abonnement gepauzeerd: er wordt niets in rekening gebracht en de toegang tot de modules vervalt. De Klant hoeft daarvoor niets te doen en niet op te zeggen.</p>
+            <p>5.3 Voegt de Klant tijdens of na de proefperiode een betaalmiddel toe, dan wordt het abonnement op dat moment betaald voortgezet respectievelijk hervat, tegen de op dat moment geldende prijs.</p>
+            <p>5.4 Tijdens de proefperiode zijn alle door de Klant geselecteerde modules volledig beschikbaar.</p>
+            <p>5.5 Een gepauzeerd abonnement en de daarin opgeslagen gegevens blijven bewaard conform de bewaartermijnen in de <Link href="/privacy">Privacyverklaring</Link>, zodat de Klant later kan hervatten zonder gegevensverlies.</p>
 
             <h2>Artikel 6 — Duur en opzegging</h2>
             <p>6.1 Het abonnement wordt aangegaan voor de gekozen betalingstermijn (maandelijks of jaarlijks) en wordt na afloop automatisch verlengd.</p>
@@ -81,8 +84,8 @@ export default function AlgemeneVoorwaarden() {
             <h2>Artikel 10 — Gegevensverwerking</h2>
             <p>10.1 Toms Ambitie verwerkt persoonsgegevens van de Klant en diens medewerkers als verwerker in de zin van de Algemene Verordening Gegevensbescherming (AVG).</p>
             <p>10.2 De Klant is de verwerkingsverantwoordelijke voor de persoonsgegevens die hij invoert in Emma en is verantwoordelijk voor de rechtmatigheid van die verwerking.</p>
-            <p>10.3 Op verzoek van de Klant sluit Toms Ambitie een verwerkersovereenkomst.</p>
-            <p>10.4 Voor meer informatie over de verwerking van persoonsgegevens verwijzen wij naar onze <Link href="/privacy">Privacyverklaring</Link>.</p>
+            <p>10.3 De <Link href="/verwerkersovereenkomst">verwerkersovereenkomst</Link> maakt integraal onderdeel uit van deze overeenkomst en is van toepassing zodra de Klant persoonsgegevens invoert in Emma. De Klant hoeft daar niet om te vragen.</p>
+            <p>10.4 Voor meer informatie over de verwerking van persoonsgegevens verwijzen wij naar onze <Link href="/privacy">Privacyverklaring</Link> en het <Link href="/cookiebeleid">Cookiebeleid</Link>.</p>
 
             <h2>Artikel 11 — Aansprakelijkheid</h2>
             <p>11.1 De totale aansprakelijkheid van Toms Ambitie is beperkt tot directe schade en bedraagt maximaal het bedrag dat de Klant in de drie kalendermaanden voorafgaand aan de schadeveroorzakende gebeurtenis aan abonnementskosten heeft betaald.</p>
@@ -103,8 +106,16 @@ export default function AlgemeneVoorwaarden() {
 
             <h2>Artikel 15 — Contact</h2>
             <p>Vragen over deze algemene voorwaarden? Neem contact op via <Link href="/contact">emmastudio.nl/contact</Link> of mail naar <a href="mailto:info@emmastudio.nl">info@emmastudio.nl</a>.</p>
+            <p>
+              <b>{BEDRIJF.naam}</b><br />
+              {BEDRIJF.straat}<br />
+              {BEDRIJF.postcode} {BEDRIJF.plaats}, {BEDRIJF.land}<br />
+              KvK: {BEDRIJF.kvk}<br />
+              Btw-identificatienummer: {BEDRIJF.btw}<br />
+              E-mail: <a href={`mailto:${BEDRIJF.email}`}>{BEDRIJF.email}</a>
+            </p>
             <p style={{ marginTop: '48px', paddingTop: '24px', borderTop: '1px solid var(--line)', fontSize: '13px', color: 'var(--ink-soft)' }}>
-              Toms Ambitie · Zwolle · <Link href="/privacy">Privacyverklaring</Link>
+              {BEDRIJF.naam} · {ADRES_KORT} · {NUMMERS_KORT} · <Link href="/privacy">Privacyverklaring</Link> · <Link href="/cookiebeleid">Cookiebeleid</Link>
             </p>
 
           </div>

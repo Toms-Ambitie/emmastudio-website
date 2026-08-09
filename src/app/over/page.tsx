@@ -1,7 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { SIGNUP_URL, LAUNCHED } from '@/data/modules';
-import { ILZE_QUOTE } from '@/data/proof';
+import { SIGNUP_URL, LAUNCHED, MODULE_STATUS } from '@/data/modules';
+import { ILZE_QUOTE, MAANDEN_PRAKTIJK } from '@/data/proof';
+
+/* Afgeleid, niet met de hand geteld: zodra MODULE_STATUS wijzigt klopt deze
+   pagina mee. Handmatige tellingen zijn precies wat hier eerder misging. */
+const LIVE_AANTAL = Object.values(MODULE_STATUS).filter(s => s.live).length;
 
 const SITE = 'https://www.emmastudio.nl';
 
@@ -54,17 +58,20 @@ export default function Over() {
             <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-emma-ink md:text-4xl">Begonnen in een salon.</h2>
             <div className="mt-5 space-y-4 text-base leading-relaxed text-emma-ink-2">
               <p>Emma begon niet als startup-idee op een whiteboard. Het begon bij salon Blondes Incognito in Heeten, waar Ilze Spannenberg haar salon runde met een wirwar aan losse tools, spreadsheets en notities.</p>
-              <p>We bouwden een eerste versie voor haar, puur om het werk rustiger te maken. Dat draaide 18 maanden in de praktijk voordat we ook maar één euro aan Emma verdienden.</p>
+              <p>We bouwden een eerste versie voor haar, puur om het werk rustiger te maken. Dat draaide anderhalf jaar in de praktijk voordat we ook maar één euro aan Emma verdienden.</p>
               <p>Wat we leerden: ondernemers willen geen dashboard om in te verdwalen. Ze willen weten wat er vandaag toe doet, en de rest gewoon geregeld hebben.</p>
             </div>
             <div className="mt-8 grid grid-cols-2 gap-4">
               <div className="rounded-emma-card border border-emma-line bg-emma-paper p-5">
-                <div className="font-display text-3xl font-bold text-emma-ink em-num">18 mnd</div>
+                <div className="font-display text-3xl font-bold text-emma-ink em-num">{MAANDEN_PRAKTIJK} mnd</div>
                 <div className="mt-1 text-sm text-emma-subtext">bewezen in de praktijk bij Blondes Incognito</div>
               </div>
+              {/* Stond op "8 modules in ontwikkeling", wat naast vijf live modules
+                  leest alsof er nog niets af is. Het getal dat telt is hoeveel je
+                  vandaag kunt gebruiken; dat andere staat in het bijschrift. */}
               <div className="rounded-emma-card border border-emma-line bg-emma-paper p-5">
-                <div className="font-display text-3xl font-bold text-emma-ink em-num">8</div>
-                <div className="mt-1 text-sm text-emma-subtext">modules in ontwikkeling voor het platform</div>
+                <div className="font-display text-3xl font-bold text-emma-ink em-num">{LIVE_AANTAL}</div>
+                <div className="mt-1 text-sm text-emma-subtext">van de acht modules nu te gebruiken, de rest volgt</div>
               </div>
             </div>
           </div>
@@ -117,8 +124,8 @@ export default function Over() {
           <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-emma-ink md:text-4xl">Doe je mee<span className="text-emma-coral">?</span></h2>
           <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-emma-ink-2">
             {LAUNCHED
-              ? 'De boekhoudmodule, de eerste module van Emma, is live. Koppel e-Boekhouden.nl en probeer het 14 dagen gratis.'
-              : 'De boekhoudmodule van Emma draait al, maar de aanmelding staat nog niet open. Laat je e-mail achter en je hoort het als eerste zodra je kunt starten.'}
+              ? `${LIVE_AANTAL} van de acht modules zijn nu te gebruiken. Kies wat je nodig hebt en probeer het 14 dagen gratis, zonder creditcard.`
+              : `${LIVE_AANTAL} van de acht modules draaien al, maar de aanmelding staat nog niet open. Laat je e-mail achter en je hoort het als eerste zodra je kunt starten.`}
           </p>
           <div className="mt-7 flex justify-center">
             {LAUNCHED ? (

@@ -189,10 +189,13 @@ export const LAUNCHED = true;
  *  of de publieke signup open staat (een marketingbeslissing). Dat zijn
  *  onafhankelijke assen; ze aan elkaar knopen zou betekenen dat het
  *  omzetten van de signup-knop ook de modulestatus verandert, of andersom.
- *  `when` optioneel maken (`when?: string`) breekt de typecheck van
- *  `JourneySection.tsx` (regel 74, `return st.when;` met retourtype
- *  `string`) — een component, dus dit rondje niet aan te passen. Daarom
- *  blijft `when: string` verplicht en wordt het een lege string voor
+ *  `when` optioneel maken (`when?: string`) brak destijds de typecheck van
+ *  `JourneySection.tsx`. Dat bestand is inmiddels verwijderd (het werd
+ *  nergens geïmporteerd en bevatte verouderde teksten), dus die blokkade
+ *  is weg. De keuze zelf blijft staan omdat hij op zichzelf klopt: er is
+ *  geen betekenisvol verschil tussen "geen `when`" en "lege `when`", en
+ *  verplicht houden dwingt af dat je er bij een nieuwe module over
+ *  nadenkt. Daarom blijft `when: string` verplicht en is het leeg voor
  *  boekt/waakt/ziet: een module die draait heeft geen "komt in ...", en
  *  elke huidige plek die `.when` gebruikt doet dat al alleen wanneer
  *  `!live` (geverifieerd), dus deze lege string wordt nergens zichtbaar
@@ -561,7 +564,7 @@ export const MODULES: Record<string, ModuleData> = {
       { n:'04 · VERDEEL', h:'Stuur je budget', p:'Volg het advies om je budget te zetten waar het rendeert, of kies zelf.' },
     ] },
     faq:[
-      { q:'Is EmmaPromoot ook bewezen bij Blondes Incognito?', a:'EmmaPromoot is de enige module die nog niet 18 maanden in de praktijk draaide. De aanpak is beproefd, maar deze module bouwen we nu opnieuw op.' },
+      { q:'Is EmmaPromoot ook bewezen bij Blondes Incognito?', a:'EmmaPromoot is de enige module die niet is meegegroeid in de praktijk bij Blondes Incognito. De aanpak is beproefd, maar deze module bouwen we nu opnieuw op.' },
       { q:'Met welke platforms werkt het?', a:'EmmaPromoot is opgezet voor Google Ads en Meta Ads, met attributie op basis van je webstatistieken. Welke koppelingen bij de lancering klaarstaan, communiceren we vooraf.' },
       { q:'Voor wie is het bedoeld?', a:'Voor ondernemers met een actief advertentiebudget. Heb je dat niet, dan is dit niet de juiste module.' },
       { q:'Wat kost het en kan ik het nu gebruiken?', a:'€19 per maand, exclusief btw, met 10% korting bij jaarbetaling. Het advertentiebudget zelf betaal je rechtstreeks aan Google of Meta. EmmaPromoot is nog in ontwikkeling. Laat je e-mail achter, dan hoor je het zodra je kunt starten.' },
