@@ -198,6 +198,22 @@ export const LAUNCHED = true;
  *  `!live` (geverifieerd), dus deze lege string wordt nergens zichtbaar
  *  geïnterpoleerd. */
 export type ModuleStatus = { live: boolean; when: string };
+/** Echte afdrukken uit de app, per module. Alleen voor wat er draait: een
+ *  modulepagina is de belangrijkste pagina om te beslissen, en daar hoort het
+ *  echte scherm te staan in plaats van een tekening. Staat een module hier
+ *  niet in, dan valt de pagina terug op de gestileerde impressie-kaart.
+ *
+ *  Zelfde bestanden als de showcase op de homepage. Nieuwe afdruk maken: zie
+ *  emmastudio-app/docs/DEMO-OMGEVING.md, en let op dat de demo-tenant geen
+ *  echte klantgegevens toont. */
+export const MODULE_SHOT: Record<string, string> = {
+  boekt: '/assets/app/boekt.jpg',
+  waakt: '/assets/app/waakt.jpg',
+  loont: '/assets/app/loont.jpg',
+  vindt: '/assets/app/vindt.jpg',
+  ziet:  '/assets/app/ziet.jpg',
+};
+
 export const MODULE_STATUS: Record<string, ModuleStatus> = {
   boekt:    { live: true, when: '' },
   waakt:    { live: true, when: '' },
@@ -235,7 +251,7 @@ export const MODULES: Record<string, ModuleData> = {
   boekt:{
     id:'boekt', name:'Boekt', num:'01', price:9, accentVar:'--m-boekt',
     chip:'Werkt bovenop e-Boekhouden.nl',
-    head:'Boekhouden zonder je boekhoudsoftware aan te raken.',
+    head:'Boekhouden zonder je boekhoud­software aan te raken.',
     intro:'EmmaBoekt is de schil om e-Boekhouden.nl. Je boekhouding blijft daar staan, maar het werk doe je in Emma: bonnetjes doorsturen, facturen maken, offertes versturen. Je logt bijna nooit meer rechtstreeks in.',
     heroVig:'boekt_inlezen',
     does:{
@@ -247,8 +263,12 @@ export const MODULES: Record<string, ModuleData> = {
           list:['Leverancier, bedrag en BTW automatisch herkend','Grootboekrekening voorgesteld, met de reden erbij','Jij bevestigt elke boeking zelf'],
           vig:'boekt_inlezen' },
         { tag:'Facturen & offertes', h:'Factureren in een paar klikken.',
-          p:'Maak en verstuur facturen en offertes vanuit één rustig scherm. Emma onthoudt je klanten en je tarieven, en een geaccepteerde offerte zet je met één klik om naar een factuur.',
-          list:['Facturen en offertes in je eigen stijl','Offerte geaccepteerd? Eén klik naar factuur','Openstaande posten en herinneringen in beeld'],
+          p:'Maak en verstuur facturen en offertes vanuit één rustig scherm. Emma onthoudt je klanten en je tarieven, en een geaccepteerde offerte zet je met één klik om naar een factuur. Facturen die elke maand of elk kwartaal terugkomen, zet je één keer klaar.',
+          list:['Facturen en offertes in je eigen stijl','Offerte geaccepteerd? Eén klik naar factuur','Terugkerende facturen, met de volgende datum erbij'],
+          vig:'boekt_factuur' },
+        { tag:'Klanten', h:'Je klantenbestand bijgehouden.',
+          p:'Elke klant op één kaart: adresgegevens, contactpersonen en wat er openstaat. Vul een KvK-nummer in en Emma haalt de bedrijfsgegevens erbij, zodat je ze niet overtypt.',
+          list:['Adres en contactpersonen per klant','Gegevens opgehaald uit het KvK-register','Betaalgedrag en openstaand bedrag in beeld'],
           vig:'boekt_factuur' },
         { tag:'Openstaande posten', h:'Zie wie er nog moet betalen.',
           p:'Debiteuren en crediteuren live uit je boekhouding, met per klant het openstaande bedrag en de betaalgeschiedenis. Loopt een factuur te ver achter, dan zegt Emma dat, en verstuur je met een paar klikken een herinnering.',
@@ -264,7 +284,7 @@ export const MODULES: Record<string, ModuleData> = {
       { n:'01 · KOPPEL', h:'Verbind e-Boekhouden.nl', p:'Koppel je boekhouding in een paar minuten. Je sleutel wordt versleuteld opgeslagen en nooit getoond.' },
       { n:'02 · STUUR DOOR', h:'Bonnen naar je inbox', p:'Stuur bonnetjes en inkomende facturen door of sleep ze in je inbox. Emma leest ze en zet een voorstel klaar.' },
       { n:'03 · BEVESTIG', h:'Jij houdt de regie', p:'Controleer het voorstel van Emma, pas aan waar nodig en klik op Boeken. Niets gebeurt zonder jou.' },
-      { n:'04 · KLAAR', h:'Alles staat in je boekhouding', p:'Elke boeking en factuur staat direct goed in e-Boekhouden.nl. Je BTW-overzicht is voorbereid voor de aangifte.' },
+      { n:'04 · KLAAR', h:'Alles staat in je boekhouding', p:'Elke boeking en factuur staat direct goed in e-Boekhouden.nl. Je btw-aangifte doe je daar of bij je boekhouder, zoals je gewend bent.' },
     ] },
     faq:[
       { q:'Vervangt EmmaBoekt e-Boekhouden.nl?', a:'Nee, juist niet. e-Boekhouden.nl blijft de motor van je boekhouding en alles blijft daar netjes staan. Emma is de schil eromheen die het dagelijkse werk makkelijker, sneller en leuker maakt. Je logt alleen bijna nooit meer rechtstreeks in.' },
@@ -291,6 +311,10 @@ export const MODULES: Record<string, ModuleData> = {
           list:['Doelen op bedrijfs- en teamniveau','Voortgang automatisch bijgehouden','Altijd actueel, zonder bijwerken'], vig:'waakt_signaal' },
         { tag:'Prognoses', h:'Vooruitkijken op echte cijfers.', p:'Prognoses op basis van je werkelijke data en seizoenspatronen, zodat je weet wat eraan komt in plaats van het te gokken.',
           list:['Gebaseerd op je eigen historie','Houdt rekening met het seizoen','Zie verwachte omzet en kosten'], vig:'waakt_prognose' },
+        { tag:'Kosten', h:'Zie waar je geld heen gaat.', p:'Je kosten per categorie en per maand, over het hele jaar. Zo zie je welke post oploopt voordat je het aan je resultaat merkt.',
+          list:['Kosten per categorie en per maand','Jaaroverzicht in één beeld','Stijgende posten vallen op'], vig:'waakt_signaal' },
+        { tag:'Teamprestaties', h:'Wie staat waar.', p:'Per medewerker de omzet van de maand, naast het doel dat je voor die persoon hebt gesteld. Bedoeld om het gesprek te voeren, niet om af te rekenen.',
+          list:['Omzet per medewerker, per maand','Naast het doel dat jij hebt gesteld','Op basis van de cijfers die je aanlevert'], vig:'waakt_doel' },
         { tag:'Wekelijks advies', h:'Drie acties, elke week.', p:'Een rustig, kort advies op je cijfers. Geen alarmbellen, maar concrete stappen die je zelf kunt wegen.',
           list:['Kort advies op jouw situatie','Concrete acties, geen ruis','Jij beslist wat je doet'], vig:'waakt_doel' },
       ],
@@ -323,6 +347,8 @@ export const MODULES: Record<string, ModuleData> = {
       feats:[
         { tag:'Salaris', h:'Loonstroken die kloppen.', p:'Draai de loonronde met de cao van jouw branche als basis. Emma bereidt voor, jij controleert, en de loonstroken gaan als nette PDF naar je mensen. Werkgeverslasten rekent Emma mee.',
           list:['Loonronde voorbereiden, controleren, versturen','Loonstroken als PDF, per e-mail verstuurd','Werkgeverslasten automatisch berekend'], vig:'loont_strook' },
+        { tag:'Proforma', h:'Wat gaat het kosten, en wat houdt hij over?', p:'Reken een loonstrook door vóór iemand in dienst is. Handig in een sollicitatiegesprek: je laat zien wat er netto overblijft, en je weet zelf wat de werkgeverslasten worden.',
+          list:['Doorrekenen zonder iemand in dienst te nemen','Netto voor de kandidaat, bruto en lasten voor jou','Bewaren en later teruglezen'], vig:'loont_strook' },
         { tag:'Cao', h:'De cao staat er al in.', p:'Emma leest de cao-loontabellen in en houdt de versies bij. Bij het vastleggen van een contract zie je de bijbehorende schaal ernaast staan, en een waarschuwing als je eronder gaat zitten.',
           list:['Cao-loontabellen ingelezen en per versie bewaard','De schaal staat naast je contract, als hulp','Waarschuwing onder de schaal, jij beslist'], vig:'loont_contract' },
         { tag:'Contracten', h:'Contracten vastgelegd op één plek.', p:'Leg per medewerker het contract vast met uren, functie en beloning. Elke wijziging wordt een nieuwe versie, zodat je altijd terug kunt zien wat er wanneer gold.',
@@ -362,10 +388,12 @@ export const MODULES: Record<string, ModuleData> = {
       title:'Wat EmmaVindt voor je doet.',
       sub:'Of je nu mensen zoekt of klanten, het begint met de juiste in beeld krijgen. Rustig, gericht, en netjes vastgelegd.',
       feats:[
-        { tag:'Recruitment', h:'Kandidaten in de buurt.', p:'Ontdek kandidaten binnen jouw straal, met een score die laat zien wie past, en een pipeline om het overzicht te houden.',
-          list:['Kandidaatdetectie binnen 25 km','Score op basis van je vacature','Pipeline van eerste contact tot match'], vig:'vindt_score' },
+        { tag:'Recruitment', h:'Kandidaten in de buurt.', p:'Ontdek kandidaten binnen een straal die je zelf instelt, met een score die laat zien wie past, en een pipeline om het overzicht te houden.',
+          list:['Straal zelf instelbaar, per kilometer','Score met de reden erbij, geen kaal cijfer','Pipeline van eerste contact tot match'], vig:'vindt_score' },
         { tag:'Sales', h:'Klanten die bij je passen.', p:'Ontdek potentiële klanten op basis van locatie en branche, met lead-scoring en een sales-pipeline.',
           list:['Leads op locatie en SBI-code','Lead-scoring die prioriteert','Sales-pipeline in één overzicht'], vig:'vindt_klant' },
+        { tag:'Eerste contact', h:'Een bericht dat niet als sjabloon leest.', p:'Emma schrijft een concept voor het eerste bericht, op basis van wat er openbaar over iemand te vinden is. Jij leest het na, past het aan en verstuurt het. Wat je afspreekt en wanneer, leg je erbij vast.',
+          list:['Berichtconcept op openbare informatie','Jij bewerkt en verstuurt, nooit Emma','Notities en volgende stap per contact'], vig:'vindt_pipeline' },
         { tag:'AVG-proof', h:'Netjes en navolgbaar.', p:'Een audit-log houdt bij wat er gebeurt, zodat je werving en acquisitie voldoen aan de privacyregels.',
           list:['Audit-log voor de AVG','Inzichtelijk wie je benadert','Rustig en verantwoord opgezet'], vig:'vindt_pipeline' },
       ],
@@ -380,6 +408,8 @@ export const MODULES: Record<string, ModuleData> = {
       { q:'Is dit een vacaturebank?', a:'Nee. EmmaVindt helpt je actief ontdekken wie in jouw buurt past, in plaats van te wachten op reacties. In sales-modus werkt het net zo, maar dan voor potentiële klanten.' },
       { q:'Hoe zit het met privacy?', a:'De gegevens komen uit het openbare KvK-register en openbare bedrijfswebsites. Geen LinkedIn, geen social media. Dat mag niet volgens hun voorwaarden en brengt je account in gevaar. EmmaVindt werkt met de AVG als uitgangspunt en houdt met een audit-log bij wie je benadert.' },
       { q:'Voor wie is het handig?', a:'Voor ondernemers die personeel werven, zoals salons en zorgpraktijken, en voor wie nieuwe klanten zoekt, zoals ZZP\'ers en kleine teams.' },
+      { q:'Verstuurt Emma zelf berichten?', a:'Nee. Emma schrijft een concept, jij leest het na en verstuurt het. Geeft iemand aan geen berichten te willen, dan legt Emma dat vast en houdt ze die persoon buiten je berichten.' },
+      { q:'Vindt Emma ook mensen die niet op zoek zijn?', a:'Het uitgangspunt is het openbare KvK-register, dus je vindt vooral ondernemers en zelfstandigen in jouw vak. Dat is precies de groep die niet op vacaturebanken kijkt. Of iemand openstaat voor een gesprek, weet je pas als je het vraagt.' },
       { q:'Wat kost het en kan ik het nu gebruiken?', a: LAUNCHED
           ? '€9 per maand, exclusief btw, met 10% korting bij jaarbetaling. EmmaVindt is nu te gebruiken: je probeert het 14 dagen gratis, zonder creditcard. Maak een account aan op app.emmastudio.nl/signup.'
           : '€9 per maand, exclusief btw, met 10% korting bij jaarbetaling. EmmaVindt is nog in ontwikkeling. Laat je e-mail achter, dan hoor je het zodra je kunt starten.' },
