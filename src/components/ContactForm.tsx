@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRef, useState } from 'react';
 
 export default function ContactForm() {
@@ -64,7 +65,13 @@ export default function ContactForm() {
           <span className="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
         </button>
         {error && <p className="text-sm font-medium text-emma-error" role="alert">{error}</p>}
-        <p className="text-xs leading-relaxed text-emma-subtext">We gebruiken je gegevens alleen om te reageren. Niets meer, niets minder.</p>
+        {/* Informatieplicht (art. 13 AVG): wie persoonsgegevens vraagt, zegt erbij
+            waar ze heen gaan. Eén zin plus een link naar de verklaring. */}
+        <p className="text-xs leading-relaxed text-emma-subtext">
+          We gebruiken je gegevens alleen om te reageren. Niets meer, niets minder. Hoe we ermee
+          omgaan staat in onze{' '}
+          <Link href="/privacy" className="underline hover:text-emma-ink">privacyverklaring</Link>.
+        </p>
       </div>
     </form>
   );

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import ContactForm from '@/components/ContactForm';
+import { BEDRIJF } from '@/data/bedrijf';
 
 const SITE = 'https://www.emmastudio.nl';
 
@@ -72,6 +73,21 @@ export default function Contact() {
                 <div className="text-sm">
                   <b className="block font-semibold text-emma-ink">Op de hoogte blijven</b>
                   <Link href="/#wachtlijst" className="text-emma-coral hover:underline">Zet je op de wachtlijst →</Link>
+                </div>
+              </div>
+              {/* Identiteitsgegevens (art. 3:15d BW). Ook hier, niet alleen in de
+                  footer: /contact is de pagina waar iemand ze komt halen. */}
+              <div className="flex items-start gap-3.5">
+                <PointIcon>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"><path d="M4 20V9l8-5 8 5v11" /><path d="M9 20v-6h6v6" /></svg>
+                </PointIcon>
+                <div className="text-sm">
+                  <b className="block font-semibold text-emma-ink">Toms Ambitie</b>
+                  <span className="text-emma-ink-2">
+                    {BEDRIJF.straat}<br />
+                    {BEDRIJF.postcode} {BEDRIJF.plaats}<br />
+                    KvK {BEDRIJF.kvk} · Btw {BEDRIJF.btw}
+                  </span>
                 </div>
               </div>
             </div>

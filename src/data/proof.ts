@@ -28,8 +28,28 @@ export type StatItem = {
  *  onderbouwen, EmmaVindt bestaat nog niet en de Blondes Incognito-
  *  voorloper had geen KvK-zoeker. Vervangen door "6 concurrenten
  *  gemonitord", wat wél uit die praktijk komt. */
+/* ── HOE LANG DRAAIT HET AL ─────────────────────────────────────────────────
+   Stond op vijf plekken hardcoded als "18 maanden", naast "sinds eind 2024".
+   Die twee liepen uit elkaar: in augustus 2026 zijn het er twintig. Een getal
+   dat je met de hand moet bijhouden, houdt niemand bij — en op een pagina die
+   over eerlijkheid gaat is dat precies het verkeerde getal om fout te hebben.
+
+   Dus afgeleid van de startdatum. Naar beneden afgerond op hele maanden, zodat
+   het nooit méér claimt dan waar is. De waarde wordt bij de build berekend,
+   dus hij loopt hooguit tot de eerstvolgende deploy achter — de veilige kant. */
+const START_PRAKTIJK = new Date(2024, 11, 1); // december 2024, "eind 2024"
+
+export function maandenPraktijk(nu: Date = new Date()): number {
+  const m = (nu.getFullYear() - START_PRAKTIJK.getFullYear()) * 12
+          + (nu.getMonth() - START_PRAKTIJK.getMonth());
+  return Math.max(0, m);
+}
+
+/** "20 maanden" — voor lopende tekst. */
+export const MAANDEN_PRAKTIJK = maandenPraktijk();
+
 export const STATS: StatItem[] = [
-  { value: 18, suffix: '+', label: 'Maanden dagelijks in gebruik bij Blondes Incognito' },
+  { value: MAANDEN_PRAKTIJK, suffix: '+', label: 'Maanden dagelijks in gebruik bij Blondes Incognito' },
   { value: 1200, suffix: '+', label: 'Reviews geanalyseerd in de voorloper-tool' },
   { value: 6, label: 'Concurrenten gemonitord', display: '6' },
   { value: 8, label: 'Uur per week bespaard', display: '6-8' },
@@ -38,7 +58,7 @@ export const STATS: StatItem[] = [
 /** Hero-badge. Was (in de export): "Bewezen in productie sinds eind 2024" —
  *  onjuist voor EmmaStudio zelf, dat draait pas sinds circa mei 2026. Geldt
  *  de Blondes Incognito-voorloper, niet het platform. */
-export const HERO_BADGE = 'Gebouwd op 18 maanden praktijk';
+export const HERO_BADGE = `Gebouwd op ${MAANDEN_PRAKTIJK} maanden praktijk`;
 
 /** Omkadering van de proof-sectie. "Niet uit een pitch deck" (uit de export)
  *  is bewust weggelaten: dat is een variant van eerlijkheid-als-USP

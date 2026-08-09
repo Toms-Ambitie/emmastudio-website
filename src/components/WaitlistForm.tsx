@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useRef, useState } from 'react';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -44,9 +45,14 @@ export default function WaitlistForm({ dark = false, note = '', noteLabel = '', 
           {loading ? 'Even wachten…' : submitLabel} <span className="arr">→</span>
         </button>
       </div>
+      {/* Informatieplicht (art. 13 AVG): het e-mailadres is een persoonsgegeven,
+          dus de verwijzing naar de privacyverklaring hoort bij het veld te staan,
+          niet alleen ergens in de footer. */}
       <div className="wait__note">
         {noteLabel && <b>{noteLabel} </b>}
         {note || 'Geen verplichtingen. Geen creditcard. We laten je weten wanneer Emma live gaat.'}
+        {' '}We gebruiken je adres alleen daarvoor en je meldt je af met één klik. Zie de{' '}
+        <Link href="/privacy">privacyverklaring</Link>.
       </div>
       <div className="wait__ok">
         <svg viewBox="0 0 24 24" fill="none"><path d="m20 6-11 11-5-5"/></svg>
