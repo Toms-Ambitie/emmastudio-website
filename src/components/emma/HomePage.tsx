@@ -207,14 +207,7 @@ function Manifesto() {
 function ProductShowcase() {
   const [activeShot, setActiveShot] = useState(0);
 
-  const shots = [
-    { src: SHOWCASE.overzicht.src, label: SHOWCASE.overzicht.label, desc: SHOWCASE.overzicht.desc },
-    ...MODULE_ORDER.map((id) => ({
-      src: `/assets/app/${id}.jpg`,
-      label: emmaName(id),
-      desc: MODULE_TAGS[id],
-    })),
-  ];
+  const shots = SHOWCASE.shots;
 
   return (
     <section id="product" className="relative overflow-hidden bg-emma-creme py-20 md:py-32">

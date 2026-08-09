@@ -49,14 +49,57 @@ export const PROBLEM_PULL = {
 /* ── MANIFESTO ── inline copy, verbatim. */
 export const MANIFESTO = 'Emma is een rustige copiloot. Geen vervanger voor je vak, maar een schil eromheen die het saaie werk overneemt.';
 
-/* ── PRODUCT SHOWCASE ── inline copy. De screenshots komen per module-id
-   uit /assets/app/{id}.jpg (waaks → waakt hernoemd, §3.3), plus overzicht. */
+/* ── PRODUCT SHOWCASE ──
+   `shots` is een expliciete lijst, geen afgeleide van MODULE_ORDER. Dat is
+   bewust: hier hoort alleen een scherm te staan waarvan er een echte afdruk
+   uit de app ligt. Vroeger liep dit blok over alle acht modules en werd het
+   gevuld met getekende schermen — inclusief een BTW-scherm en een chat die
+   niet bestaan. Een lijst die zichzelf uit MODULE_ORDER vult, vult zich ook
+   met modules die alleen op papier bestaan.
+
+   Voor EmmaCoacht, EmmaSchrijft en EmmaPromoot staat hier dus niets. Die zijn
+   niet gebouwd (zie MODULE_STATUS in modules.ts). Zodra er één live is:
+   afdruk in /public/assets/app/ zetten en hier een regel toevoegen.
+
+   De omschrijvingen beschrijven wat er op het scherm te zien is, niet wat de
+   module belooft. Wijk daar niet van af zonder de afdruk opnieuw te bekijken. */
 export const SHOWCASE = {
   eyebrow: 'Het product',
   title1: 'Software zo slim,',
   title2: 'dat het simpel voelt.',
-  intro: 'Eén overzicht plus acht modules. Elke module doet een specifiek stuk van je bedrijf. Klik door en kijk rond.',
-  overzicht: { src: '/assets/app/overzicht.jpg', label: 'Overzicht', desc: 'De dag in een blik. Signalen die Emma ziet, geprioriteerd op urgentie.' },
+  intro: 'Eén overzicht plus de vijf modules die nu live staan. Dit zijn echte schermen uit de app.',
+  shots: [
+    {
+      src: '/assets/app/overzicht.jpg',
+      label: 'Overzicht',
+      desc: 'Je dag in één blik. Emma legt in gewone zinnen uit wat er in je cijfers gebeurt en wat aandacht vraagt.',
+    },
+    {
+      src: '/assets/app/boekt.jpg',
+      label: 'EmmaBoekt',
+      desc: 'Je facturen, offertes en openstaande posten, zonder dat je je boekhoudpakket opent.',
+    },
+    {
+      src: '/assets/app/waakt.jpg',
+      label: 'EmmaWaakt',
+      desc: 'Wie staat waar, en tegenover welk doel. Je team op omzet gerangschikt, per maand.',
+    },
+    {
+      src: '/assets/app/loont.jpg',
+      label: 'EmmaLoont',
+      desc: 'Loonstroken per medewerker, klaar om te versturen. Jij drukt op versturen, niet Emma.',
+    },
+    {
+      src: '/assets/app/vindt.jpg',
+      label: 'EmmaVindt',
+      desc: 'Bedrijven in je regio met een score op hoe goed ze passen, van nieuw tot match.',
+    },
+    {
+      src: '/assets/app/ziet.jpg',
+      label: 'EmmaZiet',
+      desc: 'Jouw prijzen naast die van je concurrenten, per dienst. Emma haalt ze op, jij ziet waar je staat.',
+    },
+  ],
 };
 
 /* ── SOLUTION ── inline copy, verbatim. Punt 3 "Geen AI-product, wel slim"
