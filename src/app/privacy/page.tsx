@@ -24,10 +24,10 @@ export default function Privacy() {
 
             <h2>1. Wie zijn wij?</h2>
             <p>
-              Toms Ambitie is de verwerkingsverantwoordelijke voor de persoonsgegevens die worden verwerkt via emmastudio.nl en het Emma-platform.
+              Toms Ambitie is de verwerkingsverantwoordelijke voor de persoonsgegevens die worden verwerkt via emmastudio.nl en het Emma-platform. Emma en EmmaStudio zijn handelsnamen van Toms Ambitie; er zit geen aparte onderneming achter.
             </p>
             <p>
-              <b>{BEDRIJF.naam}</b><br />
+              <b>{BEDRIJF.naam}</b> ({BEDRIJF.rechtsvorm})<br />
               {BEDRIJF.straat}<br />
               {BEDRIJF.postcode} {BEDRIJF.plaats}, {BEDRIJF.land}<br />
               KvK: {BEDRIJF.kvk}<br />

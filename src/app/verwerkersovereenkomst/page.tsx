@@ -44,7 +44,8 @@ export default function Verwerkersovereenkomst() {
 
             <h2>Artikel 1 — Partijen en rollen</h2>
             <p>
-              1.1 <b>Verwerker:</b> {BEDRIJF.naam}, {ADRES_KORT}, KvK {BEDRIJF.kvk}.
+              1.1 <b>Verwerker:</b> de {BEDRIJF.rechtsvorm} {BEDRIJF.naam}, {ADRES_KORT}, KvK{' '}
+              {BEDRIJF.kvk}, handelend onder de naam EmmaStudio.
             </p>
             <p>
               1.2 <b>Verwerkingsverantwoordelijke:</b> de Klant, zijnde de onderneming die een

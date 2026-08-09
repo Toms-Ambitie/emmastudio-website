@@ -12,6 +12,17 @@
 
 export const BEDRIJF = {
   naam: 'Toms Ambitie',
+  /** Rechtsvorm. Toms Ambitie is een eenmanszaak, geen BV. Dat stond eerder
+   *  wél in de algemene voorwaarden ("de besloten vennootschap Toms Ambitie")
+   *  en dat is onjuist: een verkeerde rechtsvorm in je eigen voorwaarden is
+   *  een fout in het document dat je aansprakelijkheid regelt. Gaat EmmaStudio
+   *  later in een aparte BV, dan wijzigt het hier — en op geen enkele
+   *  andere plek. */
+  rechtsvorm: 'eenmanszaak',
+  /** EmmaStudio en Emma zijn handelsnamen van dezelfde onderneming, geen
+   *  aparte rechtspersonen. Wie een factuur van "Toms Ambitie" krijgt voor
+   *  iets wat hij bij "Emma" kocht, moet dat kunnen terugvinden. */
+  handelsnamen: ['EmmaStudio', 'Emma'],
   straat: 'Cleyndertstraat 16',
   postcode: '8044 PP',
   plaats: 'Zwolle',

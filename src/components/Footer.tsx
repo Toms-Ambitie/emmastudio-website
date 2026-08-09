@@ -12,7 +12,10 @@ export default function Footer() {
         <div className="foot__grid">
           <div className="foot__brand">
             <Image src="/logo-light.svg" alt="emma." width={88} height={26} />
-            <p>De vriendelijke schil om je boekhouding, en straks om de rest van je onderneming. Voor zelfstandige ondernemers en kleine bedrijven in Nederland. Gebouwd door Toms Ambitie in Zwolle.</p>
+            {/* "Handelsnaam van" staat er bewust bij: op de factuur en op je
+                bankafschrift verschijnt Toms Ambitie, niet Emma. Wie dat pas
+                achteraf ontdekt, denkt aan een incassofout. */}
+            <p>De vriendelijke schil om je boekhouding, en straks om de rest van je onderneming. Voor zelfstandige ondernemers en kleine bedrijven in Nederland. EmmaStudio is een handelsnaam van Toms Ambitie in Zwolle.</p>
           </div>
           <div className="foot__col">
             <h2>Modules</h2>
