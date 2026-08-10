@@ -37,6 +37,14 @@ Een webhook of API-aanroep verandert hier niets aan: dat bepaalt alleen wát de
 routine start, niet wat de gestarte sessie mag. De goedkeuringsvraag komt van
 de rechten van die sessie, niet van de aanleiding.
 
+**Mailmelding staat bewust uit.** Dat is een keuze van Tom, niet iets dat
+vergeten is; zet hem niet "behulpzaam" weer aan. Dat kan omdat de melding
+niet nodig is om te weten of de controle gedraaid heeft: de
+goedkeuringsvraag op de telefoon is zelf het teken van leven. Komt die op
+maandagochtend niet, dan is er iets mis met de routine. Vindt de controle een
+verschil, dan blijkt dat uit een commit op main; vindt hij niets, dan hoort er
+ook niets te gebeuren.
+
 ## De opdracht
 
 ```
