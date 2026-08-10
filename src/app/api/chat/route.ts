@@ -167,6 +167,26 @@ async function stuurDoor(
   };
 }
 
+/* Een GET op deze route zegt of de chat kán werken, zonder er een gesprek voor
+   te hoeven voeren.
+
+   Waarom dit er staat: we hebben een uur besteed aan "de chat is nu niet
+   beschikbaar", en het antwoord was een omgevingsvariabele die op de ene
+   omgeving wel en op de andere niet stond. Dat was van buitenaf niet te zien;
+   je moest de runtime logs van Vercel erbij pakken. Eén GET beantwoordt dat nu
+   direct, ook vanaf een telefoon.
+
+   Er staat bewust geen sleutel in het antwoord, alleen of hij er is. */
+export async function GET() {
+  return Response.json({
+    gereed: Boolean(ANTHROPIC_API_KEY) && Boolean(RESEND_API_KEY),
+    antwoorden: Boolean(ANTHROPIC_API_KEY),
+    doorzetten: Boolean(RESEND_API_KEY),
+    model: MODEL,
+    kennisbasisTekens: KENNISBASIS.length,
+  });
+}
+
 export async function POST(req: Request) {
   if (!ANTHROPIC_API_KEY) {
     console.error('[chat] ANTHROPIC_API_KEY ontbreekt');
