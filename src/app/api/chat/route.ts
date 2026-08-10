@@ -157,7 +157,18 @@ export async function POST(req: Request) {
          op is terwijl het model nog een tool aanroept, is er niets gestreamd
          en staart de bezoeker naar niets. Stilte is hier de ergste uitkomst. */
       let ietsGezegd = false;
+
+      /* Na een toolaanroep begint het model aan een nieuw stuk tekst. Zonder
+         scheiding plakt dat aan de vorige zin vast, en dan las de bezoeker
+         "...ik weet daar niets over.Wil je het aan hem voorleggen". Eén lege
+         regel ertussen, en alleen als er daadwerkelijk nog tekst komt: een
+         ronde die niets meer zegt hoort geen witregel achter te laten. */
+      let scheidingNodig = false;
       const stuurTekst = (t: string) => {
+        if (scheidingNodig) {
+          stuur('tekst', '\n\n');
+          scheidingNodig = false;
+        }
         ietsGezegd = true;
         stuur('tekst', t);
       };
@@ -217,12 +228,14 @@ export async function POST(req: Request) {
               tool_use_id: a.id,
               content:
                 'Het voorstel staat nu bij de bezoeker in beeld, met een invulveld ' +
-                'voor zijn e-mailadres en een knop om te versturen. Zeg in één zin ' +
-                'dat hij het met die knop naar Tom kan sturen als hij wil. Vraag ' +
-                'zelf niet om zijn e-mailadres en dring niet aan.',
+                'voor zijn e-mailadres en een knop om te versturen. Heb je de knop ' +
+                'hiervoor al genoemd, zeg dan niets meer; anders één korte zin dat ' +
+                'hij het er zelf mee naar Tom kan sturen. Vraag zelf niet om zijn ' +
+                'e-mailadres en dring niet aan.',
             });
           }
           messages.push({ role: 'user', content: resultaten });
+          if (ietsGezegd) scheidingNodig = true;
         }
         if (!ietsGezegd) {
           // Het model bleef gereedschap aanroepen tot de lus op was. Zeg dan

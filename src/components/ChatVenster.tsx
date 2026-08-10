@@ -35,22 +35,36 @@ export default function ChatVenster({ chat }: { chat: Chat }) {
   const lijstRef = useRef<HTMLDivElement>(null);
   const invoerRef = useRef<HTMLTextAreaElement>(null);
 
-  /* Meescrollen terwijl het antwoord binnenkomt, maar alleen als je toch al
-     onderaan zat.
+  /* Meescrollen terwijl het antwoord binnenkomt, maar niet als de bezoeker
+     zelf omhoog is gegaan om iets terug te lezen.
 
-     Twee dingen die hier eerder misgingen. Het was `scrollIntoView`, en dat
-     zoekt zelf een scrollbare voorouder; zolang het gespreksvak niet scrolde
-     was dat de pagina, dus sprong de hele site omlaag bij elk woord. En het
-     scrolde onvoorwaardelijk: lees je een eerder antwoord terug terwijl Emma
-     nog typt, dan werd je bij elke token teruggetrokken naar beneden.
+     Het was `scrollIntoView`, en dat zoekt zelf een scrollbare voorouder;
+     zolang het gespreksvak niet scrolde was dat de pagina, dus sprong de hele
+     site omlaag bij elk woord.
 
-     Nu zetten we scrollTop op het vak zelf, en alleen als je binnen 80 pixels
-     van de bodem bent. Scrol je omhoog, dan laat hij je met rust. */
-  useEffect(() => {
+     `volgen` onthoudt of we onderaan mogen plakken, en die vlag wordt gezet
+     door de scroll-gebeurtenis, niet door de afstand op het moment van
+     tekenen. Dat verschil is niet theoretisch: eerst stond hier "scroll mee
+     als je binnen 80 pixels van de bodem bent", gemeten in de effect-hook.
+     Komt er tussen twee tekenbeurten meer dan 80 pixels tekst bij, en dat
+     gebeurt zodra een brok tekst in één keer aankomt, dan is die test één
+     keer onwaar en daarna voorgoed onwaar: het vak bleef bovenaan hangen.
+     Gemeten in de browser: scrollTop 62 van de 1512 na drie antwoorden.
+
+     Een programmatische sprong naar de bodem zet `volgen` weer op true, want
+     dan zijn we per definitie onderaan. Alleen een mens die omhoog scrolt
+     zet hem uit. */
+  const volgen = useRef(true);
+
+  const onthoudScrolpositie = () => {
     const l = lijstRef.current;
     if (!l) return;
-    const bijDeBodem = l.scrollHeight - l.scrollTop - l.clientHeight < 80;
-    if (bijDeBodem) l.scrollTop = l.scrollHeight;
+    volgen.current = l.scrollHeight - l.scrollTop - l.clientHeight < 80;
+  };
+
+  useEffect(() => {
+    const l = lijstRef.current;
+    if (l && volgen.current) l.scrollTop = l.scrollHeight;
   }, [beurten, bezig, voorstel, doorgezet]);
 
   const stuur = (tekst: string) => {
@@ -87,6 +101,7 @@ export default function ChatVenster({ chat }: { chat: Chat }) {
         aria-live="polite"
         aria-label="Gesprek met Emma"
         ref={lijstRef}
+        onScroll={onthoudScrolpositie}
       >
         <p className="max-w-[46ch] text-sm leading-relaxed text-emma-ink-2">{OPENING}</p>
 
