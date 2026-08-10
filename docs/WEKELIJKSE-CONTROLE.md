@@ -35,6 +35,22 @@ allemaal goed staan. Anders schrijft hij dat de loontabellen erin zitten, en
 meldt hij in de PR wat er leeg was. Bij nul loonregels schrijft hij helemaal
 geen artikel, want dan is er iets mis met de data en is er niets te vieren.
 
+### Hoe de routine weet welk artikel er nog mist
+
+Niet aan de hand van wat er in de data veranderd is. Dat lijkt logisch en het is
+fout: de routine werkt `cao.ts` bij én schrijft de artikelen. Rondt Tom vijf
+cao's tegelijk af en schrijft de routine er twee, dan staan alle vijf daarna in
+`cao.ts` en zijn de andere drie de week erna niet meer "nieuw". Die krijgen dan
+nooit een artikel.
+
+De achterstand komt daarom uit `ARTICLES` zelf: bestaat er al een artikel over
+deze branche of deze module? Zo niet, dan staat hij op de lijst, hoe lang
+geleden de data ook veranderd is. Dat overleeft een overgeslagen week en een
+mislukte run.
+
+Maximaal twee artikelen per run, de rest volgende week. Liever twee goede
+stukken dan vijf haastige, en het houdt de leesstapel voor Tom behapbaar.
+
 ### Waar het naartoe gaat
 
 Bewust twee wegen:
