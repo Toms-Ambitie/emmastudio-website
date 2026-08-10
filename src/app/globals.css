@@ -71,6 +71,13 @@
    RESET & BASE
    ============================================================ */
 
+/* LET OP: deze kale reset staat NA de Tailwind-import en wint daardoor van
+   alles wat Tailwind met een :where()-selector bouwt (nul specificiteit,
+   zelfde als `*`, latere bron wint). Concreet: space-x-* en space-y-* doen
+   op deze site NIETS. Gewone klassen (mt-*, p-*, gap-*) winnen wel van `*`
+   en werken gewoon. Gebruik dus gap op de ouder in plaats van space-*.
+   Gemeten op 10 augustus 2026: de blokken op /vergelijk stonden tegen
+   elkaar terwijl er space-y-8 op stond. */
 *{ margin:0; padding:0; box-sizing:border-box; }
 html{ -webkit-text-size-adjust:100%; background:var(--creme); }
 body{ font-family:var(--body); background:var(--creme); color:var(--ink); font-size:17px;

@@ -91,7 +91,7 @@ export default function Vergelijk() {
             {rows.map((row, i) => (
               <div key={i} className="p-5">
                 <h2 className="font-display text-base font-bold text-emma-ink">{row.need}</h2>
-                <div className="mt-3 space-y-2">
+                <div className="mt-3 flex flex-col gap-2">
                   <div className="flex items-center justify-between rounded-lg bg-emma-coral-soft/40 px-3 py-2">
                     <span className="text-xs font-semibold text-emma-coral">Emma</span>
                     <EmmaKolom modules={row.modules} klein />
@@ -138,7 +138,7 @@ export default function Vergelijk() {
             </p>
           </div>
 
-          <div className="mt-10 space-y-8">
+          <div className="mt-10 flex flex-col gap-8">
             {VERGELIJK_MODULES.map(id => {
               const v = MODULE_VERGELIJK[id];
               const accent = `var(--m-${id})`;
@@ -163,7 +163,7 @@ export default function Vergelijk() {
                     <div className="mt-6 grid gap-6 md:grid-cols-2">
                       <div>
                         <h4 className="em-label text-emma-subtext">Waar je ons mee moet vergelijken</h4>
-                        <ul className="mt-3 space-y-3">
+                        <ul className="mt-3 flex flex-col gap-3">
                           {v.ankers.map(a => (
                             <li key={a.naam} className="flex items-baseline justify-between gap-4 border-b border-emma-line/70 pb-3 last:border-b-0 last:pb-0">
                               <span className="text-sm font-semibold text-emma-ink">{a.naam}</span>
