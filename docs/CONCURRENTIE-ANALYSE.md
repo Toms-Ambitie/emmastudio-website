@@ -19,10 +19,46 @@ peildatum, en de wekelijkse routine is de plek om die jaarlijks te verversen.
 
 ## EmmaBoekt (€9 p/mnd) — boekhouden en factureren
 
-### De opstelling
+### Het kader (aangescherpt door Tom, 10 augustus)
 
-EmmaBoekt is een schil om e-Boekhouden.nl en vereist een e-Boekhouden-account.
-De eerlijke vergelijking is dus **stack tegen pakket**:
+EmmaBoekt is een schil bovenop een boekhoudmotor. De strategie is drie
+motoren: e-Boekhouden.nl, Moneybird en SnelStart, waarvan je er altijd één
+nodig hebt. De vergelijking hoort daarom niet tegen die motoren te gaan (dat
+zijn partners in de stack) maar tegen de **premium pakketten**: Exact Online,
+Twinfield en AFAS SB.
+
+**Wat er vandaag echt is, gemeten in de app-code op 10 augustus 2026:**
+alleen de e-Boekhouden-adapter bestaat (`boekt/adapter/index.ts`). SnelStart
+is een uitgecommentarieerde placeholder in dezelfde adapter, dus de
+architectuur is er klaar voor, maar er is geen regel werkende code. De
+`moneybird-sync`-functie die in de repo staat is de platformboekhouding van
+Toms Ambitie zelf, geen klantkoppeling. **De site mag dus zeggen: "werkt met
+e-Boekhouden.nl; Moneybird en SnelStart staan op de planning", en niets
+sterkers, tot de adapters er zijn.** De motorkeuze staat overigens al wel zo
+in de koppelscherm-opzet van de app (InstellingenKoppeling.tsx kiest eerst
+het pakket), dus dit is roadmap met fundament, geen luchtkasteel.
+
+### De premium vergelijking
+
+| Opstelling | Prijs p/mnd (excl. btw) | Peildatum |
+|---|---|---|
+| Motor (e-Boekhouden ZZP/Standaard) + EmmaBoekt | **± €23 tot ± €33** | aug 2026, VERIFIEER |
+| Exact Online Essentials / Plus / Professional | €48 / €99 / €159 | aug 2026 |
+| Twinfield | €44-114,50; meestgekozen ± €61 | aug 2026 |
+| AFAS SB (alleen boekhouden, vast) | €59 | aug 2026, afas-sb.nl |
+
+**Let op met Visma eAccounting.** Tom noemde die als derde premium pakket,
+maar eAccounting kost €17,50 (Starter), €25 (Standaard) tot €36 (Pro) per
+maand en speelt daarmee in de Moneybird-klasse, niet in de premium-klasse.
+In de premium kolom zetten maakt de tabel aanvechtbaar; Twinfield en AFAS SB
+zijn de verdedigbare derde en vierde naam naast Exact.
+
+### De middenklasse (context, geen hoofdvergelijking)
+
+Moneybird €15/€28/€39, SnelStart €15,50-54, Visma eAccounting €17,50-36.
+Zodra de Moneybird- en SnelStart-adapters bestaan, zijn dit motoren in onze
+stack in plaats van concurrenten, en dat is precies het verhaal: wij vechten
+niet tegen de middenklasse, wij bouwen erop.
 
 | Opstelling | Prijs p/mnd (excl. btw) | Peildatum |
 |---|---|---|
@@ -72,8 +108,10 @@ gratis; dan is de hele stack €9.
 
 ### De bravoure-invalshoek
 
-"Boekhouden op het niveau van een pakket van €39 tot €99, voor het geld van
-een tostiapparaat." Kán, mits de btw-aangifte-grens er eerlijk naast staat.
+"Jouw vertrouwde boekhoudpakket als motor, Emma als cockpit erop: samen
+€23-33 waar Exact €99 en Twinfield €61 vragen." Kán, mits de
+btw-aangifte-grens er eerlijk naast staat en de motorenlijst niet breder
+wordt opgeschreven dan wat er draait (nu alleen e-Boekhouden).
 
 ---
 
@@ -240,6 +278,9 @@ Per stuk één blik op de prijspagina van de aanbieder zelf:
    minimum.
 7. Visionplanner: ondernemersprijs opvragen of "op aanvraag" laten staan.
 8. Indeed €120 p/mnd; KvK-tarieven per 1 jan 2026.
+9. Twinfield: actuele abonnementsprijzen op de Wolters Kluwer-pagina
+   (bronnen lopen uiteen van €44 tot €114,50).
+10. AFAS SB €59 vast (afas-sb.nl/prijs); Visma eAccounting €17,50/€25/€36.
 
 ## Voorstel voor de nieuwe /vergelijk (nog niet gebouwd)
 
