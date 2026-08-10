@@ -225,10 +225,22 @@ export async function POST(req: Request) {
   }
 
   const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
-  const messages: Anthropic.MessageParam[] = gesprek.map(b => ({
-    role: b.rol === 'gebruiker' ? 'user' : 'assistant',
-    content: b.tekst,
-  }));
+
+  /* Beurten van dezelfde rol achter elkaar samenvoegen. Dat gebeurt zodra een
+     verzoek mislukt: de vraag van de bezoeker blijft staan zonder antwoord, hij
+     probeert het nog eens, en dan staan er twee vragen achter elkaar. De
+     Messages API wil rollen om en om, dus dat zou een tweede storing bovenop
+     de eerste zijn, precies wanneer iemand aan het herstellen is. */
+  const messages: Anthropic.MessageParam[] = [];
+  for (const b of gesprek) {
+    const rol = b.rol === 'gebruiker' ? 'user' : 'assistant';
+    const vorige = messages[messages.length - 1];
+    if (vorige && vorige.role === rol) {
+      vorige.content = `${vorige.content}\n\n${b.tekst}`;
+    } else {
+      messages.push({ role: rol, content: b.tekst });
+    }
+  }
 
   const encoder = new TextEncoder();
   const stream = new ReadableStream({
