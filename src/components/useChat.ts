@@ -29,6 +29,10 @@ export type Chat = {
 
   /* Doorzetten. Emma stelt voor, de bezoeker beslist. */
   voorstel: Voorstel | null;
+  /** Er is een voorstel weggeklikt en nog niets verstuurd, dus het aanbod
+   *  is terug te halen zonder Emma er opnieuw om te vragen. */
+  kanVoorstelTerughalen: boolean;
+  haalVoorstelTerug: () => void;
   doorzetBezig: boolean;
   doorzetFout: string | null;
   doorgezet: boolean;
@@ -187,13 +191,31 @@ export function useChat(): Chat {
     }
   }, [voorstel, doorzetBezig]);
 
+  /* Wegklikken haalt het kaartje weg maar niet het aanbod.
+
+     Waarom dat verschil er is: Emma weet niet dat je op "Nee, laat maar" hebt
+     gedrukt, want dat is een klik in de browser en geen beurt in het gesprek.
+     In haar tekst staat nog wel "je kunt het met de knop hieronder sturen".
+     Vroeg je daarna nog eens hetzelfde, dan bood ze het niet opnieuw aan (ze
+     ziet in het gesprek dat ze het al deed) en verwees haar eigen zin naar een
+     knop die er niet meer stond. Daarom onthouden we het laatste voorstel en
+     blijft er een klein tekstlinkje staan waarmee je het terughaalt. */
+  const [weggeklikt, setWeggeklikt] = useState<Voorstel | null>(null);
+
   const laatVoorstelVallen = useCallback(() => {
+    setWeggeklikt(voorstel);
     setVoorstel(null);
     setDoorzetFout(null);
-  }, []);
+  }, [voorstel]);
+
+  const haalVoorstelTerug = useCallback(() => {
+    if (weggeklikt) setVoorstel(weggeklikt);
+  }, [weggeklikt]);
 
   return {
     beurten, bezig, fout, verstuur,
     voorstel, doorzetBezig, doorzetFout, doorgezet, zetDoor, laatVoorstelVallen,
+    kanVoorstelTerughalen: Boolean(weggeklikt) && !voorstel && !doorgezet,
+    haalVoorstelTerug,
   };
 }

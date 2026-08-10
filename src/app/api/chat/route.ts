@@ -1,7 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { bouwKennisbasis } from '@/data/kennis';
 import { BEDRIJF } from '@/data/bedrijf';
-import { ipVan, leesGesprek, teVaak, MAX_VRAAG_TEKENS } from './gedeeld';
+import { ipVan, leesGesprek, teDruk, teVaak, MAX_VRAAG_TEKENS } from './gedeeld';
 
 /* ── CHAT-ROUTE ─────────────────────────────────────────────────────────────
    De assistent op de website. Beantwoordt vragen over EmmaStudio uit een
@@ -119,6 +119,12 @@ export async function POST(req: Request) {
       { status: 429 },
     );
   }
+  if (teDruk()) {
+    return Response.json(
+      { error: 'Het is nu te druk in de chat. Probeer het later nog eens, of mail naar ' + BEDRIJF.email + '.' },
+      { status: 429 },
+    );
+  }
 
   const body = await req.json().catch(() => null);
   /* De client stuurt alleen beurten, nooit een systeemprompt, nooit een model,
@@ -127,6 +133,25 @@ export async function POST(req: Request) {
   if (!gesprek.length || gesprek[gesprek.length - 1].rol !== 'gebruiker') {
     return Response.json({ error: 'Ongeldig verzoek.' }, { status: 400 });
   }
+
+  /* De vraag in het log. Dit is het enige zicht dat we op de chat hebben.
+
+     Waarom het nodig is: alleen doorgezette vragen bereiken Tom, en dat is per
+     ontwerp een kleine minderheid. Beantwoordt Emma iets structureel verkeerd
+     of onhandig, dan merkt niemand het ooit. Zonder deze regel kun je de
+     kennisbasis niet verbeteren, want je weet niet waar hij tekortschiet.
+
+     Waarom het zo mager is: geen IP, geen antwoord, geen e-mailadres, en
+     alleen de laatste vraag. Genoeg om te zien welke onderwerpen langskomen,
+     te weinig om iemand mee te volgen. En bewust naar het log en niet naar een
+     database: deze route heeft geen databaseverbinding en dat is precies wat
+     hem veilig maakt. Een tabel erbij zou die eigenschap opgeven voor een
+     statistiekje. Wil je ooit een echt overzicht, dan hoort dat in de
+     admin-app, niet hier.
+
+     Staat ook zo in de privacyverklaring, §2 en §4. */
+  const laatsteVraag = gesprek[gesprek.length - 1].tekst;
+  console.log('[chat] vraag:', JSON.stringify(laatsteVraag.slice(0, 300)));
 
   const client = new Anthropic({ apiKey: ANTHROPIC_API_KEY });
 

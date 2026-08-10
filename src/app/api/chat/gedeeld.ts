@@ -38,6 +38,36 @@ export function teVaak(sleutel: string, max: number): boolean {
   return t.aantal > max;
 }
 
+/* Een tweede rem, en een andere dan de vorige.
+
+   De limiet per IP houdt één bezoeker tegen. Hij houdt niets tegen als iemand
+   met honderd adressen aanklopt, en juist dat is het scenario waarin een
+   publieke chatendpoint geld kost: elke vraag is een betaald verzoek aan het
+   model. Deze teller kijkt daarom niet naar wie er belt maar naar hoeveel er
+   in totaal binnenkomt op deze instantie, per uur.
+
+   Bewust ruim gezet. Bij het huidige verkeer haalt niemand dit; het is een
+   noodrem tegen een script dat losgaat in een weekend, niet een quotum voor
+   bezoekers. Merk je hem in de praktijk, dan is dat het signaal dat er echt
+   verkeer is en dat gedeelde opslag (Vercel KV of Upstash) de volgende stap
+   is, want ook dit plafond geldt per draaiende instantie. */
+const UUR_MS = 3_600_000;
+const MAX_PER_UUR = 400;
+let uurvenster = { tot: 0, aantal: 0 };
+
+export function teDruk(): boolean {
+  const nu = Date.now();
+  if (nu > uurvenster.tot) {
+    uurvenster = { tot: nu + UUR_MS, aantal: 1 };
+    return false;
+  }
+  uurvenster.aantal += 1;
+  if (uurvenster.aantal === MAX_PER_UUR + 1) {
+    console.error('[chat] uurplafond geraakt:', MAX_PER_UUR, 'verzoeken op deze instantie');
+  }
+  return uurvenster.aantal > MAX_PER_UUR;
+}
+
 export function ipVan(req: Request): string {
   return (
     req.headers.get('x-forwarded-for')?.split(',')[0].trim() ||

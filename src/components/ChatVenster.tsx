@@ -28,6 +28,7 @@ export default function ChatVenster({ chat }: { chat: Chat }) {
   const {
     beurten, bezig, fout, verstuur,
     voorstel, doorzetBezig, doorzetFout, doorgezet, zetDoor, laatVoorstelVallen,
+    kanVoorstelTerughalen, haalVoorstelTerug,
   } = chat;
   const [invoer, setInvoer] = useState('');
   const [email, setEmail] = useState('');
@@ -179,7 +180,9 @@ export default function ChatVenster({ chat }: { chat: Chat }) {
                 onChange={e => setEmail(e.target.value)}
                 placeholder="jouw@email.nl"
                 disabled={doorzetBezig}
-                className="w-full rounded-emma-btn border border-emma-line bg-white px-3 py-2 text-sm text-emma-ink outline-none transition-colors placeholder:text-emma-subtext focus:border-emma-coral disabled:opacity-60"
+                /* Ook hier text-base op mobiel, zelfde reden als bij het
+                   vraagveld: onder de 16px zoomt iOS in bij aanraken. */
+                className="w-full rounded-emma-btn border border-emma-line bg-white px-3 py-2 text-base text-emma-ink outline-none transition-colors placeholder:text-emma-subtext focus:border-emma-coral disabled:opacity-60 sm:text-sm"
               />
               <div className="flex items-center gap-2">
                 <button
@@ -205,6 +208,20 @@ export default function ChatVenster({ chat }: { chat: Chat }) {
               </p>
             )}
           </div>
+        )}
+
+        {/* Weggeklikt maar nog niet verstuurd. Emma weet niet dat je op "Nee,
+            laat maar" hebt gedrukt, dus in haar tekst staat nog steeds dat je
+            de knop hieronder kunt gebruiken. Dit linkje zorgt dat die zin naar
+            iets blijft wijzen, zonder dat er weer een heel kaartje staat. */}
+        {kanVoorstelTerughalen && (
+          <button
+            type="button"
+            onClick={haalVoorstelTerug}
+            className="text-xs text-emma-subtext underline transition-colors hover:text-emma-ink"
+          >
+            Toch je vraag naar Tom sturen
+          </button>
         )}
 
         {doorgezet && (
@@ -248,7 +265,16 @@ export default function ChatVenster({ chat }: { chat: Chat }) {
             rows={1}
             placeholder="Stel je vraag…"
             disabled={bezig}
-            className="max-h-32 min-h-[42px] flex-1 resize-none rounded-emma-btn border border-emma-line bg-white px-3.5 py-2.5 text-sm text-emma-ink outline-none transition-colors placeholder:text-emma-subtext focus:border-emma-coral disabled:opacity-60"
+            /* text-base op mobiel, en dat is geen smaakkwestie. Safari op iOS
+               zoomt automatisch in zodra je een invoerveld aanraakt waarvan de
+               letter kleiner is dan 16px. Dit veld stond op text-sm (14px),
+               dus bij elke tik zoomde de telefoon in. Het zichtbare gebied
+               wordt daardoor smaller dan de pagina, en een `position: fixed`
+               paneel hangt aan de pagina, niet aan wat je ziet. Gevolg: het
+               chatvenster leek breder dan het scherm en de knop Stuur viel er
+               rechts buiten. Vanaf sm mag hij weer 14px zijn, want daar bestaat
+               dat gedrag niet. */
+            className="max-h-32 min-h-[42px] flex-1 resize-none rounded-emma-btn border border-emma-line bg-white px-3.5 py-2.5 text-base text-emma-ink outline-none transition-colors placeholder:text-emma-subtext focus:border-emma-coral disabled:opacity-60 sm:text-sm"
           />
           <button
             type="submit"

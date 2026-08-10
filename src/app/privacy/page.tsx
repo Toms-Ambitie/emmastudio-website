@@ -70,7 +70,7 @@ export default function Privacy() {
               <li><b>Factuurgegevens:</b> 7 jaar op grond van de fiscale bewaarplicht.</li>
               <li><b>Wachtlijst-e-mailadressen:</b> totdat je je uitschrijft via de afmeldlink in de e-mail.</li>
               <li><b>Contactformulierberichten:</b> maximaal 1 jaar.</li>
-              <li><b>Chatgesprekken:</b> het gesprek staat alleen in je eigen browser en verdwijnt zodra je de pagina sluit. Wij bewaren het niet. Laat je je vraag doorzetten, dan wordt dat deel van het gesprek als e-mail bewaard, maximaal 1 jaar, net als een contactformulierbericht.</li>
+              <li><b>Chatgesprekken:</b> het gesprek zelf staat alleen in je eigen browser en verdwijnt zodra je de pagina sluit. Van elke vraag komt de tekst wel kort in onze serverlogboeken terecht, zonder je IP-adres en zonder het antwoord, zodat wij zien welke onderwerpen langskomen en de assistent kunnen verbeteren. Die logboeken worden automatisch opgeruimd door onze hostingpartij. Stuur je je vraag met de knop door naar ons, dan wordt dat deel van het gesprek als e-mail bewaard, maximaal 1 jaar, net als een contactformulierbericht.</li>
             </ul>
 
             <h2>5. Ontvangers en doorgifte aan derden</h2>
