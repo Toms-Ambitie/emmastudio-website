@@ -443,14 +443,14 @@ function PriceComparison() {
                 {row.loose ? (
                   <span className="text-sm text-emma-ink-2">{row.loose}</span>
                 ) : (
-                  <span className="text-emma-line text-2xl" aria-label="Niet beschikbaar">&mdash;</span>
+                  <span className="text-xs text-emma-subtext">niet beschikbaar</span>
                 )}
               </div>
               <div className="px-6 py-4">
                 {row.bureau ? (
                   <span className="text-sm text-emma-ink-2">{row.bureau}</span>
                 ) : (
-                  <span className="text-emma-line text-2xl" aria-label="Niet beschikbaar">&mdash;</span>
+                  <span className="text-xs text-emma-subtext">niet beschikbaar</span>
                 )}
               </div>
             </div>
@@ -468,11 +468,11 @@ function PriceComparison() {
                 </div>
                 <div className="flex items-center justify-between px-3 py-2">
                   <span className="text-xs text-emma-subtext">Losse tools</span>
-                  {row.loose ? <span className="text-sm text-emma-ink-2">{row.loose}</span> : <span className="text-emma-line text-xl">&mdash;</span>}
+                  {row.loose ? <span className="text-sm text-emma-ink-2">{row.loose}</span> : <span className="text-xs text-emma-subtext">niet beschikbaar</span>}
                 </div>
                 <div className="flex items-center justify-between px-3 py-2">
                   <span className="text-xs text-emma-subtext">Bureau</span>
-                  {row.bureau ? <span className="text-sm text-emma-ink-2">{row.bureau}</span> : <span className="text-emma-line text-xl">&mdash;</span>}
+                  {row.bureau ? <span className="text-sm text-emma-ink-2">{row.bureau}</span> : <span className="text-xs text-emma-subtext">niet beschikbaar</span>}
                 </div>
               </div>
             </div>

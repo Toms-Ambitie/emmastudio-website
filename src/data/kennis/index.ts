@@ -3,6 +3,7 @@ import { PACKAGES } from '@/data/packages';
 import { FAQ, SECURITY } from '@/data/home';
 import { ARTICLES } from '@/data/articles';
 import { BEDRIJF, ADRES_KORT } from '@/data/bedrijf';
+import { MODULE_VERGELIJK, PEILDATUM } from '@/data/vergelijk';
 import { MAANDEN_PRAKTIJK } from '@/data/proof';
 import { GEDRAG } from './gedrag';
 import { SUPPORT } from './support';
@@ -194,6 +195,40 @@ function platformFaqBlok(): string {
   return regels.join('\n');
 }
 
+/** Concurrentie per module, uit dezelfde bron als /vergelijk. Zonder dit blok
+ *  verzint het model concurrentprijzen zodra iemand ernaar vraagt, en dat is
+ *  erger dan er niets over kunnen zeggen. */
+function vergelijkBlok(): string {
+  const regels = [
+    '# Vergelijking met alternatieven',
+    '',
+    `Op /vergelijk staat per module waar Emma mee concurreert. Prijzen van andere`,
+    `aanbieders zijn openbare prijsinformatie, gepeild in ${PEILDATUM}, exclusief`,
+    'btw. Noem je zo\'n prijs, zeg er dan altijd bij dat het een peiling uit die',
+    'maand is en dat de actuele prijs bij de aanbieder zelf staat. Noem nooit een',
+    'concurrentprijs die hieronder niet staat.',
+    '',
+    'Belangrijk bij EmmaBoekt: e-Boekhouden.nl, Moneybird en SnelStart zijn geen',
+    'concurrenten maar boekhoudmotoren waar Emma bovenop werkt. Vandaag werkt de',
+    'koppeling met e-Boekhouden.nl; Moneybird en SnelStart staan op de planning,',
+    'zonder datum.',
+    '',
+  ];
+  for (const [id, v] of Object.entries(MODULE_VERGELIJK)) {
+    if (!MODULE_STATUS[id]?.live) continue;
+    regels.push(`## Emma${cap(id)}: ${v.kop}`);
+    regels.push(plat(v.emma));
+    regels.push('Alternatieven en hun prijs:');
+    for (const a of v.ankers) {
+      regels.push(`- ${a.naam}: ${a.prijs}${a.toelichting ? ` (${a.toelichting})` : ''}`);
+    }
+    regels.push(`Wat veel ondernemers nu doen: ${plat(v.statusQuo)}`);
+    regels.push(plat(v.grens));
+    regels.push('');
+  }
+  return regels.join('\n');
+}
+
 function kennisbankBlok(): string {
   const regels = [
     '# Artikelen in de kennisbank',
@@ -316,6 +351,7 @@ export function bouwKennisbasis(): string {
     pakkettenBlok(),
     beginnenBlok(),
     veiligheidBlok(),
+    vergelijkBlok(),
     platformFaqBlok(),
     SUPPORT,
     '',
