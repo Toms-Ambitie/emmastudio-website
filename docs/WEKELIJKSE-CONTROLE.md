@@ -1,6 +1,53 @@
-# Wekelijkse waarheidscontrole
+# Wekelijkse waarheidscontrole en lanceringen
 
-## Waarom dit bestaat
+De routine doet drie dingen met één query: kijken of de site nog klopt, en
+reageren op de twee gebeurtenissen die een lancering zijn.
+
+## Wat er bij een lancering gebeurt
+
+**Een cao komt erbij** (een `cao_versie` gaat naar `actief`): de routine werkt
+`cao.ts` bij en schrijft een artikel in de trant van "EmmaStudio nu ook voor
+[branche]".
+
+**Een module gaat live** (`plans.purchasable` wordt true): de routine zet
+`MODULE_STATUS` om en schrijft een uitgebreid artikel over die module.
+
+### De grendel op wat er beweerd mag worden
+
+Dit is de reden dat de query meer ophaalt dan alleen namen. Gemeten op
+10 augustus 2026 staat de enige actieve cao, Kappersbedrijf, in de database als
+`onvolledig = true`:
+
+- 29 loontabellen overgeslagen omdat er geen bedragen in de bron stonden
+- bij 428 regels vermeldt de bron niet of het maand- of uurbedragen zijn
+- bij alle 470 regels ontbreekt de urenbasis
+- geen pensioenfonds en geen ziektepercentages ingevuld
+
+De loontabellen zijn dus bruikbaar (470 regels, 38 uur, maandbedragen), maar
+"de cao is volledig geïntegreerd" is niet waar te maken. Een routine die die
+zin automatisch publiceert zodra een cao op actief springt, zou precies het
+probleem opnieuw invoeren dat de rest van dit document beschrijft, alleen dan
+elke week opnieuw en zonder dat iemand meekijkt.
+
+Daarom leest de routine `onvolledig`, `pensioen`, `ziekte` en het aantal
+loonregels mee, en mag hij "volledig ingelezen" alleen schrijven als die
+allemaal goed staan. Anders schrijft hij dat de loontabellen erin zitten, en
+meldt hij in de PR wat er leeg was. Bij nul loonregels schrijft hij helemaal
+geen artikel, want dan is er iets mis met de data en is er niets te vieren.
+
+### Waar het naartoe gaat
+
+Bewust twee wegen:
+
+| Wat er verandert | Waarheen |
+|---|---|
+| alleen cijfers en statussen | rechtstreeks naar `main` |
+| er zit een artikel of andere wervende tekst bij | een aparte branch, Tom leest mee |
+
+Een correctie maakt de site alleen maar waarder en hoeft niet te wachten.
+Wervende tekst over een branche of een module gaat niet ongelezen de deur uit.
+
+## Waarom de controle bestaat
 
 Deze site heeft één terugkerend probleem gehad: teksten die iets beweerden wat
 de code of de database niet deed. Het meeste is opgelost door af te leiden in
@@ -47,70 +94,20 @@ ook niets te gebeuren.
 
 ## De opdracht
 
-```
-Wekelijkse controle of de website van EmmaStudio nog klopt met de werkelijkheid
-op productie. Werk zelfstandig; er kijkt niemand mee.
+De volledige opdracht staat in de routine zelf (`trig_019T7csAahq5USKHpYcy8VAU`,
+te vinden onder Scheduled op claude.ai). Hij is te lang om hier woordelijk te
+herhalen zonder dat de twee versies uit elkaar gaan lopen, en dat is precies de
+fout die dit document beschrijft.
 
-Repo: Toms-Ambitie/emmastudio-website, branch main.
+Wat je moet weten om hem te kunnen beoordelen:
 
-BELANGRIJK: DOE EXACT ÉÉN SUPABASE-AANROEP. Elke aanroep vraagt Tom om
-goedkeuring op zijn telefoon, dus meer dan één is hinderlijk. Roep
-mcp__Supabase__execute_sql precies één keer aan, met project_id
-rzizzoatvfdzmbwornss en letterlijk deze query:
-
-select 'cao_actief' as soort, c.naam as sleutel, v.status as waarde
-from cao c join cao_versie v on v.cao_id = c.id where v.status = 'actief'
-union all
-select 'cao_concept_aantal', 'totaal', count(*)::text from cao_versie where status = 'concept'
-union all
-select 'plan_' || kind, plan_key, 'purchasable=' || purchasable::text || ' active=' || active::text
-from plans where billing_interval = 'month'
-order by 1, 2;
-
-Heb je die uitkomst, doe dan verder geen enkele query meer, ook niet om iets na
-te kijken. Alles wat je nodig hebt zit erin.
-
-ACHTERGROND. Deze site heeft een terugkerend probleem gehad: teksten die iets
-beweerden wat de code of de database niet deed. Drie bestanden zijn een met de
-hand bijgehouden kopie van een databasestand die daarbuiten om verandert. Deze
-controle vindt dat verschil voordat een bezoeker het vindt.
-
-VERGELIJK DE UITKOMST MET DE CODE:
-
-1. CAO. De regels met soort 'cao_actief' geven de cao's die een klant echt kan
-   kiezen. Die namen moeten exact in CAO_GEVALIDEERD staan in src/data/cao.ts.
-   Het getal bij 'cao_concept_aantal' hoort CAO_IN_VOORBEREIDING te zijn. Werk
-   bij een wijziging ook CAO_GEMETEN_OP bij naar vandaag.
-   Dit bestand voedt de EmmaLoont-pagina én de kennisbasis van de chatbot, dus
-   een afwijking betekent dat Emma bezoekers verkeerd voorlicht over hun cao.
-
-2. MODULES. De regels 'plan_module' met purchasable=true zijn de modules die op
-   prod te koop zijn. Vergelijk met MODULE_STATUS in src/data/modules.ts. Een
-   module die te koop is maar op de site "Binnenkort" heet, kost omzet;
-   andersom kost het vertrouwen. Let op: koopbaar zijn en technisch werken zijn
-   twee verschillende assen. Zet een module alleen op live als hij ook echt
-   bereikbaar is; twijfel je, meld het dan in plaats van het te wijzigen.
-
-3. PAKKETTEN. De regels 'plan_bundle' horen allemaal purchasable=false te zijn.
-   Staat er één op true, dan klopt de zin "Geen enkel pakket is op dit moment te
-   koop" niet meer. Die staat in src/data/kennis/index.ts en wordt door een
-   bouwcontrole afgedwongen.
-
-BIJ EEN VERSCHIL. Pas de databestanden aan, draai `npm run build` (de
-zelfcontrole van de kennisbasis draait daarin mee en laat de build vallen bij
-onzin), commit met een bericht dat de gemeten waarden noemt, en push naar main.
-Push niets als de build niet slaagt.
-
-ALS ALLES KLOPT. Niets wijzigen, niets pushen.
-
-Noem in je samenvatting altijd de gemeten waarden, ook als alles klopt: welke
-cao's actief zijn, hoeveel concept, welke modules koopbaar, en of de pakketten
-nog dicht staan. Zo is één blik genoeg.
-
-Schrijf je samenvatting in het Nederlands, tutoyeren, zonder uitroeptekens en
-zonder gedachtestreepjes (em-dash of en-dash) als leesteken; dat is een harde
-huisstijlregel van dit project.
-```
+1. Eén Supabase-aanroep, met een `union all` die de cao-status, de
+   volledigheidsvelden, het aantal concepten en alle plannen in één keer
+   ophaalt. Meer aanroepen betekent meer tikken op de telefoon.
+2. Stap 1 is de vaste controle, stap 2 de cao-lancering, stap 3 de
+   modulelancering.
+3. De grendel op de beweringen staat hierboven beschreven.
+4. Cijfers naar `main`, wervende tekst naar een branch.
 
 ## Laatste meting
 
