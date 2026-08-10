@@ -108,6 +108,17 @@ const DOORZET_TOOL: Anthropic.Tool = {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/** Kort de vraag in voor de onderwerpregel. Een harde slice(0, 60) hakt midden
+ *  in een woord en laat een losse haak of komma achter; de eerste echte
+ *  doorzetmail had als onderwerp "... hoe kan dat? (" staan. */
+function kort(vraag: string): string {
+  const v = vraag.replace(/\s+/g, ' ').trim();
+  if (v.length <= 60) return v;
+  const afgekapt = v.slice(0, 60);
+  const spatie = afgekapt.lastIndexOf(' ');
+  return (spatie > 30 ? afgekapt.slice(0, spatie) : afgekapt).replace(/[\s([{,;:.-]+$/, '') + '...';
+}
+
 /** Verstuurt de doorgezette vraag. Het hele gesprek gaat mee: zonder de
  *  aanloop is "klopt dat wel?" onbeantwoordbaar, en Tom moet kunnen zien
  *  waar Emma vastliep zonder terug te hoeven vragen. */
@@ -144,7 +155,7 @@ async function stuurDoor(
       from: 'Emma <noreply@emmastudio.nl>',
       to: [BEDRIJF.email],
       reply_to: invoer.email,
-      subject: `Vraag via de chat, ${invoer.vraag.slice(0, 60)}`,
+      subject: `Vraag via de chat: ${kort(invoer.vraag)}`,
       text:
         `Emma kon deze vraag niet beantwoorden en zet hem door.\n\n` +
         `Van: ${invoer.email}\n` +
