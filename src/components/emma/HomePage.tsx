@@ -31,6 +31,7 @@ import { AnimatedCounter } from './AnimatedCounter';
 import { IconArrow, IconCheck, IconShield, IconLink, IconSparkChat } from './icons';
 import WaitlistForm from '@/components/WaitlistForm';
 import StatusBadge from '@/components/StatusBadge';
+import { EmmaKolom } from './EmmaKolom';
 
 import {
   MODULE_ORDER, MODULE_TAGS, MODULE_PRICE, MODULES, ICONS, MODULE_STATUS, SIGNUP_URL, LAUNCHED,
@@ -333,7 +334,7 @@ function ModulesSection() {
               <h3 className="mt-5 font-display text-xl font-bold text-emma-ink">{emmaName(id)}</h3>
               <p className="mt-2 text-sm leading-relaxed text-emma-ink-2">{MODULE_TAGS[id]}</p>
               <div className="mt-auto flex items-center justify-between pt-5">
-                <span className="em-label text-emma-subtext">EUR {MODULE_PRICE[id]} / mnd</span>
+                <span className="em-label text-emma-subtext">€ {MODULE_PRICE[id]} / mnd</span>
                 <IconArrow size={16} className="text-emma-subtext transition-all group-hover:text-emma-coral group-hover:translate-x-1" />
               </div>
             </Link>
@@ -418,15 +419,15 @@ function PriceComparison() {
             <div className="relative px-6 py-5 bg-emma-coral-soft/40">
               <div className="absolute left-0 right-0 top-0 h-1 bg-emma-coral" aria-hidden="true" />
               <div className="font-display text-lg font-bold text-emma-ink">Emma</div>
-              <div className="text-xs text-emma-subtext">vanaf EUR 9/mnd</div>
+              <div className="text-xs text-emma-subtext">vanaf €9/mnd</div>
             </div>
             <div className="px-6 py-5">
               <div className="font-display text-lg font-bold text-emma-ink">Losse tools</div>
-              <div className="text-xs text-emma-subtext">EUR 60-300+/mnd</div>
+              <div className="text-xs text-emma-subtext">€60-300+/mnd</div>
             </div>
             <div className="px-6 py-5">
               <div className="font-display text-lg font-bold text-emma-ink">Bureau</div>
-              <div className="text-xs text-emma-subtext">EUR 200-2.000+/mnd</div>
+              <div className="text-xs text-emma-subtext">€200-2.000+/mnd</div>
             </div>
           </div>
 
@@ -436,9 +437,7 @@ function PriceComparison() {
                 <span className="text-sm font-semibold text-emma-ink">{row.need}</span>
               </div>
               <div className="px-6 py-4 bg-emma-coral-soft/40">
-                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emma-coral" aria-label="Inbegrepen bij Emma">
-                  <IconCheck size={16} className="text-white" />
-                </div>
+                <EmmaKolom modules={row.modules} />
               </div>
               <div className="px-6 py-4">
                 {row.loose ? (
@@ -465,9 +464,7 @@ function PriceComparison() {
               <div className="mt-3 space-y-2">
                 <div className="flex items-center justify-between rounded-lg bg-emma-coral-soft/40 px-3 py-2">
                   <span className="text-xs font-semibold text-emma-coral">Emma</span>
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-emma-coral" aria-label="Inbegrepen bij Emma">
-                    <IconCheck size={14} className="text-white" />
-                  </div>
+                  <EmmaKolom modules={row.modules} klein />
                 </div>
                 <div className="flex items-center justify-between px-3 py-2">
                   <span className="text-xs text-emma-subtext">Losse tools</span>
@@ -550,7 +547,7 @@ function ModulePrices() {
 
             <div className="px-6 pb-4">
               <div className="flex items-baseline gap-2">
-                <span className="font-display text-4xl font-bold text-emma-ink em-num">EUR {MODULE_PRICE[id]}</span>
+                <span className="font-display text-4xl font-bold text-emma-ink em-num">€ {MODULE_PRICE[id]}</span>
                 <span className="text-sm text-emma-subtext">per maand, excl. BTW</span>
               </div>
               {MODULE_STATUS[id].live && LAUNCHED ? (
@@ -658,7 +655,7 @@ function PackagesSection() {
               <h3 className="font-display text-lg font-bold text-emma-ink">{pkg.name}</h3>
               <p className="mt-1 text-xs text-emma-subtext">{pkg.desc}</p>
               <div className="mt-4 flex items-baseline gap-1">
-                <span className="font-display text-3xl font-bold em-num text-emma-ink">EUR {pkg.price}</span>
+                <span className="font-display text-3xl font-bold em-num text-emma-ink">€ {pkg.price}</span>
                 <span className="text-sm text-emma-subtext">/mnd</span>
               </div>
               <p className="mt-1 text-xs font-medium text-emma-subtext">{pkg.modules.length} MODULES</p>

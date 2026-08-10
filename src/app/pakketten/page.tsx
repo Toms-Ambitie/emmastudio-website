@@ -48,7 +48,7 @@ export default function Pakketten() {
                 <h2 className="font-display text-lg font-bold text-emma-ink">{pkg.name}</h2>
                 <p className="mt-1 text-xs text-emma-subtext">{pkg.desc}</p>
                 <div className="mt-4 flex items-baseline gap-1">
-                  <span className="font-display text-3xl font-bold em-num text-emma-ink">EUR {pkg.price}</span>
+                  <span className="font-display text-3xl font-bold em-num text-emma-ink">€ {pkg.price}</span>
                   <span className="text-sm text-emma-subtext">/mnd</span>
                 </div>
                 <p className="mt-1 text-xs font-medium text-emma-subtext">{pkg.modules.length} MODULES</p>
@@ -93,7 +93,7 @@ export default function Pakketten() {
             ))}
           </ul>
           <p className="mt-6 text-xs text-emma-subtext">
-            Som van alle acht losse modules: EUR {['boekt','waakt','loont','vindt','coacht','ziet','schrijft','promoot'].reduce((s, k) => s + MODULE_PRICE[k], 0)}/mnd. Emma Compleet bundelt ze straks voor EUR 77.
+            Som van alle acht losse modules: € {['boekt','waakt','loont','vindt','coacht','ziet','schrijft','promoot'].reduce((s, k) => s + MODULE_PRICE[k], 0)}/mnd. Emma Compleet bundelt ze straks voor €77.
           </p>
         </div>
       </section>

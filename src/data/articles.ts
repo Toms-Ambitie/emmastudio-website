@@ -149,7 +149,7 @@ export const ARTICLES: Article[] = [
       { t: 'h2', v: 'Waar het vandaag staat' },
       { t: 'p', v: 'Vijf van de acht modules zijn er en zijn te gebruiken: de boekhoudschil, het financiële overzicht, de marktverkenner, de zoeker voor klanten en personeel, en de loonadministratie. Drie zijn er nog niet: coaching, content en adverteren. Die staan op de planning, zonder datum, want een gemiste datum kost meer vertrouwen dan geen datum.' },
       { t: 'p', v: 'En omdat het makkelijker is om te vertellen wat er wel is: er zit nog geen chatfunctie in waarin je vragen aan je eigen cijfers stelt. Emma bereidt je btw-aangifte niet voor. Contracten worden vastgelegd, niet digitaal ondertekend. Als je die drie dingen zoekt, weet je het nu voordat je begint in plaats van erna.' },
-      { t: 'note', v: '<b>Wat het kost:</b> je betaalt per module, vanaf EUR 9 per maand exclusief btw. Elke module begint met 14 dagen gratis, zonder creditcard, en je kunt maandelijks opzeggen. Je neemt alleen wat je gebruikt.' },
+      { t: 'note', v: '<b>Wat het kost:</b> je betaalt per module, vanaf €9 per maand exclusief btw. Elke module begint met 14 dagen gratis, zonder creditcard, en je kunt maandelijks opzeggen. Je neemt alleen wat je gebruikt.' },
       { t: 'p', v: 'Het blijft een raar startpunt voor software: één kapsalon in Overijssel. Maar het is wel de reden dat de vragen die Emma stelt de vragen zijn die een ondernemer herkent, en niet de vragen die een boekhoudpakket handig vindt.' },
     ],
   },
@@ -358,7 +358,7 @@ export const ARTICLES: Article[] = [
       { t: 'h2', v: 'Wat deze drie gemeen hebben' },
       { t: 'p', v: 'Geen van drieën vraagt software om te beginnen. Ze vragen aandacht, en dat is precies waarom ze het vaakst blijven liggen: er is nooit een moment waarop ze urgent worden.' },
       { t: 'p', v: 'Zodra je ze te pakken hebt, is het wel prettig als iets ze voor je bijhoudt. Dat je niet elke maand opnieuw hoeft uit te rekenen wat een dienst oplevert, en dat het je opvalt als het verschuift. Daar is Emma voor, maar begin gerust zonder.' },
-      { t: 'note', v: '<b>Zelf doorrekenen?</b> Wat je in stap één met de hand doet, houdt EmmaWaakt daarna bij: doelen per dienst en per medewerker, en een signaal als er iets afwijkt. Vanaf EUR 9 per maand, 14 dagen gratis te proberen.' },
+      { t: 'note', v: '<b>Zelf doorrekenen?</b> Wat je in stap één met de hand doet, houdt EmmaWaakt daarna bij: doelen per dienst en per medewerker, en een signaal als er iets afwijkt. Vanaf €9 per maand, 14 dagen gratis te proberen.' },
     ],
   },
 ];

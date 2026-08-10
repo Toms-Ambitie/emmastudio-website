@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { PRICE_COMPARISON } from '@/data/home';
-import { IconCheck, IconArrow } from '@/components/emma/icons';
+import { IconArrow } from '@/components/emma/icons';
+import { EmmaKolom } from '@/components/emma/EmmaKolom';
 
 const SITE = 'https://www.emmastudio.nl';
 const { rows, foot } = PRICE_COMPARISON;
@@ -47,24 +48,22 @@ export default function Vergelijk() {
               <div className="relative px-6 py-5 bg-emma-coral-soft/40">
                 <div className="absolute left-0 right-0 top-0 h-1 bg-emma-coral" aria-hidden="true" />
                 <div className="font-display text-lg font-bold text-emma-ink">Emma</div>
-                <div className="text-xs text-emma-subtext">vanaf EUR 9/mnd</div>
+                <div className="text-xs text-emma-subtext">vanaf €9/mnd</div>
               </div>
               <div className="px-6 py-5">
                 <div className="font-display text-lg font-bold text-emma-ink">Losse tools</div>
-                <div className="text-xs text-emma-subtext">EUR 60-300+/mnd</div>
+                <div className="text-xs text-emma-subtext">€60-300+/mnd</div>
               </div>
               <div className="px-6 py-5">
                 <div className="font-display text-lg font-bold text-emma-ink">Bureau</div>
-                <div className="text-xs text-emma-subtext">EUR 200-2.000+/mnd</div>
+                <div className="text-xs text-emma-subtext">€200-2.000+/mnd</div>
               </div>
             </div>
             {rows.map((row, i) => (
               <div key={i} className={`grid grid-cols-4 border-b border-emma-line last:border-b-0 ${i % 2 === 0 ? '' : 'bg-emma-creme/30'}`}>
                 <div className="px-6 py-4"><span className="text-sm font-semibold text-emma-ink">{row.need}</span></div>
                 <div className="px-6 py-4 bg-emma-coral-soft/40">
-                  <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emma-coral" aria-label="Inbegrepen bij Emma">
-                    <IconCheck size={16} className="text-white" />
-                  </div>
+                  <EmmaKolom modules={row.modules} />
                 </div>
                 <div className="px-6 py-4">
                   {row.loose ? <span className="text-sm text-emma-ink-2">{row.loose}</span> : <span className="text-emma-line text-2xl" aria-label="Niet beschikbaar">&mdash;</span>}
@@ -84,9 +83,7 @@ export default function Vergelijk() {
                 <div className="mt-3 space-y-2">
                   <div className="flex items-center justify-between rounded-lg bg-emma-coral-soft/40 px-3 py-2">
                     <span className="text-xs font-semibold text-emma-coral">Emma</span>
-                    <div className="flex h-6 w-6 items-center justify-center rounded-full bg-emma-coral" aria-label="Inbegrepen bij Emma">
-                      <IconCheck size={14} className="text-white" />
-                    </div>
+                    <EmmaKolom modules={row.modules} klein />
                   </div>
                   <div className="flex items-center justify-between px-3 py-2">
                     <span className="text-xs text-emma-subtext">Losse tools</span>
@@ -112,7 +109,7 @@ export default function Vergelijk() {
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-5 rounded-emma-card border border-emma-line bg-emma-paper p-8 text-center shadow-emma-card md:flex-row md:justify-between md:p-10 md:text-left">
           <div>
             <h2 className="font-display text-2xl font-bold tracking-tight text-emma-ink">Begin met één module.</h2>
-            <p className="mt-2 text-base leading-relaxed text-emma-ink-2">Los verkrijgbaar vanaf EUR 9 per maand. Pakketten volgen zodra alle acht live zijn.</p>
+            <p className="mt-2 text-base leading-relaxed text-emma-ink-2">Los verkrijgbaar vanaf €9 per maand. Pakketten volgen zodra alle acht live zijn.</p>
           </div>
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
             <Link href="/modules" className="group inline-flex items-center justify-center gap-2 rounded-emma-btn bg-emma-coral-strong px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-emma-coral-deep active:translate-y-px">

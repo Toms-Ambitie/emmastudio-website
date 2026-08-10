@@ -29,7 +29,7 @@ export const HERO = {
   titleLine2: 'Emma de rest.',
   intro: 'Acht modules die het saaie werk overnemen. Boekhouden, cijfers, personeel, marketing. Voor zelfstandige ondernemers en kleine bedrijven in Nederland.',
   // assurances: eerste komt uit HERO_BADGE (proof.ts), rest verbatim
-  assurances: ['Vanaf EUR 9 per maand', 'Je data blijft van jou'],
+  assurances: ['Vanaf €9 per maand', 'Je data blijft van jou'],
 };
 
 /* ── HET PROBLEEM ──
@@ -120,7 +120,7 @@ export const MODULES_SECTION = {
   eyebrow: 'Acht modules',
   title1: 'Acht modules.',
   title2: 'Eén platform.',
-  intro: 'Elke module werkt op zichzelf. Neem er één, neem er acht. Vanaf EUR 9 per maand, per module.',
+  intro: 'Elke module werkt op zichzelf. Neem er één, neem er acht. Vanaf €9 per maand, per module.',
 };
 
 /* ── HOE HET WERKT ── inline copy, verbatim. */
@@ -135,20 +135,30 @@ export const HOW_IT_WORKS = {
 };
 
 /* ── PRIJSVERGELIJKING ── inline rijen, verbatim. Voettekst gecorrigeerd
-   volgens §6.2 (was: "Emma Compleet (EUR 77/mnd) bevat alles ..."). */
+   volgens §6.2 (was: "Emma Compleet (€77/mnd) bevat alles ..."). */
 export const PRICE_COMPARISON = {
   eyebrow: 'Vergelijking',
   title: 'Emma vs. losse tools vs. bureau',
   intro: 'Zes losse abonnementen of een bureau dat niet alles doet. Emma brengt het samen, voor een stuk minder.',
+  /* `modules` bepaalt of de Emma-kolom een vinkje krijgt of "Binnenkort".
+
+     Waarom dat er nu staat: de Emma-kolom zette onvoorwaardelijk een vinkje
+     bij élke rij, hard in de renderer. Bij "Marketing & ads" beloofde dat
+     EmmaPromoot en EmmaSchrijft, en die bestaan geen van beide. Een vinkje in
+     een vergelijkingstabel is precies de plek waar iemand zijn keuze op
+     baseert, dus dat was de duurste plek om iets te beweren wat niet waar is.
+
+     Een lege lijst betekent: dit gaat over het platform zelf, niet over een
+     module, en krijgt altijd een vinkje. */
   rows: [
-    { need: 'Boekhouding', loose: 'Losse app EUR 9-15/mnd', bureau: 'Inbegrepen, maar traag' },
-    { need: 'Loonadministratie', loose: 'Loonbureau EUR 100-300/mnd', bureau: 'Meerprijs' },
-    { need: 'Marketing & ads', loose: 'Marketingbureau EUR 500-2.000/mnd', bureau: 'Niet inbegrepen' },
-    { need: 'Klanten vinden', loose: 'Extra tool nodig', bureau: 'Niet inbegrepen' },
-    { need: 'Slimme assistent', loose: null, bureau: null },
-    { need: 'Alles onder een dak', loose: null, bureau: null },
+    { need: 'Boekhouding', modules: ['boekt'], loose: 'Losse app €9-15/mnd', bureau: 'Inbegrepen, maar traag' },
+    { need: 'Loonadministratie', modules: ['loont'], loose: 'Loonbureau €100-300/mnd', bureau: 'Meerprijs' },
+    { need: 'Marketing & ads', modules: ['promoot', 'schrijft'], loose: 'Marketingbureau €500-2.000/mnd', bureau: 'Niet inbegrepen' },
+    { need: 'Klanten vinden', modules: ['vindt'], loose: 'Extra tool nodig', bureau: 'Niet inbegrepen' },
+    { need: 'Zicht op je cijfers', modules: ['waakt'], loose: null, bureau: null },
+    { need: 'Alles onder een dak', modules: [], loose: null, bureau: null },
   ],
-  foot: 'Gebaseerd op marktprijzen 2026. Losse modules zijn nu beschikbaar vanaf EUR 9 per maand. De pakketten volgen zodra alle acht modules live zijn.',
+  foot: 'Gebaseerd op marktprijzen 2026. Losse modules zijn nu beschikbaar vanaf €9 per maand. De pakketten volgen zodra alle acht modules live zijn.',
 };
 
 /* ── MODULE-PRIJZEN ── benefits verbatim uit de export. */
@@ -157,10 +167,10 @@ export const MODULE_PRICES = {
   title: 'Eén module, één eerlijke prijs.',
   intro: 'Je begint met één module en betaalt alleen daarvoor. Wil je er later een bij, dan zet je die los aan. Geen pakket verplicht.',
   benefits: [
-    'Elke module kost EUR 9 of EUR 19 per maand',
+    'Elke module kost €9 of €19 per maand',
     'De prijs waarvoor je instapt, blijft je prijs',
     '10% korting als je per jaar betaalt',
-    'Zodra alle acht modules er zijn: Emma Compleet voor EUR 77 per maand',
+    'Zodra alle acht modules er zijn: Emma Compleet voor €77 per maand',
   ],
 };
 
@@ -170,7 +180,7 @@ export const MODULE_PRICES = {
 export const PACKAGES_SECTION = {
   title: 'Straks kies je een pakket.',
   intro: 'Zodra alle acht modules er zijn, bundelen we ze per branche met 20 tot 25% korting. Wie nu instapt, houdt zijn prijs.',
-  foot: 'Tot die tijd is elke module los te gebruiken: standaard EUR 9/mnd, premium EUR 19/mnd, excl. BTW en maandelijks opzegbaar.',
+  foot: 'Tot die tijd is elke module los te gebruiken: standaard €9/mnd, premium €19/mnd, excl. BTW en maandelijks opzegbaar.',
   waitlist: {
     heading: 'Wil je weten wanneer de pakketten er zijn?',
     sub: 'Laat je e-mailadres achter. Je hoort het als eerste, en je houdt de prijs waarvoor je instapt.',
@@ -209,9 +219,9 @@ export const FAQ = {
   title: 'Goede vragen.',
   items: [
     { q: 'Moet ik mijn boekhoudsoftware vervangen?', a: 'Nee. EmmaBoekt is een schil rond je bestaande boekhoudpakket. De koppeling werkt op dit moment met e-Boekhouden.nl. SnelStart en Moneybird staan op de planning, nog zonder datum. Het onderliggende pakket blijft de bron van waarheid. Stop je met Emma? Dan staat je volledige administratie gewoon in je eigen pakket.' },
-    { q: 'Kan ik met een module beginnen en later uitbreiden?', a: 'Ja. Elke module is zelfstandig levensvatbaar. Begin met EmmaBoekt voor EUR 9 per maand. Voeg er later andere modules aan toe. Een module aanzetten is een rij toevoegen, geen code schrijven.' },
+    { q: 'Kan ik met een module beginnen en later uitbreiden?', a: 'Ja. Elke module is zelfstandig levensvatbaar. Begin met EmmaBoekt voor €9 per maand. Voeg er later andere modules aan toe. Een module aanzetten is een rij toevoegen, geen code schrijven.' },
     { q: 'Wat als ik stop met Emma?', a: 'Je verliest geen data. Alles wat je via Emma doet, landt ook in je onderliggende pakket. Emma is een schil, geen kooi. Je data blijft van jou.' },
-    { q: 'Wat kost Emma?', a: 'Standaard-modules kosten EUR 9 per maand, premium-modules EUR 19 per maand, exclusief btw. Je begint met 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 10% korting.' },
+    { q: 'Wat kost Emma?', a: 'Standaard-modules kosten €9 per maand, premium-modules €19 per maand, exclusief btw. Je begint met 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 10% korting.' },
     { q: 'Welke modules kan ik nu gebruiken?', a: 'Vijf. EmmaBoekt voor je boekhouding, EmmaWaakt voor je cijfers, EmmaZiet voor je concurrenten en EmmaVindt voor klanten en personeel kosten elk €9 per maand. EmmaLoont voor loon, contracten en verlof kost €19. Je begint met 14 dagen gratis, zonder creditcard. De andere drie zijn in ontwikkeling. Op elke modulepagina zie je waar een module staat.' },
     { q: 'Wat gebeurt er na die 14 dagen?', a: 'Niets, tenzij jij iets doet. Je start zonder creditcard, en zonder betaalmiddel kan er ook niets worden afgeschreven. Loopt de proefperiode af en heb je geen betaalgegevens ingevuld, dan pauzeert je account: je hoeft niet op te zeggen en je krijgt geen factuur. Je gegevens blijven staan, dus je kunt later verder waar je gebleven was. Wil je door, dan vul je je betaalgegevens in en loopt het gewoon door.' },
     { q: 'Hoe zit het met privacy en beveiliging?', a: 'Je bedrijfsdata staat binnen de Europese Unie, op servers in Frankfurt. Onze website en e-mailverzending lopen via Amerikaanse dienstverleners onder Europese standaardcontractbepalingen. Je gegevens worden alleen verwerkt om Emma te laten werken: geen verkoop aan derden, geen tracking. De koppeling met je boekhouding is versleuteld en voldoet aan de AVG.' },
