@@ -248,10 +248,13 @@ const MAG_NIET: { naam: string; patroon: RegExp }[] = [
 
 /** Dingen die er juist wél in moeten. Verdwijnt er een bron, dan valt dit op. */
 const MOET_WEL = [
-  'vraag_doorzetten',
+  'doorzetten_voorstellen',
   'Geen enkel pakket is op dit moment te koop',
   'exclusief btw',
   'e-Boekhouden.nl',
+  // De cao-dekking. Verdwijnt deze regel, dan gokt Emma weer over cao's, en
+  // dat was precies de klacht: "ik kan niet zien of jouw cao erin zit."
+  'volledig ingelezen en gecontroleerd',
 ];
 
 function keurKennisbasis(tekst: string): void {

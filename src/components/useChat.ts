@@ -17,12 +17,23 @@ import { useCallback, useRef, useState } from 'react';
 
 export type Beurt = { rol: 'gebruiker' | 'emma'; tekst: string };
 
+/** Wat Emma voorstelt door te zetten. Zolang dit gevuld is, staat het kaartje
+ *  met de knop in beeld; er is dan nog niets verstuurd. */
+export type Voorstel = { vraag: string; waarom: string };
+
 export type Chat = {
   beurten: Beurt[];
   bezig: boolean;
   fout: string | null;
-  doorgezet: boolean;
   verstuur: (tekst: string) => Promise<void>;
+
+  /* Doorzetten. Emma stelt voor, de bezoeker beslist. */
+  voorstel: Voorstel | null;
+  doorzetBezig: boolean;
+  doorzetFout: string | null;
+  doorgezet: boolean;
+  zetDoor: (email: string) => Promise<void>;
+  laatVoorstelVallen: () => void;
 };
 
 const MAX_TEKENS = 2_000;
@@ -31,6 +42,9 @@ export function useChat(): Chat {
   const [beurten, setBeurten] = useState<Beurt[]>([]);
   const [bezig, setBezig] = useState(false);
   const [fout, setFout] = useState<string | null>(null);
+  const [voorstel, setVoorstel] = useState<Voorstel | null>(null);
+  const [doorzetBezig, setDoorzetBezig] = useState(false);
+  const [doorzetFout, setDoorzetFout] = useState<string | null>(null);
   const [doorgezet, setDoorgezet] = useState(false);
 
   // Voorkomt dat twee verzendingen tegelijk lopen als React de state nog niet
@@ -65,8 +79,13 @@ export function useChat(): Chat {
 
     loopt.current = true;
     setFout(null);
-    setDoorgezet(false);
     setBezig(true);
+    /* Een nieuwe vraag haalt het vorige voorstel weg. Twee kaartjes met een
+       verzendknop onder elkaar is verwarrend, en het oude gaat vrijwel altijd
+       over iets anders. De bevestiging van een geslaagde verzending blijft
+       wel staan; die is een feit, geen aanbod. */
+    setVoorstel(null);
+    setDoorzetFout(null);
 
     const nieuw: Beurt[] = [...beurtenRef.current, { rol: 'gebruiker', tekst: vraag }];
     zet(nieuw);
@@ -110,8 +129,10 @@ export function useChat(): Chat {
           if (bericht.soort === 'tekst') {
             antwoord += String(bericht.waarde);
             zet([...nieuw, { rol: 'emma', tekst: antwoord }]);
-          } else if (bericht.soort === 'doorgezet') {
-            setDoorgezet(true);
+          } else if (bericht.soort === 'voorstel') {
+            const v = bericht.waarde as Voorstel;
+            setVoorstel({ vraag: String(v?.vraag ?? ''), waarom: String(v?.waarom ?? '') });
+            setDoorgezet(false);
           } else if (bericht.soort === 'fout') {
             setFout(String(bericht.waarde));
           }
@@ -137,5 +158,42 @@ export function useChat(): Chat {
     }
   }, [zet]);
 
-  return { beurten, bezig, fout, doorgezet, verstuur };
+  /* Pas hier gaat er een mail uit, na een klik van de bezoeker. Het gesprek
+     gaat mee zodat Tom ziet waar Emma vastliep, precies zoals eerst, alleen
+     op een ander moment. */
+  const zetDoor = useCallback(async (email: string) => {
+    if (!voorstel || doorzetBezig) return;
+    setDoorzetBezig(true);
+    setDoorzetFout(null);
+    try {
+      const res = await fetch('/api/chat/doorzetten', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          vraag: voorstel.vraag,
+          waarom: voorstel.waarom,
+          gesprek: beurtenRef.current,
+        }),
+      });
+      const j = await res.json().catch(() => null);
+      if (!res.ok) throw new Error(j?.error ?? 'Versturen lukte niet.');
+      setDoorgezet(true);
+      setVoorstel(null);
+    } catch (e) {
+      setDoorzetFout(e instanceof Error ? e.message : 'Versturen lukte niet.');
+    } finally {
+      setDoorzetBezig(false);
+    }
+  }, [voorstel, doorzetBezig]);
+
+  const laatVoorstelVallen = useCallback(() => {
+    setVoorstel(null);
+    setDoorzetFout(null);
+  }, []);
+
+  return {
+    beurten, bezig, fout, verstuur,
+    voorstel, doorzetBezig, doorzetFout, doorgezet, zetDoor, laatVoorstelVallen,
+  };
 }

@@ -1,3 +1,5 @@
+import { CAO_GEVALIDEERD, CAO_REGEL, caoDekkingZin } from './cao';
+
 export type ModuleVignette = {
   type: 'factuur' | 'inlezen' | 'schil' | 'doel' | 'prognose' | 'signaal' |
         'strook' | 'contract' | 'verlof' | 'pipeline' | 'score' | 'klant' |
@@ -342,20 +344,20 @@ export const MODULES: Record<string, ModuleData> = {
   },
   loont:{
     id:'loont', name:'Loont', num:'03', price:19, accentVar:'--m-loont',
-    chip:'met CAO-engine voor jouw branche',
+    chip:'loon, contracten en verlof op één plek',
     head:'Loon en contracten, zonder gedoe.',
-    intro:'De personeelsadministratie op één plek. Loonstroken, contracten, verlof, verzuim en declaraties, met de cao van jouw branche al ingelezen. De loonkosten landen daarna in je boekhouding.',
+    intro:'De personeelsadministratie op één plek. Loonstroken, contracten, verlof, verzuim en declaraties, met je cao ernaast als die is ingelezen. De loonkosten landen daarna in je boekhouding.',
     heroVig:'loont_strook',
     does:{
       title:'Wat EmmaLoont voor je doet.',
       sub:'Alles rond je personeel, rustig geregeld. Van contract tot loonstrook, en de loonkosten belanden meteen in je boekhouding.',
       feats:[
-        { tag:'Salaris', h:'Loonstroken die kloppen.', p:'Draai de loonronde met de cao van jouw branche als basis. Emma bereidt voor, jij controleert, en de loonstroken gaan als nette PDF naar je mensen. Werkgeverslasten rekent Emma mee.',
+        { tag:'Salaris', h:'Loonstroken die kloppen.', p:'Draai de loonronde met je cao als basis, of zonder cao als je die niet volgt. Emma bereidt voor, jij controleert, en de loonstroken gaan als nette PDF naar je mensen. Werkgeverslasten rekent Emma mee.',
           list:['Loonronde voorbereiden, controleren, versturen','Loonstrook als PDF, per e-mail bij toestemming','Werkgeverslasten automatisch berekend'], vig:'loont_strook' },
         { tag:'Proforma', h:'Wat gaat het kosten, en wat houdt hij over?', p:'Reken een loonstrook door vóór iemand in dienst is. Handig in een sollicitatiegesprek: je laat zien wat er netto overblijft, en je weet zelf wat de werkgeverslasten worden.',
           list:['Doorrekenen zonder iemand in dienst te nemen','Netto voor de kandidaat, bruto en lasten voor jou','Bewaren en later teruglezen'], vig:'loont_strook' },
-        { tag:'Cao', h:'De cao staat er al in.', p:'Emma leest de cao-loontabellen in en houdt de versies bij. Bij het vastleggen van een contract zie je de bijbehorende schaal ernaast staan, en een waarschuwing als je eronder gaat zitten.',
-          list:['Cao-loontabellen ingelezen en per versie bewaard','De schaal staat naast je contract, als hulp','Waarschuwing onder de schaal, jij beslist'], vig:'loont_contract' },
+        { tag:'Cao', h:'Je cao ernaast, als die er is.', p:`Emma leest openbare cao-loontabellen in en bewaart ze per versie. ${caoDekkingZin()} Bij het vastleggen van een contract zie je die schaal ernaast staan, met een waarschuwing als je eronder gaat zitten. Volg je geen cao, dan werkt de module net zo goed: je legt het contract vast zonder schaal ernaast.`,
+          list:[`Gecontroleerd en te kiezen: ${CAO_GEVALIDEERD.join(', ')}`,'De schaal staat naast je contract, als hulp','Geen cao? Dan gewoon zonder schaal'], vig:'loont_contract' },
         { tag:'Contracten', h:'Contracten vastgelegd op één plek.', p:'Leg per medewerker het contract vast met uren, functie en beloning. Elke wijziging wordt een nieuwe versie, zodat je altijd terug kunt zien wat er wanneer gold.',
           list:['Contract per medewerker, met versiehistorie','De cao-schaal ernaast als ondergrens','Alles netjes bewaard op één plek'], vig:'loont_contract' },
         { tag:'Verlof, verzuim & declaraties', h:'Bijgehouden zonder rekenwerk.', p:'Je medewerker vraagt verlof aan, jij keurt goed. Ziekmeldingen en declaraties lopen langs dezelfde weg: indienen, beoordelen, afhandelen.',
@@ -369,14 +371,14 @@ export const MODULES: Record<string, ModuleData> = {
       ],
     },
     steps:{ title:'Zo werkt het.', items:[
-      { n:'01 · KIES CAO', h:'Stel je branche in', p:'Kies de cao die bij je past, of geef aan dat je er geen volgt. Emma zet de loontabellen klaar.' },
-      { n:'02 · VOEG TOE', h:'Zet je team erin', p:'Voeg je medewerkers toe en leg per persoon het contract vast. De schaal uit de cao staat ernaast.' },
+      { n:'01 · KIES CAO', h:'Stel je branche in', p:'Kies je cao als die is ingelezen, of geef aan dat je er geen volgt. Emma zet de loontabellen klaar.' },
+      { n:'02 · VOEG TOE', h:'Zet je team erin', p:'Voeg je medewerkers toe en leg per persoon het contract vast. Volg je een cao, dan staat de schaal ernaast.' },
       { n:'03 · DRAAI', h:'Draai de loonronde', p:'Emma bereidt de ronde voor, jij controleert. De loonstroken gaan als PDF naar je mensen.' },
       { n:'04 · BOEK', h:'Loonkosten in je boekhouding', p:'De loonjournaalpost staat klaar. Met EmmaBoekt boekt hij door, anders krijg je een CSV.' },
     ] },
     faq:[
       { q:'Voor wie is EmmaLoont bedoeld?', a:'Voor ondernemers met één of meer medewerkers, in salons, zorgpraktijken en kleine teams. Werk je alleen, dan heb je deze module simpelweg niet nodig.' },
-      { q:'Welke cao\'s ondersteunt het?', a:'Emma leest openbare cao-loontabellen in en bewaart ze per versie. Kappers is de eerste, en er staan er inmiddels tientallen klaar. Volg je geen cao, dan kan dat ook: je legt het contract dan gewoon vast zonder schaal ernaast. Twijfel je of jouw cao erbij zit, mail dan even naar info@emmastudio.nl.' },
+      { q:'Welke cao\'s ondersteunt het?', a:`${caoDekkingZin()} Er staan er meer ingelezen, maar die zijn nog niet gecontroleerd en kun je dus nog niet kiezen. ${CAO_REGEL}` },
       { q:'Vervangt het mijn loonbureau?', a:'Grotendeels, maar niet helemaal. EmmaLoont rekent het loon, maakt de loonstroken, legt contracten vast, houdt verlof, verzuim en declaraties bij en zet de loonkosten in je boekhouding. De loonaangifte bij de Belastingdienst doe je zelf via Mijn Belastingdienst Zakelijk, wat mag bij tien of minder werknemers, of je laat die bij je administratiekantoor.' },
       { q:'Krijgen mijn medewerkers zelf toegang?', a:'Als je dat wilt. Je nodigt ze uit met hun e-mailadres en de rol medewerker. Ze zien dan alleen hun eigen scherm: hun loonstroken, hun verlofsaldo en hun declaraties. Niet de cijfers van het bedrijf en niet het loon van collega\'s. Nodig je niemand uit, dan doe jij het werk en verstrek je de loonstroken zelf.' },
       { q:'Kan ik contracten digitaal laten ondertekenen?', a:'Nog niet. Je legt het contract vast in Emma, met alle afspraken en een versiehistorie, maar ondertekenen gebeurt buiten Emma om. Digitaal ondertekenen staat op de planning zonder datum.' },
