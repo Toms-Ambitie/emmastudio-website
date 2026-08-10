@@ -8,7 +8,7 @@
    export en de datalaag botsten, wint de datalaag (stap 2 is leidend).
 
    Nav en Footer worden door layout.tsx gerenderd; deze component levert
-   alleen de secties + ScrollEffects + StickyCTA.
+   alleen de secties + ScrollEffects.
 
    Dwingende correcties (zie ook home.ts):
    - Drie assen (live / koopbaar / gelanceerd): elke CTA schakelt op
@@ -18,7 +18,7 @@
    - Geen eerlijkheid-als-USP; onware serverclaim gecorrigeerd (in data).
    ============================================================ */
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -41,7 +41,7 @@ import type { Article } from '@/data/articles';
 import {
   HERO, THREE_PROBLEMS, PROBLEM_PULL, MANIFESTO, SHOWCASE, SOLUTION,
   MODULES_SECTION, HOW_IT_WORKS, PRICE_COMPARISON, MODULE_PRICES,
-  PACKAGES_SECTION, PROOF_SECTION, SECURITY, FAQ, KB_PREVIEW, STICKY_CTA,
+  PACKAGES_SECTION, PROOF_SECTION, SECURITY, FAQ, KB_PREVIEW,
 } from '@/data/home';
 
 /* Waar de niet-gelanceerde CTA's naartoe wijzen: het ene wachtlijst-
@@ -825,29 +825,29 @@ function KbPreview({ posts }: { posts: Article[] }) {
   );
 }
 
-/* ==================== STICKY CTA ==================== */
+/* ==================== ZWEVENDE CTA: WEGGEHAALD ====================
 
-function StickyCTA() {
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 800);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-  return (
-    <div className={`fixed bottom-4 left-1/2 z-40 -translate-x-1/2 transition-all duration-300 ${visible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0 pointer-events-none'}`} aria-hidden={!visible}>
-      <div className="flex items-center gap-3 rounded-emma-pill bg-emma-petrol px-5 py-3 shadow-emma-pop" role="region" aria-label="Call to action">
-        <span className="flex h-2 w-2 rounded-full bg-emma-coral" aria-hidden="true" />
-        <span className="text-sm font-medium text-emma-creme">{STICKY_CTA.text}</span>
-        {LAUNCHED ? (
-          <a href={SIGNUP_URL} className="rounded-emma-pill bg-emma-coral-strong px-4 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-emma-coral-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Begin vandaag</a>
-        ) : (
-          <a href={WAITLIST_ANCHOR} className="rounded-emma-pill bg-emma-coral-strong px-4 py-1.5 text-sm font-semibold text-white transition-colors hover:bg-emma-coral-deep focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Naar de wachtlijst</a>
-        )}
-      </div>
-    </div>
-  );
-}
+   Hier stond een zwevende balk "Klaar om Emma te ontmoeten? / Begin vandaag".
+   Weg, op verzoek van Tom, en om twee redenen die elkaar versterken.
+
+   Ten eerste stonden er twee zwevende dingen tegelijk in beeld: deze balk en
+   de chatknop. Dat is er een te veel op een merk waarvan de eerste regel
+   "rustig" is en de negende "ruimte boven volheid".
+
+   Ten tweede was de keuze tussen die twee niet gelijk. Aanmelden staat op de
+   homepage al in de hero, in de nav op desktop, in het mobiele menu en in de
+   footer: vier ingangen. De chat had er precies één, deze knop. Deze balk
+   weghalen kost dus geen ingang, de chatknop weghalen zou de chat onbereikbaar
+   maken.
+
+   Meegenomen: de balk had op mobiel een zichtbaar mankement. Er zat geen
+   verberg-bij-omlaag-scrollen in (alleen `scrollY > 800`), maar iOS klapt zijn
+   werkbalk in tijdens het scrollen en verschuift daarmee het layout-viewport,
+   waardoor een `position: fixed`-element aan de onderrand half wegzakt. Je zag
+   dan een groen streepje onderin. Dat probleem is met de balk mee verdwenen.
+
+   Komt hij ooit terug: geef hem `padding-bottom: env(safe-area-inset-bottom)`
+   en test op een echte telefoon, niet in een verkleind browservenster. */
 
 /* ==================== PAGINA ==================== */
 
@@ -872,7 +872,6 @@ export default function HomePage({ kbPosts }: { kbPosts: Article[] }) {
         <KbPreview posts={kbPosts} />
       </main>
       <ClientOnly><ScrollEffects /></ClientOnly>
-      <ClientOnly><StickyCTA /></ClientOnly>
     </>
   );
 }

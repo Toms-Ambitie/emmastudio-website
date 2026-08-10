@@ -110,10 +110,15 @@ export default function ChatKnop() {
 
       {/* De knop.
 
-          MOBIEL: bottom-28 (112px). De zwevende CTA-balk van de homepage staat
-          gecentreerd op bottom-4 en wordt op een smal scherm 84px hoog doordat
-          hij afbreekt naar twee regels, hij loopt dus tot 100px vanaf de
-          onderkant. Gemeten op 390px breed: met bottom-20 overlapten ze echt.
+          POSITIE: stond op bottom-28 (112px) om de zwevende CTA-balk van de
+          homepage te ontwijken, die op een smal scherm tot 100px vanaf de
+          onderkant liep. Die balk bestaat niet meer, dus de knop mag terug
+          naar beneden en hoeft niet langer halverwege het scherm te zweven.
+
+          `env(safe-area-inset-bottom)` erbij: op een iPhone loopt het scherm
+          door tot achter de home-indicator, en zonder die marge staat de knop
+          daar half onder. Bij een toestel zonder inkeping is de waarde 0 en
+          verandert er niets.
 
           OPEN OP DESKTOP: knop blijft staan als zichtbare sluitknop, naast
           het paneel. OPEN OP MOBIEL: knop verdwijnt, want daar is het paneel
@@ -130,7 +135,7 @@ export default function ChatKnop() {
         onClick={() => setOpen(v => !v)}
         aria-expanded={open}
         aria-label={open ? 'Chat sluiten' : 'Stel een vraag aan Emma'}
-        className={`fixed bottom-28 right-4 z-50 flex items-center gap-2.5 rounded-emma-pill bg-emma-petrol px-4 py-3 shadow-emma-pop transition-colors hover:bg-emma-petrol-light focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emma-coral sm:bottom-6 sm:right-6 ${open ? 'max-sm:hidden' : ''}`}
+        className={`fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] right-4 z-50 flex items-center gap-2.5 rounded-emma-pill bg-emma-petrol px-4 py-3 shadow-emma-pop transition-colors hover:bg-emma-petrol-light focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emma-coral sm:right-6 ${open ? 'max-sm:hidden' : ''}`}
       >
         <span className="flex h-2 w-2 shrink-0 rounded-full bg-emma-coral" aria-hidden="true" />
         <span className="text-sm font-medium text-emma-creme">

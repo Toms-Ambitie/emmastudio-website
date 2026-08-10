@@ -227,7 +227,8 @@ export const KB_PREVIEW = {
   link: 'Naar de kennisbank',
 };
 
-/* ── STICKY CTA ── inline. CTA schakelt met LAUNCHED (component). */
-export const STICKY_CTA = {
-  text: 'Klaar om Emma te ontmoeten?',
-};
+/* ── STICKY CTA ── weggehaald.
+   De zwevende balk "Klaar om Emma te ontmoeten?" bestaat niet meer; er staat
+   nog maar één zwevend element op de site en dat is de chatknop. De reden
+   staat bij het lege blok in HomePage.tsx. Aanmelden staat nog steeds in de
+   hero, de nav, het mobiele menu en de footer. */
