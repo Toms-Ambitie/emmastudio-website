@@ -1,7 +1,7 @@
 /* ── BEDRIJFSGEGEVENS ──────────────────────────────────────────────────────
    Eén bron voor de wettelijk verplichte identiteitsgegevens (art. 3:15d BW).
-   Ze staan op vier plekken op de site — footer, /contact, privacyverklaring
-   en algemene voorwaarden — en dat zijn precies vier plekken waar ze uit
+   Ze staan op vier plekken op de site: footer, /contact, privacyverklaring
+   en algemene voorwaarden. Dat zijn precies vier plekken waar ze uit
    elkaar kunnen gaan lopen. Hier dus, niet in de pagina's zelf.
 
    IBAN en BIC staan er bewust in maar worden NERGENS publiek getoond. Betalen
@@ -16,7 +16,7 @@ export const BEDRIJF = {
    *  wél in de algemene voorwaarden ("de besloten vennootschap Toms Ambitie")
    *  en dat is onjuist: een verkeerde rechtsvorm in je eigen voorwaarden is
    *  een fout in het document dat je aansprakelijkheid regelt. Gaat EmmaStudio
-   *  later in een aparte BV, dan wijzigt het hier — en op geen enkele
+   *  later in een aparte BV, dan wijzigt het hier, en op geen enkele
    *  andere plek. */
   rechtsvorm: 'eenmanszaak',
   /** EmmaStudio en Emma zijn handelsnamen van dezelfde onderneming, geen
@@ -31,13 +31,13 @@ export const BEDRIJF = {
   btw: 'NL002010180B20',
   email: 'info@emmastudio.nl',
   website: 'www.emmastudio.nl',
-  /** Niet publiek tonen — zie de toelichting hierboven. */
+  /** Niet publiek tonen, zie de toelichting hierboven. */
   iban: 'NL84 KNAB 0257 0110 48',
   bic: 'KNABNL2H',
 } as const;
 
-/** "Cleyndertstraat 16, 8044 PP Zwolle" — voor lopende tekst en één regel. */
+/** "Cleyndertstraat 16, 8044 PP Zwolle": voor lopende tekst en één regel. */
 export const ADRES_KORT = `${BEDRIJF.straat}, ${BEDRIJF.postcode} ${BEDRIJF.plaats}`;
 
-/** "KvK 70590907 · Btw NL002010180B20" — voor de footer en colofonregels. */
+/** "KvK 70590907 · Btw NL002010180B20": voor de footer en colofonregels. */
 export const NUMMERS_KORT = `KvK ${BEDRIJF.kvk} · Btw ${BEDRIJF.btw}`;
