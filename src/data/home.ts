@@ -7,7 +7,7 @@
    Herkomst per blok en de correcties tegen de Higgsfield-export staan
    in de comments. Dwingende correcties (briefing v3):
    - Eerlijkheid-als-USP schrappen (§3.5): "Niet uit een pitch deck",
-     "Open over hoe we bouwen" — verwijderd.
+     "Open over hoe we bouwen", verwijderd.
    - Onware serverclaim (§3.5): "servers in Amsterdam en Frankfurt" in de
      FAQ gecorrigeerd naar de vastgestelde Frankfurt-tekst.
    - Security-sectie: de drie live kaarten uit §3.5, verbatim.
@@ -19,7 +19,7 @@
    Copy verbatim uit de export, met twee correcties:
    - De assurance-regel "Bewezen in productie sinds eind 2024" (onwaar voor
      EmmaStudio zelf) is vervangen door HERO_BADGE uit proof.ts
-     ("Gebouwd op 18 maanden praktijk", §3.2/§4.3) — die wordt in de
+     ("Gebouwd op 18 maanden praktijk", §3.2/§4.3), die wordt in de
      component uit proof.ts gehaald, niet hier gedupliceerd.
    - De hero-CTA schakelt met LAUNCHED: nu open → "Begin vandaag" naar
      SIGNUP_URL (app.emmastudio.nl/signup). */
@@ -53,7 +53,7 @@ export const MANIFESTO = 'Emma is een rustige copiloot. Geen vervanger voor je v
    `shots` is een expliciete lijst, geen afgeleide van MODULE_ORDER. Dat is
    bewust: hier hoort alleen een scherm te staan waarvan er een echte afdruk
    uit de app ligt. Vroeger liep dit blok over alle acht modules en werd het
-   gevuld met getekende schermen — inclusief een BTW-scherm en een chat die
+   gevuld met getekende schermen, inclusief een BTW-scherm en een chat die
    niet bestaan. Een lijst die zichzelf uit MODULE_ORDER vult, vult zich ook
    met modules die alleen op papier bestaan.
 
@@ -200,7 +200,7 @@ export const SECURITY = {
 };
 
 /* ── FAQ ── zes vragen verbatim uit de export, met één correctie:
-   vraag 6 bevatte "servers in Amsterdam en Frankfurt" — dezelfde onware
+   vraag 6 bevatte "servers in Amsterdam en Frankfurt", dezelfde onware
    claim die op prod is gecorrigeerd (commit b5295a0). Vervangen door de
    vastgestelde Frankfurt-tekst uit §3.5 (server- en SCC-zin verbatim uit
    security-kaart 3), gevolgd door de bestaande FAQ-staart. Zie rapport. */

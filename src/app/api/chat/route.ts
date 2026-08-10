@@ -9,7 +9,7 @@ import { BEDRIJF } from '@/data/bedrijf';
    WAT DEZE ROUTE NIET HEEFT, EN DAT IS HET PUNT: geen databaseverbinding.
    Geen Supabase-sleutel, geen tenant-context, geen enkel pad naar klantdata.
    De scheiding tussen wat een bezoeker mag zien en wat een klant heeft is
-   hier geen instructie in een prompt maar een eigenschap van de code — er is
+   hier geen instructie in een prompt maar een eigenschap van de code, er is
    niets om te lekken, ook niet als iemand het model perfect ompraat. Wil je
    een assistent die wél over iemands eigen cijfers praat, dan hoort die in
    de app te staan, achter een login, met RLS eronder.
@@ -18,12 +18,23 @@ import { BEDRIJF } from '@/data/bedrijf';
    (antwoord geven uit een vast document) en latency in een chat telt.
    Thinking blijft AAN: met thinking uit schrijft het model een toolaanroep
    soms als gewone tekst in plaats van als toolaanroep, en dan draait de
-   doorzetting stil niet — precies de storing die je nooit ziet gebeuren. */
+   doorzetting stil niet, precies de storing die je nooit ziet gebeuren. */
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
 
 const MODEL = 'claude-opus-5';
+
+/* Eén keer bouwen, bij het laden van de module, niet bij elk verzoek.
+
+   Twee redenen, en de tweede is de belangrijke. Een: de kennisbasis is
+   deterministisch, hem per verzoek opnieuw samenstellen is werk voor niets.
+   Twee: bouwKennisbasis() gooit als de zelfcontrole iets afkeurt. Stond die
+   aanroep in de request-lus, dan viel dat pas om als een bezoeker een vraag
+   stelde, met een 500 voor hem en een regel in een log die niemand leest.
+   Hier valt het om tijdens `next build`, en dan gaat het deploy niet door. */
+const KENNISBASIS = bouwKennisbasis();
+
 const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY ?? '';
 const RESEND_API_KEY = process.env.RESEND_API_KEY ?? '';
 
@@ -133,7 +144,7 @@ async function stuurDoor(
       from: 'Emma <noreply@emmastudio.nl>',
       to: [BEDRIJF.email],
       reply_to: invoer.email,
-      subject: `Vraag via de chat — ${invoer.vraag.slice(0, 60)}`,
+      subject: `Vraag via de chat, ${invoer.vraag.slice(0, 60)}`,
       text:
         `Emma kon deze vraag niet beantwoorden en zet hem door.\n\n` +
         `Van: ${invoer.email}\n` +
@@ -177,7 +188,7 @@ export async function POST(req: Request) {
   const ruw = Array.isArray(body?.gesprek) ? body.gesprek : null;
   if (!ruw) return Response.json({ error: 'Ongeldig verzoek.' }, { status: 400 });
 
-  /* De client stuurt alleen beurten — nooit een systeemprompt, nooit een model,
+  /* De client stuurt alleen beurten, nooit een systeemprompt, nooit een model,
      nooit instellingen. Alles wat het gedrag bepaalt staat op de server. */
   const gesprek: Beurt[] = [];
   let totaal = 0;
@@ -227,7 +238,7 @@ export async function POST(req: Request) {
             system: [
               {
                 type: 'text',
-                text: bouwKennisbasis(),
+                text: KENNISBASIS,
                 // De kennisbasis is byte-voor-byte gelijk bij elk verzoek, dus
                 // hij komt uit de cache tegen een tiende van de prijs. Daarom
                 // staat hij hier en niet in de eerste gebruikersbeurt.
@@ -261,7 +272,7 @@ export async function POST(req: Request) {
             );
             /* Het bevestigingsblokje pas NA een geslaagde verzending. Het stond
                hiervoor, en dan las de bezoeker "je vraag is doorgezet naar Tom"
-               terwijl de mail was mislukt — een onwaarheid op het moment dat
+               terwijl de mail was mislukt, een onwaarheid op het moment dat
                vertrouwen er het meest toe doet. Het model krijgt in dat geval
                een andere tekst terug en zegt zelf iets anders; die twee mochten
                niet uit elkaar lopen. */

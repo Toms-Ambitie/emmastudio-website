@@ -12,10 +12,11 @@ import type { Chat } from './useChat';
    Huisstijl: rustig. Geen sparkles, geen robot-icoon, geen typende puntjes
    die op een mens moeten lijken. Emma is een assistent, geen personage. */
 
-const OPENING =
-  'Hoi. Ik ben Emma. Vraag me wat je wilt weten over EmmaStudio — wat de ' +
-  'modules doen, wat het kost, hoe je begint. Weet ik het niet, dan zet ik ' +
-  'je vraag door naar Tom.';
+/* Kort houden. Wat de modules doen en wat het kost, staat al in de knoppen
+   eronder; dat opnoemen leest als een menu dat de bezoeker nog moet doorlopen
+   voordat hij iets mag vragen. Dat Emma doorzet naar Tom hoort hij vanzelf op
+   het moment dat het gebeurt, niet vooraf als voorbehoud. */
+const OPENING = 'Hoi. Ik ben Emma. Vraag me wat je wilt weten over EmmaStudio.';
 
 const VOORBEELDEN = [
   'Wat kost het?',
@@ -150,11 +151,14 @@ export default function ChatVenster({ chat }: { chat: Chat }) {
             Stuur
           </button>
         </div>
-        {/* Informatieplicht: wat je hier typt verlaat de browser. Kort houden,
-            maar het moet er staan — de privacyverklaring noemt dit ook. */}
+        {/* Eén regel: dat je met software praat, en waar het volledige verhaal
+            staat. De twee zinnen die hier eerst stonden (waar je tekst heen
+            gaat, en de waarschuwing om er niets gevoeligs in te zetten) waren
+            de AVG-informatieplicht in het klein. Die is niet vervallen, hij is
+            verhuisd naar de privacyverklaring, §2 en §5, waar de link naartoe
+            wijst. Onder een invoerveld hoort de korte versie. */}
         <p className="mt-2 text-[11px] leading-relaxed text-emma-subtext">
-          Emma is een assistent, geen mens. Wat je typt gaat naar onze AI-dienstverlener en, als je
-          vraag wordt doorgezet, naar Tom. Zet er geen gevoelige gegevens in. Zie de{' '}
+          Emma is een assistent, geen mens. Zie de{' '}
           <Link href="/privacy" className="underline hover:text-emma-ink">
             privacyverklaring
           </Link>

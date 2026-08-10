@@ -35,12 +35,12 @@ export default function ChatTest() {
         </h1>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-emma-ink-2">
           Deze pagina staat op <code className="text-sm">noindex</code> en er verwijst nergens een
-          knop naartoe. Bedoeld om Emma stuk te maken voordat bezoekers haar zien. Vindt ze iets
-          niet, dan zet ze de vraag door en krijg jij een mail op{' '}
+          knop naartoe. Bedoeld om Emma stuk te maken voordat bezoekers haar zien. Let op bij het
+          testen: vindt ze iets niet, dan zet ze de vraag door en krijg jij een echte mail op{' '}
           <Link href="/contact" className="underline">
             info@emmastudio.nl
-          </Link>{' '}
-          — houd daar rekening mee bij het testen.
+          </Link>
+          .
         </p>
 
         <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">

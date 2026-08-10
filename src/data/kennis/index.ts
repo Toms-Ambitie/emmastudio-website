@@ -53,8 +53,8 @@ function modulesBlok(): string {
   regels.push(
     `Er zijn acht modules. ${live.length} zijn nu te gebruiken: ` +
     `${live.map(id => `Emma${cap(id)}`).join(', ')}. ` +
-    `${komt.length} bestaan nog niet: ${komt.map(id => `Emma${cap(id)}`).join(', ')} — ` +
-    `die kun je niet afnemen en er is geen datum voor.`,
+    `${komt.length} bestaan nog niet: ${komt.map(id => `Emma${cap(id)}`).join(', ')}. ` +
+    `Die kun je niet afnemen en er is geen datum voor.`,
     '',
     'Je neemt de modules los af. Je kunt er één nemen of meerdere; je betaalt alleen',
     'voor wat je aanzet. Elke module begint met 14 dagen gratis.',
@@ -66,7 +66,7 @@ function modulesBlok(): string {
     if (!m) continue;
     const st = MODULE_STATUS[id];
 
-    regels.push(`## Emma${m.name} — €${m.price} per maand, exclusief btw`);
+    regels.push(`## Emma${m.name} (€${m.price} per maand, exclusief btw)`);
     regels.push(`Pagina: /modules/${id}`);
     regels.push(st.live ? 'Status: nu te gebruiken.' : `Status: ${st.when}. Bestaat nog niet, niet af te nemen, geen datum.`);
     regels.push('');
@@ -77,7 +77,7 @@ function modulesBlok(): string {
     if (st.live && m.does.feats.length) {
       regels.push('Wat het doet:');
       for (const f of m.does.feats) {
-        regels.push(`- **${f.tag}** — ${plat(f.p)}`);
+        regels.push(`- **${f.tag}**: ${plat(f.p)}`);
         for (const punt of f.list) regels.push(`  - ${plat(punt)}`);
       }
       regels.push('');
@@ -116,7 +116,7 @@ function pakkettenBlok(): string {
     const som = p.modules.reduce((t, id) => t + (MODULE_PRICE[id] ?? 0), 0);
     const korting = som > 0 ? Math.round((1 - p.price / som) * 100) : 0;
     regels.push(
-      `- **${p.name}** — €${p.price} per maand (${p.status}). ${p.desc} ` +
+      `- **${p.name}**: €${p.price} per maand (${p.status}). ${p.desc} ` +
       `Bevat ${p.modules.length} modules: ${p.modules.map(id => `Emma${cap(id)}`).join(', ')}. ` +
       `Los zouden die €${som} kosten, dus ongeveer ${korting}% korting.`,
     );
@@ -142,7 +142,7 @@ function prijsBlok(): string {
     '',
     /* PRICE_COMPARISON.foot hoort hier bewust NIET bij. Die voetnoot ("gebaseerd
        op marktprijzen 2026") gaat over de vergelijkingstabel met losse apps en
-       bureaus, niet over Emma's eigen prijzen — hier zou hij lezen alsof Emma's
+       bureaus, niet over Emma's eigen prijzen, hier zou hij lezen alsof Emma zijn
        tarief op een marktonderzoek is gebaseerd. Bovendien staat er "EUR 9" in
        plaats van "€9", wat de chatbot zou overnemen. */
   ].join('\n');
@@ -169,7 +169,7 @@ function bedrijfBlok(): string {
 
 function veiligheidBlok(): string {
   const regels = ['# Veiligheid en privacy', '', plat(SECURITY.intro), ''];
-  for (const c of SECURITY.cards) regels.push(`- **${plat(c.title)}** — ${plat(c.desc)}`);
+  for (const c of SECURITY.cards) regels.push(`- **${plat(c.title)}**: ${plat(c.desc)}`);
   regels.push(
     '',
     'Aanvullend, uit de privacyverklaring en de verwerkersovereenkomst:',
@@ -202,7 +202,7 @@ function kennisbankBlok(): string {
     '',
   ];
   for (const a of ARTICLES) {
-    regels.push(`- **${plat(a.title)}** (/kennisbank/${a.slug}) — ${plat(a.dek)}`);
+    regels.push(`- **${plat(a.title)}** (/kennisbank/${a.slug}): ${plat(a.dek)}`);
   }
   regels.push('');
   return regels.join('\n');
@@ -238,6 +238,12 @@ const MAG_NIET: { naam: string; patroon: RegExp }[] = [
   { naam: 'inloggegevens', patroon: /wachtwoord|password|api[_-]?key|service[_ ]role/i },
   { naam: 'btw-aangifte als belofte', patroon: /bereidt (je |de )?btw-aangifte voor(?! niet)/i },
   { naam: 'digitaal ondertekenen als functie', patroon: /(kun je|kan je|laat) contracten digitaal (laten )?(onder)?tekenen(?!\.? Nog niet)/i },
+  /* Gedachtestreepjes. Huisstijlregel, en een die ik zelf al eens heb
+     overtreden: ik schoonde mijn eigen tekst en vergat dat de kennisbasis uit
+     twintig andere bestanden wordt samengesteld. Eén em-dash in een moduletekst
+     of een FAQ-antwoord en de chatbot neemt het patroon over in elk antwoord.
+     Vandaar hier en niet alleen in gedrag.ts. */
+  { naam: 'een em-dash of en-dash', patroon: /[—–]/ },
 ];
 
 /** Dingen die er juist wél in moeten. Verdwijnt er een bron, dan valt dit op. */
@@ -252,8 +258,17 @@ function keurKennisbasis(tekst: string): void {
   const fouten: string[] = [];
 
   for (const { naam, patroon } of MAG_NIET) {
-    const m = tekst.match(patroon);
-    if (m) fouten.push(`bevat ${naam}: "${m[0].slice(0, 80)}"`);
+    /* Alle treffers tonen, niet alleen de eerste, en met de tekst eromheen.
+       Een melding als `bevat een em-dash: "—"` is waardeloos: de kennisbasis
+       wordt uit twintig bestanden samengesteld en je weet dan niet welk. Met
+       de context ernaast zie je meteen om welke zin het gaat. */
+    const alle = [...tekst.matchAll(new RegExp(patroon.source, patroon.flags + 'g'))];
+    for (const m of alle.slice(0, 8)) {
+      const i = m.index ?? 0;
+      const context = tekst.slice(Math.max(0, i - 45), i + m[0].length + 45).replace(/\s+/g, ' ');
+      fouten.push(`bevat ${naam}: "...${context}..."`);
+    }
+    if (alle.length > 8) fouten.push(`  (nog ${alle.length - 8} keer ${naam})`);
   }
   for (const zin of MOET_WEL) {
     if (!tekst.includes(zin)) fouten.push(`mist verplichte regel: "${zin}"`);
@@ -277,7 +292,7 @@ function keurKennisbasis(tekst: string): void {
  *
  * Deterministisch: dezelfde invoer levert byte-voor-byte dezelfde uitvoer, wat
  * een voorwaarde is voor prompt caching. Geen datums, geen willekeur, geen
- * objectiteratie in ongedefinieerde volgorde — alles loopt via MODULE_ORDER en
+ * objectiteratie in ongedefinieerde volgorde, alles loopt via MODULE_ORDER en
  * de vaste arrays.
  *
  * Gooit als de zelfcontrole hierboven iets vindt.

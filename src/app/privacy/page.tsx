@@ -44,6 +44,7 @@ export default function Privacy() {
               <li><b>Gebruiksgegevens:</b> welke modules worden gebruikt, tijdstippen van gebruik en technische loggegevens.</li>
               <li><b>Betalingsgegevens:</b> betalingen worden verwerkt via Stripe. Toms Ambitie slaat zelf geen betaalkaartgegevens op.</li>
               <li><b>Bedrijfsgegevens:</b> gegevens die de Klant invoert in Emma, zoals factuurinformatie, loongegevens en personeelsdossiers. Toms Ambitie verwerkt deze gegevens als verwerker (zie artikel 7).</li>
+              <li><b>Chatberichten:</b> wat je typt in de chat-assistent op deze website, plus je e-mailadres als je je vraag laat doorzetten. De chat-assistent heeft geen toegang tot accounts of klantgegevens en kan er dus niets over vertellen; zet er geen bijzondere of gevoelige gegevens in.</li>
             </ul>
 
             <h2>3. Doeleinden en grondslagen</h2>
@@ -69,6 +70,7 @@ export default function Privacy() {
               <li><b>Factuurgegevens:</b> 7 jaar op grond van de fiscale bewaarplicht.</li>
               <li><b>Wachtlijst-e-mailadressen:</b> totdat je je uitschrijft via de afmeldlink in de e-mail.</li>
               <li><b>Contactformulierberichten:</b> maximaal 1 jaar.</li>
+              <li><b>Chatgesprekken:</b> het gesprek staat alleen in je eigen browser en verdwijnt zodra je de pagina sluit. Wij bewaren het niet. Laat je je vraag doorzetten, dan wordt dat deel van het gesprek als e-mail bewaard, maximaal 1 jaar, net als een contactformulierbericht.</li>
             </ul>
 
             <h2>5. Ontvangers en doorgifte aan derden</h2>
@@ -78,6 +80,7 @@ export default function Privacy() {
               <li><b>Resend:</b> voor het verzenden van e-mail (wachtlijst-bevestigingen en berichten via het contactformulier). Resend is gevestigd in de Verenigde Staten; de doorgifte vindt plaats op basis van Standard Contractual Clauses.</li>
               <li><b>Vercel:</b> voor de hosting van de website. Vercel is gevestigd in de Verenigde Staten; de doorgifte vindt plaats op basis van Standard Contractual Clauses.</li>
               <li><b>Supabase:</b> voor de database en opslag van het Emma-platform. De gegevens staan op servers binnen de Europese Unie (Frankfurt).</li>
+              <li><b>Anthropic:</b> voor de chat-assistent op deze website. Wat je in de chat typt, gaat naar Anthropic om het antwoord te laten opstellen. Onder de zakelijke voorwaarden die wij hebben afgenomen, gebruikt Anthropic die berichten niet om modellen mee te trainen. Anthropic is gevestigd in de Verenigde Staten; de doorgifte vindt plaats op basis van Standard Contractual Clauses.</li>
               <li><b>Consently:</b> voor de cookiebanner waarmee je je toestemming beheert. Consently verwerkt je toestemmingskeuze en het bijbehorende IP-adres als bewijs van die keuze.</li>
               <li><b>Google Ireland Limited:</b> voor Google Tag Manager, waarmee wij meetinstrumenten op de website plaatsen. Google Tag Manager laadt alleen ná jouw toestemming via de cookiebanner. Welke meetinstrumenten daarmee worden geplaatst, staat in het <Link href="/cookiebeleid">Cookiebeleid</Link>. Google kan gegevens doorgeven aan de Verenigde Staten; die doorgifte vindt plaats op basis van het EU-VS Data Privacy Framework en Standard Contractual Clauses.</li>
               <li><b>Google Fonts:</b> de lettertypen van deze website worden geladen via Google Fonts. Daarbij wordt jouw IP-adres aan Google doorgegeven. Zie het <Link href="/cookiebeleid">Cookiebeleid</Link> voor de stand van zaken.</li>

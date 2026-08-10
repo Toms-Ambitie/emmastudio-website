@@ -22,7 +22,7 @@ export type Article = {
   author: string;
   featured?: boolean;
   /** Voorbereiding op de latere blog/kennisbank-splitsing. Nu nog geen filter
-   *  actief — /kennisbank toont alle artikelen ongeacht deze waarde.
+   *  actief: /kennisbank toont alle artikelen ongeacht deze waarde.
    *  'kennisbank' = uitleg over hoe iets werkt, tijdloos.
    *  'blog' = verhaal over Emma zelf (herkomst, keuzes, voortgang). */
   section: 'blog' | 'kennisbank';

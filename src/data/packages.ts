@@ -6,7 +6,7 @@ import { MODULE_ORDER } from './modules';
  *  coral-highlight op één kaart (dat suggereert een keuze die er nog niet
  *  is). Prijs = pakketprijs; de som van losse modules en het kortings-
  *  percentage worden bewust NIET hier vastgelegd, maar afgeleid uit
- *  MODULE_PRICE bij het renderen — zo kunnen de twee getallen nooit uit
+ *  MODULE_PRICE bij het renderen, zo kunnen de twee getallen nooit uit
  *  elkaar lopen. */
 export type Package = {
   name: string;

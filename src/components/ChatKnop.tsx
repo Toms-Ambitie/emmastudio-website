@@ -36,7 +36,7 @@ export default function ChatKnop() {
 
   /* Focus alleen terugzetten als de knop echt zichtbaar is. Op mobiel is hij
      verborgen zolang het paneel open staat, en focus() op een element met
-     display:none doet niets — dan blijft de focus achter op een verdwenen
+     display:none doet niets, dan blijft de focus achter op een verdwenen
      paneel en is de bezoeker zijn plek op de pagina kwijt.
 
      NIET met offsetParent controleren. Dat is de voor de hand liggende keuze
@@ -112,7 +112,7 @@ export default function ChatKnop() {
 
           MOBIEL: bottom-28 (112px). De zwevende CTA-balk van de homepage staat
           gecentreerd op bottom-4 en wordt op een smal scherm 84px hoog doordat
-          hij afbreekt naar twee regels — hij loopt dus tot 100px vanaf de
+          hij afbreekt naar twee regels, hij loopt dus tot 100px vanaf de
           onderkant. Gemeten op 390px breed: met bottom-20 overlapten ze echt.
 
           OPEN OP DESKTOP: knop blijft staan als zichtbare sluitknop, naast

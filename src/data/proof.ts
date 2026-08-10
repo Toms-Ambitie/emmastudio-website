@@ -1,6 +1,6 @@
 /** Social proof. Bron: briefing v2 §4.3.
  *
- *  Het Ilze-citaat zelf is ongewijzigd — Tom heeft bevestigd dat zij dit
+ *  Het Ilze-citaat zelf is ongewijzigd, Tom heeft bevestigd dat zij dit
  *  letterlijk heeft gezegd. De bijbehorende cijfers zijn wel gecorrigeerd:
  *  "7/8 modules bewezen in de praktijk" en "1 salon, ons startpunt, nu voor
  *  iedereen" suggereerden dat EmmaStudio zelf al zo lang draait en zo breed
@@ -31,12 +31,12 @@ export type StatItem = {
 /* ── HOE LANG DRAAIT HET AL ─────────────────────────────────────────────────
    Stond op vijf plekken hardcoded als "18 maanden", naast "sinds eind 2024".
    Die twee liepen uit elkaar: in augustus 2026 zijn het er twintig. Een getal
-   dat je met de hand moet bijhouden, houdt niemand bij — en op een pagina die
+   dat je met de hand moet bijhouden, houdt niemand bij, en op een pagina die
    over eerlijkheid gaat is dat precies het verkeerde getal om fout te hebben.
 
    Dus afgeleid van de startdatum. Naar beneden afgerond op hele maanden, zodat
    het nooit méér claimt dan waar is. De waarde wordt bij de build berekend,
-   dus hij loopt hooguit tot de eerstvolgende deploy achter — de veilige kant. */
+   dus hij loopt hooguit tot de eerstvolgende deploy achter, de veilige kant. */
 const START_PRAKTIJK = new Date(2024, 11, 1); // december 2024, "eind 2024"
 
 export function maandenPraktijk(nu: Date = new Date()): number {
@@ -45,7 +45,7 @@ export function maandenPraktijk(nu: Date = new Date()): number {
   return Math.max(0, m);
 }
 
-/** "20 maanden" — voor lopende tekst. */
+/** "20 maanden": voor lopende tekst. */
 export const MAANDEN_PRAKTIJK = maandenPraktijk();
 
 export const STATS: StatItem[] = [
@@ -55,14 +55,14 @@ export const STATS: StatItem[] = [
   { value: 8, label: 'Uur per week bespaard', display: '6-8' },
 ];
 
-/** Hero-badge. Was (in de export): "Bewezen in productie sinds eind 2024" —
- *  onjuist voor EmmaStudio zelf, dat draait pas sinds circa mei 2026. Geldt
+/** Hero-badge. Was (in de export): "Bewezen in productie sinds eind 2024".
+ *  Onjuist voor EmmaStudio zelf, dat draait pas sinds circa mei 2026. Geldt
  *  de Blondes Incognito-voorloper, niet het platform. */
 export const HERO_BADGE = `Gebouwd op ${MAANDEN_PRAKTIJK} maanden praktijk`;
 
 /** Omkadering van de proof-sectie. "Niet uit een pitch deck" (uit de export)
  *  is bewust weggelaten: dat is een variant van eerlijkheid-als-USP
- *  (briefing §3.5) — het bewijs staat er al, het hoeft er niet nog eens
+ *  (briefing §3.5), het bewijs staat er al, het hoeft er niet nog eens
  *  bij gezegd te worden dat het bewijs is.
  *  Kleine afwijking van de letterlijke briefing-tekst: het em-dash-teken
  *  vóór "als platform voor elke ondernemer" is vervangen door een komma,

@@ -184,7 +184,7 @@ export const LAUNCHED = true;
  *  datums. [...] Een gemiste datum doet meer schade dan geen datum.").
  *
  *  `live` staat hier bewust LOS van `LAUNCHED`. `live` beschrijft of de
- *  software draait (een technisch feit — Supabase toont actieve tabellen
+ *  software draait (een technisch feit, Supabase toont actieve tabellen
  *  en een draaiende tenant voor boekt/waakt/ziet). `LAUNCHED` beschrijft
  *  of de publieke signup open staat (een marketingbeslissing). Dat zijn
  *  onafhankelijke assen; ze aan elkaar knopen zou betekenen dat het
@@ -245,7 +245,7 @@ export const APP_URL = 'https://app.emmastudio.nl';
  *  blijft voor "Inloggen". Geen module-specifieke parameter (besluit Tom). */
 export const SIGNUP_URL = 'https://app.emmastudio.nl/signup';
 
-/** Modules die 18 maanden dagelijks bij Blondes Incognito draaiden — alleen
+/** Modules die 18 maanden dagelijks bij Blondes Incognito draaiden, alleen
  *  die mogen de badge "Draait dagelijks in de praktijk" tonen. Overige live
  *  modules (bv. EmmaVindt) tonen het neutrale, ware "Nu beschikbaar". */
 export const PROVEN_IN_PRACTICE = ['boekt', 'waakt', 'ziet'];
