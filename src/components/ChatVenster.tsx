@@ -158,8 +158,16 @@ export default function ChatVenster({ chat }: { chat: Chat }) {
                 e.preventDefault();
                 void zetDoor(email);
               }}
-              className="mt-3 flex flex-wrap items-center gap-2"
+              className="mt-3 space-y-2"
             >
+              {/* Het veld op zijn eigen regel, de knoppen eronder.
+
+                  Dit stond eerst op één rij met `flex-wrap`, en dat is fout
+                  gemeten: het paneel is 400px breed en de twee knoppen nemen
+                  daar samen 230px van, dus hield het adresveld er 44 over.
+                  Wrappen deed het niet, want de rij paste technisch nog. Een
+                  invoerveld van 44 pixels voor een e-mailadres is onbruikbaar,
+                  op mobiel én op desktop. */}
               <label htmlFor="chat-email" className="sr-only">
                 Je e-mailadres
               </label>
@@ -171,23 +179,25 @@ export default function ChatVenster({ chat }: { chat: Chat }) {
                 onChange={e => setEmail(e.target.value)}
                 placeholder="jouw@email.nl"
                 disabled={doorzetBezig}
-                className="min-w-0 flex-1 rounded-emma-btn border border-emma-line bg-white px-3 py-2 text-sm text-emma-ink outline-none transition-colors placeholder:text-emma-subtext focus:border-emma-coral disabled:opacity-60"
+                className="w-full rounded-emma-btn border border-emma-line bg-white px-3 py-2 text-sm text-emma-ink outline-none transition-colors placeholder:text-emma-subtext focus:border-emma-coral disabled:opacity-60"
               />
-              <button
-                type="submit"
-                disabled={doorzetBezig || !email.trim()}
-                className="shrink-0 rounded-emma-btn bg-emma-coral-strong px-3.5 py-2 text-sm font-semibold text-white transition-colors hover:bg-emma-coral-deep disabled:opacity-40"
-              >
-                {doorzetBezig ? 'Bezig…' : 'Versturen'}
-              </button>
-              <button
-                type="button"
-                onClick={laatVoorstelVallen}
-                disabled={doorzetBezig}
-                className="shrink-0 rounded-emma-btn px-2.5 py-2 text-sm text-emma-subtext transition-colors hover:text-emma-ink disabled:opacity-40"
-              >
-                Nee, laat maar
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  type="submit"
+                  disabled={doorzetBezig || !email.trim()}
+                  className="shrink-0 rounded-emma-btn bg-emma-coral-strong px-3.5 py-2 text-sm font-semibold text-white transition-colors hover:bg-emma-coral-deep disabled:opacity-40"
+                >
+                  {doorzetBezig ? 'Bezig…' : 'Versturen'}
+                </button>
+                <button
+                  type="button"
+                  onClick={laatVoorstelVallen}
+                  disabled={doorzetBezig}
+                  className="shrink-0 rounded-emma-btn px-2.5 py-2 text-sm text-emma-subtext transition-colors hover:text-emma-ink disabled:opacity-40"
+                >
+                  Nee, laat maar
+                </button>
+              </div>
             </form>
             {doorzetFout && (
               <p className="mt-2 text-xs text-emma-error" role="alert">
