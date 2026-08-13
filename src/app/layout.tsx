@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next';
+import { Bricolage_Grotesque, Hanken_Grotesk, Spline_Sans_Mono } from 'next/font/google';
 import './globals.css';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
@@ -6,6 +7,21 @@ import Analytics from '@/components/Analytics';
 import ScrollReveal from '@/components/ScrollReveal';
 import ScrollReset from '@/components/ScrollReset';
 import ChatKnop from '@/components/ChatKnop';
+
+/* Fonts self-hosted via next/font (was: een render-blokkerende @import naar
+   fonts.googleapis.com boven in globals.css). next/font haalt de fonts bij de
+   build op, host ze op ons eigen domein, injecteert een <link rel=preload> en
+   zet font-display:swap — geen externe Google-request meer bij de bezoeker, en
+   niets dat de eerste weergave blokkeert. Variabele fonts: de volledige
+   gewichts-as zit in één bestand per familie. De klassenamen dragen alleen de
+   CSS-variabelen (--ff-*); de font-family-tokens in globals.css wijzen daarnaar. */
+/* Bricolage laadt mét de breedte-as (wdth). Zonder die as pint next/font de
+   breedte op 100% — de bréédste snit — terwijl het merk de SemiCondensed
+   voert (zie het logo, CLAUDE.md §3). De koppen staan daarom in globals.css
+   op font-stretch:semi-condensed. */
+const fontDisplay = Bricolage_Grotesque({ subsets: ['latin'], display: 'swap', axes: ['wdth'], variable: '--ff-display' });
+const fontBody = Hanken_Grotesk({ subsets: ['latin'], display: 'swap', variable: '--ff-body' });
+const fontMono = Spline_Sans_Mono({ subsets: ['latin'], display: 'swap', variable: '--ff-mono' });
 
 export const metadata: Metadata = {
   title: 'Emma · Jij doet je werk. Emma de rest.',
@@ -31,7 +47,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="nl">
+    <html lang="nl" className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}>
       <body>
         {/* GEEN GTM-noscript-iframe hier. Die stond er wel, server-rendered direct
             na <body>, als fallback voor bezoekers zonder JavaScript. Maar hij laadde

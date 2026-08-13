@@ -84,7 +84,7 @@ function Hero() {
   return (
     <section className="relative h-dvh w-full overflow-hidden bg-emma-petrol" aria-label="emma introductie">
       <ClientOnly
-        fallback={<img src="/assets/hero-cinematic.jpg" alt="Warm en kalm werkblad met zacht gouden licht" className="absolute inset-0 h-full w-full object-cover" aria-hidden="true" />}
+        fallback={<img src="/assets/hero-cinematic.jpg" alt="Warm en kalm werkblad met zacht gouden licht" className="absolute inset-0 h-full w-full object-cover" aria-hidden="true" fetchPriority="high" />}
       >
         <CinematicHero />
       </ClientOnly>
