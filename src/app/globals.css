@@ -1,4 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;500&display=swap');
+/* Fonts worden self-hosted geladen via next/font (zie src/app/layout.tsx).
+   De vroegere render-blokkerende @import naar fonts.googleapis.com is bewust
+   verwijderd: die serialiseerde de eerste weergave (HTML -> deze CSS -> Google-
+   CSS -> fontbestanden) en legde bij elke bezoeker rechtstreeks contact met
+   Google. next/font zet de families op de variabelen --ff-display/-body/-mono;
+   de font-family-tokens hieronder wijzen daarnaar. */
 
 /* ============================================================
    TAILWIND v4 — utilities-only, GEEN preflight
@@ -58,9 +63,9 @@
   --sh-card:0 1px 2px rgba(28,23,21,.04), 0 1px 1px rgba(28,23,21,.03);
   --sh-pop:0 12px 32px rgba(28,23,21,.12), 0 2px 8px rgba(28,23,21,.06);
   --sh-hover:0 6px 20px rgba(28,23,21,.08);
-  --display:"Bricolage Grotesque",system-ui,sans-serif;
-  --body:"Hanken Grotesk",system-ui,sans-serif;
-  --mono:"Spline Sans Mono",ui-monospace,monospace;
+  --display:var(--ff-display),"Bricolage Grotesque",system-ui,sans-serif;
+  --body:var(--ff-body),"Hanken Grotesk",system-ui,sans-serif;
+  --mono:var(--ff-mono),"Spline Sans Mono",ui-monospace,monospace;
   --maxw:1280px; --gut:clamp(22px,5vw,64px);
   --topbar-h:0px;
   --ease:cubic-bezier(.22,.61,.36,1);
@@ -1646,9 +1651,9 @@ a.rm:hover{ transform:translateY(-2px); box-shadow:var(--sh-hover); }
   --color-emma-success-soft: #DBEEE3;
 
   /* Typography — export-namen, genereren font-display/body/mono */
-  --font-display: 'Bricolage Grotesque', system-ui, sans-serif;
-  --font-body: 'Hanken Grotesk', system-ui, sans-serif;
-  --font-mono: 'Spline Sans Mono', ui-monospace, monospace;
+  --font-display: var(--ff-display), 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-body: var(--ff-body), 'Hanken Grotesk', system-ui, sans-serif;
+  --font-mono: var(--ff-mono), 'Spline Sans Mono', ui-monospace, monospace;
 
   /* Radius */
   --radius-emma-card: 16px;

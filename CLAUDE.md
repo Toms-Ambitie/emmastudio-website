@@ -93,10 +93,27 @@ Elke sessie: lees dit eerst. Wijk niet af zonder expliciete toestemming.
 
 **Belangrijk:** Het logo gebruikt Bricolage Grotesque **SemiCondensed ExtraBold (800)** via Adobe Fonts. De Google Fonts-versie heeft geen SemiCondensed. Gebruik altijd de meegeleverde SVG-vector voor het logo — nooit zelf natypen.
 
-### Laden (Google Fonts in globals.css)
-```css
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=Spline+Sans+Mono:wght@400;600&display=swap');
+### Laden (self-hosted via `next/font` — in `src/app/layout.tsx`)
+De fonts worden bij de build opgehaald en op ons eigen domein gehost via
+`next/font/google` (was: een render-blokkerende `@import` in globals.css; die is
+om performance- en privacyredenen verwijderd — geen browser-request naar Google
+meer). `next/font` injecteert automatisch een `<link rel=preload>` per familie
+en zet `font-display:swap`.
+
+```tsx
+// src/app/layout.tsx
+import { Bricolage_Grotesque, Hanken_Grotesk, Spline_Sans_Mono } from 'next/font/google';
+const fontDisplay = Bricolage_Grotesque({ subsets: ['latin'], display: 'swap', variable: '--ff-display' });
+const fontBody    = Hanken_Grotesk({ subsets: ['latin'], display: 'swap', variable: '--ff-body' });
+const fontMono    = Spline_Sans_Mono({ subsets: ['latin'], display: 'swap', variable: '--ff-mono' });
+// <html className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}>
 ```
+
+De familie-tokens in `globals.css` (`--display/--body/--mono` én de Tailwind
+`@theme` `--font-display/-body/-mono`) wijzen naar deze `--ff-*`-variabelen, dus
+alle bestaande `font-family`-regels en `font-display/-body/-mono`-utilities
+blijven ongewijzigd werken. Het zijn variabele fonts: de volledige gewichts-as
+zit in één bestand per familie.
 
 ---
 
