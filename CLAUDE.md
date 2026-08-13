@@ -91,7 +91,13 @@ Elke sessie: lees dit eerst. Wijk niet af zonder expliciete toestemming.
 | Body / UI / lange tekst | Hanken Grotesk       | 400–600              |
 | Labels / mono / eyebrow | Spline Sans Mono     | 400–600, 0.1em spat  |
 
-**Belangrijk:** Het logo gebruikt Bricolage Grotesque **SemiCondensed ExtraBold (800)** via Adobe Fonts. De Google Fonts-versie heeft geen SemiCondensed. Gebruik altijd de meegeleverde SVG-vector voor het logo — nooit zelf natypen.
+**Belangrijk:** Het logo gebruikt Bricolage Grotesque **SemiCondensed ExtraBold (800)** via Adobe Fonts. Gebruik altijd de meegeleverde SVG-vector voor het logo — nooit zelf natypen.
+
+**Correctie (13 aug 2026):** hier stond dat de Google Fonts-versie geen
+SemiCondensed heeft. Dat is achterhaald — Bricolage Grotesque heeft daar een
+breedte-as (`wdth`, bereik 75–100%), geverifieerd tegen de Google Fonts-API.
+De site laadt die as mee en zet de koppen op `font-stretch: semi-condensed`
+(87,5%), zodat de webtypografie dezelfde snit heeft als het logo.
 
 ### Laden (self-hosted via `next/font` — in `src/app/layout.tsx`)
 De fonts worden bij de build opgehaald en op ons eigen domein gehost via
@@ -103,7 +109,8 @@ en zet `font-display:swap`.
 ```tsx
 // src/app/layout.tsx
 import { Bricolage_Grotesque, Hanken_Grotesk, Spline_Sans_Mono } from 'next/font/google';
-const fontDisplay = Bricolage_Grotesque({ subsets: ['latin'], display: 'swap', variable: '--ff-display' });
+// axes:['wdth'] is nodig: zonder die as pint next/font de breedte op 100% (de breedste snit).
+const fontDisplay = Bricolage_Grotesque({ subsets: ['latin'], display: 'swap', axes: ['wdth'], variable: '--ff-display' });
 const fontBody    = Hanken_Grotesk({ subsets: ['latin'], display: 'swap', variable: '--ff-body' });
 const fontMono    = Spline_Sans_Mono({ subsets: ['latin'], display: 'swap', variable: '--ff-mono' });
 // <html className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}>
@@ -114,6 +121,12 @@ De familie-tokens in `globals.css` (`--display/--body/--mono` én de Tailwind
 alle bestaande `font-family`-regels en `font-display/-body/-mono`-utilities
 blijven ongewijzigd werken. Het zijn variabele fonts: de volledige gewichts-as
 zit in één bestand per familie.
+
+De koppen staan op **`font-stretch: semi-condensed`** (87,5%), gezet op het
+`html`-element in globals.css zodat het doorerft. Dat raakt alléén Bricolage:
+Hanken Grotesk en Spline Sans Mono hebben geen breedte-as, en `font-stretch`
+doet op zo'n familie niets (browsers versmallen niet synthetisch). Voeg je ooit
+een body- of mono-font mét `wdth`-as toe, zet die dan expliciet op `normal`.
 
 ---
 

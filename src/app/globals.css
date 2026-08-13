@@ -84,7 +84,13 @@
    Gemeten op 10 augustus 2026: de blokken op /vergelijk stonden tegen
    elkaar terwijl er space-y-8 op stond. */
 *{ margin:0; padding:0; box-sizing:border-box; }
-html{ -webkit-text-size-adjust:100%; background:var(--creme); }
+html{ -webkit-text-size-adjust:100%; background:var(--creme); font-stretch:semi-condensed; }
+/* font-stretch staat bewust globaal (erft door) en niet op elke kop apart:
+   --display wordt op ~80 plekken gebruikt. Het raakt alléén Bricolage, want
+   dat is de enige familie hier mét een breedte-as; Hanken Grotesk en Spline
+   Sans Mono hebben er geen, en font-stretch heeft op een familie zonder
+   breedte-as geen effect (browsers versmallen niet synthetisch). Voeg je ooit
+   een body- of mono-font mét wdth-as toe, zet die dan expliciet op normal. */
 body{ font-family:var(--body); background:var(--creme); color:var(--ink); font-size:17px;
   line-height:1.6; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility; overflow-x:hidden; }
 img{ max-width:100%; display:block; }

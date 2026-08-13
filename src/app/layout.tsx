@@ -15,7 +15,11 @@ import ChatKnop from '@/components/ChatKnop';
    niets dat de eerste weergave blokkeert. Variabele fonts: de volledige
    gewichts-as zit in één bestand per familie. De klassenamen dragen alleen de
    CSS-variabelen (--ff-*); de font-family-tokens in globals.css wijzen daarnaar. */
-const fontDisplay = Bricolage_Grotesque({ subsets: ['latin'], display: 'swap', variable: '--ff-display' });
+/* Bricolage laadt mét de breedte-as (wdth). Zonder die as pint next/font de
+   breedte op 100% — de bréédste snit — terwijl het merk de SemiCondensed
+   voert (zie het logo, CLAUDE.md §3). De koppen staan daarom in globals.css
+   op font-stretch:semi-condensed. */
+const fontDisplay = Bricolage_Grotesque({ subsets: ['latin'], display: 'swap', axes: ['wdth'], variable: '--ff-display' });
 const fontBody = Hanken_Grotesk({ subsets: ['latin'], display: 'swap', variable: '--ff-body' });
 const fontMono = Spline_Sans_Mono({ subsets: ['latin'], display: 'swap', variable: '--ff-mono' });
 
