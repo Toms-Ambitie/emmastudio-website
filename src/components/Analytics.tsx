@@ -6,17 +6,27 @@ import { useState } from 'react';
 /**
  * Consent Mode v2 (Advanced) — geketende laadvolgorde.
  *
- * Consently (CMP) laadt eerst en zet de consent-defaults en de tag-blokkering.
- * Pas ná Consently's `onLoad` mounten we de GTM-container. Zo start GTM
- * gegarandeerd nadat Consently klaar is — geen enkele tag kan te vroeg vuren,
- * want de GTM-container bestaat simpelweg nog niet vóór dat moment.
+ * De consent-DEFAULTS (alles denied) staan NIET hier maar server-rendered en
+ * inline in layout.tsx, zodat ze bij het parsen draaien: gegarandeerd vóór dit
+ * component, dat pas na hydration mount. Dat is bewust de eerste verdedigings-
+ * linie en niet iets dat aan de CMP wordt overgelaten.
  *
- * `afterInteractive` (na hydration) is hier correct: bij Advanced Consent Mode
- * telt de volgorde, niet hoe vroeg. Laadt Consently niet (bv. offline), dan
- * mount GTM bewust niet — consent-first: geen CMP betekent geen tracking.
+ * Hier stond eerder dat "Consently de consent-defaults zet". Dat was onjuist en
+ * het kostte de site zijn consent: zonder expliciete default gaat Google uit van
+ * GRANTED, dus zodra Consently niet initialiseerde vertrok GTM met gcs=G111.
+ * Zet die defaults dus nooit terug in de CMP alleen.
  *
- * De GTM <noscript>-iframe staat NIET hier maar server-rendered in layout.tsx,
- * direct na <body>, zodat bezoekers zonder JavaScript die fallback ook krijgen.
+ * Consently (CMP) laadt eerst; pas ná zijn `onLoad` mount de GTM-container, dus
+ * GTM bestaat niet voordat de CMP er is. Wordt Consently hard geblokkeerd, dan
+ * mount GTM bewust helemaal niet. Komt er een leeg antwoord terug (wat ad-
+ * blockers vaak doen), dan mount GTM wél, maar dankzij de denied-defaults in
+ * layout.tsx blijft alles geblokkeerd tot de bezoeker kiest.
+ *
+ * `afterInteractive` is hier correct: bij Advanced Consent Mode telt de volgorde
+ * ten opzichte van de defaults, niet hoe vroeg de container laadt.
+ *
+ * Er is bewust GEEN GTM <noscript>-iframe (zie de toelichting in layout.tsx):
+ * die laadde onvoorwaardelijk, buiten de CMP om.
  */
 export default function Analytics() {
   const [consentReady, setConsentReady] = useState(false);

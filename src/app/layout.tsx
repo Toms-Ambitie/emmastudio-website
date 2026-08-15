@@ -49,6 +49,31 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="nl" className={`${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}>
       <body>
+        {/* CONSENT MODE v2 — DEFAULTS OP DENIED. Server-rendered en inline, dus dit
+            draait bij het parsen van de pagina: gegarandeerd vóór GTM, dat pas na
+            hydration mount (Analytics.tsx).
+
+            Waarom dit hier moet staan en niet aan de CMP overgelaten mag worden:
+            zonder een expliciete default gaat Google uit van GRANTED. De keten
+            vertrouwde er volledig op dat Consently de defaults zou zetten, maar
+            zodra Consently niet initialiseert (geblokkeerd door een adblocker, een
+            leeg 200-antwoord, of een domein dat niet in het Consently-account
+            staat) werd er nooit één consent-commando gezet en vertrok GTM met
+            gcs=G111, oftewel toestemming verleend zonder dat iemand iets koos.
+            Gemeten op de productiecode van 13 aug 2026: in alle scenario's stond
+            er nul consent-commando's in de dataLayer.
+
+            Nu is de standaard fail-closed: gaat er iets mis met de CMP, dan blijft
+            het denied. security_storage staat op granted (strikt noodzakelijk,
+            bv. fraudepreventie). wait_for_update geeft de CMP 500ms om de keuze
+            van een terugkerende bezoeker door te geven voordat tags beslissen. */}
+        <script
+          id="consent-default"
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'denied',personalization_storage:'denied',security_storage:'granted',wait_for_update:500});`,
+          }}
+        />
+
         {/* GEEN GTM-noscript-iframe hier. Die stond er wel, server-rendered direct
             na <body>, als fallback voor bezoekers zonder JavaScript. Maar hij laadde
             onvoorwaardelijk: buiten Consently om, dus vóór en zonder toestemming.
