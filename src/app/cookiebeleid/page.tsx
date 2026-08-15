@@ -134,7 +134,12 @@ export default function Cookiebeleid() {
               Google is gevestigd in Ierland en kan gegevens doorgeven aan de Verenigde Staten. Die
               doorgifte vindt plaats op basis van het EU-VS Data Privacy Framework en Standard
               Contractual Clauses. Ook Vercel is een Amerikaanse partij; ook daar geldt de doorgifte
-              op basis van Standard Contractual Clauses. Gegevens die je invoert <em>in</em> het
+              op basis van Standard Contractual Clauses. CookieYes Limited is gevestigd in het
+              Verenigd Koninkrijk (3 Warren Yard, Warren Park, Wolverton Mill, Milton Keynes
+              MK12 5NW); die doorgifte vindt plaats op basis van het adequaatheidsbesluit van de
+              Europese Commissie voor het Verenigd Koninkrijk, hernieuwd in december 2025. Voor
+              sub-verwerkers hanteert CookieYes een verwerkersovereenkomst met
+              EU-standaardcontractbepalingen. Gegevens die je invoert <em>in</em> het
               Emma-platform staan op servers binnen de Europese Unie (Frankfurt).
             </p>
 
