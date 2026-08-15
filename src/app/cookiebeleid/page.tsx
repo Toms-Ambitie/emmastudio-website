@@ -3,11 +3,16 @@ import Link from 'next/link';
 import { BEDRIJF, ADRES_KORT, NUMMERS_KORT } from '@/data/bedrijf';
 
 /* Cookiebeleid. Beschrijft wat er FEITELIJK laadt op deze site:
-   Consently (CMP), Google Tag Manager (pas ná toestemming, zie Analytics.tsx),
-   Google Fonts (via @import in globals.css) en Vercel als host.
+   CookieYes (CMP), Google Tag Manager (pas ná toestemming, zie Analytics.tsx)
+   en Vercel als host.
+
+   Google Fonts staat hier bewust NIET meer bij: de lettertypen worden sinds
+   augustus 2026 self-hosted via next/font, dus er gaat geen verzoek en geen
+   IP-adres meer naar Google. De alinea die dat aankondigde ("zodra dat gebeurd
+   is, halen we deze alinea weg") is daarmee ingelost en verwijderd.
 
    Bewust NIET opgenomen: een tabel met exacte cookienamen en -duren per tag.
-   Die lijst wordt door Consently live gegenereerd uit de daadwerkelijke scan en
+   Die lijst wordt door de CMP live gegenereerd uit de daadwerkelijke scan en
    staat in de banner zelf. Een handgeschreven kopie daarvan veroudert stil bij
    de eerste containerwijziging, en een cookiebeleid dat niet klopt is erger dan
    een cookiebeleid dat doorverwijst naar de bron die wél klopt. */
@@ -78,7 +83,7 @@ export default function Cookiebeleid() {
               </thead>
               <tbody>
                 <tr>
-                  <td><b>Consently</b></td>
+                  <td><b>CookieYes</b></td>
                   <td>De cookiebanner. Vraagt je toestemming en bewaart je keuze, zodat we het niet elk bezoek opnieuw vragen en kunnen aantonen wat je hebt gekozen.</td>
                   <td>Altijd — noodzakelijk.</td>
                 </tr>
@@ -86,11 +91,6 @@ export default function Cookiebeleid() {
                   <td><b>Google Tag Manager</b></td>
                   <td>Het systeem waarmee wij meetinstrumenten op de site plaatsen. Welke instrumenten dat zijn, zie je in de cookiebanner onder &quot;Statistieken&quot; en &quot;Marketing&quot;.</td>
                   <td>Alleen ná jouw toestemming. Geef je die niet, dan wordt Google Tag Manager niet geladen.</td>
-                </tr>
-                <tr>
-                  <td><b>Google Fonts</b></td>
-                  <td>De lettertypen waarmee de site wordt weergegeven. Hierbij wordt jouw IP-adres doorgegeven aan Google.</td>
-                  <td>Bij het laden van de pagina. Zie de opmerking hieronder.</td>
                 </tr>
                 <tr>
                   <td><b>Vercel</b></td>
@@ -101,11 +101,9 @@ export default function Cookiebeleid() {
             </table>
 
             <p>
-              <b>Over Google Fonts.</b> De lettertypen worden op dit moment bij Google opgehaald,
-              wat betekent dat je IP-adres daarbij naar Google gaat, ook als je geen toestemming
-              geeft. Dat is geen cookie en geen tracking, maar wel een gegevensuitwisseling die we
-              liever niet hebben. We zijn bezig de lettertypen zelf te hosten, zodat die uitwisseling
-              helemaal verdwijnt. Zodra dat gebeurd is, halen we deze alinea weg.
+              <b>Over de lettertypen.</b> Die staan op onze eigen server. Er gaat daarvoor geen
+              enkel verzoek naar Google en dus ook geen IP-adres. Hier stond eerder dat we daar
+              nog mee bezig waren; dat is sinds augustus 2026 geregeld.
             </p>
 
             <h2>4. Welke cookies precies, en hoe lang?</h2>

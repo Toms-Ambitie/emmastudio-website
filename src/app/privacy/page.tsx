@@ -81,9 +81,8 @@ export default function Privacy() {
               <li><b>Vercel:</b> voor de hosting van de website. Vercel is gevestigd in de Verenigde Staten; de doorgifte vindt plaats op basis van Standard Contractual Clauses.</li>
               <li><b>Supabase:</b> voor de database en opslag van het Emma-platform. De gegevens staan op servers binnen de Europese Unie (Frankfurt).</li>
               <li><b>Anthropic:</b> voor de chat-assistent op deze website. Wat je in de chat typt, gaat naar Anthropic om het antwoord te laten opstellen. Onder de zakelijke voorwaarden die wij hebben afgenomen, gebruikt Anthropic die berichten niet om modellen mee te trainen. Anthropic is gevestigd in de Verenigde Staten; de doorgifte vindt plaats op basis van Standard Contractual Clauses.</li>
-              <li><b>Consently:</b> voor de cookiebanner waarmee je je toestemming beheert. Consently verwerkt je toestemmingskeuze en het bijbehorende IP-adres als bewijs van die keuze.</li>
+              <li><b>CookieYes:</b> voor de cookiebanner waarmee je je toestemming beheert. CookieYes verwerkt je toestemmingskeuze en het bijbehorende IP-adres als bewijs van die keuze.</li>
               <li><b>Google Ireland Limited:</b> voor Google Tag Manager, waarmee wij meetinstrumenten op de website plaatsen. Google Tag Manager laadt alleen ná jouw toestemming via de cookiebanner. Welke meetinstrumenten daarmee worden geplaatst, staat in het <Link href="/cookiebeleid">Cookiebeleid</Link>. Google kan gegevens doorgeven aan de Verenigde Staten; die doorgifte vindt plaats op basis van het EU-VS Data Privacy Framework en Standard Contractual Clauses.</li>
-              <li><b>Google Fonts:</b> de lettertypen van deze website worden geladen via Google Fonts. Daarbij wordt jouw IP-adres aan Google doorgegeven. Zie het <Link href="/cookiebeleid">Cookiebeleid</Link> voor de stand van zaken.</li>
             </ul>
             <p>Een volledig en actueel overzicht van wat er precies laadt, wanneer en waarom, staat in ons <Link href="/cookiebeleid">Cookiebeleid</Link>.</p>
             <p>Persoonsgegevens die je invoert <em>in</em> het Emma-platform worden opgeslagen op servers binnen de Europese Unie (Frankfurt). Wij verkopen jouw gegevens nooit aan derden.</p>
@@ -110,7 +109,8 @@ export default function Privacy() {
             <p>Je hebt ook het recht een klacht in te dienen bij de toezichthoudende autoriteit: de <a href="https://www.autoriteitpersoonsgegevens.nl" target="_blank" rel="noopener noreferrer">Autoriteit Persoonsgegevens</a>.</p>
 
             <h2>9. Cookies en vergelijkbare technieken</h2>
-            <p>Op emmastudio.nl staat een cookiebanner (Consently). Die vraagt jouw toestemming vóórdat er meetinstrumenten laden, en bewaart jouw keuze. Zonder toestemming plaatsen wij geen analytische of advertentiecookies.</p>
+            <p>Op emmastudio.nl staat een cookiebanner (CookieYes). Die vraagt jouw toestemming vóórdat er meetinstrumenten laden, en bewaart jouw keuze. Zonder toestemming plaatsen wij geen analytische of advertentiecookies.</p>
+            <p>De lettertypen van deze website staan op onze eigen server. Er gaat daarvoor dus geen enkel verzoek, en ook geen IP-adres, naar Google.</p>
             <p>De website zelf kent geen inlogfunctie en plaatst daarvoor dus ook geen sessiecookies. Inloggen gebeurt in het Emma-platform op app.emmastudio.nl; daar zijn de sessiecookies strikt noodzakelijk om je ingelogd te houden.</p>
             <p>Welke cookies en scripts er precies laden, met welk doel en hoe lang ze blijven staan, staat in het <Link href="/cookiebeleid">Cookiebeleid</Link>. Je kunt je keuze daar ook op elk moment weer wijzigen.</p>
 
