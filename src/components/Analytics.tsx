@@ -6,17 +6,33 @@ import { useState } from 'react';
 /**
  * Consent Mode v2 (Advanced) — geketende laadvolgorde.
  *
- * Consently (CMP) laadt eerst en zet de consent-defaults en de tag-blokkering.
- * Pas ná Consently's `onLoad` mounten we de GTM-container. Zo start GTM
- * gegarandeerd nadat Consently klaar is — geen enkele tag kan te vroeg vuren,
- * want de GTM-container bestaat simpelweg nog niet vóór dat moment.
+ * De consent-DEFAULTS (alles denied) staan NIET hier maar server-rendered en
+ * inline in layout.tsx, zodat ze bij het parsen draaien: gegarandeerd vóór dit
+ * component, dat pas na hydration mount. Dat is bewust de eerste verdedigings-
+ * linie en niet iets dat aan de CMP wordt overgelaten.
  *
- * `afterInteractive` (na hydration) is hier correct: bij Advanced Consent Mode
- * telt de volgorde, niet hoe vroeg. Laadt Consently niet (bv. offline), dan
- * mount GTM bewust niet — consent-first: geen CMP betekent geen tracking.
+ * Hier stond eerder dat de CMP zelf "de consent-defaults zet". Dat was onjuist
+ * en het kostte de site zijn consent: zonder expliciete default gaat Google uit
+ * van GRANTED, dus zodra de CMP niet initialiseerde vertrok GTM met gcs=G111.
+ * Zet die defaults dus nooit terug in de CMP alleen — ongeacht welke CMP.
  *
- * De GTM <noscript>-iframe staat NIET hier maar server-rendered in layout.tsx,
- * direct na <body>, zodat bezoekers zonder JavaScript die fallback ook krijgen.
+ * CookieYes (CMP) laadt eerst; pas ná zijn `onLoad` mount de GTM-container, dus
+ * GTM bestaat niet voordat de CMP er is. Wordt CookieYes hard geblokkeerd, dan
+ * mount GTM bewust helemaal niet. Komt er een leeg antwoord terug (wat ad-
+ * blockers vaak doen), dan mount GTM wél, maar dankzij de denied-defaults in
+ * layout.tsx blijft alles geblokkeerd tot de bezoeker kiest.
+ *
+ * CookieYes verving in augustus 2026 de vorige CMP. Die had een verlopen
+ * abonnement: het script kwam nog wel binnen, maar initialiseerde niet meer —
+ * precies de "leeg antwoord"-situatie hierboven, waardoor er een maand lang
+ * zonder banner is gemeten. Het client-ID zit in de URL en is omgevingsloos:
+ * één ID voor preview en productie. Wisselt het ID, dan is dit de enige plek.
+ *
+ * `afterInteractive` is hier correct: bij Advanced Consent Mode telt de volgorde
+ * ten opzichte van de defaults, niet hoe vroeg de container laadt.
+ *
+ * Er is bewust GEEN GTM <noscript>-iframe (zie de toelichting in layout.tsx):
+ * die laadde onvoorwaardelijk, buiten de CMP om.
  */
 export default function Analytics() {
   const [consentReady, setConsentReady] = useState(false);
@@ -24,8 +40,8 @@ export default function Analytics() {
   return (
     <>
       <Script
-        src="https://app.consently.net/consently.js"
-        data-bannerid="6a5b92331f0ff60f232cf9e6"
+        id="cookieyes"
+        src="https://cdn-cookieyes.com/client_data/7e6a2f80d6d54df29d71857763b07b13/script.js"
         strategy="afterInteractive"
         onLoad={() => setConsentReady(true)}
       />
