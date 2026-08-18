@@ -262,16 +262,24 @@ EmmaLoont stond tot 8 augustus ten onrechte op "Binnenkort" terwijl hij op prod 
 
 Format: `Emma voor [branche]` — geen sub-merken, geen aparte logo's.
 
-| Pakket              | Modules                                              | À la carte | Pakketprijs | Korting |
-|---------------------|------------------------------------------------------|------------|-------------|---------|
-| Emma voor ZZP'ers   | 4 — Boekt + Waakt + Vindt + Schrijft                 | €46/mnd    | €37/mnd     | 20%     |
-| Emma voor Zorg      | 5 — Boekt + Waakt + Loont + Vindt + Coacht           | €55/mnd    | €44/mnd     | 20%     |
-| Emma voor Salons    | 7 — alles behalve EmmaPromoot                        | €83/mnd    | €66/mnd     | 20%     |
-| Emma Compleet       | Alle 8 modules                                       | €102/mnd   | €77/mnd     | 25%     |
+| Pakket                  | Modules                                    | À la carte | Pakketprijs   | Korting |
+|-------------------------|--------------------------------------------|------------|---------------|---------|
+| Emma voor Salons        | 5 — Boekt + Waakt + Loont + Vindt + Ziet   | €55/mnd    | €49,50/mnd    | 10%     |
+| Emma voor Horeca        | 4 — Boekt + Waakt + Loont + Ziet           | €46/mnd    | €41,40/mnd    | 10%     |
+| Emma voor Installateurs | 5 — Boekt + Waakt + Loont + Vindt + Ziet   | €55/mnd    | €49,50/mnd    | 10%     |
+| Emma Compleet           | Alle 8 modules                             | €102/mnd   | nog geen prijs| —       |
 
-Deze prijzen staan zo in `src/data/packages.ts`, in de Module-atlas én in de `plans`-tabel op prod. De oudere reeks 29/39/59/69 die hier eerder stond, is achterhaald.
+**Prijslogica:** som van de losse modules × 0,9. Deze prijzen staan zo in `src/data/packages.ts` én in Stripe (prod, live); Stripe is leidend, want dat is wat er wordt afgerekend. In de code staat de prijs daarom hard en wordt alleen het kortingspercentage afgeleid — een formule zou een bedrag kunnen tonen dat Stripe niet in rekening brengt.
 
-Pakketten zijn marketing-bundels, geen aparte producten. Zelfde software, andere module-configuratie. Geen enkel pakket is op dit moment koopbaar.
+**Emma Compleet heeft bewust geen prijs** tot alle acht modules gebouwd zijn. Zet er geen indicatie bij.
+
+**Herzien augustus 2026.** Vervallen: *Emma voor ZZP'ers* (focus verschoven van zzp naar MKB) en *Emma voor Zorg* (cao- en pensioenfondsstructuur voorlopig te complex voor EmmaLoont, en geen actieve focusbranche). De reeksen 29/39/59/69 en 37/44/66/77 zijn beide achterhaald.
+
+**Waarom deze samenstelling:** Salons en Installateurs krijgen EmmaVindt omdat personeel daar op concurrentwebsites te vinden is (de scraping leunt daarop); horecazaken hebben zelden een medewerkerspagina, dus daar zit Vindt niet in. Bij installateurs is het sterkste argument dat omzet (CRM voor intekening) en kosten (boekhouding voor inkoop) vrijwel nooit in hetzelfde systeem zitten.
+
+**Naamgeving:** `Emma voor [Branche]`, zoals een ondernemer zichzelf noemt — "Emma voor Salons" (dekt kappers, barbershops en schoonheidssalons), niet "Emma voor Haarverzorging" of "Emma voor Kapsalons".
+
+Pakketten zijn marketing-bundels, geen aparte producten. Zelfde software, andere module-configuratie. Geen enkel pakket is op dit moment koopbaar op de site: de signup staat dicht (`LAUNCHED=false`) en elk pakket bevat EmmaLoont, dat volgens `MODULE_STATUS` nog niet live is.
 
 ---
 

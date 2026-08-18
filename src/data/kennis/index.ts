@@ -1,5 +1,5 @@
 import { MODULES, MODULE_ORDER, MODULE_STATUS, MODULE_PRICE, LAUNCHED, APP_URL, SIGNUP_URL } from '@/data/modules';
-import { PACKAGES } from '@/data/packages';
+import { PACKAGES, packageListPrice, packageDiscount, formatPrice } from '@/data/packages';
 import { FAQ, SECURITY } from '@/data/home';
 import { ARTICLES } from '@/data/articles';
 import { BEDRIJF, ADRES_KORT } from '@/data/bedrijf';
@@ -103,23 +103,33 @@ function modulesBlok(): string {
 /** Pakketten. De à-la-cartesom en de korting worden berekend, niet vastgelegd,
  *  zodat ze niet uit elkaar kunnen lopen met MODULE_PRICE. */
 function pakkettenBlok(): string {
+  // Hoeveel modules nog niet draaien wordt geteld, niet als getal opgeschreven:
+  // hier stond "nog drie modules ontbreken", wat allang niet meer klopte.
+  const nogNiet = MODULE_ORDER.filter(id => !MODULE_STATUS[id]?.live).length;
+
   const regels: string[] = [
     '# Pakketten',
     '',
-    'Er zijn vier pakketten. **Geen enkel pakket is op dit moment te koop.**',
-    'Ze staan op de site en op /pakketten, maar je kunt ze niet afnemen omdat er',
-    'nog drie modules ontbreken. Wie nu wil beginnen, neemt de modules los.',
-    'Noem een pakket dus nooit als iets dat iemand vandaag kan kopen.',
+    `Er zijn ${PACKAGES.length} pakketten. **Geen enkel pakket is op dit moment te koop.**`,
+    'Ze staan op de site en op /pakketten, maar je kunt ze niet afnemen: elk pakket',
+    `bevat EmmaLoont, en er draaien nog ${nogNiet} modules niet. Wie nu wil beginnen,`,
+    'neemt de modules los. Noem een pakket dus nooit als iets dat iemand vandaag',
+    'kan kopen.',
     '',
   ];
 
   for (const p of PACKAGES) {
-    const som = p.modules.reduce((t, id) => t + (MODULE_PRICE[id] ?? 0), 0);
-    const korting = som > 0 ? Math.round((1 - p.price / som) * 100) : 0;
+    const som = packageListPrice(p.modules);
+    const korting = packageDiscount(p);
+    const modules = `Bevat ${p.modules.length} modules: ${p.modules.map(id => `Emma${cap(id)}`).join(', ')}.`;
+    // Emma Compleet heeft nog geen prijs. Nooit een bedrag verzinnen of afleiden:
+    // wat er niet is, moet ze ook niet noemen.
     regels.push(
-      `- **${p.name}**: €${p.price} per maand (${p.status}). ${p.desc} ` +
-      `Bevat ${p.modules.length} modules: ${p.modules.map(id => `Emma${cap(id)}`).join(', ')}. ` +
-      `Los zouden die €${som} kosten, dus ongeveer ${korting}% korting.`,
+      p.price === null
+        ? `- **${p.name}**: nog geen prijs bekend (${p.status}). ${p.desc} ${modules} ` +
+          `Los kosten die modules €${som} per maand.`
+        : `- **${p.name}**: €${formatPrice(p.price)} per maand (${p.status}). ${p.desc} ${modules} ` +
+          `Los zouden die €${som} kosten, dus ongeveer ${korting}% korting.`,
     );
   }
 

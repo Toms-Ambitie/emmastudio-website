@@ -36,7 +36,7 @@ import { EmmaKolom } from './EmmaKolom';
 import {
   MODULE_ORDER, MODULE_TAGS, MODULE_PRICE, MODULES, ICONS, MODULE_STATUS, SIGNUP_URL, LAUNCHED,
 } from '@/data/modules';
-import { PACKAGES } from '@/data/packages';
+import { PACKAGES, formatPrice, packageListPrice, packageDiscount } from '@/data/packages';
 import { ILZE_QUOTE, STATS, HERO_BADGE, PROOF_INTRO } from '@/data/proof';
 import type { Article } from '@/data/articles';
 import {
@@ -654,10 +654,20 @@ function PackagesSection() {
             <div>
               <h3 className="font-display text-lg font-bold text-emma-ink">{pkg.name}</h3>
               <p className="mt-1 text-xs text-emma-subtext">{pkg.desc}</p>
-              <div className="mt-4 flex items-baseline gap-1">
-                <span className="font-display text-3xl font-bold em-num text-emma-ink">€ {pkg.price}</span>
-                <span className="text-sm text-emma-subtext">/mnd</span>
-              </div>
+              {pkg.price === null ? (
+                <p className="mt-4 text-sm font-semibold text-emma-subtext">Prijs volgt</p>
+              ) : (
+                <div className="mt-4 flex items-baseline gap-1">
+                  <span className="font-display text-3xl font-bold em-num text-emma-ink">€ {formatPrice(pkg.price)}</span>
+                  <span className="text-sm text-emma-subtext">/mnd</span>
+                </div>
+              )}
+              {/* Los-bedrag en korting worden afgeleid, nooit los onderhouden. */}
+              {pkg.price !== null && (
+                <p className="mt-1 text-xs text-emma-subtext">
+                  Los € {packageListPrice(pkg.modules)}/mnd · je bespaart {packageDiscount(pkg)}%
+                </p>
+              )}
               <p className="mt-1 text-xs font-medium text-emma-subtext">{pkg.modules.length} MODULES</p>
 
               <ul className="mt-5 space-y-2">
