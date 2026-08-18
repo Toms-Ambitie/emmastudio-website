@@ -170,7 +170,7 @@ export const MODULE_PRICES = {
     'Elke module kost €9 of €19 per maand',
     'De prijs waarvoor je instapt, blijft je prijs',
     '10% korting als je per jaar betaalt',
-    'Zodra alle acht modules er zijn: Emma Compleet voor €77 per maand',
+    'Kies je een branchepakket, dan betaal je 10% minder dan los',
   ],
 };
 
@@ -179,7 +179,7 @@ export const MODULE_PRICES = {
    wachtlijstformulier onder de kaarten. */
 export const PACKAGES_SECTION = {
   title: 'Straks kies je een pakket.',
-  intro: 'Zodra alle acht modules er zijn, bundelen we ze per branche met 20 tot 25% korting. Wie nu instapt, houdt zijn prijs.',
+  intro: 'We bundelen de modules per branche, met 10% korting op de losse prijs. Wie nu instapt, houdt zijn prijs.',
   foot: 'Tot die tijd is elke module los te gebruiken: standaard €9/mnd, premium €19/mnd, excl. BTW en maandelijks opzegbaar.',
   waitlist: {
     heading: 'Wil je weten wanneer de pakketten er zijn?',

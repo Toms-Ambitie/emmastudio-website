@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { MODULES, MODULE_PRICE } from '@/data/modules';
-import { PACKAGES } from '@/data/packages';
+import { PACKAGES, formatPrice, packageListPrice, packageDiscount } from '@/data/packages';
 import { PACKAGES_SECTION, MODULE_PRICES } from '@/data/home';
 import { IconCheck } from '@/components/emma/icons';
 import WaitlistForm from '@/components/WaitlistForm';
@@ -8,8 +8,8 @@ import WaitlistForm from '@/components/WaitlistForm';
 const SITE = 'https://www.emmastudio.nl';
 const emmaName = (id: string) => `Emma${MODULES[id]?.name ?? id.charAt(0).toUpperCase() + id.slice(1)}`;
 
-const META_TITLE = 'Emma-pakketten · Software per branche voor zzp, zorg en salons';
-const META_DESC = "Emma bundelt modules per branche: voor zzp'ers, zorg, salons of compleet. Straks met 20 tot 25% korting. Stap nu los in en houd je prijs. Vanaf €37.";
+const META_TITLE = 'Emma-pakketten · Software per branche voor salons, horeca en installateurs';
+const META_DESC = 'Emma bundelt modules per branche: voor salons, horeca of installateurs. 10% korting op de losse prijs. Stap nu los in en houd je prijs. Vanaf €41,40 per maand.';
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -47,10 +47,20 @@ export default function Pakketten() {
               <div key={pkg.name} className="flex flex-col overflow-hidden rounded-emma-card border border-emma-line bg-emma-paper p-6 transition-all hover:shadow-emma-hover">
                 <h2 className="font-display text-lg font-bold text-emma-ink">{pkg.name}</h2>
                 <p className="mt-1 text-xs text-emma-subtext">{pkg.desc}</p>
-                <div className="mt-4 flex items-baseline gap-1">
-                  <span className="font-display text-3xl font-bold em-num text-emma-ink">€ {pkg.price}</span>
-                  <span className="text-sm text-emma-subtext">/mnd</span>
-                </div>
+                {pkg.price === null ? (
+                  <p className="mt-4 text-sm font-semibold text-emma-subtext">Prijs volgt</p>
+                ) : (
+                  <div className="mt-4 flex items-baseline gap-1">
+                    <span className="font-display text-3xl font-bold em-num text-emma-ink">€ {formatPrice(pkg.price)}</span>
+                    <span className="text-sm text-emma-subtext">/mnd</span>
+                  </div>
+                )}
+                {/* Los-bedrag en korting worden afgeleid, nooit los onderhouden. */}
+                {pkg.price !== null && (
+                  <p className="mt-1 text-xs text-emma-subtext">
+                    Los € {packageListPrice(pkg.modules)}/mnd · je bespaart {packageDiscount(pkg)}%
+                  </p>
+                )}
                 <p className="mt-1 text-xs font-medium text-emma-subtext">{pkg.modules.length} MODULES</p>
                 <ul className="mt-5 space-y-2">
                   {pkg.modules.map((modId) => (
@@ -93,7 +103,7 @@ export default function Pakketten() {
             ))}
           </ul>
           <p className="mt-6 text-xs text-emma-subtext">
-            Som van alle acht losse modules: € {['boekt','waakt','loont','vindt','coacht','ziet','schrijft','promoot'].reduce((s, k) => s + MODULE_PRICE[k], 0)}/mnd. Emma Compleet bundelt ze straks voor €77.
+            Som van alle acht losse modules: € {['boekt','waakt','loont','vindt','coacht','ziet','schrijft','promoot'].reduce((s, k) => s + MODULE_PRICE[k], 0)}/mnd. Emma Compleet bundelt ze straks; die prijs volgt zodra alle acht modules er zijn.
           </p>
         </div>
       </section>
