@@ -1,3 +1,23 @@
+/* ── HOE LANG DRAAIT HET AL ─────────────────────────────────────────────────
+   Staat bewust bovenaan: elk cijfer over "hoe lang draait dit al" op de site
+   komt hiervandaan, zodat de hero-badge, de STATS-strip, het citaatblok en de
+   kennisbasis van de chatbot niet uit elkaar kunnen lopen. Ze deden dat wel:
+   het citaatblok stond hard op "18+ mnd" terwijl de hero al 21 zei.
+
+   Naar beneden afgerond op hele maanden, zodat het nooit méér claimt dan waar
+   is. De waarde wordt bij het renderen berekend; zie de `revalidate` op de
+   pagina's die hem tonen, anders bevriest hij in de prerender-cache. */
+const START_PRAKTIJK = new Date(2024, 11, 1); // december 2024, "eind 2024"
+
+export function maandenPraktijk(nu: Date = new Date()): number {
+  const m = (nu.getFullYear() - START_PRAKTIJK.getFullYear()) * 12
+          + (nu.getMonth() - START_PRAKTIJK.getMonth());
+  return Math.max(0, m);
+}
+
+/** Voor lopende tekst. */
+export const MAANDEN_PRAKTIJK = maandenPraktijk();
+
 /** Social proof. Bron: briefing v2 §4.3.
  *
  *  Het Ilze-citaat zelf is ongewijzigd, Tom heeft bevestigd dat zij dit
@@ -11,7 +31,9 @@ export const ILZE_QUOTE = {
   name: 'Ilze Spannenberg',
   role: 'Eigenaar, Blondes Incognito, Heeten',
   stats: [
-    { value: '18+ mnd', label: 'dagelijks in productie' },
+    // Stond hard op "18+ mnd" en liep daarmee uit de pas met de hero-badge en
+    // de STATS-strip, die hetzelfde feit uit maandenPraktijk() halen.
+    { value: `${maandenPraktijk()}+ mnd`, label: 'dagelijks in productie' },
     { value: '1 salon', label: 'waar de logica is bewezen' },
     { value: '5 modules', label: 'nu beschikbaar op het platform' },
   ],
@@ -28,26 +50,6 @@ export type StatItem = {
  *  onderbouwen, EmmaVindt bestaat nog niet en de Blondes Incognito-
  *  voorloper had geen KvK-zoeker. Vervangen door "6 concurrenten
  *  gemonitord", wat wél uit die praktijk komt. */
-/* ── HOE LANG DRAAIT HET AL ─────────────────────────────────────────────────
-   Stond op vijf plekken hardcoded als "18 maanden", naast "sinds eind 2024".
-   Die twee liepen uit elkaar: in augustus 2026 zijn het er twintig. Een getal
-   dat je met de hand moet bijhouden, houdt niemand bij, en op een pagina die
-   over eerlijkheid gaat is dat precies het verkeerde getal om fout te hebben.
-
-   Dus afgeleid van de startdatum. Naar beneden afgerond op hele maanden, zodat
-   het nooit méér claimt dan waar is. De waarde wordt bij de build berekend,
-   dus hij loopt hooguit tot de eerstvolgende deploy achter, de veilige kant. */
-const START_PRAKTIJK = new Date(2024, 11, 1); // december 2024, "eind 2024"
-
-export function maandenPraktijk(nu: Date = new Date()): number {
-  const m = (nu.getFullYear() - START_PRAKTIJK.getFullYear()) * 12
-          + (nu.getMonth() - START_PRAKTIJK.getMonth());
-  return Math.max(0, m);
-}
-
-/** "20 maanden": voor lopende tekst. */
-export const MAANDEN_PRAKTIJK = maandenPraktijk();
-
 export const STATS: StatItem[] = [
   { value: MAANDEN_PRAKTIJK, suffix: '+', label: 'Maanden dagelijks in gebruik bij Blondes Incognito' },
   { value: 1200, suffix: '+', label: 'Reviews geanalyseerd in de voorloper-tool' },

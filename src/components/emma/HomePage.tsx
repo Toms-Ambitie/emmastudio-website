@@ -226,7 +226,9 @@ function ProductShowcase() {
         <div data-reveal className="mt-12">
           <div className="mx-auto max-w-md lg:max-w-none lg:grid lg:grid-cols-[1fr_280px] lg:gap-6">
             <div className="relative overflow-hidden rounded-2xl border border-emma-line bg-emma-paper shadow-emma-pop">
-              <div className="aspect-[3/2] w-full overflow-hidden bg-emma-petrol">
+              {/* Verhouding volgt de aangeleverde screenshots (1568x707). Stond op
+                  3/2; met object-cover sneed dat ruim 30% van de breedte weg. */}
+              <div className="aspect-[1568/707] w-full overflow-hidden bg-emma-petrol">
                 <img
                   key={activeShot}
                   src={shots[activeShot].src}

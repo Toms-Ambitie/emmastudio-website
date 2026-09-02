@@ -203,8 +203,10 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
                   {shot ? 'uit de app' : 'impressie'}
                 </span>
               </div>
+              {/* De verhouding hieronder volgt de aangeleverde screenshots (1568x707).
+                  Stond op 3/2; met object-cover object-left-top viel de rechterkant weg. */}
               {shot ? (
-                <div className="relative aspect-[3/2] w-full overflow-hidden rounded-emma-squircle border border-emma-line bg-emma-creme">
+                <div className="relative aspect-[1568/707] w-full overflow-hidden rounded-emma-squircle border border-emma-line bg-emma-creme">
                   <Image
                     src={shot}
                     alt={`Het scherm van Emma${mod.name} in de app`}

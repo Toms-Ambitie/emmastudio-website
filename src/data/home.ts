@@ -39,7 +39,7 @@ export const HERO = {
 export const THREE_PROBLEMS = [
   { num: '01', title: 'Boekhouding vreet je avonden op', desc: 'Bonnetjes overtypen als de zaak dicht is. Zes tabbladen open en nog steeds geen idee wat je marge is. Het werk is niet moeilijk, het is alleen nooit klaar.', solution: 'EmmaBoekt + EmmaWaakt' },
   { num: '02', title: 'Loonadministratie is een ramp', desc: 'Contracten, verlof, salaris, en één fout is er één te veel. Een loonbureau lost het op voor honderd tot driehonderd euro per maand, ook in de maanden dat er niets verandert.', solution: 'EmmaLoont' },
-  { num: '03', title: 'Klanten vinden kost handen en voeten', desc: 'Zes losse tools die niet met elkaar praten. Marketing die erbij inschiet omdat er geen tijd is. En als er een lead binnenkomt, weet je niet waar hij vandaan kwam.', solution: 'EmmaVindt + EmmaPromoot + EmmaSchrijft' },
+  { num: '03', title: 'Je marketing schiet erbij in', desc: 'Zes losse tools die niet met elkaar praten. Adverteren en schrijven komen er pas bij als er tijd over is, en die is er nooit. En als er een klant binnenkomt, weet je niet waar hij vandaan kwam.', solution: 'EmmaPromoot + EmmaSchrijft' },
 ];
 export const PROBLEM_PULL = {
   stat: '8 tot 12 uur per week aan werk dat je niet gekozen hebt toen je voor jezelf begon.',
@@ -154,7 +154,7 @@ export const PRICE_COMPARISON = {
     { need: 'Boekhouding', modules: ['boekt'], loose: 'Losse app €9-15/mnd', bureau: 'Inbegrepen, maar traag' },
     { need: 'Loonadministratie', modules: ['loont'], loose: 'Loonbureau €100-300/mnd', bureau: 'Meerprijs' },
     { need: 'Marketing & ads', modules: ['promoot', 'schrijft'], loose: 'Marketingbureau €500-2.000/mnd', bureau: 'Niet inbegrepen' },
-    { need: 'Klanten vinden', modules: ['vindt'], loose: 'Extra tool nodig', bureau: 'Niet inbegrepen' },
+    { need: 'Personeel werven', modules: ['vindt'], loose: 'Vacaturebank of recruiter', bureau: 'Niet inbegrepen' },
     { need: 'Zicht op je cijfers', modules: ['waakt'], loose: null, bureau: null },
     { need: 'Alles onder een dak', modules: [], loose: null, bureau: null },
   ],
@@ -222,7 +222,7 @@ export const FAQ = {
     { q: 'Kan ik met een module beginnen en later uitbreiden?', a: 'Ja. Elke module is zelfstandig levensvatbaar. Begin met EmmaBoekt voor €9 per maand. Voeg er later andere modules aan toe. Een module aanzetten is een rij toevoegen, geen code schrijven.' },
     { q: 'Wat als ik stop met Emma?', a: 'Je verliest geen data. Alles wat je via Emma doet, landt ook in je onderliggende pakket. Emma is een schil, geen kooi. Je data blijft van jou.' },
     { q: 'Wat kost Emma?', a: 'Standaard-modules kosten €9 per maand, premium-modules €19 per maand, exclusief btw. Je begint met 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 10% korting.' },
-    { q: 'Welke modules kan ik nu gebruiken?', a: 'Vijf. EmmaBoekt voor je boekhouding, EmmaWaakt voor je cijfers, EmmaZiet voor je concurrenten en EmmaVindt voor klanten en personeel kosten elk €9 per maand. EmmaLoont voor loon, contracten en verlof kost €19. Je begint met 14 dagen gratis, zonder creditcard. De andere drie zijn in ontwikkeling. Op elke modulepagina zie je waar een module staat.' },
+    { q: 'Welke modules kan ik nu gebruiken?', a: 'Vijf. EmmaBoekt voor je boekhouding, EmmaWaakt voor je cijfers, EmmaZiet voor je concurrenten en EmmaVindt voor personeel werven kosten elk €9 per maand. EmmaLoont voor loon, contracten en verlof kost €19. Je begint met 14 dagen gratis, zonder creditcard. De andere drie zijn in ontwikkeling. Op elke modulepagina zie je waar een module staat.' },
     { q: 'Wat gebeurt er na die 14 dagen?', a: 'Niets, tenzij jij iets doet. Je start zonder creditcard, en zonder betaalmiddel kan er ook niets worden afgeschreven. Loopt de proefperiode af en heb je geen betaalgegevens ingevuld, dan pauzeert je account: je hoeft niet op te zeggen en je krijgt geen factuur. Je gegevens blijven staan, dus je kunt later verder waar je gebleven was. Wil je door, dan vul je je betaalgegevens in en loopt het gewoon door.' },
     { q: 'Hoe zit het met privacy en beveiliging?', a: 'Je bedrijfsdata staat binnen de Europese Unie, op servers in Frankfurt. Onze website en e-mailverzending lopen via Amerikaanse dienstverleners onder Europese standaardcontractbepalingen. Je gegevens worden alleen verwerkt om Emma te laten werken: geen verkoop aan derden, geen tracking. De koppeling met je boekhouding is versleuteld en voldoet aan de AVG.' },
   ],

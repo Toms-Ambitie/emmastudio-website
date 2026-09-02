@@ -61,7 +61,7 @@ export const MODULE_TAGS: Record<string, string> = {
   boekt:    'Boekhouden zonder je boekhoudsoftware aan te raken.',
   waakt:    'Het financiële brein van je zaak.',
   loont:    'Loon en contracten, zonder gedoe.',
-  vindt:    'Vind klanten en kandidaten die passen.',
+  vindt:    'Vind personeel dat past.',
   coacht:   'Coaching en voortgang voor jou en je team.',
   ziet:     'Weet wat je concurrenten in de buurt doen.',
   schrijft: 'Teksten die klinken als jij.',
