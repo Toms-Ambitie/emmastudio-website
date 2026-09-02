@@ -196,6 +196,10 @@ een body- of mono-font mét `wdth`-as toe, zet die dan expliciet op `normal`.
 - Rustige stillevens, natuurlijk licht, rustige composities
 - **Vermijd:** handenschud-stock, mascottes, 3D-renders, neon
 - Liever geen beeld dan een willekeurige illustratie
+- **Kennisbank-covers: gegenereerde beelden in documentaire stijl zijn akkoord**
+  (besluit Tom, 2 september 2026; echte klantfoto's komen er niet). Eisen: zelfde
+  beeldtaal als hierboven, natuurlijk licht, rustige compositie, nooit tekst of
+  logo's in beeld, 1920 breed als geoptimaliseerde JPG in `/public/kennisbank/`.
 
 ---
 
