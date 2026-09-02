@@ -182,7 +182,7 @@ export const ARTICLES: Article[] = [
       { t: 'h2', v: 'Drie vragen die je altijd zou moeten kunnen beantwoorden' },
       { t: 'ul', v: [
         'Hoe sta ik er deze maand voor ten opzichte van mijn doel?',
-        'Welke dienst of welk product draagt het meest bij, en welke kost me eigenlijk geld?',
+        'Welke kosten lopen op, en wat houd ik onderaan de streep over?',
         'Wat zou ik deze week kunnen doen om bij te sturen?',
       ] },
       { t: 'p', v: 'Als je deze drie vragen op elk moment kunt beantwoorden zonder eerst een avond te reserveren, heb je grip. Dat is precies waar Emma op mikt. Niet om jou tot data-analist te maken, maar om de antwoorden binnen handbereik te leggen zodat je een beslissing kunt nemen en weer verder kunt.' },
@@ -190,6 +190,8 @@ export const ARTICLES: Article[] = [
       { t: 'p', v: 'Veel ondernemers denken dat zoiets pas kan als hun boekhouding aan een systeem hangt. Dat hoeft niet. Heb je EmmaBoekt, dan komen je cijfers vanzelf binnen. Heb je die niet, dan upload je een omzet- en kostenoverzicht uit je eigen kassa- of boekhoudsysteem. Emma leest het uit, jij controleert het, en daarna werkt je overzicht precies hetzelfde.' },
       { t: 'p', v: 'Eén eis: de bedragen moeten zonder btw zijn. Staan ze inclusief, dan weigert Emma het bestand in plaats van te gokken. Terugrekenen met verschillende tarieven door elkaar levert cijfers op die er goed uitzien en niet kloppen, en dat is erger dan geen cijfers.' },
       { t: 'note', v: '<b>Een lege plek is geen fout.</b> Zie je ergens geen getal staan, dan is er geen bron voor. Emma vult zoiets nooit in met een schatting of een nul. Liever een eerlijke lege plek dan een getal waar je op stuurt terwijl het nergens op slaat.' },
+      { t: 'h2', v: 'Of je vraagt het gewoon' },
+      { t: 'p', v: 'Wil je iets weten dat niet op je overzicht staat, dan hoef je niet te zoeken. Met Vraag Emma, de knop bovenin de app of de sneltoets Ctrl+K, stel je een vraag over je eigen administratie, bijvoorbeeld wie er nog niet heeft betaald. Het antwoord komt uit je eigen gegevens, met de bron erbij en een link naar het scherm waar je het zelf kunt nakijken.' },
       { t: 'p', v: 'Rust en grip lijken tegenpolen, maar ze horen bij elkaar. Je krijgt pas rust als je weet dat je het ziet wanneer het ertoe doet. En je houdt pas grip als het kijken je geen energie kost.' },
     ],
   },
@@ -326,7 +328,7 @@ export const ARTICLES: Article[] = [
       { t: 'h2', v: 'Wat deze drie gemeen hebben' },
       { t: 'p', v: 'Geen van drieën vraagt software om te beginnen. Ze vragen aandacht, en dat is precies waarom ze het vaakst blijven liggen: er is nooit een moment waarop ze urgent worden.' },
       { t: 'p', v: 'Zodra je ze te pakken hebt, is het wel prettig als iets ze voor je bijhoudt. Dat je niet elke maand opnieuw hoeft uit te rekenen wat een dienst oplevert, en dat het je opvalt als het verschuift. Daar is Emma voor, maar begin gerust zonder.' },
-      { t: 'note', v: '<b>Zelf doorrekenen?</b> Wat je in stap één met de hand doet, houdt EmmaWaakt daarna bij: doelen per dienst en per medewerker, en een signaal als er iets afwijkt. Vanaf €9 per maand, 14 dagen gratis te proberen.' },
+      { t: 'note', v: '<b>Zelf doorrekenen?</b> De uitkomst van stap één zet je om in doelen: EmmaWaakt volgt je omzet, marge en kosten tegen die doelen en geeft een signaal als er iets afwijkt. Vanaf €9 per maand, 14 dagen gratis te proberen.' },
     ],
   },
   {
