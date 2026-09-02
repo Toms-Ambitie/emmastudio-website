@@ -194,32 +194,40 @@ werkelijke alternatieven:
 
 ---
 
-## EmmaVindt (€9 p/mnd) — klanten en kandidaten in je regio
+## EmmaVindt (€9 p/mnd) — personeel vinden in je regio
+
+> **Herzien 2 september 2026.** EmmaVindt is eind augustus een zuivere
+> personeelswervingsmodule geworden; het klanten-zoekdeel is uit de app
+> verwijderd (navigatietaak heet "Personeel werven"). De sales-intelligence-
+> ankers (Vainu, Dealfront, Company.info) zijn daarmee uit de vergelijking op
+> /vergelijk gehaald; ze blijven hieronder staan als achtergrond van het
+> oorspronkelijke veld.
 
 ### Het veld
 
 | Alternatief | Prijs | Peildatum |
 |---|---|---|
 | **EmmaVindt** | €9 p/mnd | — |
-| Zelf KvK-data via API | €6,40 p/mnd + €0,02 per profiel, plus bouwwerk | KvK-tarieven 1 jan 2026 |
-| Company.info | abonnement, prijs op aanvraag | aug 2026 |
-| Vainu | vanaf ± €3.500 p/jaar (± €292 p/mnd) | aug 2026 |
-| Dealfront | maatwerkprijs, mid-market | aug 2026 |
 | Indeed-abonnement (werving) | €120 p/mnd standaard, plus per klik | aug 2026, indeed.nl |
 | Werving- en selectiebureau | 20-35% van het bruto jaarsalaris per hire | aug 2026 |
+| Zelf KvK-data via API | €6,40 p/mnd + €0,02 per profiel, plus bouwwerk | KvK-tarieven 1 jan 2026 |
+| ~~Vainu~~ (sales, geen anker meer) | vanaf ± €3.500 p/jaar (± €292 p/mnd) | aug 2026 |
+| ~~Dealfront~~ (sales, geen anker meer) | maatwerkprijs, mid-market | aug 2026 |
+| ~~Company.info~~ (sales, geen anker meer) | abonnement, prijs op aanvraag | aug 2026 |
 
 ### Eerlijke grenzen
 
-- Vainu/Dealfront/Company.info bieden verrijking, triggers en integraties
-  voor salesteams; Vindt is bewust simpel: radius, score, pipeline.
-- Vindt levert kandidaten en leads om zelf te benaderen; het is geen
-  vacaturebank en geen bureau dat het gesprek voor je voert.
+- Vindt levert kandidaten om zelf te benaderen; het is geen vacaturebank en
+  geen bureau dat het gesprek voor je voert.
+- Klanten of leads zoeken zit er niet (meer) in; wie dat zoekt, is bij Vindt
+  aan het verkeerde adres.
 
 ### Wat wij hebben en zij niet
 
 - Dezelfde openbare bron (KvK-register) als de dure tools, maar dan op
-  salon-formaat en met een pipeline erbij, voor €9 in plaats van honderden
-  euro's per maand of een bureaufee van duizenden euro's per aanname.
+  salon-formaat en met een pipeline erbij, voor €9 in plaats van een
+  Indeed-abonnement plus klikbudget of een bureaufee van duizenden euro's
+  per aanname.
 
 ---
 

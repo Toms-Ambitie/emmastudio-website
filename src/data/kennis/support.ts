@@ -144,18 +144,20 @@ Emma jezelf uit de lijst.
 ## EmmaVindt
 
 **"Zoekt Emma op LinkedIn?"**
-Nee, en dat doen we bewust niet. De officiële LinkedIn-API staat zoeken op
-personen of bedrijven voor leadgeneratie niet toe, en pagina's scrapen is tegen
-hun voorwaarden en kost je je account. Emma zoekt in het openbare KvK-register.
+Nee, en dat doen we bewust niet. De officiële LinkedIn-API staat dit soort
+zoeken op personen niet toe, en pagina's scrapen is tegen hun voorwaarden en
+kost je je account. Emma zoekt in openbare bronnen zoals het KvK-register.
 
-**"Wat is het verschil tussen klanten zoeken en personeel werven?"**
-Twee aparte schermen, dezelfde techniek eronder. Gescheiden omdat een sollicitant
-geen lead is: er gelden andere privacyregels, en je wilt ze niet in één lijst.
+**"Kan ik er ook klanten of leads mee zoeken?"**
+Nee. EmmaVindt heeft een tijd een klanten-zoekdeel gehad, maar dat is bewust
+verwijderd: de module doet nu één ding en doet dat goed, personeel vinden.
+Wie dit leest op een oudere pagina of screenshot: dat klantendeel bestaat niet
+meer.
 
 **"Mag dit zomaar, met de AVG?"**
 Het gaat om openbare bedrijfsgegevens uit het KvK-register. Emma houdt daarnaast
 bij wie wat heeft opgezocht en wanneer, zodat je kunt verantwoorden wat er is
-gebeurd. Dat is vooral van belang bij werving.
+gebeurd. Bij werving is dat geen luxe maar een vereiste.
 
 **"Verstuurt Emma zelf berichten?"**
 Nee. Emma stelt een eerste bericht voor op basis van wat er openbaar bekend is.
@@ -206,6 +208,12 @@ zien geen bedrijfscijfers en niets van collega's.
 Alleen met zijn toestemming; dat schrijft de wet voor. Zonder toestemming opent
 hij hem zelf in de app.
 
+**"Kan ik contracten in Emma laten ondertekenen?"**
+Ja. Werkgever en medewerker ondertekenen het contract allebei in de app, en
+Emma legt vast wie er wanneer heeft getekend. Op het contract staat dan
+"ondertekend in Emma". Het is geen gekwalificeerde elektronische handtekening
+met een certificaat; wie die specifiek nodig heeft, regelt dat buiten Emma om.
+
 ## EmmaCoacht, EmmaSchrijft en EmmaPromoot
 
 **"Wanneer komen die?"**
@@ -233,8 +241,11 @@ beheerder mag meekijken en werken in de bedrijfsdata maar niet bij de
 facturatie; een medewerker ziet alleen zichzelf.
 
 **"Waar is de chat in de app? Ik zie Vraag Emma staan."**
-Die is er nog niet. Het paneel staat er met het label Binnenkort, maar de chat
-zelf werkt nog niet.
+Die werkt. Klik op Vraag Emma bovenin het scherm, of gebruik Ctrl+K (op een Mac
+Cmd+K). Je stelt een vraag over je eigen administratie, bijvoorbeeld wie er nog
+niet heeft betaald, en het antwoord komt uit je eigen gegevens, met de bron
+erbij en een link naar het scherm waar je het zelf kunt nakijken. Emma ziet
+daarbij alleen wat jouw rol mag zien.
 
 ## Wanneer je altijd doorzet
 

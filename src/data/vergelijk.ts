@@ -91,18 +91,20 @@ export const MODULE_VERGELIJK: Record<string, ModuleVergelijk> = {
       'Die doe je zelf via Mijn Belastingdienst Zakelijk (mag tot tien werknemers) of via je kantoor.',
   },
   vindt: {
-    kop: 'Kandidaten en klanten uit dezelfde bron als de dure tools',
-    emma: 'EmmaVindt à €9 per maand: bedrijven en kandidaten in jouw radius uit het openbare KvK-register, met score en pipeline.',
+    kop: 'Personeel vinden zonder bureaufee',
+    emma:
+      'EmmaVindt à €9 per maand: kandidaten in jouw radius uit openbare bronnen zoals het KvK-register, ' +
+      'met een score met de reden erbij en een pipeline tot en met de match.',
     ankers: [
-      { naam: 'Vainu', prijs: 'vanaf ± €292 p/mnd', toelichting: 'sales intelligence voor salesteams' },
       { naam: 'Indeed', prijs: '€120 p/mnd plus klikbudget', toelichting: 'standaard werkgeversabonnement' },
       { naam: 'Werving- en selectiebureau', prijs: '20 tot 35% van een jaarsalaris', toelichting: 'per aanname, al gauw duizenden euro\'s' },
     ],
     statusQuo:
-      'Een vacature plaatsen en hopen, of een adressenbestand kopen dat veroudert in de la. ' +
+      'Een vacature plaatsen en hopen dat de juiste persoon toevallig zoekt. ' +
       'Voor de fee van één bureau-aanname draait EmmaVindt tientallen jaren.',
     grens:
-      'Eerlijk: Vindt levert namen om zelf te benaderen. Het is geen vacaturebank en voert het gesprek niet voor je.',
+      'Eerlijk: Vindt levert namen om zelf te benaderen. Het is geen vacaturebank en voert het gesprek niet voor je. ' +
+      'En klanten of leads zoeken zit er niet in; Vindt doet alleen personeel.',
   },
   ziet: {
     kop: 'Weten wat er om je heen gebeurt, zonder groot-bedrijf-budget',

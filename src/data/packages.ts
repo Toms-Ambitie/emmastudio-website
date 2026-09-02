@@ -24,9 +24,10 @@ import { MODULE_ORDER, MODULE_PRICE } from './modules';
  *  "Emma voor Salons" (dekt kappers, barbershops en schoonheidssalons), niet
  *  "Emma voor Haarverzorging" of "Emma voor Kapsalons".
  *
- *  STATUS. Alle kaarten staan op 'Binnenkort'. Dat is geen slordigheid: de
- *  signup staat site-breed dicht (LAUNCHED=false) en elk pakket bevat
- *  EmmaLoont, dat volgens MODULE_STATUS nog niet live is. */
+ *  KOOPBAARHEID. `purchasable` volgt `plans.purchasable` op Supabase prod,
+ *  gemeten 2 september 2026: Emma voor Salons staat daar op true (en active),
+ *  de andere drie op false. Verandert dat, werk het dan HIER bij; de kaarten
+ *  en de chatbot lezen dit veld. */
 export type Package = {
   name: string;
   /** Maandprijs excl. btw zoals in Stripe. `null` = nog niet verkoopbaar. */
@@ -35,6 +36,8 @@ export type Package = {
   /** Module-id's zoals in MODULE_ORDER (niet de displaynamen). */
   modules: string[];
   status: string;
+  /** Is dit pakket vandaag echt af te nemen (plans.purchasable op prod)? */
+  purchasable: boolean;
 };
 
 /** Som van de losse modules in een pakket, per maand. */
@@ -64,7 +67,8 @@ export const PACKAGES: Package[] = [
     price: 49.5,
     desc: 'Voor de salon met personeel: kappers, barbershops en schoonheidssalons.',
     modules: ['boekt', 'waakt', 'loont', 'vindt', 'ziet'],
-    status: 'Binnenkort',
+    status: 'Nu te koop',
+    purchasable: true,
   },
   {
     name: 'Emma voor Horeca',
@@ -72,6 +76,7 @@ export const PACKAGES: Package[] = [
     desc: 'Voor de zaak met een team in de keuken en de bediening.',
     modules: ['boekt', 'waakt', 'loont', 'ziet'],
     status: 'Binnenkort',
+    purchasable: false,
   },
   {
     name: 'Emma voor Installateurs',
@@ -79,6 +84,7 @@ export const PACKAGES: Package[] = [
     desc: 'Voor het installatiebedrijf: zonnepanelen, warmtepompen en thuisbatterijen.',
     modules: ['boekt', 'waakt', 'loont', 'vindt', 'ziet'],
     status: 'Binnenkort',
+    purchasable: false,
   },
   {
     name: 'Emma Compleet',
@@ -86,5 +92,6 @@ export const PACKAGES: Package[] = [
     desc: 'Voor wie niets meer wil missen. De prijs volgt zodra alle acht modules er zijn.',
     modules: MODULE_ORDER,
     status: 'Binnenkort',
+    purchasable: false,
   },
 ];

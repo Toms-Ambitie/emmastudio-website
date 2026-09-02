@@ -178,11 +178,11 @@ export const MODULE_PRICES = {
    §6.2/§6.3: alle kaarten "Binnenkort" (geen coral/recommended), één
    wachtlijstformulier onder de kaarten. */
 export const PACKAGES_SECTION = {
-  title: 'Straks kies je een pakket.',
-  intro: 'We bundelen de modules per branche, met 10% korting op de losse prijs. Wie nu instapt, houdt zijn prijs.',
-  foot: 'Tot die tijd is elke module los te gebruiken: standaard €9/mnd, premium €19/mnd, excl. BTW en maandelijks opzegbaar.',
+  title: 'Of kies een pakket.',
+  intro: 'We bundelen de modules per branche, met 10% korting op de losse prijs. Emma voor Salons is er; de andere pakketten volgen.',
+  foot: 'Elke module blijft ook los te gebruiken: standaard €9/mnd, premium €19/mnd, excl. BTW en maandelijks opzegbaar.',
   waitlist: {
-    heading: 'Wil je weten wanneer de pakketten er zijn?',
+    heading: 'Wil je weten wanneer de andere pakketten er zijn?',
     sub: 'Laat je e-mailadres achter. Je hoort het als eerste, en je houdt de prijs waarvoor je instapt.',
     button: 'Houd me op de hoogte',
   },
@@ -223,6 +223,7 @@ export const FAQ = {
     { q: 'Wat als ik stop met Emma?', a: 'Je verliest geen data. Alles wat je via Emma doet, landt ook in je onderliggende pakket. Emma is een schil, geen kooi. Je data blijft van jou.' },
     { q: 'Wat kost Emma?', a: 'Standaard-modules kosten €9 per maand, premium-modules €19 per maand, exclusief btw. Je begint met 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 10% korting.' },
     { q: 'Welke modules kan ik nu gebruiken?', a: 'Vijf. EmmaBoekt voor je boekhouding, EmmaWaakt voor je cijfers, EmmaZiet voor je concurrenten en EmmaVindt voor personeel werven kosten elk €9 per maand. EmmaLoont voor loon, contracten en verlof kost €19. Je begint met 14 dagen gratis, zonder creditcard. De andere drie zijn in ontwikkeling. Op elke modulepagina zie je waar een module staat.' },
+    { q: 'Kan ik Emma gewoon een vraag stellen over mijn cijfers?', a: 'Ja. In de app zit Vraag Emma: je typt een vraag over je eigen administratie, bijvoorbeeld wie er nog niet heeft betaald, en het antwoord komt uit je eigen gegevens. Emma zegt er altijd bij waarop het antwoord is gebaseerd en linkt naar het scherm waar je het zelf kunt nakijken.' },
     { q: 'Wat gebeurt er na die 14 dagen?', a: 'Niets, tenzij jij iets doet. Je start zonder creditcard, en zonder betaalmiddel kan er ook niets worden afgeschreven. Loopt de proefperiode af en heb je geen betaalgegevens ingevuld, dan pauzeert je account: je hoeft niet op te zeggen en je krijgt geen factuur. Je gegevens blijven staan, dus je kunt later verder waar je gebleven was. Wil je door, dan vul je je betaalgegevens in en loopt het gewoon door.' },
     { q: 'Hoe zit het met privacy en beveiliging?', a: 'Je bedrijfsdata staat binnen de Europese Unie, op servers in Frankfurt. Onze website en e-mailverzending lopen via Amerikaanse dienstverleners onder Europese standaardcontractbepalingen. Je gegevens worden alleen verwerkt om Emma te laten werken: geen verkoop aan derden, geen tracking. De koppeling met je boekhouding is versleuteld en voldoet aan de AVG.' },
   ],

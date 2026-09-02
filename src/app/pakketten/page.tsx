@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { MODULES, MODULE_PRICE } from '@/data/modules';
+import { MODULES, MODULE_PRICE, SIGNUP_URL } from '@/data/modules';
 import { PACKAGES, formatPrice, packageListPrice, packageDiscount } from '@/data/packages';
 import { PACKAGES_SECTION, MODULE_PRICES } from '@/data/home';
 import { IconCheck } from '@/components/emma/icons';
@@ -39,7 +39,7 @@ export default function Pakketten() {
         </div>
       </section>
 
-      {/* Pakketkaarten — alle vier "Binnenkort", geen coral/aanrader (§6.2) */}
+      {/* Pakketkaarten. Emma voor Salons is koopbaar en krijgt de CTA; de rest toont zijn status. */}
       <section className="px-5 pt-8 md:px-8 lg:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4">
@@ -72,10 +72,17 @@ export default function Pakketten() {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-6 flex items-center gap-2 rounded-emma-btn border border-emma-line bg-emma-creme/50 px-4 py-2.5">
-                  <span className="flex h-1.5 w-1.5 rounded-full bg-emma-subtext" aria-hidden="true" />
-                  <span className="text-sm font-semibold text-emma-subtext">{pkg.status}</span>
-                </div>
+                {/* Koopbaarheid volgt plans.purchasable op prod (zie packages.ts). */}
+                {pkg.purchasable ? (
+                  <a href={SIGNUP_URL} className="mt-6 flex items-center justify-center rounded-emma-btn bg-emma-coral-strong px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-emma-coral-deep active:translate-y-px">
+                    Start 14 dagen gratis
+                  </a>
+                ) : (
+                  <div className="mt-6 flex items-center gap-2 rounded-emma-btn border border-emma-line bg-emma-creme/50 px-4 py-2.5">
+                    <span className="flex h-1.5 w-1.5 rounded-full bg-emma-subtext" aria-hidden="true" />
+                    <span className="text-sm font-semibold text-emma-subtext">{pkg.status}</span>
+                  </div>
+                )}
               </div>
             ))}
           </div>

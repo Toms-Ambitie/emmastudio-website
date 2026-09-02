@@ -208,7 +208,7 @@ Emma heeft 8 modules — elke module is een Nederlands werkwoord. CamelCase: `Em
 | 1 | EmmaBoekt    | `#16B79C` | €9/mnd | Boekhouden zonder boekhoudsoftware aan te raken           |
 | 2 | EmmaWaakt    | `#FFB23E` | €9/mnd | Continu zicht op hoe je bedrijf ervoor staat              |
 | 3 | EmmaLoont    | `#4D6BF5` | €19/mnd| Salaris, contracten en verlof zonder gedoe                |
-| 4 | EmmaVindt    | `#EB5C43` | €9/mnd | Kandidaten en klanten ontdekken in je radius              |
+| 4 | EmmaVindt    | `#EB5C43` | €9/mnd | Personeel vinden dat past, in je eigen radius             |
 | 5 | EmmaCoacht   | `#FF7FA3` | €9/mnd | Voortgang van je mensen op één plek                       |
 | 6 | EmmaZiet     | `#9B6BE0` | €9/mnd | Markt en concurrenten in beeld zonder zoekwerk            |
 | 7 | EmmaSchrijft | `#1FA4E0` | €19/mnd| Content schrijven en plannen met jouw stem                |
@@ -224,13 +224,20 @@ Emma heeft 8 modules — elke module is een Nederlands werkwoord. CamelCase: `Em
 
 ---
 
-## 9b. Lanceerstatus (8 augustus 2026) — leidend voor alle site-teksten
+## 9b. Lanceerstatus (2 september 2026) — leidend voor alle site-teksten
 
-> **Bron van waarheid voor functies en status:** `emmastudio-app/docs/FUNCTIES.md`.
-> Dat document is gemeten tegen de code, Supabase prod/dev en de `plans`-tabel.
-> Spreekt dit bestand het tegen, dan wint FUNCTIES.md en wordt dit bijgewerkt.
+> **Bron van waarheid voor functies en status:** `emmastudio-app/docs/FUNCTIES.md`,
+> aangevuld met `docs/MEETRONDE-1-SEPTEMBER.md` en `docs/branchestand.md` in die repo.
+> Die documenten zijn gemeten tegen de code, Supabase prod/dev en de `plans`-tabel.
+> Spreekt dit bestand ze tegen, dan winnen zij en wordt dit bijgewerkt.
 
-**`LAUNCHED`** in `src/data/modules.ts` is de publieke signup-schakelaar, niet de modulestatus. Staat die op `false`, dan toont de site "lanceert in juli" met e-mailcapture; op `true` schakelen de CTA's naar "Start 14 dagen gratis" richting **app.emmastudio.nl**. `LAUNCHED` zegt alleen of de signup open staat, niet of een module technisch draait (dat regelt `MODULE_STATUS`) en niet of een module op dit moment koopbaar is (dat is `plans.purchasable` in Supabase). Draaien, koopbaar zijn en publiek gelanceerd zijn zijn drie onafhankelijke assen. Gemeten op prod, 9 augustus 2026: `purchasable = true` voor boekt, waakt, ziet, vindt en loont; `false` voor coacht, schrijft, promoot en alle vier de pakketten.
+**`LAUNCHED = true`** sinds eind augustus: de signup staat open en de CTA's zeggen "Start 14 dagen gratis" richting **app.emmastudio.nl/signup**. `LAUNCHED` zegt alleen of de signup open staat, niet of een module technisch draait (dat regelt `MODULE_STATUS`) en niet of een module of pakket op dit moment koopbaar is (dat is `plans.purchasable` in Supabase). Draaien, koopbaar zijn en publiek gelanceerd zijn zijn drie onafhankelijke assen. Gemeten op prod, 2 september 2026: `purchasable = true` voor boekt, waakt, ziet, vindt, loont én het pakket **Emma voor Salons**; `false` voor coacht, schrijft, promoot en de overige pakketten. Sinds 1 september loopt er marketing voor vijf modules in zes branches.
+
+**EmmaVindt is een personeelswervingsmodule.** Het klanten-zoekdeel is eind augustus bewust verwijderd; de module doet alleen nog kandidaten. Schrijf nergens meer "klanten en kandidaten". De navigatietaak in de app heet "Personeel werven".
+
+**EmmaLoont rekent met zes branches**, alle zes op prod gecontroleerd (celverificatie zonder afwijkingen, pensioenfonds vastgesteld): Kappers, Horeca, Huisartsenzorg, Schilders, Motorvoertuigen en tweewielers, Technisch installatiebedrijf. De ene bron voor site en chatbot is `src/data/cao.ts`; werk die bij, niet losse teksten.
+
+**De app-navigatie groepeert op taken, niet op modulenamen** (nieuwe UX, augustus 2026): gebieden Werk, Cijfers, Financiën, Relaties, Markt, Werving en Personeel. Modulenamen leven op het abonnementsscherm en in de modulesignatuur boven de schermtitel. Verwijs in hulpteksten naar taken ("onder Personeel bij Loonrun"), niet naar moduleschermen die niet meer zo heten.
 
 **Naamgeving:** EmmaBoekt is een communicatietitel, geen productnaam. Het product is EmmaStudio met een boekhoudmodule. De losse Emma-domeinen in TransIP zijn communicatie-URL's, geen zelfstandige sites: elk moduledomein (emmaboekt.nl, emmawaakt.nl, emmaloont.nl, emmavindt.nl, emmavind.nl, emmacoacht.nl, emmaziet.nl, emmaschrijft.nl, emmapromoot.nl) verwijst naar zijn modulepagina op www.emmastudio.nl/modules/[id]; de merkdomeinen zonder module (emmastudio.eu, emmacorp.nl, emmaregelt.nl) naar de homepage. Geregeld in `next.config.ts` via host-redirects. Een redirect werkt pas als het domein óók aan het Vercel-project emmastudio-website hangt — staat het domein elders, dan doet de config niets.
 
@@ -245,12 +252,15 @@ EmmaZiet is **niet langer gedeeltelijk**. Prijsvergelijking, reviews-analyse, se
 
 EmmaLoont stond tot 8 augustus ten onrechte op "Binnenkort" terwijl hij op prod al te koop was. Nu live op de site.
 
-**Drie claims die NIET waargemaakt worden — nooit op de site zetten:**
-- **Vraag Emma / de copilot bestaat niet.** In de app staat een paneel met "Binnenkort". Geen chat, geen antwoorden uit je eigen cijfers.
+**Twee claims die NIET waargemaakt worden — nooit op de site zetten:**
 - **Geen BTW-scherm en geen BTW-aangifte.** EmmaBoekt bereidt geen aangifte voor.
-- **Geen digitale ondertekening van contracten.** EmmaLoont legt contracten vast, laat ze niet tekenen.
+- **Geen loonaangifte bij de Belastingdienst.** EmmaLoont rekent, maakt stroken en journaalposten; de aangifte blijft bij de klant of zijn kantoor.
 
-"Live" betekent hier: bereikbaar en werkend op prod. Het betekent niet "in dagelijks gebruik door klanten" — op prod staan 2 tenants en is het gebruik nog minimaal. Het functiebewijs staat grotendeels op dev.
+**Twee claims die sinds augustus WEL waar zijn — maar alleen in deze bewoordingen:**
+- **Vraag Emma bestaat en werkt** (knop in de kopbalk, Ctrl+K/Cmd+K, aangezet 17 augustus; RPC's en ai-functie op prod gemeten 2 september). Antwoorden komen uit de eigen administratie, met bronvermelding en schermlinks, binnen de rechten van de rol. Beloof geen vrije kletschat; het is vraag-en-antwoord op eigen cijfers.
+- **Contracten worden in Emma ondertekend**: werkgever én medewerker tekenen in de app, Emma legt het bewijs vast. De vaste formulering is "ondertekend in Emma". Noem het nooit een gekwalificeerde of gecertificeerde elektronische handtekening.
+
+"Live" betekent hier: bereikbaar en werkend op prod. Het betekent niet "in dagelijks gebruik door klanten" — buiten de demo-tenant staan er enkele bedrijven op prod (waarvan twee van onszelf) en is het klantgebruik nog minimaal. Zet nooit gebruikersaantallen op de site.
 
 **Eigenaar Blondes Incognito (testimonial): Ilze Spannenberg, Heeten.**
 
@@ -279,7 +289,7 @@ Format: `Emma voor [branche]` — geen sub-merken, geen aparte logo's.
 
 **Naamgeving:** `Emma voor [Branche]`, zoals een ondernemer zichzelf noemt — "Emma voor Salons" (dekt kappers, barbershops en schoonheidssalons), niet "Emma voor Haarverzorging" of "Emma voor Kapsalons".
 
-Pakketten zijn marketing-bundels, geen aparte producten. Zelfde software, andere module-configuratie. Geen enkel pakket is op dit moment koopbaar op de site: de signup staat dicht (`LAUNCHED=false`) en elk pakket bevat EmmaLoont, dat volgens `MODULE_STATUS` nog niet live is.
+Pakketten zijn marketing-bundels, geen aparte producten. Zelfde software, andere module-configuratie. **Emma voor Salons is koopbaar** (`plans.purchasable = true` op prod, gemeten 2 september 2026) en krijgt op de site de "Start 14 dagen gratis"-CTA; de andere drie tonen "Binnenkort". De koopbaarheid staat als `purchasable` in `src/data/packages.ts` en volgt de `plans`-tabel; werk beide samen bij.
 
 ---
 

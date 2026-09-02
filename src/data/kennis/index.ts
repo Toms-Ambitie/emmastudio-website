@@ -103,18 +103,20 @@ function modulesBlok(): string {
 /** Pakketten. De à-la-cartesom en de korting worden berekend, niet vastgelegd,
  *  zodat ze niet uit elkaar kunnen lopen met MODULE_PRICE. */
 function pakkettenBlok(): string {
-  // Hoeveel modules nog niet draaien wordt geteld, niet als getal opgeschreven:
-  // hier stond "nog drie modules ontbreken", wat allang niet meer klopte.
-  const nogNiet = MODULE_ORDER.filter(id => !MODULE_STATUS[id]?.live).length;
+  // Koopbaarheid wordt gelezen, niet opgeschreven: het veld volgt
+  // plans.purchasable op prod (zie packages.ts) en hier telt de code zelf
+  // welke pakketten te koop zijn. Er stond eerder "geen enkel pakket is te
+  // koop" als vaste zin, en die veroudert stil.
+  const teKoop = PACKAGES.filter(p => p.purchasable);
 
   const regels: string[] = [
     '# Pakketten',
     '',
-    `Er zijn ${PACKAGES.length} pakketten. **Geen enkel pakket is op dit moment te koop.**`,
-    'Ze staan op de site en op /pakketten, maar je kunt ze niet afnemen: elk pakket',
-    `bevat EmmaLoont, en er draaien nog ${nogNiet} modules niet. Wie nu wil beginnen,`,
-    'neemt de modules los. Noem een pakket dus nooit als iets dat iemand vandaag',
-    'kan kopen.',
+    teKoop.length === 0
+      ? `Er zijn ${PACKAGES.length} pakketten. Geen enkel pakket is op dit moment te koop; wie nu wil beginnen, neemt de modules los.`
+      : `Er zijn ${PACKAGES.length} pakketten. Vandaag te koop: ${teKoop.map(p => p.name).join(', ')}. ` +
+        'De andere pakketten zijn er nog niet; noem die nooit als iets dat iemand vandaag kan kopen. ' +
+        'De modules zijn daarnaast altijd los af te nemen.',
     '',
   ];
 
@@ -126,9 +128,9 @@ function pakkettenBlok(): string {
     // wat er niet is, moet ze ook niet noemen.
     regels.push(
       p.price === null
-        ? `- **${p.name}**: nog geen prijs bekend (${p.status}). ${p.desc} ${modules} ` +
+        ? `- **${p.name}**: nog geen prijs bekend (${p.status.toLowerCase()}). ${p.desc} ${modules} ` +
           `Los kosten die modules €${som} per maand.`
-        : `- **${p.name}**: €${formatPrice(p.price)} per maand (${p.status}). ${p.desc} ${modules} ` +
+        : `- **${p.name}**: €${formatPrice(p.price)} per maand (${p.purchasable ? 'nu te koop, 14 dagen gratis proberen' : p.status.toLowerCase()}). ${p.desc} ${modules} ` +
           `Los zouden die €${som} kosten, dus ongeveer ${korting}% korting.`,
     );
   }
@@ -294,7 +296,9 @@ const MAG_NIET: { naam: string; patroon: RegExp }[] = [
 /** Dingen die er juist wél in moeten. Verdwijnt er een bron, dan valt dit op. */
 const MOET_WEL = [
   'doorzetten_voorstellen',
-  'Geen enkel pakket is op dit moment te koop',
+  // Het pakkettenblok moet er zijn, in welke koopstand dan ook. Beide
+  // varianten van de openingszin beginnen zo:
+  `Er zijn ${PACKAGES.length} pakketten.`,
   'exclusief btw',
   'e-Boekhouden.nl',
   // De cao-dekking. Verdwijnt deze regel, dan gokt Emma weer over cao's, en

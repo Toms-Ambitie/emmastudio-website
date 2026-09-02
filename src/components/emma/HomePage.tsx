@@ -683,10 +683,17 @@ function PackagesSection() {
                 ))}
               </ul>
 
-              <div className="mt-6 flex items-center gap-2 rounded-emma-btn border border-emma-line bg-emma-creme/50 px-4 py-2.5">
-                <span className="flex h-1.5 w-1.5 rounded-full bg-emma-subtext" aria-hidden="true" />
-                <span className="text-sm font-semibold text-emma-subtext">{pkg.status}</span>
-              </div>
+              {/* Koopbaarheid volgt plans.purchasable op prod (zie packages.ts). */}
+              {pkg.purchasable ? (
+                <a href={SIGNUP_URL} className="mt-6 flex items-center justify-center rounded-emma-btn bg-emma-coral-strong px-4 py-2.5 text-sm font-semibold text-white transition-all hover:bg-emma-coral-deep active:translate-y-px">
+                  Start 14 dagen gratis
+                </a>
+              ) : (
+                <div className="mt-6 flex items-center gap-2 rounded-emma-btn border border-emma-line bg-emma-creme/50 px-4 py-2.5">
+                  <span className="flex h-1.5 w-1.5 rounded-full bg-emma-subtext" aria-hidden="true" />
+                  <span className="text-sm font-semibold text-emma-subtext">{pkg.status}</span>
+                </div>
+              )}
             </div>
           </div>
         ))}
