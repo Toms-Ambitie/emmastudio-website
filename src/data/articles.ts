@@ -339,6 +339,7 @@ export const ARTICLES: Article[] = [
     dek: 'De cao voor garages, autobedrijven en tweewielerspecialisten zit nu in EmmaLoont. Loonstroken, contracten en verlof, met de cao-schaal ernaast.',
     date: '2 september 2026',
     read: '4 min',
+    image: '/kennisbank/emmastudio-voor-motorvoertuigen-en-tweewielers.jpg',
     author: 'Het team van Emma',
     body: [
       { t: 'p', v: 'Een garage draait op de brug en de planning, niet op de administratie. Toch gaat er elke maand een avond op aan lonen, contracten en verlofbriefjes. Vanaf nu kan dat anders: de cao voor het motorvoertuigen- en tweewielerbedrijf zit in EmmaLoont.' },
@@ -367,6 +368,7 @@ export const ARTICLES: Article[] = [
     dek: 'De horeca-cao zit nu in EmmaLoont. Contracten, loonstroken en verlof voor je team in de keuken en de bediening, zonder avondwerk.',
     date: '2 september 2026',
     read: '4 min',
+    image: '/kennisbank/emmastudio-voor-horeca.jpg',
     author: 'Het team van Emma',
     body: [
       { t: 'p', v: 'In de horeca is personeel je grootste kostenpost en je grootste zorg. Mensen komen en gaan, contracten verschillen per persoon, en de administratie doe je na sluitingstijd. Vanaf nu zit de horeca-cao in EmmaLoont, zodat dat werk in de app gebeurt in plaats van in je avonden.' },

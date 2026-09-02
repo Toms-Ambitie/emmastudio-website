@@ -77,8 +77,11 @@ function CoverDecor({ glyph, size = 150 }: { glyph: string; size?: number }) {
 export default function Kennisbank() {
   // metBeeld zet `image` terug op undefined als het bestand er niet is, zodat de
   // kaart terugvalt op het gekleurde vlak in plaats van een leeg donker gat.
-  const featured = ARTICLES.filter(a => a.featured).map(metBeeld)[0];
-  const rest = nieuwsteEerst(ARTICLES.filter(a => !a.featured)).map(metBeeld);
+  // Het uitgelichte blok is altijd het NIEUWSTE artikel, niet een vaste pin:
+  // een oud verhaal boven een verse lancering las als een site die stilstaat.
+  const gesorteerd = nieuwsteEerst(ARTICLES).map(metBeeld);
+  const featured = gesorteerd[0];
+  const rest = gesorteerd.slice(1);
 
   return (
     <main id="main-content">
