@@ -6,6 +6,14 @@ import { metBeeld } from '@/data/coverbeeld';
 
 const SITE = 'https://www.emmastudio.nl';
 
+/* Deze pagina toont "X maanden praktijk" (hero-badge, STATS-strip, citaatblok),
+   afgeleid van de startdatum in proof.ts. Zonder revalidatie wordt die waarde
+   één keer geprerenderd en daarna hergebruikt uit de cache, óók bij volgende
+   deploys waarin deze pagina niet verandert. Zo bleef het getal op 20 staan
+   terwijl het er 21 waren. Eén keer per dag opnieuw renderen is ruim genoeg
+   voor een teller die per maand opschuift. */
+export const revalidate = 86400;
+
 export const metadata: Metadata = {
   title: 'Emma · Software voor ondernemers, van boekhouden tot marketing',
   description: 'Emma neemt het saaie werk van ondernemen over: boekhouden, cijfers, personeel en marketing in één platform. Vanaf €9 per maand. Bekijk de modules.',

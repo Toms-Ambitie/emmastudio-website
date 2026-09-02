@@ -9,6 +9,10 @@ const LIVE_AANTAL = Object.values(MODULE_STATUS).filter(s => s.live).length;
 
 const SITE = 'https://www.emmastudio.nl';
 
+/* Zie de toelichting in src/app/page.tsx: deze pagina toont hetzelfde
+   maandental en zou anders in de prerender-cache bevriezen. */
+export const revalidate = 86400;
+
 const META_TITLE = 'Over Emma · Ontstaan in een kapsalon, gebouwd voor ondernemers';
 const META_DESC = 'Emma begon als werkend systeem in een echte kapsalon, niet op een whiteboard. Gebouwd door Toms Ambitie uit Zwolle, module voor module. Lees het verhaal.';
 

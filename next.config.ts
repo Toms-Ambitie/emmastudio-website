@@ -56,6 +56,18 @@ const nextConfig: NextConfig = {
       })),
       // Taakgerichte URL, blijft los van de domeinredirect bestaan
       { source: '/boekhouding', destination: '/modules/boekt', permanent: false },
+      // Ingetrokken artikel. Het stuk ging over EmmaVindt als zoeker met twee
+      // modi, klanten en personeel, en die klant-modus bestaat niet meer in het
+      // product. Het artikel is verwijderd in plaats van herschreven, maar de
+      // URL was geindexeerd, dus hij blijft bestaan als permanente redirect naar
+      // de modulepagina die het onderwerp nu correct beschrijft.
+      //
+      // statusCode: 301 en niet permanent: true. Die laatste levert in Next een
+      // 308 op. Voor Google maakt dat niets uit, beide consolideren de
+      // autoriteit, maar 301 is wat er is afgesproken en wat oudere crawlers en
+      // linkchecks het meest voorspelbaar afhandelen. Vandaar hier de expliciete
+      // statuscode, terwijl de regels hierboven met permanent werken.
+      { source: '/kennisbank/klanten-en-personeel-vinden', destination: '/modules/vindt', statusCode: 301 },
     ];
   },
 };

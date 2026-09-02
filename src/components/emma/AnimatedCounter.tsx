@@ -20,7 +20,12 @@ export function AnimatedCounter({
   suffix?: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const [display, setDisplay] = useState("0");
+  // Begint op de ECHTE waarde, niet op "0". Anders staat er in de server-HTML
+  // een nul: dat is wat zoekmachines, bezoekers zonder JavaScript en iedereen
+  // die niet tot dit blok scrollt te zien krijgt. "0+ maanden dagelijks in
+  // gebruik" is precies het tegenovergestelde van wat die strip moet zeggen.
+  // De animatie zet zelf terug naar nul op het moment dat hij begint.
+  const [display, setDisplay] = useState(() => formatNumber(value));
   const animatedRef = useRef(false);
 
   useEffect(() => {
@@ -39,6 +44,7 @@ export function AnimatedCounter({
         entries.forEach((entry) => {
           if (entry.isIntersecting && !animatedRef.current) {
             animatedRef.current = true;
+            setDisplay("0"); // pas hier naar nul, vlak voor de animatie
             const start = performance.now();
             function tick(now: number) {
               const elapsed = now - start;
