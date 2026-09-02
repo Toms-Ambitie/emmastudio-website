@@ -91,8 +91,8 @@ export const MODULE_SEO: Record<string, { title: string; desc: string }> = {
     desc: 'EmmaLoont doet je loonadministratie: loon berekenen conform cao, loonstroken, contracten en verlof. De loonkosten belanden direct in je boekhouding.',
   },
   vindt: {
-    title: 'EmmaVindt · Personeel en klanten vinden in je eigen regio',
-    desc: 'EmmaVindt zoekt personeel of klanten in je regio via het openbare KvK-register, met een fit-score per match. Lokaal, licht, zonder dure recruitmenttool.',
+    title: 'EmmaVindt · Personeel werven in je eigen regio',
+    desc: 'EmmaVindt zoekt kandidaten in je regio via het openbare KvK-register, met een fit-score per match. Lokaal, licht, zonder dure recruitmenttool.',
   },
   coacht: {
     title: 'EmmaCoacht · Medewerkers coachen met structuur en cijfers',
@@ -143,19 +143,19 @@ export const MODULE_RELATED: Record<string, { lead: string; links: { href: strin
     { href: '/modules/vindt', anchor: 'EmmaVindt om nieuwe mensen te vinden' },
   ] },
   ziet: { lead: 'EmmaZiet werkt goed samen met', links: [
-    { href: '/modules/vindt', anchor: 'EmmaVindt om nieuwe klanten te vinden' },
+    { href: '/modules/vindt', anchor: 'EmmaVindt om personeel te werven' },
     { href: '/modules/schrijft', anchor: 'EmmaSchrijft om je content te plannen' },
     { href: '/pakketten', anchor: 'een branchepakket waarin EmmaZiet zit' },
   ] },
   schrijft: { lead: 'EmmaSchrijft werkt goed samen met', links: [
     { href: '/modules/promoot', anchor: 'EmmaPromoot voor je betaalde advertenties' },
-    { href: '/modules/vindt', anchor: 'EmmaVindt om klanten te vinden' },
+    { href: '/modules/vindt', anchor: 'EmmaVindt om personeel te werven' },
     { href: '/modules/ziet', anchor: 'EmmaZiet om te weten wat de buurt doet' },
   ] },
   promoot: { lead: 'EmmaPromoot werkt goed samen met', links: [
     { href: '/modules/schrijft', anchor: 'EmmaSchrijft voor je organische content' },
     { href: '/modules/waakt', anchor: 'EmmaWaakt om op je echte omzet te meten' },
-    { href: '/modules/vindt', anchor: 'EmmaVindt om nieuwe klanten te vinden' },
+    { href: '/modules/vindt', anchor: 'EmmaVindt om personeel te werven' },
   ] },
 };
 
@@ -390,34 +390,31 @@ export const MODULES: Record<string, ModuleData> = {
   },
   vindt:{
     id:'vindt', name:'Vindt', num:'04', price:9, accentVar:'--m-vindt',
-    chip:'recruitment én sales in één',
-    head:'Vind wie bij je past.',
-    intro:'Eén module met twee gezichten. Ontdek kandidaten als je personeel zoekt, of nieuwe klanten als je wilt groeien, allebei dichtbij en met een nette pipeline.',
+    chip:'werving in je eigen regio',
+    head:'Vind personeel dat past.',
+    intro:'Een zoeker voor personeelswerving: lokale kandidaten vinden, scoren en in een pijplijn zetten, tot aan het eerste contact.',
     heroVig:'vindt_pipeline',
     does:{
       title:'Wat EmmaVindt voor je doet.',
-      sub:'Of je nu mensen zoekt of klanten, het begint met de juiste in beeld krijgen. Rustig, gericht, en netjes vastgelegd.',
+      sub:'Werven begint met de juiste mensen in beeld krijgen. Rustig, gericht, en netjes vastgelegd.',
       feats:[
         { tag:'Recruitment', h:'Kandidaten in de buurt.', p:'Ontdek kandidaten binnen een straal die je zelf instelt, met een score die laat zien wie past, en een pipeline om het overzicht te houden.',
           list:['Straal zelf instelbaar, per kilometer','Score met de reden erbij, geen kaal cijfer','Pipeline van eerste contact tot match'], vig:'vindt_score' },
-        { tag:'Sales', h:'Klanten die bij je passen.', p:'Ontdek potentiële klanten op basis van locatie en branche, met lead-scoring en een sales-pipeline.',
-          list:['Leads op locatie en SBI-code','Lead-scoring die prioriteert','Sales-pipeline in één overzicht'], vig:'vindt_klant' },
         { tag:'Eerste contact', h:'Een bericht dat niet als sjabloon leest.', p:'Emma schrijft een concept voor het eerste bericht, op basis van wat er openbaar over iemand te vinden is. Jij leest het na, past het aan en verstuurt het. Wat je afspreekt en wanneer, leg je erbij vast.',
           list:['Berichtconcept op openbare informatie','Jij bewerkt en verstuurt, nooit Emma','Notities en volgende stap per contact'], vig:'vindt_pipeline' },
-        { tag:'AVG-proof', h:'Netjes en navolgbaar.', p:'Een audit-log houdt bij wat er gebeurt, zodat je werving en acquisitie voldoen aan de privacyregels.',
+        { tag:'AVG-proof', h:'Netjes en navolgbaar.', p:'Een audit-log houdt bij wat er gebeurt, zodat je werving voldoet aan de privacyregels.',
           list:['Audit-log voor de AVG','Inzichtelijk wie je benadert','Rustig en verantwoord opgezet'], vig:'vindt_pipeline' },
       ],
     },
     steps:{ title:'Zo werkt het ontdekken.', items:[
-      { n:'01 · KIES MODUS', h:'Mensen of klanten', p:'Bepaal of je kandidaten of nieuwe klanten zoekt. Emma stemt zich daarop af.' },
-      { n:'02 · STEL IN', h:'Bepaal je straal', p:'Geef je werkgebied en wensen op. Emma zoekt binnen jouw buurt en branche.' },
-      { n:'03 · SCOOR', h:'Zie wie past', p:'Profielen krijgen een score, zodat je je tijd steekt in wie er echt toe doet.' },
-      { n:'04 · VOLG OP', h:'Houd je pipeline', p:'Van eerste contact tot match of klant, alles netjes en AVG-proof vastgelegd.' },
+      { n:'01 · STEL IN', h:'Bepaal je vak en straal', p:'Geef op in welk vak je werft en hoe ver je wilt zoeken. Emma zoekt binnen jouw buurt en branche.' },
+      { n:'02 · SCOOR', h:'Zie wie past', p:'Kandidaten krijgen een score, zodat je je tijd steekt in wie er echt toe doet.' },
+      { n:'03 · VOLG OP', h:'Houd je pipeline', p:'Van eerste contact tot match, alles netjes en AVG-proof vastgelegd.' },
     ] },
     faq:[
-      { q:'Is dit een vacaturebank?', a:'Nee. EmmaVindt helpt je actief ontdekken wie in jouw buurt past, in plaats van te wachten op reacties. In sales-modus werkt het net zo, maar dan voor potentiële klanten.' },
+      { q:'Is dit een vacaturebank?', a:'Nee. EmmaVindt helpt je actief ontdekken wie in jouw buurt past, in plaats van te wachten op reacties op een vacature.' },
       { q:'Hoe zit het met privacy?', a:'De gegevens komen uit het openbare KvK-register en openbare bedrijfswebsites. Geen LinkedIn, geen social media. Dat mag niet volgens hun voorwaarden en brengt je account in gevaar. EmmaVindt werkt met de AVG als uitgangspunt en houdt met een audit-log bij wie je benadert.' },
-      { q:'Voor wie is het handig?', a:'Voor ondernemers die personeel werven, zoals salons en zorgpraktijken, en voor wie nieuwe klanten zoekt, zoals ZZP\'ers en kleine teams.' },
+      { q:'Voor wie is het handig?', a:'Voor ondernemers die zelf personeel werven, zoals salons en installatiebedrijven, waar vakmensen schaars zijn en vaak al ergens in de buurt werken.' },
       { q:'Verstuurt Emma zelf berichten?', a:'Nee. Emma schrijft een concept, jij leest het na en verstuurt het. Geeft iemand aan geen berichten te willen, dan legt Emma dat vast en houdt ze die persoon buiten je berichten.' },
       { q:'Vindt Emma ook mensen die niet op zoek zijn?', a:'Het uitgangspunt is het openbare KvK-register, dus je vindt vooral ondernemers en zelfstandigen in jouw vak. Dat is precies de groep die niet op vacaturebanken kijkt. Of iemand openstaat voor een gesprek, weet je pas als je het vraagt.' },
       { q:'Wat kost het en kan ik het nu gebruiken?', a: LAUNCHED
@@ -636,10 +633,8 @@ export const VIGNETTES: Record<string, string> = {
     <div class="vig__scale"><span class="vig__band"></span><span class="vig__me" style="left:74%">deze</span><span class="vig__avg" style="left:50%"></span></div>
     <div class="vig__legend"><span><i class="vig__lg vig__lg--me"></i> deze kandidaat</span><span><i class="vig__lg"></i> gemiddelde</span></div>
     <div class="vig__li" style="margin-top:6px"><span class="vig__tick">✓</span><span>Past bij je vacature</span></div>`,
-  vindt_klant:`
-    <div class="vig__row vig__row--head"><span class="vig__dot"></span> Klanten ontdekken</div>
-    <div class="vig__li"><span class="vig__tick">✓</span><span>Bedrijf · jouw werkgebied</span><b class="vig__pill">lead</b></div>
-    <div class="vig__insight"><span class="vig__spark">◆</span> Gevonden op <b>locatie en branche</b> (SBI-code)</div>`,
+  /* vindt_klant is verwijderd samen met het sales-blok op /modules/vindt: het
+     was de enige plek die deze vignette gebruikte. */
   coacht_scorecard:`
     <div class="vig__row vig__row--head"><span class="vig__dot"></span> Scorecard · Eva</div>
     <div class="vig__pay"><span>Klanttevredenheid</span><i style="width:82%"></i></div>

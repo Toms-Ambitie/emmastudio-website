@@ -63,7 +63,7 @@ export const ARTICLE_RELATED: Record<string, { lead: string; links: { href: stri
   ] },
   'weten-wat-de-buurt-vraagt': { lead: 'Dit zit in', links: [
     { href: '/modules/ziet', anchor: 'EmmaZiet, je markt in beeld' },
-    { href: '/modules/vindt', anchor: 'EmmaVindt om klanten in dezelfde regio te zoeken' },
+    { href: '/modules/vindt', anchor: 'EmmaVindt om personeel in dezelfde regio te werven' },
     { href: '/modules/waakt', anchor: 'EmmaWaakt, waar je marktpositie terugkomt' },
   ] },
   'loon-zonder-loonbureau': { lead: 'Meer hierover:', links: [
@@ -72,7 +72,7 @@ export const ARTICLE_RELATED: Record<string, { lead: string; links: { href: stri
     { href: '/modules/vindt', anchor: 'EmmaVindt om nieuw personeel te vinden' },
   ] },
   'klanten-en-personeel-vinden': { lead: 'Zo werkt dit in', links: [
-    { href: '/modules/vindt', anchor: 'EmmaVindt, één zoeker met twee modi' },
+    { href: '/modules/vindt', anchor: 'EmmaVindt, je zoeker voor personeelswerving' },
     { href: '/modules/ziet', anchor: 'EmmaZiet om je marktgebied te kennen' },
     { href: '/modules/loont', anchor: 'EmmaLoont zodra iemand in dienst komt' },
   ] },
