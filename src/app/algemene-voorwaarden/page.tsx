@@ -20,7 +20,7 @@ export default function AlgemeneVoorwaarden() {
             </div>
 
             <h1>Algemene Voorwaarden</h1>
-            <p className="legal__meta">Toms Ambitie · Versie 1.2 · Ingangsdatum: 27 september 2026</p>
+            <p className="legal__meta">Toms Ambitie · Versie 1.3 · Ingangsdatum: 28 september 2026</p>
 
             <h2>Artikel 1. Definities</h2>
             <p>In deze voorwaarden wordt verstaan onder:</p>
@@ -54,14 +54,15 @@ export default function AlgemeneVoorwaarden() {
             <p>4.6 Toms Ambitie behoudt zich het recht voor de prijzen aan te passen. Prijswijzigingen worden minimaal 30 dagen van tevoren per e-mail aan de Klant medegedeeld.</p>
 
             <h2>Artikel 5. Gratis proefperiode</h2>
-            <p>5.1 Nieuwe Klanten hebben recht op een gratis proefperiode van 14 dagen. Voor het starten van de proefperiode wordt geen betaalmiddel gevraagd.</p>
-            <p>5.2 De proefperiode gaat <b>niet</b> automatisch over in een betaald abonnement. Heeft de Klant aan het einde van de proefperiode geen betaalmiddel toegevoegd, dan wordt het abonnement gepauzeerd: er wordt niets in rekening gebracht en de toegang tot de modules vervalt. De Klant hoeft daarvoor niets te doen en niet op te zeggen.</p>
-            <p>5.3 Voegt de Klant tijdens of na de proefperiode een betaalmiddel toe, dan wordt het abonnement op dat moment betaald voortgezet respectievelijk hervat, tegen de op dat moment geldende prijs.</p>
-            <p>5.4 Tijdens de proefperiode zijn alle door de Klant geselecteerde modules volledig beschikbaar.</p>
-            <p>5.5 Een gepauzeerd abonnement en de daarin opgeslagen gegevens blijven bewaard conform de bewaartermijnen in de <Link href="/privacy">Privacyverklaring</Link>, zodat de Klant later kan hervatten zonder gegevensverlies.</p>
+            <p>5.1 Nieuwe Klanten hebben recht op een gratis proefperiode van 14 dagen.</p>
+            <p>5.2 Bij het starten van de proefperiode voegt de Klant een betaalmiddel toe. Tijdens de proefperiode wordt er niets in rekening gebracht.</p>
+            <p>5.3 Aan het einde van de proefperiode gaat het abonnement automatisch over in een betaald abonnement, tegen de op dat moment geldende prijs. Zegt de Klant op vóór het einde van de proefperiode, dan wordt er niets in rekening gebracht en eindigt de toegang tot de modules aan het einde van de proefperiode.</p>
+            <p>5.4 Opzeggen doet de Klant in de app, bij Abonnement.</p>
+            <p>5.5 Tijdens de proefperiode zijn alle door de Klant geselecteerde modules volledig beschikbaar.</p>
+            <p>5.6 Kan een betaling niet worden uitgevoerd, dan wordt het abonnement gepauzeerd: de toegang tot de modules vervalt en er wordt niets verder in rekening gebracht. De opgeslagen gegevens blijven bewaard conform de bewaartermijnen in de <Link href="/privacy">Privacyverklaring</Link>, zodat de Klant later kan hervatten zonder gegevensverlies.</p>
 
             <h2>Artikel 6. Duur en opzegging</h2>
-            <p>6.1 Het abonnement wordt aangegaan voor de gekozen betalingstermijn (maandelijks of jaarlijks) en wordt na afloop automatisch verlengd.</p>
+            <p>6.1 Het abonnement wordt maandelijks aangegaan en na afloop automatisch verlengd, tenzij schriftelijk een andere betalingstermijn is afgesproken.</p>
             <p>6.2 De Klant kan het abonnement op elk moment opzeggen via de accountinstellingen. De opzegging gaat in aan het einde van de lopende betaalperiode.</p>
             <p>6.3 Toms Ambitie kan het abonnement opzeggen met inachtneming van een opzegtermijn van 30 dagen, tenzij sprake is van een zwaarwegende reden zoals schending van deze voorwaarden of niet-betaling.</p>
             <p>6.4 Bij opzegging worden de gegevens van de Klant conform de Privacyverklaring bewaard en na de bewaartermijn verwijderd.</p>
@@ -120,6 +121,7 @@ export default function AlgemeneVoorwaarden() {
             <ul>
               <li><b>Versie 1.1</b>, 9 augustus 2026.</li>
               <li><b>Versie 1.2</b>, 27 september 2026: het accepteren van deze voorwaarden en de verwerkersovereenkomst bij het aanmaken van het account staat nu in artikel 3.5 en 10.3, en de gedachtestreepjes zijn eruit.</li>
+              <li><b>Versie 1.3</b>, 28 september 2026: artikel 5 is aangepast omdat bij het starten van de proefperiode wel een betaalmiddel wordt gevraagd en de proefperiode automatisch overgaat in een betaald abonnement, en artikel 6.1 noemt jaarlijks niet meer als standaardkeuze.</li>
             </ul>
             <p style={{ marginTop: '48px', paddingTop: '24px', borderTop: '1px solid var(--line)', fontSize: '13px', color: 'var(--ink-soft)' }}>
               {BEDRIJF.naam} · {ADRES_KORT} · {NUMMERS_KORT} · <Link href="/privacy">Privacyverklaring</Link> · <Link href="/cookiebeleid">Cookiebeleid</Link>
