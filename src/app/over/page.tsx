@@ -128,7 +128,7 @@ export default function Over() {
           <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-emma-ink md:text-4xl">Doe je mee<span className="text-emma-coral">?</span></h2>
           <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-emma-ink-2">
             {LAUNCHED
-              ? `${LIVE_AANTAL} van de acht modules zijn nu te gebruiken. Kies wat je nodig hebt en probeer het 14 dagen gratis, zonder creditcard.`
+              ? `${LIVE_AANTAL} van de acht modules zijn nu te gebruiken. Kies wat je nodig hebt en probeer het 14 dagen gratis. Je betaalt pas vanaf dag 15.`
               : `${LIVE_AANTAL} van de acht modules draaien al, maar de aanmelding staat nog niet open. Laat je e-mail achter en je hoort het als eerste zodra je kunt starten.`}
           </p>
           <div className="mt-7 flex justify-center">

@@ -553,7 +553,7 @@ function ModulePrices() {
                 <span className="text-sm text-emma-subtext">per maand, excl. BTW</span>
               </div>
               {MODULE_STATUS[id].live && LAUNCHED ? (
-                <p className="mt-2 text-sm font-medium text-emma-success">14 dagen gratis proberen, geen creditcard nodig</p>
+                <p className="mt-2 text-sm font-medium text-emma-success">14 dagen gratis, pas op dag 15 betalen</p>
               ) : (
                 <p className="mt-2 text-sm font-medium text-emma-subtext">Binnenkort beschikbaar</p>
               )}

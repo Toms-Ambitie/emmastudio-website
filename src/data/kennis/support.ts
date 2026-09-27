@@ -46,10 +46,10 @@ uitgeklede versie, en dan weet je nog steeds niet of het voor jou werkt. Je
 krijgt liever 14 dagen de échte module.
 
 **"Wat gebeurt er na de proefperiode?"**
-Niets, tenzij je zelf iets doet. Je start zonder creditcard, dus er kan ook
-niets worden afgeschreven. Vul je geen betaalgegevens in, dan pauzeert je
-account: geen factuur, geen opzegging nodig. Je gegevens blijven staan, dus je
-kunt later verder waar je gebleven was.
+Bij het starten vul je je betaalgegevens in, met automatische incasso of een
+kaart. De eerste 14 dagen wordt er niets afgeschreven. Zeg je voor dag 15 op,
+dan betaal je niets; opzeggen regel je zelf in de app onder Abonnement. Zeg je
+niet op, dan loopt het abonnement door en betaal je vanaf dag 15 per maand.
 
 **"Kan ik later een module bijnemen?"**
 Ja, dat regel je zelf in de app onder Abonnement. Ook een nieuwe module begint

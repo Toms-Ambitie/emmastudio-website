@@ -147,11 +147,12 @@ function prijsBlok(): string {
     'Alle prijzen zijn exclusief btw.',
     'Alle acht modules los zouden €' + MODULE_ORDER.reduce((t, id) => t + (MODULE_PRICE[id] ?? 0), 0) + ' per maand zijn.',
     '',
-    '- 14 dagen gratis proberen, zonder creditcard.',
+    '- 14 dagen gratis proberen.',
     '- Maandelijks opzegbaar.',
     '- 10% korting bij jaarbetaling.',
-    '- Na de proefperiode wordt er niets afgeschreven. Zonder betaalgegevens',
-    '  pauzeert het account; je hoeft niet op te zeggen en krijgt geen factuur.',
+    '- Bij het starten vul je je betaalgegevens in, met automatische incasso of',
+    '  een kaart. De eerste 14 dagen wordt er niets afgeschreven. Wie voor dag 15',
+    '  opzegt, betaalt niets; wie niet opzegt, betaalt vanaf dag 15 per maand.',
     '',
     /* PRICE_COMPARISON.foot hoort hier bewust NIET bij. Die voetnoot ("gebaseerd
        op marktprijzen 2026") gaat over de vergelijkingstabel met losse apps en
@@ -261,7 +262,7 @@ function beginnenBlok(): string {
     '',
     LAUNCHED
       ? `Aanmelden kan via ${SIGNUP_URL}. Je kiest je modules, probeert ze 14 dagen ` +
-        'gratis en hoeft geen creditcard op te geven.'
+        'gratis. Betaalgegevens vul je meteen in, maar er wordt pas op dag 15 iets afgeschreven.'
       : 'De aanmelding staat nog niet open. Bezoekers kunnen hun e-mailadres ' +
         'achterlaten via het wachtlijstformulier op de homepage.',
     `Inloggen doen bestaande klanten op ${APP_URL}.`,

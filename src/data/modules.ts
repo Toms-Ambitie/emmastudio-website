@@ -298,7 +298,7 @@ export const MODULES: Record<string, ModuleData> = {
       { q:'Ik gebruik SnelStart. Kan ik ook meedoen?', a:'Nog niet. EmmaBoekt werkt met e-Boekhouden.nl. De koppelingen met SnelStart en Moneybird staan op de planning, maar hebben nog geen datum. Laat je e-mail achter, dan hoor je het als ze er zijn.' },
       { q:'Wat kost EmmaBoekt?', a:'€9 per maand, exclusief btw. Je probeert Emma eerst 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 10% korting.' },
       { q:'Kan ik de boekhoudmodule nu al gebruiken?', a: LAUNCHED
-          ? 'Ja. De boekhoudmodule is de eerste module van Emma en is nu te gebruiken. Je probeert het 14 dagen gratis, zonder creditcard. Maak een account aan op app.emmastudio.nl/signup en je bent binnen een paar minuten gekoppeld.'
+          ? 'Ja. De boekhoudmodule is de eerste module van Emma en is nu te gebruiken. Je probeert het 14 dagen gratis. Je betaalgegevens vul je meteen in, met automatische incasso of een kaart, maar er wordt pas op dag 15 iets afgeschreven. Zeg je eerder op, dan betaal je niets. Maak een account aan op app.emmastudio.nl/signup en je bent binnen een paar minuten gekoppeld.'
           : 'EmmaBoekt draait al, maar de aanmelding staat nog niet open. Laat je e-mail achter, dan hoor je het op de dag dat je kunt starten.' },
     ],
   },
@@ -337,7 +337,7 @@ export const MODULES: Record<string, ModuleData> = {
       { q:'Werkt EmmaWaakt samen met EmmaBoekt?', a:'Ja. Heb je EmmaBoekt, dan leest Waakt die cijfers direct mee. Heb je Boekt niet, dan upload je je omzet en kosten zelf. Waakt werkt allebei de manieren.' },
       { q:'Wat kost EmmaWaakt?', a:'€9 per maand, exclusief btw. Je probeert Emma eerst 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 10% korting.' },
       { q:'Kan ik het nu al gebruiken?', a: LAUNCHED
-          ? 'Ja. EmmaWaakt is nu te gebruiken. Je probeert het 14 dagen gratis, zonder creditcard. Maak een account aan op app.emmastudio.nl/signup.'
+          ? 'Ja. EmmaWaakt is nu te gebruiken. Je probeert het 14 dagen gratis. Je betaalgegevens vul je meteen in, met automatische incasso of een kaart, maar er wordt pas op dag 15 iets afgeschreven. Zeg je eerder op, dan betaal je niets. Maak een account aan op app.emmastudio.nl/signup.'
           : 'EmmaWaakt draait al, maar de aanmelding staat nog niet open. Laat je e-mail achter, dan hoor je het op de dag dat je kunt starten.' },
       { q:'Verzint Emma cijfers als er geen data is?', a:'Nee. Als er geen gegevens zijn, zie je dat. Geen nul waar niets staat, geen schatting die eruitziet als een meting. Emma rekent niet zelf: de database rekent, Emma vertelt wat eruit komt.' },
     ],
@@ -384,7 +384,7 @@ export const MODULES: Record<string, ModuleData> = {
       { q:'Kunnen contracten in Emma ondertekend worden?', a:'Ja. Werkgever en medewerker ondertekenen het contract allebei in de app, en Emma legt vast wie er wanneer tekende. Op het contract staat dan: ondertekend in Emma. Het is geen gekwalificeerde elektronische handtekening met certificaat; wie die specifiek nodig heeft, regelt dat buiten Emma om.' },
       { q:'Wat als ik onder de cao-schaal wil betalen?', a:'Dat mag, en Emma houdt je niet tegen. Er zijn legitieme redenen voor, bijvoorbeeld een andere urenbasis of functie. Wat Emma wel doet: de schaal ernaast zetten en waarschuwen als je eronder gaat zitten, zodat je het bewust doet.' },
       { q:'Wat kost EmmaLoont en kan ik het nu gebruiken?', a: LAUNCHED
-          ? 'Ja, EmmaLoont is nu te gebruiken. €19 per maand, exclusief btw, met 10% korting bij jaarbetaling. Je probeert het 14 dagen gratis, zonder creditcard. Maak een account aan op app.emmastudio.nl/signup.'
+          ? 'Ja, EmmaLoont is nu te gebruiken. €19 per maand, exclusief btw, met 10% korting bij jaarbetaling. Je probeert het 14 dagen gratis. Je betaalgegevens vul je meteen in, met automatische incasso of een kaart, maar er wordt pas op dag 15 iets afgeschreven. Zeg je eerder op, dan betaal je niets. Maak een account aan op app.emmastudio.nl/signup.'
           : '€19 per maand, exclusief btw, met 10% korting bij jaarbetaling. EmmaLoont draait al, maar de aanmelding staat nog niet open. Laat je e-mail achter, dan hoor je het zodra je kunt starten.' },
     ],
   },
@@ -418,7 +418,7 @@ export const MODULES: Record<string, ModuleData> = {
       { q:'Verstuurt Emma zelf berichten?', a:'Nee. Emma schrijft een concept, jij leest het na en verstuurt het. Geeft iemand aan geen berichten te willen, dan legt Emma dat vast en houdt ze die persoon buiten je berichten.' },
       { q:'Vindt Emma ook mensen die niet op zoek zijn?', a:'Het uitgangspunt is het openbare KvK-register, dus je vindt vooral ondernemers en zelfstandigen in jouw vak. Dat is precies de groep die niet op vacaturebanken kijkt. Of iemand openstaat voor een gesprek, weet je pas als je het vraagt.' },
       { q:'Wat kost het en kan ik het nu gebruiken?', a: LAUNCHED
-          ? '€9 per maand, exclusief btw, met 10% korting bij jaarbetaling. EmmaVindt is nu te gebruiken: je probeert het 14 dagen gratis, zonder creditcard. Maak een account aan op app.emmastudio.nl/signup.'
+          ? '€9 per maand, exclusief btw, met 10% korting bij jaarbetaling. EmmaVindt is nu te gebruiken. Je probeert het 14 dagen gratis. Je betaalgegevens vul je meteen in, met automatische incasso of een kaart, maar er wordt pas op dag 15 iets afgeschreven. Zeg je eerder op, dan betaal je niets. Maak een account aan op app.emmastudio.nl/signup.'
           : '€9 per maand, exclusief btw, met 10% korting bij jaarbetaling. EmmaVindt is nog in ontwikkeling. Laat je e-mail achter, dan hoor je het zodra je kunt starten.' },
     ],
   },
@@ -499,7 +499,7 @@ export const MODULES: Record<string, ModuleData> = {
       { q:'Waar komen de reviews vandaan?', a:'Van Google. Emma haalt de reviews van je concurrenten op, haalt er de terugkerende thema\'s uit en houdt bij of het sentiment beter of slechter wordt. Je ziet ook je eigen positie ertegenover.' },
       { q:'Wat kost EmmaZiet?', a:'€9 per maand, exclusief btw. Je probeert het eerst 14 dagen gratis en je kunt maandelijks opzeggen. Betaal je per jaar, dan krijg je 10% korting.' },
       { q:'Kan ik EmmaZiet nu al gebruiken?', a: LAUNCHED
-          ? 'Ja. EmmaZiet is nu te gebruiken. Je probeert het 14 dagen gratis, zonder creditcard. Maak een account aan op app.emmastudio.nl/signup.'
+          ? 'Ja. EmmaZiet is nu te gebruiken. Je probeert het 14 dagen gratis. Je betaalgegevens vul je meteen in, met automatische incasso of een kaart, maar er wordt pas op dag 15 iets afgeschreven. Zeg je eerder op, dan betaal je niets. Maak een account aan op app.emmastudio.nl/signup.'
           : 'EmmaZiet draait al, maar de aanmelding staat nog niet open. Laat je e-mail achter, dan hoor je het op de dag dat je kunt starten.' },
     ],
   },

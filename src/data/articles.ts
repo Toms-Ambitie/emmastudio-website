@@ -155,7 +155,7 @@ export const ARTICLES: Article[] = [
       { t: 'h2', v: 'Waar het vandaag staat' },
       { t: 'p', v: 'Vijf van de acht modules zijn er en zijn te gebruiken: de boekhoudschil, het financiële overzicht, de marktverkenner, de personeelszoeker en de loonadministratie. Drie zijn er nog niet: coaching, content en adverteren. Die staan op de planning, zonder datum, want een gemiste datum kost meer vertrouwen dan geen datum.' },
       { t: 'p', v: 'En omdat eerlijkheid twee kanten op werkt, ook de grenzen: Emma bereidt je btw-aangifte niet voor, en de loonaangifte bij de Belastingdienst blijft bij jou of je kantoor. Als je die twee dingen zoekt, weet je het nu voordat je begint in plaats van erna.' },
-      { t: 'note', v: '<b>Wat het kost:</b> je betaalt per module, vanaf €9 per maand exclusief btw. Elke module begint met 14 dagen gratis, zonder creditcard, en je kunt maandelijks opzeggen. Je neemt alleen wat je gebruikt.' },
+      { t: 'note', v: '<b>Wat het kost:</b> je betaalt per module, vanaf €9 per maand exclusief btw. Elke module begint met 14 dagen gratis en je kunt maandelijks opzeggen. Je betaalgegevens vul je meteen in, maar er wordt pas op dag 15 iets afgeschreven. Je neemt alleen wat je gebruikt.' },
       { t: 'p', v: 'Het blijft een raar startpunt voor software: één kapsalon in Overijssel. Maar het is wel de reden dat de vragen die Emma stelt de vragen zijn die een ondernemer herkent, en niet de vragen die een boekhoudpakket handig vindt.' },
     ],
   },
@@ -357,7 +357,7 @@ export const ARTICLES: Article[] = [
       { t: 'h2', v: 'En als je iets wilt weten, vraag je het gewoon' },
       { t: 'p', v: 'In de app zit Vraag Emma. Je typt een vraag over je eigen administratie, bijvoorbeeld wie er nog verlof heeft staan, en het antwoord komt uit je eigen gegevens, met de bron erbij en een link naar het scherm waar je het zelf kunt nakijken.' },
       { t: 'p', v: 'Eén ding doet Emma bewust niet: de loonaangifte bij de Belastingdienst. Die blijft bij jou of je kantoor. Het rekenwerk, de stroken en de journaalpost krijg je aangeleverd, dus dat laatste stukje is klein.' },
-      { t: 'note', v: '<b>Wat het kost:</b> EmmaLoont kost €19 per maand, exclusief btw. Je probeert het 14 dagen gratis, zonder creditcard, en je kunt maandelijks opzeggen.' },
+      { t: 'note', v: '<b>Wat het kost:</b> EmmaLoont kost €19 per maand, exclusief btw. Je probeert het 14 dagen gratis en je kunt maandelijks opzeggen. Je betaalgegevens vul je meteen in, maar er wordt pas op dag 15 iets afgeschreven.' },
     ],
   },
   {
@@ -385,7 +385,7 @@ export const ARTICLES: Article[] = [
       { t: 'pull', v: 'Liever een avond in de zaak dan een avond in de administratie.' },
       { t: 'h2', v: 'Eerlijk over de grens' },
       { t: 'p', v: 'De loonaangifte bij de Belastingdienst doet Emma niet. Die doe je zelf via Mijn Belastingdienst Zakelijk, wat mag bij tien of minder werknemers, of je laat dat stukje bij je kantoor. Het rekenwerk en de stroken heb je dan al, dus dat laatste stukje is klein.' },
-      { t: 'note', v: '<b>Wat het kost:</b> EmmaLoont kost €19 per maand, exclusief btw. Je probeert het 14 dagen gratis, zonder creditcard, en je kunt maandelijks opzeggen.' },
+      { t: 'note', v: '<b>Wat het kost:</b> EmmaLoont kost €19 per maand, exclusief btw. Je probeert het 14 dagen gratis en je kunt maandelijks opzeggen. Je betaalgegevens vul je meteen in, maar er wordt pas op dag 15 iets afgeschreven.' },
     ],
   },
 ];

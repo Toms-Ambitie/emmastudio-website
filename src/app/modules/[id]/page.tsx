@@ -353,7 +353,7 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
           {canSignup ? (
             <>
               <h2 className="mt-5 font-display text-3xl font-bold tracking-tight text-emma-ink md:text-4xl">Begin zonder gedoe<span style={{ color: mc }}>.</span></h2>
-              <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-emma-ink-2">Maak een account aan en start meteen. De eerste 14 dagen zijn gratis, geen creditcard nodig.</p>
+              <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-emma-ink-2">Maak een account aan en start meteen. De eerste 14 dagen zijn gratis: je vult je betaalgegevens in, maar er wordt pas op dag 15 iets afgeschreven. Zeg je eerder op, dan betaal je niets.</p>
               <div className="mt-7 flex justify-center">
                 <a className="group inline-flex items-center justify-center gap-2 rounded-emma-btn bg-emma-coral-strong px-7 py-3.5 text-base font-semibold text-white transition-all hover:bg-emma-coral-deep active:translate-y-px" href={SIGNUP_URL}>
                   Start 14 dagen gratis
@@ -378,8 +378,8 @@ export default async function ModulePage({ params }: { params: Promise<{ id: str
           )}
           {canSignup && (
             <div className="mt-7 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-emma-subtext">
-              <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: mc }} aria-hidden="true" />14 dagen gratis proberen</span>
-              <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: mc }} aria-hidden="true" />Geen creditcard nodig</span>
+              <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: mc }} aria-hidden="true" />14 dagen gratis</span>
+              <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: mc }} aria-hidden="true" />Pas op dag 15 betalen</span>
               <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: mc }} aria-hidden="true" />Maandelijks opzegbaar</span>
               <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: mc }} aria-hidden="true" />Excl. btw</span>
             </div>
