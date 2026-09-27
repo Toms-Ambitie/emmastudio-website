@@ -59,10 +59,10 @@ export default function AlgemeneVoorwaarden() {
             <p>5.3 Aan het einde van de proefperiode gaat het abonnement automatisch over in een betaald abonnement, tegen de op dat moment geldende prijs. Zegt de Klant op vóór het einde van de proefperiode, dan wordt er niets in rekening gebracht en eindigt de toegang tot de modules aan het einde van de proefperiode.</p>
             <p>5.4 Opzeggen doet de Klant in de app, bij Abonnement.</p>
             <p>5.5 Tijdens de proefperiode zijn alle door de Klant geselecteerde modules volledig beschikbaar.</p>
-            <p>5.6 Kan een betaling niet worden uitgevoerd, dan wordt het abonnement gepauzeerd: de toegang tot de modules vervalt en er wordt niets verder in rekening gebracht. De opgeslagen gegevens blijven bewaard conform de bewaartermijnen in de <Link href="/privacy">Privacyverklaring</Link>, zodat de Klant later kan hervatten zonder gegevensverlies.</p>
+            <p>5.6 Kan een betaling niet worden uitgevoerd, dan geldt artikel 4.5. De opgeslagen gegevens van de Klant blijven bewaard conform de bewaartermijnen in de <Link href="/privacy">Privacyverklaring</Link>, zodat de Klant later kan hervatten zonder gegevensverlies.</p>
 
             <h2>Artikel 6. Duur en opzegging</h2>
-            <p>6.1 Het abonnement wordt maandelijks aangegaan en na afloop automatisch verlengd, tenzij schriftelijk een andere betalingstermijn is afgesproken.</p>
+            <p>6.1 Het abonnement wordt aangegaan voor de gekozen betalingstermijn (maandelijks of jaarlijks) en wordt na afloop automatisch verlengd.</p>
             <p>6.2 De Klant kan het abonnement op elk moment opzeggen via de accountinstellingen. De opzegging gaat in aan het einde van de lopende betaalperiode.</p>
             <p>6.3 Toms Ambitie kan het abonnement opzeggen met inachtneming van een opzegtermijn van 30 dagen, tenzij sprake is van een zwaarwegende reden zoals schending van deze voorwaarden of niet-betaling.</p>
             <p>6.4 Bij opzegging worden de gegevens van de Klant conform de Privacyverklaring bewaard en na de bewaartermijn verwijderd.</p>
@@ -121,7 +121,7 @@ export default function AlgemeneVoorwaarden() {
             <ul>
               <li><b>Versie 1.1</b>, 9 augustus 2026.</li>
               <li><b>Versie 1.2</b>, 27 september 2026: het accepteren van deze voorwaarden en de verwerkersovereenkomst bij het aanmaken van het account staat nu in artikel 3.5 en 10.3, en de gedachtestreepjes zijn eruit.</li>
-              <li><b>Versie 1.3</b>, 28 september 2026: artikel 5 is aangepast omdat bij het starten van de proefperiode wel een betaalmiddel wordt gevraagd en de proefperiode automatisch overgaat in een betaald abonnement, en artikel 6.1 noemt jaarlijks niet meer als standaardkeuze.</li>
+              <li><b>Versie 1.3</b>, 28 september 2026: artikel 5 is aangepast omdat bij het starten van de proefperiode wel een betaalmiddel wordt gevraagd en de proefperiode automatisch overgaat in een betaald abonnement.</li>
             </ul>
             <p style={{ marginTop: '48px', paddingTop: '24px', borderTop: '1px solid var(--line)', fontSize: '13px', color: 'var(--ink-soft)' }}>
               {BEDRIJF.naam} · {ADRES_KORT} · {NUMMERS_KORT} · <Link href="/privacy">Privacyverklaring</Link> · <Link href="/cookiebeleid">Cookiebeleid</Link>
