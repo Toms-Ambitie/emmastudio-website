@@ -36,11 +36,11 @@ export default function Verwerkersovereenkomst() {
             <p>
               Werk je met Emma, dan voer je gegevens in over je klanten en je medewerkers. Dat maakt
               jou de verwerkingsverantwoordelijke en ons de verwerker. De AVG schrijft voor dat we
-              daar afspraken over vastleggen. Dat doen we hier. Deze overeenkomst maakt onderdeel uit van
-              de <Link href="/algemene-voorwaarden">Algemene Voorwaarden</Link>. Je accepteert haar
-              bij het aanmelden, samen met die voorwaarden, met een vinkje. Emma legt vast welke
-              versie je hebt geaccepteerd en wanneer. Die vastlegging zie je terug in de app onder
-              Instellingen, bij Overeenkomsten.
+              daar afspraken over vastleggen. Dat doen we hier, als onderdeel van de{' '}
+              <Link href="/algemene-voorwaarden">Algemene Voorwaarden</Link>. Je accepteert deze
+              overeenkomst bij het aanmelden, samen met die voorwaarden, met een vinkje. Emma legt
+              vast welke versie je hebt geaccepteerd en wanneer. Die vastlegging zie je terug in de
+              app onder Instellingen, bij Overeenkomsten.
             </p>
 
             <h2>Artikel 1. Partijen en rollen</h2>
