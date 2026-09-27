@@ -158,7 +158,7 @@ export const PRICE_COMPARISON = {
     { need: 'Zicht op je cijfers', modules: ['waakt'], loose: null, bureau: null },
     { need: 'Alles onder een dak', modules: [], loose: null, bureau: null },
   ],
-  foot: 'Gebaseerd op marktprijzen 2026. Losse modules zijn nu beschikbaar vanaf €9 per maand. De pakketten volgen zodra alle acht modules live zijn.',
+  foot: 'Gebaseerd op marktprijzen 2026. Losse modules zijn er vanaf €9 per maand, en voor salons is er het pakket Emma voor Salons. De andere pakketten volgen.',
 };
 
 /* ── MODULE-PRIJZEN ── benefits verbatim uit de export. */
@@ -175,8 +175,9 @@ export const MODULE_PRICES = {
 };
 
 /* ── PAKKETTEN ── kop verbatim; data uit packages.ts. Voettekst verbatim.
-   §6.2/§6.3: alle kaarten "Binnenkort" (geen coral/recommended), één
-   wachtlijstformulier onder de kaarten. */
+   Emma voor Salons is koopbaar en krijgt de CTA, de andere kaarten tonen
+   "Binnenkort" (zie packages.ts). Eén wachtlijstformulier onder de kaarten,
+   voor wie wil horen wanneer de andere pakketten er zijn. */
 export const PACKAGES_SECTION = {
   title: 'Of kies een pakket.',
   intro: 'We bundelen de modules per branche, met 10% korting op de losse prijs. Emma voor Salons is er; de andere pakketten volgen.',

@@ -145,7 +145,7 @@ export default function Over() {
             )}
           </div>
           <div className="mt-7 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-emma-subtext">
-            <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-emma-coral" aria-hidden="true" />Daarna €9 per maand</span>
+            <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-emma-coral" aria-hidden="true" />Daarna vanaf €9 per maand</span>
             <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-emma-coral" aria-hidden="true" />Maandelijks opzegbaar</span>
             <span className="flex items-center gap-2"><span className="h-1.5 w-1.5 rounded-full bg-emma-coral" aria-hidden="true" />Je accountant houdt toegang</span>
           </div>

@@ -9,7 +9,7 @@ const SITE = 'https://www.emmastudio.nl';
 const emmaName = (id: string) => `Emma${MODULES[id]?.name ?? id.charAt(0).toUpperCase() + id.slice(1)}`;
 
 const META_TITLE = 'Emma-pakketten · Software per branche voor salons, horeca en installateurs';
-const META_DESC = 'Emma bundelt modules per branche: voor salons, horeca of installateurs. 10% korting op de losse prijs. Stap nu los in en houd je prijs. Vanaf €41,40 per maand.';
+const META_DESC = 'Emma bundelt modules per branche: voor salons, horeca of installateurs. 10% korting op de losse prijs. Stap nu los in en houd je prijs. Emma voor Salons: €49,50 per maand.';
 
 export const metadata: Metadata = {
   title: META_TITLE,
@@ -121,7 +121,7 @@ export default function Pakketten() {
           <h2 className="font-display text-2xl font-bold text-emma-ink">{PACKAGES_SECTION.waitlist.heading}</h2>
           <p className="mt-2 text-sm leading-relaxed text-emma-ink-2">{PACKAGES_SECTION.waitlist.sub}</p>
           <div className="mt-6">
-            <WaitlistForm submitLabel={PACKAGES_SECTION.waitlist.button} note="Geen spam. Je hoort het als de pakketten er zijn." />
+            <WaitlistForm submitLabel={PACKAGES_SECTION.waitlist.button} note="Geen spam. Je hoort het als de andere pakketten er zijn." />
           </div>
         </div>
       </section>

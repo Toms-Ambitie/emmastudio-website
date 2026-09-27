@@ -12,9 +12,11 @@
 
    Dwingende correcties (zie ook home.ts):
    - Drie assen (live / koopbaar / gelanceerd): elke CTA schakelt op
-     LAUNCHED. Nu false → wachtlijst, geen knop naar een dichte funnel.
-   - Pakketten: vier kaarten "Binnenkort", geen coral/aanrader, één
-     wachtlijstformulier onder de kaarten op /api/subscribe.
+     LAUNCHED. Staat die op false, dan wachtlijst in plaats van een knop
+     naar een dichte funnel.
+   - Pakketten: koopbaarheid per kaart uit packages.ts (nu alleen Emma voor
+     Salons), geen coral/aanrader, één wachtlijstformulier onder de kaarten
+     op /api/subscribe voor de andere pakketten.
    - Geen eerlijkheid-als-USP; onware serverclaim gecorrigeerd (in data).
    ============================================================ */
 
@@ -709,7 +711,7 @@ function PackagesSection() {
         <h3 className="font-display text-2xl font-bold text-emma-ink">{PACKAGES_SECTION.waitlist.heading}</h3>
         <p className="mt-2 text-sm leading-relaxed text-emma-ink-2">{PACKAGES_SECTION.waitlist.sub}</p>
         <div className="mt-6">
-          <WaitlistForm submitLabel={PACKAGES_SECTION.waitlist.button} note="Geen spam. Je hoort het als de pakketten er zijn." />
+          <WaitlistForm submitLabel={PACKAGES_SECTION.waitlist.button} note="Geen spam. Je hoort het als de andere pakketten er zijn." />
         </div>
       </div>
     </Section>

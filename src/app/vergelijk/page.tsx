@@ -212,7 +212,7 @@ export default function Vergelijk() {
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-5 rounded-emma-card border border-emma-line bg-emma-paper p-8 text-center shadow-emma-card md:flex-row md:justify-between md:p-10 md:text-left">
           <div>
             <h2 className="font-display text-2xl font-bold tracking-tight text-emma-ink">Begin met één module.</h2>
-            <p className="mt-2 text-base leading-relaxed text-emma-ink-2">Los verkrijgbaar vanaf €9 per maand. Pakketten volgen zodra alle acht live zijn.</p>
+            <p className="mt-2 text-base leading-relaxed text-emma-ink-2">Los verkrijgbaar vanaf €9 per maand. Heb je een salon, dan is er ook Emma voor Salons voor €49,50 per maand. De andere pakketten volgen.</p>
           </div>
           <div className="flex shrink-0 flex-col gap-3 sm:flex-row">
             <Link href="/modules" className="group inline-flex items-center justify-center gap-2 rounded-emma-btn bg-emma-coral-strong px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-emma-coral-deep active:translate-y-px">
