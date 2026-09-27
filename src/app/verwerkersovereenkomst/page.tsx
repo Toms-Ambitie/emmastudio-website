@@ -9,7 +9,7 @@ import { BEDRIJF, ADRES_KORT, NUMMERS_KORT } from '@/data/bedrijf';
    De subverwerkerslijst is NIET verzonnen maar afgelezen uit de code van het
    platform: Supabase (database + opslag), Vercel (hosting), Stripe (betalingen),
    Resend (e-mail), en de AI-laag in supabase/functions/ai/ die op twee providers
-   uitkomt — Anthropic (api.anthropic.com, providers.ts) en Google (Gemini, zie
+   uitkomt: Anthropic (api.anthropic.com, providers.ts) en Google (Gemini, zie
    models.json). Die laatste twee zijn geen detail: bonnen, facturen en financiele
    overzichten gaan er doorheen. Ze horen dus in de lijst, niet erbuiten. */
 
@@ -31,18 +31,19 @@ export default function Verwerkersovereenkomst() {
             </div>
 
             <h1>Verwerkersovereenkomst</h1>
-            <p className="legal__meta">Toms Ambitie · Versie 1.0 · Ingangsdatum: 9 augustus 2026</p>
+            <p className="legal__meta">Toms Ambitie · Versie 1.1 · Ingangsdatum: 27 september 2026</p>
 
             <p>
               Werk je met Emma, dan voer je gegevens in over je klanten en je medewerkers. Dat maakt
               jou de verwerkingsverantwoordelijke en ons de verwerker. De AVG schrijft voor dat we
-              daar afspraken over vastleggen. Dat doen we hier, zodat je er niet om hoeft te vragen
-              en er niets voor hoeft te tekenen: deze overeenkomst geldt automatisch zodra je
-              persoonsgegevens invoert in Emma, en maakt onderdeel uit van de{' '}
-              <Link href="/algemene-voorwaarden">Algemene Voorwaarden</Link>.
+              daar afspraken over vastleggen. Dat doen we hier. Deze overeenkomst maakt onderdeel uit van
+              de <Link href="/algemene-voorwaarden">Algemene Voorwaarden</Link>. Je accepteert haar
+              bij het aanmelden, samen met die voorwaarden, met een vinkje. Emma legt vast welke
+              versie je hebt geaccepteerd en wanneer. Die vastlegging zie je terug in de app onder
+              Instellingen, bij Overeenkomsten.
             </p>
 
-            <h2>Artikel 1 — Partijen en rollen</h2>
+            <h2>Artikel 1. Partijen en rollen</h2>
             <p>
               1.1 <b>Verwerker:</b> de {BEDRIJF.rechtsvorm} {BEDRIJF.naam}, {ADRES_KORT}, KvK{' '}
               {BEDRIJF.kvk}, handelend onder de naam EmmaStudio.
@@ -52,12 +53,12 @@ export default function Verwerkersovereenkomst() {
               abonnement op Emma heeft en persoonsgegevens invoert in het platform.
             </p>
             <p>
-              1.3 Voor gegevens die wij voor onszelf verwerken — jouw accountgegevens, facturatie en
-              het gebruik van de website — zijn wij zélf verwerkingsverantwoordelijke. Daarvoor geldt
+              1.3 Voor gegevens die wij voor onszelf verwerken (jouw accountgegevens, facturatie en
+              het gebruik van de website) zijn wij zélf verwerkingsverantwoordelijke. Daarvoor geldt
               onze <Link href="/privacy">Privacyverklaring</Link>, niet deze overeenkomst.
             </p>
 
-            <h2>Artikel 2 — Onderwerp, aard en duur</h2>
+            <h2>Artikel 2. Onderwerp, aard en duur</h2>
             <p>
               2.1 Wij verwerken persoonsgegevens uitsluitend om het Emma-platform aan jou te kunnen
               leveren: het bijhouden van je administratie, je personeelszaken, je klantcontact en de
@@ -68,7 +69,7 @@ export default function Verwerkersovereenkomst() {
               abonnementsovereenkomst eindigt, met inachtneming van artikel 9.
             </p>
 
-            <h2>Artikel 3 — Categorieën gegevens en betrokkenen</h2>
+            <h2>Artikel 3. Categorieën gegevens en betrokkenen</h2>
             <table>
               <thead>
                 <tr><th>Betrokkenen</th><th>Gegevens</th><th>Bij welke module</th></tr>
@@ -97,12 +98,12 @@ export default function Verwerkersovereenkomst() {
               </tbody>
             </table>
             <p>
-              3.1 Verwerk je via Emma bijzondere persoonsgegevens — bij verzuimregistratie kan dat
-              gebeuren — dan blijf jij verantwoordelijk voor de rechtmatigheid daarvan. Emma vraagt
+              3.1 Verwerk je via Emma bijzondere persoonsgegevens (bij verzuimregistratie kan dat
+              gebeuren), dan blijf jij verantwoordelijk voor de rechtmatigheid daarvan. Emma vraagt
               bewust niet naar de aard of oorzaak van verzuim.
             </p>
 
-            <h2>Artikel 4 — Instructies</h2>
+            <h2>Artikel 4. Instructies</h2>
             <p>
               4.1 Wij verwerken persoonsgegevens uitsluitend op jouw instructie. Het gebruik van het
               platform door jou en je gebruikers geldt als die instructie.
@@ -116,14 +117,14 @@ export default function Verwerkersovereenkomst() {
               bij jou voordat wij die instructie uitvoeren.
             </p>
 
-            <h2>Artikel 5 — Geheimhouding</h2>
+            <h2>Artikel 5. Geheimhouding</h2>
             <p>
               5.1 Iedereen die bij ons toegang heeft tot jouw gegevens is tot geheimhouding
               verplicht. Toegang wordt alleen gegeven voor zover die nodig is voor onderhoud,
               ondersteuning of het oplossen van een storing.
             </p>
 
-            <h2>Artikel 6 — Beveiliging</h2>
+            <h2>Artikel 6. Beveiliging</h2>
             <p>6.1 Wij treffen passende technische en organisatorische maatregelen, waaronder:</p>
             <ul>
               <li>versleutelde verbindingen (TLS) en versleutelde opslag;</li>
@@ -137,7 +138,7 @@ export default function Verwerkersovereenkomst() {
               techniek of het risico daarom vraagt.
             </p>
 
-            <h2>Artikel 7 — Subverwerkers</h2>
+            <h2>Artikel 7. Subverwerkers</h2>
             <p>
               7.1 Je geeft ons toestemming om de hieronder genoemde subverwerkers in te schakelen.
               Met elk van hen hebben wij afspraken die niet minder streng zijn dan deze overeenkomst.
@@ -174,10 +175,10 @@ export default function Verwerkersovereenkomst() {
               gegevens uit op jouw instructie.
             </p>
 
-            <h2>Artikel 8 — Rechten van betrokkenen en datalekken</h2>
+            <h2>Artikel 8. Rechten van betrokkenen en datalekken</h2>
             <p>
-              8.1 Krijg je een verzoek van een betrokkene — inzage, correctie, verwijdering,
-              overdracht — dan helpen wij je dat af te handelen. Veel daarvan kun je zelf in het
+              8.1 Krijg je een verzoek van een betrokkene (inzage, correctie, verwijdering,
+              overdracht), dan helpen wij je dat af te handelen. Veel daarvan kun je zelf in het
               platform: gegevens zijn in te zien, aan te passen en te exporteren.
             </p>
             <p>
@@ -196,7 +197,7 @@ export default function Verwerkersovereenkomst() {
               bij een voorafgaande raadpleging van de toezichthouder.
             </p>
 
-            <h2>Artikel 9 — Teruggave en verwijdering</h2>
+            <h2>Artikel 9. Teruggave en verwijdering</h2>
             <p>
               9.1 Bij het einde van de overeenkomst kun je je gegevens exporteren. Wij bewaren ze
               daarna conform de bewaartermijnen in de <Link href="/privacy">Privacyverklaring</Link>
@@ -207,7 +208,7 @@ export default function Verwerkersovereenkomst() {
               behalve waar een wettelijke bewaarplicht dat verhindert.
             </p>
 
-            <h2>Artikel 10 — Controle</h2>
+            <h2>Artikel 10. Controle</h2>
             <p>
               10.1 Je mag één keer per jaar controleren of wij ons aan deze overeenkomst houden. Wij
               beantwoorden je vragen en leveren de informatie die we hebben.
@@ -217,7 +218,7 @@ export default function Verwerkersovereenkomst() {
               kosten daarvan zijn voor jou, tenzij uit de audit blijkt dat wij in gebreke zijn.
             </p>
 
-            <h2>Artikel 11 — Aansprakelijkheid en toepasselijk recht</h2>
+            <h2>Artikel 11. Aansprakelijkheid en toepasselijk recht</h2>
             <p>
               11.1 Op deze overeenkomst is Nederlands recht van toepassing. De
               aansprakelijkheidsbepalingen uit de{' '}
@@ -229,12 +230,18 @@ export default function Verwerkersovereenkomst() {
               persoonsgegevens betreft, dan gaat deze overeenkomst voor.
             </p>
 
-            <h2>Artikel 12 — Vragen</h2>
+            <h2>Artikel 12. Vragen</h2>
             <p>
               Heb je een eigen verwerkersovereenkomst die je liever gebruikt, of vragen over deze?
               Mail naar <a href={`mailto:${BEDRIJF.email}`}>{BEDRIJF.email}</a>. We kijken er serieus
               naar.
             </p>
+
+            <h2>Versiegeschiedenis</h2>
+            <ul>
+              <li><b>Versie 1.0</b>, 9 augustus 2026.</li>
+              <li><b>Versie 1.1</b>, 27 september 2026: hoe je deze overeenkomst accepteert staat er nu goed in, en de gedachtestreepjes zijn eruit.</li>
+            </ul>
 
             <p style={{ marginTop: '48px', paddingTop: '24px', borderTop: '1px solid var(--line)', fontSize: '13px', color: 'var(--ink-soft)' }}>
               {BEDRIJF.naam} · {ADRES_KORT} · {NUMMERS_KORT} · <Link href="/privacy">Privacyverklaring</Link> · <Link href="/cookiebeleid">Cookiebeleid</Link>

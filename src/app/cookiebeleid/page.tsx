@@ -61,7 +61,7 @@ export default function Cookiebeleid() {
                 <tr>
                   <td><b>Noodzakelijk</b></td>
                   <td>Onthouden van jouw cookiekeuze en het beveiligen en uitleveren van de website.</td>
-                  <td>Nee — zonder deze werkt de site niet.</td>
+                  <td>Nee, zonder deze werkt de site niet.</td>
                 </tr>
                 <tr>
                   <td><b>Statistieken</b></td>
@@ -85,7 +85,7 @@ export default function Cookiebeleid() {
                 <tr>
                   <td><b>CookieYes</b></td>
                   <td>De cookiebanner. Vraagt je toestemming en bewaart je keuze, zodat we het niet elk bezoek opnieuw vragen en kunnen aantonen wat je hebt gekozen.</td>
-                  <td>Altijd — noodzakelijk.</td>
+                  <td>Altijd, noodzakelijk.</td>
                 </tr>
                 <tr>
                   <td><b>Google Tag Manager</b></td>
@@ -95,7 +95,7 @@ export default function Cookiebeleid() {
                 <tr>
                   <td><b>Vercel</b></td>
                   <td>De host van de website. Verwerkt technische gegevens die nodig zijn om de pagina uit te leveren en misbruik te weren.</td>
-                  <td>Altijd — noodzakelijk.</td>
+                  <td>Altijd, noodzakelijk.</td>
                 </tr>
               </tbody>
             </table>
@@ -110,7 +110,7 @@ export default function Cookiebeleid() {
             <p>
               De exacte cookienamen, hun doel en hun bewaartermijn staan in de cookiebanner zelf.
               Die lijst wordt automatisch bijgehouden op basis van wat er daadwerkelijk op de site
-              laadt, dus hij is altijd actueel — ook als wij een meetinstrument toevoegen of
+              laadt, dus hij is altijd actueel, ook als wij een meetinstrument toevoegen of
               weghalen. Open de banner via de link in stap 5 hieronder en klap de categorieën open.
             </p>
 
@@ -147,7 +147,7 @@ export default function Cookiebeleid() {
             <p>
               Deze website is de etalage; app.emmastudio.nl is het platform waar je inlogt en werkt.
               Op het platform staan geen statistiek- of marketingcookies. Wel staan er strikt
-              noodzakelijke cookies om je ingelogd te houden — zonder die cookies kun je niet
+              noodzakelijke cookies om je ingelogd te houden. Zonder die cookies kun je niet
               inloggen, en daarvoor is geen toestemming vereist.
             </p>
 
