@@ -256,7 +256,7 @@ Emma heeft 8 modules — elke module is een Nederlands werkwoord. CamelCase: `Em
 **Modulestatus** (bron van waarheid: `MODULE_STATUS` in `src/data/modules.ts`, gemeten tegen Supabase prod op 9 oktober 2026):
 - **Live én koopbaar** (`plans.purchasable = true`): EmmaBoekt, EmmaWaakt, EmmaZiet, EmmaVindt, **EmmaLoont**. Vijf van de acht.
 - **Niet gebouwd**: EmmaCoacht, EmmaSchrijft, EmmaPromoot. Geen scherm, geen tabel, geen edge function. Die tonen "Binnenkort", zonder maand: een gemiste datum doet meer schade dan geen datum.
-- **Pakketten** staan alle vier op `purchasable = false, active = false`. Nog niet te koop. Pakketten volgen zodra alle acht modules live zijn.
+- **Pakketten**: Emma voor Salons staat op `purchasable = true` en is te koop; de overige pakketten op `false`. De rest volgt zodra alle acht modules live zijn.
 
 EmmaZiet is **niet langer gedeeltelijk**. Prijsvergelijking, reviews-analyse, sentiment over tijd en de positie-update zijn gebouwd en gedraaid. Het roadmap-blok bij Ziet is vervallen.
 
@@ -299,7 +299,7 @@ Format: `Emma voor [branche]` — geen sub-merken, geen aparte logo's.
 
 **Naamgeving:** `Emma voor [Branche]`, zoals een ondernemer zichzelf noemt — "Emma voor Salons" (dekt kappers, barbershops en schoonheidssalons), niet "Emma voor Haarverzorging" of "Emma voor Kapsalons".
 
-Pakketten zijn marketing-bundels, geen aparte producten. Zelfde software, andere module-configuratie. **Emma voor Salons is koopbaar** (`plans.purchasable = true` op prod, gemeten 2 september 2026) en krijgt op de site de "Start 14 dagen gratis"-CTA; de andere drie tonen "Binnenkort". De koopbaarheid staat als `purchasable` in `src/data/packages.ts` en volgt de `plans`-tabel; werk beide samen bij.
+Pakketten zijn marketing-bundels, geen aparte producten. Zelfde software, andere module-configuratie. **Emma voor Salons is koopbaar** (`plans.purchasable = true` op prod, gemeten 9 oktober 2026) en krijgt op de site de "Start 14 dagen gratis"-CTA; de andere drie tonen "Binnenkort". De koopbaarheid staat als `purchasable` in `src/data/packages.ts` en volgt de `plans`-tabel; werk beide samen bij.
 
 ---
 
