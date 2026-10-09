@@ -5,20 +5,24 @@
    Er stond "Kappers is de eerste, en er staan er inmiddels tientallen klaar".
    Sindsdien is dit de ene plek die site én chatbot lezen.
 
-   Gemeten op productie op 2 september 2026, tegen `cao_regelset` (de bron
+   Gemeten op productie op 9 oktober 2026, tegen `cao_regelset` (de bron
    waarmee Emma rekent) en de celverificatie per branche:
 
      branche                                cellen geverifieerd / afwijkingen
-     182  Horeca                            792 / 0
-     405  Kappers                           530 / 0
-     721  Huisartsenzorg                    452 / 0
-     759  Schilders                         215 / 0
-     823  Motorvoertuigen en tweewielers  1.890 / 0
-     2297 Technisch installatiebedrijf      660 / 0
+     182  Horeca                              792 / 0
+     405  Kappers                             530 / 0
+     721  Huisartsenzorg                      452 / 0
+     759  Schilders                           215 / 0
+     823  Motorvoertuigen en tweewielers    1.890 / 0
+     2297 Technisch installatiebedrijf        660 / 0
+          Carrosserie                         642 / 0
+          Goud- en zilvernijverheid           660 / 0
+          Isolatie                            642 / 0
+          Metaalbewerking                     660 / 0
 
-   Alle zes rekenen op prod, alle zes hebben een vastgesteld pensioenfonds,
-   en er staat in geen enkele branche nog een actieve weigering. Zie
-   `emmastudio-app/docs/branchestand.md` voor de volledige meting.
+   Alle tien rekenen op prod en alle tien zijn cel voor cel tegen de bron
+   gecontroleerd zonder afwijkingen. Zie `.rATLAS-verslag.md` in de app-repo
+   (meting 9 oktober) en `docs/branchestand.md` voor de volledige meting.
 
    LET OP: `cao_versie` (de AVV-inleespijplijn, met tientallen concepten) is
    NIET de maat. Die zegt wat Emma in de Staatscourant heeft gezien, niet wat
@@ -37,20 +41,24 @@ export const CAO_GEVALIDEERD = [
   'Schilders',
   'Motorvoertuigen en tweewielers',
   'Technisch installatiebedrijf',
+  'Carrosserie',
+  'Metaalbewerking',
+  'Isolatie',
+  'Goud- en zilvernijverheid',
 ] as const;
 
 /** Ingelezen via de AVV-pijplijn maar nog niet vertaald en gecontroleerd,
  *  dus nog niet te kiezen. */
-export const CAO_IN_VOORBEREIDING = 27;
+export const CAO_IN_VOORBEREIDING = 26;
 
-export const CAO_GEMETEN_OP = '2 september 2026';
+export const CAO_GEMETEN_OP = '9 oktober 2026';
 
 /** Eén zin over de dekking, voor site en chatbot. Enkelvoud en meervoud
  *  worden hier afgehandeld zodat er straks niet "1 cao's" komt te staan. */
 export function caoDekkingZin(): string {
   const n: number = CAO_GEVALIDEERD.length;
   const lijst = CAO_GEVALIDEERD.join(', ');
-  const telwoord = ['nul', 'één', 'twee', 'drie', 'vier', 'vijf', 'zes', 'zeven', 'acht'][n] ?? String(n);
+  const telwoord = ['nul', 'één', 'twee', 'drie', 'vier', 'vijf', 'zes', 'zeven', 'acht', 'negen', 'tien', 'elf', 'twaalf'][n] ?? String(n);
   return n === 1
     ? `Op dit moment is er één cao volledig ingelezen en gecontroleerd: ${lijst}.`
     : `Op dit moment zijn ${telwoord} cao's volledig ingelezen en gecontroleerd: ${lijst}.`;

@@ -64,7 +64,7 @@ export const MODULE_VERGELIJK: Record<string, ModuleVergelijk> = {
   },
   waakt: {
     kop: 'Elke week weten hoe je ervoor staat',
-    emma: 'EmmaWaakt à €9 per maand: doelen, prognoses, kostensignalen en een wekelijks advies op je eigen cijfers.',
+    emma: 'EmmaWaakt à €9 per maand: doelen, prognoses, kostensignalen en een advies op je eigen cijfers, op het ritme dat jij instelt en door een mens nagekeken voordat jij het ziet.',
     ankers: [
       { naam: 'SnelStart inZicht', prijs: '€54 p/mnd', toelichting: 'boekhouding met inzicht-laag' },
       { naam: 'Visionplanner', prijs: 'prijs op aanvraag', toelichting: 'rapportagetool, meestal via je accountant' },
@@ -117,6 +117,7 @@ export const MODULE_VERGELIJK: Record<string, ModuleVergelijk> = {
       'Niet weten. Zelf rondbellen, tabbladen bijhouden, of een eenmalige concurrentiescan van honderden euro\'s die meteen begint te verouderen.',
     grens:
       'Eerlijk: die grote tools doen ook SEO en advertenties, en dat doet Ziet niet. ' +
+      'En de prijsvergelijking per dienst werkt vandaag voor kapsalons; in andere branches zegt het scherm dat eerlijk. ' +
       'Ziet doet wat een lokale ondernemer echt wil weten: wie er om je heen zit, wat ze vragen en wat hun klanten vinden.',
   },
 };

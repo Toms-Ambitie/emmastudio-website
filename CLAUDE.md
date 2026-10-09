@@ -228,18 +228,24 @@ Emma heeft 8 modules — elke module is een Nederlands werkwoord. CamelCase: `Em
 
 ---
 
-## 9b. Lanceerstatus (2 september 2026) — leidend voor alle site-teksten
+## 9b. Lanceerstatus (9 oktober 2026) — leidend voor alle site-teksten
 
 > **Bron van waarheid voor functies en status:** `emmastudio-app/docs/FUNCTIES.md`,
-> aangevuld met `docs/MEETRONDE-1-SEPTEMBER.md` en `docs/branchestand.md` in die repo.
-> Die documenten zijn gemeten tegen de code, Supabase prod/dev en de `plans`-tabel.
-> Spreekt dit bestand ze tegen, dan winnen zij en wordt dit bijgewerkt.
+> aangevuld met `.rATLAS-verslag.md` (Atlas-nameting 9 oktober) en `docs/branchestand.md`
+> in die repo. Die documenten zijn gemeten tegen de code, Supabase prod/dev en de
+> `plans`-tabel. Spreekt dit bestand ze tegen, dan winnen zij en wordt dit bijgewerkt.
 
-**`LAUNCHED = true`** sinds eind augustus: de signup staat open en de CTA's zeggen "Start 14 dagen gratis" richting **app.emmastudio.nl/signup**. `LAUNCHED` zegt alleen of de signup open staat, niet of een module technisch draait (dat regelt `MODULE_STATUS`) en niet of een module of pakket op dit moment koopbaar is (dat is `plans.purchasable` in Supabase). Draaien, koopbaar zijn en publiek gelanceerd zijn zijn drie onafhankelijke assen. Gemeten op prod, 2 september 2026: `purchasable = true` voor boekt, waakt, ziet, vindt, loont én het pakket **Emma voor Salons**; `false` voor coacht, schrijft, promoot en de overige pakketten. Sinds 1 september loopt er marketing voor vijf modules in zes branches.
+**`LAUNCHED = true`** sinds eind augustus: de signup staat open en de CTA's zeggen "Start 14 dagen gratis" richting **app.emmastudio.nl/signup**. `LAUNCHED` zegt alleen of de signup open staat, niet of een module technisch draait (dat regelt `MODULE_STATUS`) en niet of een module of pakket op dit moment koopbaar is (dat is `plans.purchasable` in Supabase). Draaien, koopbaar zijn en publiek gelanceerd zijn zijn drie onafhankelijke assen. Gemeten op prod, 9 oktober 2026: `purchasable = true` voor boekt, waakt, ziet, vindt, loont én het pakket **Emma voor Salons**; `false` voor coacht, schrijft, promoot en de overige pakketten.
 
-**EmmaVindt is een personeelswervingsmodule.** Het klanten-zoekdeel is eind augustus bewust verwijderd; de module doet alleen nog kandidaten. Schrijf nergens meer "klanten en kandidaten". De navigatietaak in de app heet "Personeel werven".
+**Proefperiode (sinds september):** bij het starten vul je je betaalgegevens in (incasso of kaart); de eerste 14 dagen wordt er niets afgeschreven, opzeggen vóór dag 15 kost niets, en daarna loopt het abonnement door. Schrijf nergens meer "zonder creditcard".
 
-**EmmaLoont rekent met zes branches**, alle zes op prod gecontroleerd (celverificatie zonder afwijkingen, pensioenfonds vastgesteld): Kappers, Horeca, Huisartsenzorg, Schilders, Motorvoertuigen en tweewielers, Technisch installatiebedrijf. De ene bron voor site en chatbot is `src/data/cao.ts`; werk die bij, niet losse teksten.
+**EmmaVindt is een personeelswervingsmodule.** Het klanten-zoekdeel is eind augustus bewust verwijderd; de module doet alleen nog kandidaten. Schrijf nergens meer "klanten en kandidaten". De navigatietaak in de app heet "Personeel werven". Sinds oktober horen er ook **Vacatures** bij (`/vacatures`): vacature vastleggen met status, tekstconcept door Emma op basis van wat de ondernemer invult, kandidaten eraan gekoppeld; Emma publiceert of verstuurt nooit. De kandidaat-discovery leest naast het KvK-register ook openbare **teampagina's** (met respect voor robots.txt); een vermoedelijke eigenaar komt op afgewezen met reden.
+
+**EmmaLoont rekent met tien branches**, alle tien op prod cel voor cel gecontroleerd zonder afwijkingen: Kappers, Horeca, Huisartsenzorg, Schilders, Motorvoertuigen en tweewielers, Technisch installatiebedrijf, Carrosserie, Metaalbewerking, Isolatie, Goud- en zilvernijverheid. De ene bron voor site en chatbot is `src/data/cao.ts`; werk die bij, niet losse teksten.
+
+**AI-adviezen gaan langs een mens.** Elk advies van EmmaWaakt (en de positie-update en prijsduiding van EmmaZiet) wordt sinds eind september eerst door een platformbeheerder nagekeken voordat de klant het ziet. Dat mag op de site als kwaliteitsbelofte ("door een mens nagekeken"), nooit als beperking verzwegen of als realtime-advies gebracht.
+
+**De prijsvergelijking per dienst van EmmaZiet werkt vandaag voor kapsalons.** In andere branches zegt het scherm dat zelf eerlijk. Op de site staat die grens expliciet; beloof hem niet branchebreed.
 
 **De app-navigatie groepeert op taken, niet op modulenamen** (nieuwe UX, augustus 2026): gebieden Werk, Cijfers, Financiën, Relaties, Markt, Werving en Personeel. Modulenamen leven op het abonnementsscherm en in de modulesignatuur boven de schermtitel. Verwijs in hulpteksten naar taken ("onder Personeel bij Loonrun"), niet naar moduleschermen die niet meer zo heten.
 
@@ -247,7 +253,7 @@ Emma heeft 8 modules — elke module is een Nederlands werkwoord. CamelCase: `Em
 
 **Positionering EmmaBoekt:** de vriendelijke schil om **e-Boekhouden.nl**. e-Boekhouden.nl blijft de motor van de boekhouding; Emma maakt het dagelijkse werk makkelijker, sneller en leuker (bonnen slim inboeken, facturen en offertes maken, openstaande posten, Vraag Emma). SnelStart-koppeling volgt later. Kernbelofte: **Emma stelt voor, jij bevestigt — niets wordt automatisch geboekt.**
 
-**Modulestatus** (bron van waarheid: `MODULE_STATUS` in `src/data/modules.ts`, gemeten tegen Supabase prod op 8 augustus 2026):
+**Modulestatus** (bron van waarheid: `MODULE_STATUS` in `src/data/modules.ts`, gemeten tegen Supabase prod op 9 oktober 2026):
 - **Live én koopbaar** (`plans.purchasable = true`): EmmaBoekt, EmmaWaakt, EmmaZiet, EmmaVindt, **EmmaLoont**. Vijf van de acht.
 - **Niet gebouwd**: EmmaCoacht, EmmaSchrijft, EmmaPromoot. Geen scherm, geen tabel, geen edge function. Die tonen "Binnenkort", zonder maand: een gemiste datum doet meer schade dan geen datum.
 - **Pakketten** staan alle vier op `purchasable = false, active = false`. Nog niet te koop. Pakketten volgen zodra alle acht modules live zijn.
