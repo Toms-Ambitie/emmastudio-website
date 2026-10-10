@@ -3,19 +3,24 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { ICONS } from '@/data/modules';
-import { ARTICLES, ARTICLE_SEO_TITLE, ARTICLE_RELATED, nieuwsteEerst } from '@/data/articles';
+import { ARTICLES, ARTICLE_SEO_TITLE, ARTICLE_RELATED, nieuwsteEerst, gepubliceerd } from '@/data/articles';
 import type { Article, ArticleBlock } from '@/data/articles';
 import { metBeeld } from '@/data/coverbeeld';
 
 const SITE = 'https://www.emmastudio.nl';
 
+// Alleen gepubliceerde artikelen worden vooraf gebouwd; een gepland artikel
+// wordt op zijn publicatiedag on demand gerenderd (dynamicParams staat aan en
+// de pagina heeft een revalidate).
+export const revalidate = 21600;
+
 export async function generateStaticParams() {
-  return ARTICLES.map(a => ({ slug: a.slug }));
+  return gepubliceerd(ARTICLES).map(a => ({ slug: a.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const article = ARTICLES.find(a => a.slug === slug);
+  const article = gepubliceerd(ARTICLES).find(a => a.slug === slug);
   if (!article) return {};
   const url = `${SITE}/kennisbank/${article.slug}`;
   return {
@@ -159,12 +164,12 @@ function jsonLd(article: Article) {
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const gevonden = ARTICLES.find(a => a.slug === slug);
+  const gevonden = gepubliceerd(ARTICLES).find(a => a.slug === slug);
   if (!gevonden) notFound();
   // Zelfde terugval als op de overzichtspagina: geen bestand, geen foto.
   const article = metBeeld(gevonden);
 
-  const others = nieuwsteEerst(ARTICLES.filter(a => a.slug !== article.slug)).map(metBeeld);
+  const others = nieuwsteEerst(gepubliceerd(ARTICLES).filter(a => a.slug !== article.slug)).map(metBeeld);
   const accent = article.accent;
 
   return (

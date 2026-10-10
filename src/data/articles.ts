@@ -41,6 +41,15 @@ export const ARTICLE_SEO_TITLE: Record<string, string> = {
   'tips-per-branche': "3 administratietips voor elke zzp'er en salon · Emma",
   'emmastudio-voor-motorvoertuigen-en-tweewielers': 'Loonadministratie voor je garage of tweewielerbedrijf · Emma',
   'emmastudio-voor-horeca': 'Loonadministratie voor je horecazaak, met de cao erbij · Emma',
+  'emmastudio-voor-kappers': 'Loonadministratie voor je kapsalon, met de kappers-cao erbij · Emma',
+  'personeel-vinden-zonder-vacaturebank': 'Personeel vinden in de buurt zonder vacaturebank · Emma',
+  'emmastudio-voor-technisch-installatiebedrijf': 'Wat kost een monteur echt? Loonadministratie voor installateurs · Emma',
+  'emmastudio-voor-schilders': 'Loonadministratie voor je schildersbedrijf, in uurloon · Emma',
+  'emmastudio-voor-huisartsenzorg': 'Loonadministratie voor de huisartsenpraktijk · Emma',
+  'emmastudio-voor-carrosserie': 'Loonadministratie voor het schadeherstelbedrijf · Emma',
+  'emmastudio-voor-metaalbewerking': 'Je eerste medewerker in de metaal, stap voor stap · Emma',
+  'emmastudio-voor-isolatie': 'Loonadministratie voor het isolatiebedrijf · Emma',
+  'emmastudio-voor-goud-en-zilvernijverheid': 'Loonadministratie voor goudsmeden en zilversmeden · Emma',
 };
 
 /** Contextuele interne links van artikel naar modulepagina's: stuurt autoriteit
@@ -87,6 +96,51 @@ export const ARTICLE_RELATED: Record<string, { lead: string; links: { href: stri
     { href: '/modules/ziet', anchor: 'EmmaZiet, je markt en concurrenten in beeld' },
     { href: '/vergelijk', anchor: 'wat EmmaLoont kost naast een loonbureau' },
   ] },
+  'emmastudio-voor-kappers': { lead: 'Meer hierover:', links: [
+    { href: '/modules/loont', anchor: 'EmmaLoont, je personeelsadministratie' },
+    { href: '/pakketten', anchor: 'Emma voor Salons, het complete pakket' },
+    { href: '/modules/vindt', anchor: 'EmmaVindt om een nieuwe kapper te vinden' },
+  ] },
+  'personeel-vinden-zonder-vacaturebank': { lead: 'Meer hierover:', links: [
+    { href: '/modules/vindt', anchor: 'EmmaVindt, personeelswerving in je regio' },
+    { href: '/modules/loont', anchor: 'EmmaLoont, waar je nieuwe kracht daarna in komt' },
+    { href: '/vergelijk', anchor: 'wat EmmaVindt kost naast een bureau' },
+  ] },
+  'emmastudio-voor-technisch-installatiebedrijf': { lead: 'Meer hierover:', links: [
+    { href: '/modules/loont', anchor: 'EmmaLoont, je personeelsadministratie' },
+    { href: '/pakketten', anchor: 'Emma voor Installateurs, het pakket in opbouw' },
+    { href: '/vergelijk', anchor: 'wat EmmaLoont kost naast een loonbureau' },
+  ] },
+  'emmastudio-voor-schilders': { lead: 'Meer hierover:', links: [
+    { href: '/modules/loont', anchor: 'EmmaLoont, je personeelsadministratie' },
+    { href: '/modules/boekt', anchor: 'EmmaBoekt, waar de loonjournaalpost landt' },
+    { href: '/vergelijk', anchor: 'wat EmmaLoont kost naast een loonbureau' },
+  ] },
+  'emmastudio-voor-huisartsenzorg': { lead: 'Meer hierover:', links: [
+    { href: '/modules/loont', anchor: 'EmmaLoont, je personeelsadministratie' },
+    { href: '/modules/waakt', anchor: 'EmmaWaakt voor grip op de praktijkcijfers' },
+    { href: '/veiligheid', anchor: 'hoe we met gegevens omgaan' },
+  ] },
+  'emmastudio-voor-carrosserie': { lead: 'Meer hierover:', links: [
+    { href: '/modules/loont', anchor: 'EmmaLoont, je personeelsadministratie' },
+    { href: '/modules/boekt', anchor: 'EmmaBoekt voor je dagelijkse boekhouding' },
+    { href: '/vergelijk', anchor: 'wat EmmaLoont kost naast een loonbureau' },
+  ] },
+  'emmastudio-voor-metaalbewerking': { lead: 'Meer hierover:', links: [
+    { href: '/modules/loont', anchor: 'EmmaLoont, je personeelsadministratie' },
+    { href: '/modules/vindt', anchor: 'EmmaVindt om vakmensen in de buurt te vinden' },
+    { href: '/vergelijk', anchor: 'wat EmmaLoont kost naast een loonbureau' },
+  ] },
+  'emmastudio-voor-isolatie': { lead: 'Meer hierover:', links: [
+    { href: '/modules/loont', anchor: 'EmmaLoont, je personeelsadministratie' },
+    { href: '/modules/waakt', anchor: 'EmmaWaakt voor grip op je cijfers' },
+    { href: '/vergelijk', anchor: 'wat EmmaLoont kost naast een loonbureau' },
+  ] },
+  'emmastudio-voor-goud-en-zilvernijverheid': { lead: 'Meer hierover:', links: [
+    { href: '/modules/loont', anchor: 'EmmaLoont, je personeelsadministratie' },
+    { href: '/modules/ziet', anchor: 'EmmaZiet, je markt en concurrenten in beeld' },
+    { href: '/vergelijk', anchor: 'wat EmmaLoont kost naast een loonbureau' },
+  ] },
 };
 
 const MAANDEN = ['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
@@ -118,6 +172,28 @@ export function datumSleutel(datum: string): number {
  *  op /kennisbank en in de preview op de homepage. */
 export function nieuwsteEerst<T extends { date: string }>(lijst: T[]): T[] {
   return [...lijst].sort((a, b) => datumSleutel(b.date) - datumSleutel(a.date));
+}
+
+/** Sorteersleutel van vandaag, in Nederlandse tijd. De server draait op UTC;
+ *  zonder tijdzone zou een artikel 's winters een of twee uur te vroeg of te
+ *  laat verschijnen rond middernacht. */
+export function vandaagSleutel(): number {
+  const delen = new Intl.DateTimeFormat('nl-NL', {
+    timeZone: 'Europe/Amsterdam', year: 'numeric', month: '2-digit', day: '2-digit',
+  }).formatToParts(new Date());
+  const pak = (t: string) => Number(delen.find(p => p.type === t)?.value ?? 0);
+  return pak('year') * 10000 + pak('month') * 100 + pak('day');
+}
+
+/** Alleen artikelen waarvan de publicatiedatum is aangebroken. Een artikel met
+ *  een datum in de toekomst staat klaar in de code maar is nergens zichtbaar:
+ *  niet in de lijst, niet op de homepage, niet in de sitemap, niet voor de
+ *  chatbot, en zijn eigen URL geeft 404 tot de dag zelf. De pagina's die dit
+ *  gebruiken hebben een `revalidate`, zodat publiceren vanzelf gebeurt zonder
+ *  nieuwe deploy. */
+export function gepubliceerd<T extends { date: string }>(lijst: T[]): T[] {
+  const vandaag = vandaagSleutel();
+  return lijst.filter(a => datumSleutel(a.date) <= vandaag);
 }
 
 export const ARTICLES: Article[] = [
@@ -386,6 +462,225 @@ export const ARTICLES: Article[] = [
       { t: 'h2', v: 'Eerlijk over de grens' },
       { t: 'p', v: 'De loonaangifte bij de Belastingdienst doet Emma niet. Die doe je zelf via Mijn Belastingdienst Zakelijk, wat mag bij tien of minder werknemers, of je laat dat stukje bij je kantoor. Het rekenwerk en de stroken heb je dan al, dus dat laatste stukje is klein.' },
       { t: 'note', v: '<b>Wat het kost:</b> EmmaLoont kost €19 per maand, exclusief btw. Je probeert het 14 dagen gratis en je kunt maandelijks opzeggen. Je betaalgegevens vul je meteen in, maar er wordt pas op dag 15 iets afgeschreven.' },
+    ],
+  },
+  {
+    slug: 'emmastudio-voor-kappers',
+    cat: 'Lancering',
+    accent: '#40548F',
+    glyph: 'loont',
+    section: 'blog',
+    title: 'EmmaStudio nu ook volledig voor kappers',
+    dek: 'Emma begon in een kapsalon. Nu is de kappers-cao volledig ingelezen en is er een compleet pakket voor salons.',
+    date: '12 oktober 2026',
+    read: '4 min',
+    image: '/kennisbank/emmastudio-voor-kappers.jpg',
+    author: 'Het team van Emma',
+    body: [
+      { t: 'p', v: 'Emma is ontstaan in een kapsalon, dus het is een beetje gek dat dit artikel er nu pas is. Maar we wilden het pas opschrijven als het helemaal waar was. Dat is het nu: de cao voor het kappersbedrijf is volledig ingelezen en cel voor cel gecontroleerd tegen de gepubliceerde bron, 530 cellen zonder één afwijking.' },
+      { t: 'h2', v: 'Wat dat in de salon betekent' },
+      { t: 'p', v: 'Neem je een kapper of een leerling aan, dan leg je het contract vast in Emma en staat de cao-schaal er meteen naast. Wijk je af, dan zie je dat bewust, met een waarschuwing en niet met een blokkade. Ondertekenen gebeurt ook in de app: jij tekent, je medewerker tekent, en Emma legt vast wie dat wanneer deed.' },
+      { t: 'p', v: 'De loonronde zelf is voorbereiden, controleren en versturen. Emma rekent, jij kijkt per medewerker na, en de loonstroken gaan als nette PDF naar je mensen. Twijfel je vooraf wat iemand je gaat kosten, dan reken je het eerst door met de proforma: netto voor de kandidaat, bruto en werkgeverslasten voor jou.' },
+      { t: 'h2', v: 'Je team regelt het zelf' },
+      { t: 'p', v: 'Je medewerkers krijgen een eigen inlog. Daar staan hun loonstroken, daar vragen ze verlof aan en dienen ze een declaratie in met de bon erbij. Jij keurt goed, en het staat meteen goed in de administratie. Niemand ziet iets van collega\'s of van de zaak.' },
+      { t: 'pull', v: 'Liever een vol boek met afspraken dan een avond vol administratie.' },
+      { t: 'h2', v: 'Het hele pakket voor salons' },
+      { t: 'p', v: 'Voor salons is er ook een compleet pakket: Emma voor Salons bundelt de boekhoudschil, het cijferoverzicht, de loonadministratie, personeelswerving en de buurtscan voor €49,50 per maand, 10% korting op de losse prijs. Dat pakket is er niet toevallig als eerste: alles in Emma is begonnen bij wat een salon nodig heeft, van de prijsvergelijking met de salon verderop tot het vinden van een nieuwe kapper in de buurt.' },
+      { t: 'p', v: 'Eerlijk over de grens: de loonaangifte bij de Belastingdienst doet Emma niet. Die doe je zelf via Mijn Belastingdienst Zakelijk, wat mag bij tien of minder werknemers, of je laat dat stukje bij je kantoor.' },
+      { t: 'note', v: '<b>Wat het kost:</b> EmmaLoont kost €19 per maand en Emma voor Salons €49,50 per maand, exclusief btw. Je probeert het 14 dagen gratis. Je betaalgegevens vul je meteen in, maar er wordt pas op dag 15 iets afgeschreven; zeg je eerder op, dan betaal je niets.' },
+    ],
+  },
+  {
+    slug: 'personeel-vinden-zonder-vacaturebank',
+    cat: 'Lancering',
+    accent: '#A14A36',
+    glyph: 'vindt',
+    section: 'blog',
+    title: 'Personeel vinden zonder vacaturebank',
+    dek: 'De vakmensen die je zoekt kijken niet op vacaturebanken; ze werken al ergens in de buurt. EmmaVindt brengt ze in beeld, netjes en navolgbaar.',
+    date: '15 oktober 2026',
+    read: '4 min',
+    image: '/kennisbank/personeel-vinden-zonder-vacaturebank.jpg',
+    author: 'Het team van Emma',
+    body: [
+      { t: 'p', v: 'Een vacature plaatsen werkt prima voor mensen die actief zoeken. Het probleem is dat de beste vakmensen dat zelden doen: die werken al, vaak bij een zaak drie straten verderop. Daar is EmmaVindt voor gemaakt.' },
+      { t: 'h2', v: 'Waar de namen vandaan komen' },
+      { t: 'p', v: 'Emma zoekt in het openbare KvK-register en op openbare teampagina\'s van bedrijven in jouw buurt, binnen een straal die je zelf instelt. Daarbij houdt ze zich aan de regels die een website zelf stelt (robots.txt) en legt ze vast waar een naam vandaan komt. Herkent Emma iemand als vermoedelijke eigenaar van de zaak, dan zet ze die meteen op afgewezen, met de reden erbij: een eigenaar ga je niet wegkapen met een vacature.' },
+      { t: 'p', v: 'Geen LinkedIn, en dat is bewust. Daar zoeken op personen mag niet volgens hun voorwaarden, en dat risico lopen we niet, ook niet met jouw account.' },
+      { t: 'h2', v: 'Van naam naar gesprek' },
+      { t: 'p', v: 'Elke kandidaat krijgt een score met de reden erbij, geen kaal cijfer. In de pipeline volg je iedereen van eerste contact tot match. Emma schrijft een concept voor het eerste bericht op basis van wat er openbaar bekend is; jij leest het na, past het aan en verstuurt het zelf. Emma verstuurt nooit iets uit zichzelf.' },
+      { t: 'h2', v: 'En sinds kort: je vacature erbij' },
+      { t: 'p', v: 'Je legt je vacature vast in Emma, met functie, uren en wat je zoekt. Emma schrijft er een tekstconcept bij dat alleen gebruikt wat jij hebt ingevuld, zonder verzonnen details. Jij plaatst hem waar je wilt; Emma publiceert niets. Kandidaten uit je pipeline koppel je aan de vacature, zodat je ziet wie waarvoor in beeld is, van open tot vervuld.' },
+      { t: 'pull', v: 'Werven is geen campagne. Het is weten wie er in je buurt werkt en netjes vragen of iemand koffie wil doen.' },
+      { t: 'h2', v: 'Netjes volgens de regels' },
+      { t: 'p', v: 'Een audit-log houdt bij wie je hebt opgezocht en benaderd, zodat je je werving kunt verantwoorden. Geeft iemand aan geen berichten te willen, dan legt Emma dat vast en blijft die persoon buiten je berichten. En eerlijk over de grens: Vindt levert namen om zelf te benaderen. Het is geen vacaturebank en voert het gesprek niet voor je.' },
+      { t: 'note', v: '<b>Wat het kost:</b> EmmaVindt kost €9 per maand, exclusief btw. Je probeert het 14 dagen gratis. Je betaalgegevens vul je meteen in, maar er wordt pas op dag 15 iets afgeschreven; zeg je eerder op, dan betaal je niets.' },
+    ],
+  },
+  {
+    slug: 'emmastudio-voor-technisch-installatiebedrijf',
+    cat: 'Lancering',
+    accent: '#40548F',
+    glyph: 'loont',
+    section: 'blog',
+    title: 'EmmaStudio nu ook voor het technisch installatiebedrijf',
+    dek: 'Wat kost een monteur je echt per maand? De cao voor het technisch installatiebedrijf zit nu in EmmaLoont, dus dat reken je uit voordat je ja zegt.',
+    date: '19 oktober 2026',
+    read: '4 min',
+    image: '/kennisbank/emmastudio-voor-technisch-installatiebedrijf.jpg',
+    author: 'Het team van Emma',
+    body: [
+      { t: 'p', v: 'Begin eens met de rekensom, want daar wringt het bij elk installatiebedrijf dat wil groeien. Je hebt werk genoeg, je wilt een monteur erbij, maar wat kost die je nou echt per maand? Het brutoloon is het halve antwoord; de werkgeverslasten zijn de andere helft, en die schat bijna iedereen te laag in.' },
+      { t: 'h2', v: 'Eerst rekenen, dan pas ja zeggen' },
+      { t: 'p', v: 'De cao voor het technisch installatiebedrijf is nu volledig ingelezen in EmmaLoont en cel voor cel gecontroleerd tegen de gepubliceerde bron, 660 cellen zonder één afwijking. Met de proforma reken je een loonstrook door vóór iemand in dienst is: wat houdt de monteur netto over, en wat betaal jij als werkgever echt. Dat gesprek voer je dan met cijfers in plaats van met een gok.' },
+      { t: 'h2', v: 'Daarna gaat het vanzelf mee' },
+      { t: 'p', v: 'Zeg je ja, dan leg je het contract vast met de cao-schaal ernaast. Zit je eronder, dan zie je dat, met een waarschuwing en niet met een blokkade. Ondertekenen doen jullie allebei in de app, en Emma legt vast wie wanneer tekende. Elke wijziging wordt een nieuwe versie, dus bij een functiewijziging zie je altijd terug wat er eerder gold.' },
+      { t: 'p', v: 'De loonronde is daarna voorbereiden, controleren en versturen: Emma rekent, jij kijkt na, en de stroken gaan als PDF naar je mensen. De loonjournaalpost staat klaar voor je boekhouding, of komt eruit als net bestand voor je kantoor.' },
+      { t: 'h2', v: 'Onderweg geregeld' },
+      { t: 'p', v: 'Je monteurs hebben een eigen inlog. Verlof aanvragen, een ziekmelding, een bon declareren van de bouwmarkt: het gebeurt vanaf de telefoon, en jij keurt goed als het uitkomt. Geen briefjes in de bus van de zaak.' },
+      { t: 'p', v: 'Eerlijk over de grens: de loonaangifte bij de Belastingdienst doet Emma niet. Die blijft bij jou of je administratiekantoor; het rekenwerk, de stroken en de journaalpost liggen er dan al.' },
+      { t: 'note', v: '<b>Wat het kost:</b> EmmaLoont kost €19 per maand, exclusief btw, hoeveel monteurs je ook hebt. Je probeert het 14 dagen gratis. Je betaalgegevens vul je meteen in, maar er wordt pas op dag 15 iets afgeschreven; zeg je eerder op, dan betaal je niets.' },
+    ],
+  },
+  {
+    slug: 'emmastudio-voor-schilders',
+    cat: 'Lancering',
+    accent: '#40548F',
+    glyph: 'loont',
+    section: 'blog',
+    title: 'EmmaStudio nu ook voor schilders',
+    dek: 'De schilders-cao rekent in uurloon, en dat doet EmmaLoont nu ook. Contracten, loonstroken en verlof voor je ploeg, zonder papierwerk in de bus.',
+    date: '22 oktober 2026',
+    read: '3 min',
+    image: '/kennisbank/emmastudio-voor-schilders.jpg',
+    author: 'Het team van Emma',
+    body: [
+      { t: 'p', v: 'Een schildersbedrijf runnen is buiten zijn, op de steiger en bij de klant. De administratie gebeurt daarna, aan de keukentafel. Vanaf nu zit de schilders-cao in EmmaLoont, zodat dat tweede deel een stuk korter wordt.' },
+      { t: 'h2', v: 'Uurloon, zoals de cao het zegt' },
+      { t: 'p', v: 'De schilders-cao rekent in uurloon, en zo staat hij ook in Emma: volledig ingelezen en cel voor cel gecontroleerd tegen de gepubliceerde bron, zonder één afwijking. Leg je een contract vast voor een schilder, dan staat de schaal uit de cao ernaast. Wijk je af, dan zie je dat bewust, met een waarschuwing en niet met een blokkade.' },
+      { t: 'p', v: 'Het contract onderteken je samen in de app: jij tekent, je schilder tekent, en Emma legt vast wie dat wanneer deed. Geen printje dat nog ergens in de bus moet.' },
+      { t: 'h2', v: 'De maandelijkse ronde' },
+      { t: 'p', v: 'Emma bereidt de loonronde voor op de uren die je doorgeeft, jij controleert per medewerker, en de stroken gaan als PDF naar je mensen. Je ploeg heeft een eigen inlog voor loonstroken, verlof en declaraties, dus de vraag om een vrije vrijdag komt binnen in de app in plaats van halverwege een klus.' },
+      { t: 'pull', v: 'Jij doet je werk. Emma de rest.' },
+      { t: 'p', v: 'Eerlijk over de grens: de loonaangifte bij de Belastingdienst doet Emma niet. Die doe je zelf via Mijn Belastingdienst Zakelijk, wat mag bij tien of minder werknemers, of je laat dat stukje bij je kantoor.' },
+      { t: 'note', v: '<b>Wat het kost:</b> EmmaLoont kost €19 per maand, exclusief btw. Je probeert het 14 dagen gratis. Je betaalgegevens vul je meteen in, maar er wordt pas op dag 15 iets afgeschreven; zeg je eerder op, dan betaal je niets.' },
+    ],
+  },
+  {
+    slug: 'emmastudio-voor-huisartsenzorg',
+    cat: 'Lancering',
+    accent: '#40548F',
+    glyph: 'loont',
+    section: 'blog',
+    title: 'EmmaStudio nu ook voor de huisartsenzorg',
+    dek: 'De praktijk draait op assistenten en ondersteuners. De cao Huisartsenzorg zit nu in EmmaLoont, met een eigen inlog voor je team.',
+    date: '26 oktober 2026',
+    read: '4 min',
+    image: '/kennisbank/emmastudio-voor-huisartsenzorg.jpg',
+    author: 'Het team van Emma',
+    body: [
+      { t: 'p', v: 'Wie aan een huisartsenpraktijk denkt, denkt aan de huisarts. Maar de praktijk draait op het team eromheen: assistenten, ondersteuners, een praktijkmanager als je geluk hebt. Voor dat team is er nu EmmaLoont met de cao Huisartsenzorg erin, volledig ingelezen en cel voor cel gecontroleerd tegen de gepubliceerde bron, 452 cellen zonder één afwijking.' },
+      { t: 'h2', v: 'Het team regelt zichzelf' },
+      { t: 'p', v: 'Begin bij wat de meeste tijd scheelt: je medewerkers krijgen een eigen inlog. Daar staan hun loonstroken, daar vragen ze verlof aan en dienen ze declaraties in. Jij of je praktijkmanager keurt goed, en het staat meteen goed in de administratie. Niemand ziet iets van collega\'s, en bedrijfscijfers blijven afgeschermd.' },
+      { t: 'h2', v: 'Contracten zonder printwerk' },
+      { t: 'p', v: 'Een nieuwe assistent leg je vast met de cao-schaal ernaast; zit het aangeboden loon eronder, dan zie je dat meteen. Ondertekenen gebeurt in de app, door jou en je medewerker allebei, en Emma legt vast wie wanneer tekende. Elke wijziging wordt een nieuwe versie, dus bij een urenuitbreiding zie je altijd terug wat er eerder gold.' },
+      { t: 'p', v: 'De loonronde is voorbereiden, controleren en versturen. Vooraf doorrekenen wat een extra ondersteuner kost, doe je met de proforma: netto voor de kandidaat, bruto en werkgeverslasten voor de praktijk.' },
+      { t: 'h2', v: 'Wat Emma bewust niet doet' },
+      { t: 'p', v: 'De loonaangifte bij de Belastingdienst blijft bij jou of je kantoor; het rekenwerk, de stroken en de loonjournaalpost liggen er dan al. En Emma geeft geen fiscaal of arbeidsrechtelijk advies: ze zet de cao ernaast en rekent, de keuzes blijven van jou.' },
+      { t: 'note', v: '<b>Wat het kost:</b> EmmaLoont kost €19 per maand, exclusief btw, ongeacht de grootte van je team. Je probeert het 14 dagen gratis. Je betaalgegevens vul je meteen in, maar er wordt pas op dag 15 iets afgeschreven; zeg je eerder op, dan betaal je niets.' },
+    ],
+  },
+  {
+    slug: 'emmastudio-voor-carrosserie',
+    cat: 'Lancering',
+    accent: '#40548F',
+    glyph: 'loont',
+    section: 'blog',
+    title: 'EmmaStudio nu ook voor het carrosseriebedrijf',
+    dek: 'Schadeherstel draait op planning en vakwerk. De carrosserie-cao zit nu in EmmaLoont, dus de personeelsadministratie hoeft de werkplaats niet meer uit te houden.',
+    date: '29 oktober 2026',
+    read: '4 min',
+    image: '/kennisbank/emmastudio-voor-carrosserie.jpg',
+    author: 'Het team van Emma',
+    body: [
+      { t: 'p', v: 'In een schadeherstelbedrijf is de planning heilig. Elke auto die langer op de brug staat, kost een klant en een verzekeraar geduld. Juist daarom is het zonde als de ondernemer zelf avonden kwijt is aan loonstroken en verlofbriefjes. De carrosserie-cao zit nu in EmmaLoont: volledig ingelezen en cel voor cel gecontroleerd tegen de gepubliceerde bron, 642 cellen zonder één afwijking.' },
+      { t: 'h2', v: 'Vraag het gewoon' },
+      { t: 'p', v: 'Het begint bij iets kleins dat veel scheelt: in de app zit Vraag Emma. Je typt een vraag over je eigen administratie, bijvoorbeeld wie er nog verlof heeft staan voor de kerstperiode, en het antwoord komt uit je eigen gegevens, met de bron erbij en een link naar het scherm waar je het zelf kunt nakijken. Zoeken door mappen hoeft niet meer.' },
+      { t: 'h2', v: 'Van plaatwerker tot leerling' },
+      { t: 'p', v: 'Elk contract leg je vast met de cao-schaal ernaast, en ondertekenen gebeurt in de app door jullie allebei. Neem je iemand aan, dan reken je vooraf met de proforma door wat die je echt kost, inclusief werkgeverslasten. De loonronde is daarna voorbereiden, controleren en versturen; de stroken gaan als PDF naar je mensen en de loonjournaalpost staat klaar voor je boekhouding.' },
+      { t: 'p', v: 'Je monteurs en plaatwerkers hebben een eigen inlog voor loonstroken, verlof, ziekmeldingen en declaraties. Jij keurt goed wanneer het uitkomt, tussen twee offertes door.' },
+      { t: 'pull', v: 'De brug is voor de auto\'s. De administratie mag in de app.' },
+      { t: 'p', v: 'Eerlijk over de grens: de loonaangifte bij de Belastingdienst doet Emma niet. Die blijft bij jou of je administratiekantoor; het rekenwerk ligt er dan al.' },
+      { t: 'note', v: '<b>Wat het kost:</b> EmmaLoont kost €19 per maand, exclusief btw. Je probeert het 14 dagen gratis. Je betaalgegevens vul je meteen in, maar er wordt pas op dag 15 iets afgeschreven; zeg je eerder op, dan betaal je niets.' },
+    ],
+  },
+  {
+    slug: 'emmastudio-voor-metaalbewerking',
+    cat: 'Lancering',
+    accent: '#40548F',
+    glyph: 'loont',
+    section: 'blog',
+    title: 'EmmaStudio nu ook voor het metaalbewerkingsbedrijf',
+    dek: 'Je eerste vaste kracht aannemen in de werkplaats, stap voor stap: van proforma tot eerste loonstrook, met de metaal-cao erbij.',
+    date: '2 november 2026',
+    read: '4 min',
+    image: '/kennisbank/emmastudio-voor-metaalbewerking.jpg',
+    author: 'Het team van Emma',
+    body: [
+      { t: 'p', v: 'Veel metaalbewerkingsbedrijven beginnen als eenmanszaak met een draaibank en een volle agenda. Het moment dat je er niet meer alleen uitkomt, is ook het moment dat de personeelsadministratie begint. Zo ziet die er met Emma uit, stap voor stap. De cao voor het metaalbewerkingsbedrijf is volledig ingelezen en cel voor cel gecontroleerd tegen de gepubliceerde bron, 660 cellen zonder één afwijking.' },
+      { t: 'h2', v: 'Stap één: reken het door' },
+      { t: 'p', v: 'Voordat je iemand iets belooft, maak je een proforma-loonstrook. Je ziet wat de kandidaat netto overhoudt en wat jij als werkgever echt betaalt, inclusief werkgeverslasten. Dat is vaak meer dan je dacht, en beter dat je het nu weet dan bij de eerste loonronde.' },
+      { t: 'h2', v: 'Stap twee: leg het contract vast' },
+      { t: 'p', v: 'Uren, functie en beloning gaan in het contract, met de cao-schaal ernaast als ondergrens. Jullie ondertekenen allebei in de app, en Emma legt vast wie wanneer tekende. Verandert er later iets, dan wordt dat een nieuwe versie en blijft het oude bewaard.' },
+      { t: 'h2', v: 'Stap drie: draai de eerste loonronde' },
+      { t: 'p', v: 'Emma bereidt de ronde voor, jij controleert, en de strook gaat als PDF naar je medewerker. De loonjournaalpost staat klaar voor je boekhouding, of komt eruit als net bestand voor je kantoor. Vanaf dan is het elke maand een kwartier in plaats van een avond.' },
+      { t: 'h2', v: 'Stap vier: laat het team het zelf doen' },
+      { t: 'p', v: 'Je medewerker krijgt een eigen inlog voor loonstroken, verlof en declaraties. De vraag om een snipperdag komt binnen in de app, jij keurt goed, klaar. Eerlijk over de grens: de loonaangifte bij de Belastingdienst doet Emma niet; die blijft bij jou of je kantoor.' },
+      { t: 'note', v: '<b>Wat het kost:</b> EmmaLoont kost €19 per maand, exclusief btw, of je nu één of tien mensen hebt. Je probeert het 14 dagen gratis. Je betaalgegevens vul je meteen in, maar er wordt pas op dag 15 iets afgeschreven; zeg je eerder op, dan betaal je niets.' },
+    ],
+  },
+  {
+    slug: 'emmastudio-voor-isolatie',
+    cat: 'Lancering',
+    accent: '#40548F',
+    glyph: 'loont',
+    section: 'blog',
+    title: 'EmmaStudio nu ook voor het isolatiebedrijf',
+    dek: 'Het werk groeit hard en je mensen zijn de hele dag onderweg. De isolatie-cao zit nu in EmmaLoont, met verlof en declaraties gewoon vanaf de telefoon.',
+    date: '5 november 2026',
+    read: '3 min',
+    image: '/kennisbank/emmastudio-voor-isolatie.jpg',
+    author: 'Het team van Emma',
+    body: [
+      { t: 'p', v: 'Isolatiebedrijven hebben de wind mee: er moet meer verduurzaamd worden dan er handen zijn. Maar groei betekent personeel, en personeel betekent administratie. Daarom zit de cao voor het isolatiebedrijf nu in EmmaLoont: volledig ingelezen en cel voor cel gecontroleerd tegen de gepubliceerde bron, 642 cellen zonder één afwijking.' },
+      { t: 'h2', v: 'Je ploegen zijn onderweg, de administratie niet' },
+      { t: 'p', v: 'Je mensen zitten op projecten, niet op kantoor. Daarom heeft iedereen een eigen inlog: verlof aanvragen, een ziekmelding doorgeven of een bon declareren gebeurt vanaf de telefoon, vanaf de bus of de bouwplaats. Jij keurt goed op het moment dat het jou uitkomt, en het staat meteen goed in de administratie.' },
+      { t: 'h2', v: 'Contracten en loonrondes zonder gedoe' },
+      { t: 'p', v: 'Een nieuwe kracht leg je vast met de cao-schaal ernaast, en jullie ondertekenen allebei in de app. Vooraf doorrekenen wat iemand kost, doe je met de proforma. De loonronde is daarna voorbereiden, controleren en versturen; de stroken gaan als PDF naar je mensen en de loonjournaalpost staat klaar voor je boekhouding of je kantoor.' },
+      { t: 'p', v: 'Eerlijk over de grens: de loonaangifte bij de Belastingdienst doet Emma niet. Die doe je zelf via Mijn Belastingdienst Zakelijk, wat mag bij tien of minder werknemers, of je laat dat stukje bij je kantoor.' },
+      { t: 'note', v: '<b>Wat het kost:</b> EmmaLoont kost €19 per maand, exclusief btw. Je probeert het 14 dagen gratis. Je betaalgegevens vul je meteen in, maar er wordt pas op dag 15 iets afgeschreven; zeg je eerder op, dan betaal je niets.' },
+    ],
+  },
+  {
+    slug: 'emmastudio-voor-goud-en-zilvernijverheid',
+    cat: 'Lancering',
+    accent: '#40548F',
+    glyph: 'loont',
+    section: 'blog',
+    title: 'EmmaStudio nu ook voor de goud- en zilvernijverheid',
+    dek: 'Een atelier met één gezel heeft dezelfde loonadministratie als een bedrijf met tien man. De cao voor de goud- en zilvernijverheid zit nu in EmmaLoont.',
+    date: '9 november 2026',
+    read: '3 min',
+    image: '/kennisbank/emmastudio-voor-goud-en-zilvernijverheid.jpg',
+    author: 'Het team van Emma',
+    body: [
+      { t: 'p', v: 'De goud- en zilvernijverheid is een vak van kleine ateliers: een goudsmid, soms een gezel, soms een leerling. Juist daar doet de administratie pijn, want of je nu één of tien mensen op de loonlijst hebt, de regels zijn hetzelfde. Daarom zit de cao voor de goud- en zilvernijverheid nu in EmmaLoont: volledig ingelezen en cel voor cel gecontroleerd tegen de gepubliceerde bron, 660 cellen zonder één afwijking.' },
+      { t: 'h2', v: 'Klein team, volwassen administratie' },
+      { t: 'p', v: 'Het contract van je gezel leg je vast met de cao-schaal ernaast, en jullie ondertekenen allebei in de app. Emma legt vast wie wanneer tekende, en elke wijziging wordt een nieuwe versie. Overweeg je een leerling aan te nemen, dan reken je met de proforma eerst door wat dat je echt kost.' },
+      { t: 'p', v: 'De loonronde is elke maand hetzelfde rustige ritueel: Emma bereidt voor, jij controleert, de strook gaat als PDF de deur uit. De loonjournaalpost staat klaar voor je boekhouding of je kantoor, en je medewerker heeft een eigen inlog voor stroken, verlof en declaraties.' },
+      { t: 'pull', v: 'Vakwerk verdient een administratie die zichzelf gedraagt.' },
+      { t: 'p', v: 'Eerlijk over de grens: de loonaangifte bij de Belastingdienst doet Emma niet. Bij een atelier met een of twee mensen op de loonlijst mag je die zelf doen via Mijn Belastingdienst Zakelijk, of je laat dat stukje bij je kantoor.' },
+      { t: 'note', v: '<b>Wat het kost:</b> EmmaLoont kost €19 per maand, exclusief btw. Je probeert het 14 dagen gratis. Je betaalgegevens vul je meteen in, maar er wordt pas op dag 15 iets afgeschreven; zeg je eerder op, dan betaal je niets.' },
     ],
   },
 ];

@@ -1,7 +1,7 @@
 import { MODULES, MODULE_ORDER, MODULE_STATUS, MODULE_PRICE, LAUNCHED, APP_URL, SIGNUP_URL } from '@/data/modules';
 import { PACKAGES, packageListPrice, packageDiscount, formatPrice } from '@/data/packages';
 import { FAQ, SECURITY } from '@/data/home';
-import { ARTICLES } from '@/data/articles';
+import { ARTICLES, gepubliceerd } from '@/data/articles';
 import { BEDRIJF, ADRES_KORT } from '@/data/bedrijf';
 import { MODULE_VERGELIJK, PEILDATUM } from '@/data/vergelijk';
 import { MAANDEN_PRAKTIJK } from '@/data/proof';
@@ -249,7 +249,9 @@ function kennisbankBlok(): string {
     'Op /kennisbank staan deze artikelen. Verwijs ernaar als iemand meer diepgang wil.',
     '',
   ];
-  for (const a of ARTICLES) {
+  // Alleen gepubliceerde artikelen: een gepland artikel staat al in de code
+  // maar bestaat voor de bezoeker (en dus voor de chatbot) nog niet.
+  for (const a of gepubliceerd(ARTICLES)) {
     regels.push(`- **${plat(a.title)}** (/kennisbank/${a.slug}): ${plat(a.dek)}`);
   }
   regels.push('');

@@ -163,6 +163,13 @@ gebeurd. Bij werving is dat geen luxe maar een vereiste.
 Nee. Emma stelt een eerste bericht voor op basis van wat er openbaar bekend is.
 Jij past het aan en verstuurt het zelf.
 
+**"Kan Emma een vacature voor me schrijven?"**
+Ja. Je legt je vacature vast in Emma (functie, uren, wat je zoekt) en Emma
+schrijft er een tekstconcept bij dat alleen gebruikt wat jij hebt ingevuld,
+zonder verzonnen details. Jij leest het na en plaatst het waar je wilt; Emma
+publiceert of verstuurt niets. Kandidaten uit je pipeline koppel je aan de
+vacature, zodat je ziet wie waarvoor in beeld is.
+
 ## EmmaLoont
 
 **"Vervangt dit mijn loonbureau?"**

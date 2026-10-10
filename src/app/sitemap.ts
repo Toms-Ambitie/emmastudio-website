@@ -1,6 +1,8 @@
 import type { MetadataRoute } from 'next';
 import { MODULE_ORDER } from '@/data/modules';
-import { ARTICLES } from '@/data/articles';
+import { ARTICLES, gepubliceerd } from '@/data/articles';
+
+export const revalidate = 21600;
 
 const BASE = 'https://www.emmastudio.nl';
 
@@ -31,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.85,
       changeFrequency: 'monthly' as const,
     })),
-    ...ARTICLES.map(a => ({
+    ...gepubliceerd(ARTICLES).map(a => ({
       url: `${BASE}/kennisbank/${a.slug}`,
       priority: 0.7,
       changeFrequency: 'monthly' as const,

@@ -2,8 +2,12 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ICONS } from '@/data/modules';
-import { ARTICLES, nieuwsteEerst } from '@/data/articles';
+import { ARTICLES, nieuwsteEerst, gepubliceerd } from '@/data/articles';
 import { metBeeld } from '@/data/coverbeeld';
+
+// Geplande artikelen verschijnen vanzelf: de pagina wordt elke zes uur opnieuw
+// opgebouwd, dus een publicatiedatum wordt zonder deploy gehaald.
+export const revalidate = 21600;
 
 export const metadata: Metadata = {
   title: 'Kennisbank · Emma',
@@ -79,7 +83,7 @@ export default function Kennisbank() {
   // kaart terugvalt op het gekleurde vlak in plaats van een leeg donker gat.
   // Het uitgelichte blok is altijd het NIEUWSTE artikel, niet een vaste pin:
   // een oud verhaal boven een verse lancering las als een site die stilstaat.
-  const gesorteerd = nieuwsteEerst(ARTICLES).map(metBeeld);
+  const gesorteerd = nieuwsteEerst(gepubliceerd(ARTICLES)).map(metBeeld);
   const featured = gesorteerd[0];
   const rest = gesorteerd.slice(1);
 
