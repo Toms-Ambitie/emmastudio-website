@@ -20,7 +20,7 @@ export default function Privacy() {
             </div>
 
             <h1>Privacyverklaring</h1>
-            <p className="legal__meta">Toms Ambitie · Versie 1.1 · Ingangsdatum: 9 augustus 2026</p>
+            <p className="legal__meta">Toms Ambitie · Versie 1.2 · Ingangsdatum: 19 oktober 2026</p>
 
             <h2>1. Wie zijn wij?</h2>
             <p>
@@ -66,8 +66,14 @@ export default function Privacy() {
             <h2>4. Bewaartermijnen</h2>
             <p>Wij bewaren persoonsgegevens niet langer dan noodzakelijk voor het doel waarvoor ze zijn verzameld:</p>
             <ul>
-              <li><b>Accountgegevens:</b> zolang het account actief is, plus 2 jaar na opzegging.</li>
-              <li><b>Factuurgegevens:</b> 7 jaar op grond van de fiscale bewaarplicht.</li>
+              <li><b>Accountgegevens:</b> je naam, je e-mailadres en je inloggegevens bewaren wij zolang je een login bij Emma hebt. Worden de bedrijfsgegevens opgeruimd (zie hieronder), dan is je login niet meer aan dat bedrijf gekoppeld, maar de login zelf verwijderen wij niet vanzelf. Wil je dat wij die daarna ook verwijderen, dan kun je dat vragen via info@emmastudio.nl (zie artikel 8).</li>
+              <li><b>Factuurgegevens en je abonnement:</b> de facturen die wij jou sturen, de betalingen daarop, en wanneer en door wie je abonnement is opgezegd, gesloten of heropend. Dat is onze eigen administratie. Wij bewaren die ten minste 7 jaar, op grond van onze eigen fiscale bewaarplicht, en ruimen die niet op met je bedrijfsgegevens.</li>
+              <li><b>Bedrijfsgegevens:</b> de gegevens die je als Klant zelf in Emma invoert, zoals factuurinformatie, loongegevens en personeelsdossiers, en de bestanden die je uploadt of die Emma voor je maakt, zoals loonstroken, contracten, bonnen en facturen. Je zegt je account op in Emma, bij Abonnement. Je abonnement loopt dan door tot het einde van de lopende betaalperiode, en aan het einde van die periode archiveren wij je account. Vanaf de dag van archiveren bewaren wij je bedrijfsgegevens nog 24 maanden. Daarna verwijderen wij ze, met de uitzondering hieronder.</li>
+              <li><b>Na het archiveren:</b> je account is dan gesloten. Je kunt er niets meer in toevoegen, wijzigen of verwijderen, maar je kunt alles nog lezen, en als eigenaar van het account kun je een volledige export maken van alles wat je in Emma hebt vastgelegd. Dat kan tot wij je bedrijfsgegevens na die 24 maanden verwijderen.</li>
+              <li><b>Heropenen:</b> binnen zes maanden na het archiveren heropen je je account zelf, met een klik in je account. Je sluit dan een nieuw abonnement af en alles staat er weer zoals je het achterliet. Na die zes maanden kan heropenen nog steeds tot de 24 maanden voorbij zijn, maar niet meer met een klik: mail dan naar info@emmastudio.nl. Heropen je je account, dan stopt de termijn van 24 maanden. Wordt je account later opnieuw gearchiveerd, dan begint die termijn opnieuw.</li>
+              <li><b>Langere wettelijke termijn:</b> voor een deel van je bedrijfsgegevens geldt voor jou als ondernemer een langere wettelijke bewaartermijn: voor je administratie, ook je loonadministratie, 7 jaar (de fiscale bewaarplicht), en voor de gegevens voor de loonheffingen van een medewerker ten minste 5 kalenderjaren na het kalenderjaar waarin het dienstverband eindigt. Dat deel verwijderen wij later dan de rest: wij laten het staan tot het einde van het zevende kalenderjaar na de dag van archiveren, of na de laatste einddatum van een dienstverband als die later ligt. Staat bij een medewerker geen einddatum van het dienstverband, dan is die termijn niet te berekenen en laten wij dat deel staan. De bestanden die bij dat deel horen, zoals loonstroken, contracten, bonnen en facturen, volgen dezelfde termijn.</li>
+              <li><b>Jouw bewaarplicht:</b> de wettelijke bewaarplicht voor je administratie en je loonadministratie ligt bij jou als ondernemer, ook na je opzegging. Emma is geen archief voor je administratie, en wij nemen die plicht op geen enkel moment van je over, ook niet doordat wij een deel van je gegevens langer laten staan. Na de 24 maanden kun je dat deel niet meer inzien, en wij staan er niet voor in dat je het dan nog bij ons kunt opvragen. Maak daarom voordat die 24 maanden voorbij zijn een volledige export, en bewaar die zelf zolang de wet dat van je vraagt.</li>
+              <li><b>Bewijs van akkoord en van opruimen:</b> het akkoord dat je bij het aanmelden gaf op de algemene voorwaarden en de verwerkersovereenkomst, met je e-mailadres en het moment, en het verslag dat wij je bedrijfsgegevens hebben opgeruimd, met de naam en het KvK-nummer van je bedrijf, bewaren wij ook na het opruimen, als bewijs.</li>
               <li><b>Wachtlijst-e-mailadressen:</b> totdat je je uitschrijft via de afmeldlink in de e-mail.</li>
               <li><b>Contactformulierberichten:</b> maximaal 1 jaar.</li>
               <li><b>Chatgesprekken:</b> het gesprek zelf staat alleen in je eigen browser en verdwijnt zodra je de pagina sluit. Van elke vraag komt de tekst wel kort in onze serverlogboeken terecht, zonder je IP-adres en zonder het antwoord, zodat wij zien welke onderwerpen langskomen en de assistent kunnen verbeteren. Die logboeken worden automatisch opgeruimd door onze hostingpartij. Stuur je je vraag met de knop door naar ons, dan wordt dat deel van het gesprek als e-mail bewaard, maximaal 1 jaar, net als een contactformulierbericht.</li>
@@ -92,7 +98,7 @@ export default function Privacy() {
 
             <h2>7. Emma als verwerker</h2>
             <p>Wanneer je als Klant bedrijfsgegevens invoert in Emma (zoals facturen, loongegevens of personeelsdossiers), treedt Toms Ambitie op als verwerker in de zin van de AVG en ben jij de verwerkingsverantwoordelijke. Je bent zelf verantwoordelijk voor de rechtmatigheid van de verwerking van die gegevens.</p>
-            <p>Onze <Link href="/verwerkersovereenkomst">verwerkersovereenkomst</Link> staat gewoon online en geldt zodra je persoonsgegevens invoert in Emma. Je hoeft er niet om te vragen en er niets voor te tekenen.</p>
+            <p>Onze <Link href="/verwerkersovereenkomst">verwerkersovereenkomst</Link> staat gewoon online. Je accepteert die bij het aanmelden voor Emma met een vinkje, samen met de algemene voorwaarden. Je hoeft er dus niet apart om te vragen.</p>
 
             <h2>8. Jouw rechten</h2>
             <p>Op grond van de AVG heb je de volgende rechten ten aanzien van jouw persoonsgegevens:</p>
