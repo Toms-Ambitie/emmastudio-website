@@ -7,7 +7,7 @@ import Analytics from '@/components/Analytics';
 import ScrollReveal from '@/components/ScrollReveal';
 import ScrollReset from '@/components/ScrollReset';
 import ChatKnop from '@/components/ChatKnop';
-import AppLinkMkt from '@/components/AppLinkMkt';
+import AppLinkAttributie from '@/components/AppLinkAttributie';
 
 /* Fonts self-hosted via next/font (was: een render-blokkerende @import naar
    fonts.googleapis.com boven in globals.css). next/font haalt de fonts bij de
@@ -91,11 +91,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             Consent Mode v2 (Advanced): CookieYes eerst, GTM geketend erná. Zie Analytics.tsx. */}
         <Analytics />
 
-        {/* Hangt ?mkt=<GA client_id> aan links naar app.emmastudio.nl, zodat een
-            aanmelding aan zijn campagne te koppelen is. Rendert niets; het is
-            één gedelegeerde click-listener. Staat hier onder Analytics omdat
-            het de GA-cookie gebruikt die daar vandaan komt. */}
-        <AppLinkMkt />
+        {/* Geeft links naar app.emmastudio.nl hun herkomst mee: ?mkt=<GA client_id>
+            plus de first-touch utm_* en klik-ID's, elk alleen met de bijbehorende
+            CookieYes-toestemming. Rendert niets; het zijn gedelegeerde listeners.
+            Staat hier onder Analytics omdat het leunt op de cookies die daar
+            vandaan komen. */}
+        <AppLinkAttributie />
 
         <ScrollReset />
         <a
