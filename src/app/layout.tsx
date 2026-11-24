@@ -8,6 +8,7 @@ import ScrollReveal from '@/components/ScrollReveal';
 import ScrollReset from '@/components/ScrollReset';
 import ChatKnop from '@/components/ChatKnop';
 import AppLinkAttributie from '@/components/AppLinkAttributie';
+import ToestemmingDelen from '@/components/ToestemmingDelen';
 
 /* Fonts self-hosted via next/font (was: een render-blokkerende @import naar
    fonts.googleapis.com boven in globals.css). next/font haalt de fonts bij de
@@ -97,6 +98,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             Staat hier onder Analytics omdat het leunt op de cookies die daar
             vandaan komen. */}
         <AppLinkAttributie />
+
+        {/* Zet de cookiekeuze ook op .emmastudio.nl (emma_toestemming), omdat
+            CookieYes zijn eigen cookie alleen op www zet en de app hem anders
+            niet kan lezen. Rendert niets. */}
+        <ToestemmingDelen />
 
         <ScrollReset />
         <a
