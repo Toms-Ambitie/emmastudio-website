@@ -51,6 +51,13 @@ export default function Veiligheid() {
           <p className="mt-8 text-sm leading-relaxed text-emma-creme/60">
             Emma verwerkt gevoelige bedrijfsdata. Wat we precies bewaren, waarom, en welke rechten je hebt, staat in het privacybeleid.
           </p>
+          {/* RONDE JURIDISCH-1 (audit 27-11-2026, W8): een meldpunt voor kwetsbaarheden. Hetzelfde adres staat in
+              app.emmastudio.nl/.well-known/security.txt. */}
+          <p className="mt-3 text-sm leading-relaxed text-emma-creme/60">
+            Een beveiligingsprobleem gevonden in Emma? Mail het naar{" "}
+            <a href="mailto:info@emmastudio.nl" className="text-emma-creme underline">info@emmastudio.nl</a>, met wat je deed en wat je zag.
+            Hetzelfde adres staat in <a href="https://app.emmastudio.nl/.well-known/security.txt" className="text-emma-creme underline">security.txt</a>.
+          </p>
           <div className="mt-4 flex flex-wrap gap-3">
             <Link href="/privacy" className="group inline-flex items-center gap-1.5 rounded-emma-btn bg-emma-creme px-5 py-2.5 text-sm font-semibold text-emma-ink transition-all hover:bg-white">
               Lees het privacybeleid
