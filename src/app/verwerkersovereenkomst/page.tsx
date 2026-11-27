@@ -31,7 +31,7 @@ export default function Verwerkersovereenkomst() {
             </div>
 
             <h1>Verwerkersovereenkomst</h1>
-            <p className="legal__meta">Toms Ambitie · Versie 1.1 · Ingangsdatum: 27 september 2026</p>
+            <p className="legal__meta">Toms Ambitie · Versie 1.2 · Ingangsdatum: [[INGANGSDATUM]]</p>
 
             <p>
               Werk je met Emma, dan voer je gegevens in over je klanten en je medewerkers. Dat maakt
@@ -87,7 +87,7 @@ export default function Verwerkersovereenkomst() {
                 </tr>
                 <tr>
                   <td>Zakelijke contacten en kandidaten</td>
-                  <td>Bedrijfsnaam, openbaar beschikbare contactgegevens, locatie en de door Emma berekende score.</td>
+                  <td>Bedrijfsnaam, openbaar beschikbare contactgegevens en locatie.</td>
                   <td>EmmaVindt</td>
                 </tr>
                 <tr>
@@ -152,7 +152,7 @@ export default function Verwerkersovereenkomst() {
                 <tr><td>Vercel</td><td>Hosting van de applicatie en de website</td><td>Verenigde Staten (SCC&apos;s)</td></tr>
                 <tr><td>Stripe</td><td>Verwerking van abonnementsbetalingen</td><td>Verenigde Staten (SCC&apos;s)</td></tr>
                 <tr><td>Resend</td><td>Verzending van e-mail, waaronder loonstroken en facturen</td><td>Verenigde Staten (SCC&apos;s)</td></tr>
-                <tr><td>Anthropic</td><td>Analyse van tekst: grootboeksuggesties, wekelijkse adviezen, scoren van leads en het opstellen van conceptberichten</td><td>Verenigde Staten (SCC&apos;s)</td></tr>
+                <tr><td>Anthropic</td><td>Analyse van tekst: grootboeksuggesties, wekelijkse adviezen en het opstellen van conceptberichten</td><td>Verenigde Staten (SCC&apos;s)</td></tr>
                 <tr><td>Google</td><td>Uitlezen van bonnen, facturen en financiële overzichten (OCR en tekstherkenning)</td><td>Verenigde Staten (SCC&apos;s)</td></tr>
               </tbody>
             </table>
@@ -241,6 +241,7 @@ export default function Verwerkersovereenkomst() {
             <ul>
               <li><b>Versie 1.0</b>, 9 augustus 2026.</li>
               <li><b>Versie 1.1</b>, 27 september 2026: hoe je deze overeenkomst accepteert staat er nu goed in, en de gedachtestreepjes zijn eruit.</li>
+              <li><b>Versie 1.2</b>, [[INGANGSDATUM]]: het scoren van kandidaten is eruit. Emma berekent sinds 9 oktober 2026 geen score meer voor kandidaten.</li>
             </ul>
 
             <p style={{ marginTop: '48px', paddingTop: '24px', borderTop: '1px solid var(--line)', fontSize: '13px', color: 'var(--ink-soft)' }}>
