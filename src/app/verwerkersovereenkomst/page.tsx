@@ -31,7 +31,7 @@ export default function Verwerkersovereenkomst() {
             </div>
 
             <h1>Verwerkersovereenkomst</h1>
-            <p className="legal__meta">Toms Ambitie · Versie 1.2 · Ingangsdatum: [[INGANGSDATUM]]</p>
+            <p className="legal__meta">Toms Ambitie · Versie 1.2 · Ingangsdatum: 1 december 2026</p>
 
             <p>
               Werk je met Emma, dan voer je gegevens in over je klanten en je medewerkers. Dat maakt
@@ -241,7 +241,7 @@ export default function Verwerkersovereenkomst() {
             <ul>
               <li><b>Versie 1.0</b>, 9 augustus 2026.</li>
               <li><b>Versie 1.1</b>, 27 september 2026: hoe je deze overeenkomst accepteert staat er nu goed in, en de gedachtestreepjes zijn eruit.</li>
-              <li><b>Versie 1.2</b>, [[INGANGSDATUM]]: het scoren van kandidaten is eruit. Emma berekent sinds 9 oktober 2026 geen score meer voor kandidaten.</li>
+              <li><b>Versie 1.2</b>, 1 december 2026: het scoren van kandidaten is eruit. Emma berekent sinds 9 oktober 2026 geen score meer voor kandidaten.</li>
             </ul>
 
             <p style={{ marginTop: '48px', paddingTop: '24px', borderTop: '1px solid var(--line)', fontSize: '13px', color: 'var(--ink-soft)' }}>

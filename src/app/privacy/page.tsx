@@ -20,7 +20,7 @@ export default function Privacy() {
             </div>
 
             <h1>Privacyverklaring</h1>
-            <p className="legal__meta">Toms Ambitie · Versie 1.3 · Ingangsdatum: [[INGANGSDATUM]]</p>
+            <p className="legal__meta">Toms Ambitie · Versie 1.3 · Ingangsdatum: 1 december 2026</p>
 
             <h2>1. Wie zijn wij?</h2>
             <p>
